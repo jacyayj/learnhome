@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/choose_view1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/choose_label1"
+            style="@style/text_14_99"
+            android:paddingStart="23dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="10dp"
+            android:text="选择年份" />
+
+        <pro.haichuang.learn.home.ui.weight.AutoListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:choiceMode="multipleChoice"
+            android:divider="@null" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/choose_view2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/text_14_99"
+            android:paddingVertical="10dp"
+            android:paddingStart="23dp"
+            android:text="选择年份" />
+
+
+        <pro.haichuang.learn.home.ui.weight.AutoListView
+            android:id="@+id/listView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:choiceMode="multipleChoice"
+            android:divider="@null" />
+
+        <TextView
+            style="@style/text_14_ff"
+            android:layout_marginVertical="10dp"
+            android:paddingStart="23dp"
+            android:text="*仅限VIP用户使用"
+            android:textColor="@color/colorFF4343" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="110dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginVertical="20dp"
+        android:background="@drawable/bg_e5f5ff_stroke_32c8fa_radius_15dp"
+        android:gravity="center"
+        android:text="确定"
+        android:textColor="@color/color32C8FA"
+        android:textSize="16sp" />
+</LinearLayout>

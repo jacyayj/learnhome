@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="140dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_zhiyuan_notice"
+    android:divider="@drawable/divider_vertical_e0"
+    android:orientation="vertical"
+    android:paddingTop="20dp"
+    android:dividerPadding="10dp"
+    android:paddingBottom="10dp"
+    android:showDividers="middle">
+
+    <TextView
+        style="@style/text_16_ff"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:paddingBottom="10dp"
+        android:text="什么叫线差分"
+        android:textColor="@color/colorFF5E5E" />
+    <TextView
+        style="@style/text_14_66"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="模拟分与所在地区批次省控线的差值"
+        android:paddingHorizontal="8dp"
+        />
+</LinearLayout>

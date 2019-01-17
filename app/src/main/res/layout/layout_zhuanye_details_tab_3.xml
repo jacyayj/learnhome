@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/zhuanye_details_tab3"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:orientation="vertical"
+    android:visibility="gone">
+
+    <TextView
+        style="@style/text_14_002133"
+        android:drawablePadding="10dp"
+        android:paddingStart="40dp"
+        android:paddingTop="15dp"
+        android:text="中国社科院哲学研究所携手成都 共建贺玲哲学" />
+
+    <TextView
+        style="@style/text_14_002133"
+        android:drawablePadding="10dp"
+        android:paddingStart="40dp"
+        android:paddingTop="15dp"
+        android:text="哲学：与智慧同在" />
+
+    <TextView
+        style="@style/text_14_002133"
+        android:drawablePadding="10dp"
+        android:paddingStart="40dp"
+        android:paddingTop="15dp"
+        android:text="文学专业大辞典" />
+
+    <TextView
+        style="@style/text_14_002133"
+        android:drawablePadding="10dp"
+        android:paddingStart="40dp"
+        android:paddingTop="15dp"
+        android:text="2009中国大学哲学20强高校名单" />
+
+    <TextView
+        style="@style/text_14_002133"
+        android:drawablePadding="10dp"
+        android:paddingStart="40dp"
+        android:paddingTop="15dp"
+        android:text="细数哲学专业地域特征" />
+</LinearLayout>

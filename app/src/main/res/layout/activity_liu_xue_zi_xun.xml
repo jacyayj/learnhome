@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorF0F7FA"
+    android:orientation="vertical"
+    tools:context=".ui.activity.index.LiuXueZiXunActivity">
+
+    <include layout="@layout/layout_title" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@color/colorWhite"
+                android:paddingStart="30dp"
+                android:paddingTop="15dp"
+                android:paddingEnd="35dp"
+                android:paddingBottom="10dp">
+
+                <com.yhy.widget.core.img.round.CircleImageView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@mipmap/ic_launcher_round" />
+
+                <TextView
+                    style="@style/text_18_33"
+                    android:layout_marginStart="85dp"
+                    android:paddingTop="25dp"
+                    android:text="刘坤云" />
+
+                <TextView
+                    style="@style/text_14_33"
+                    android:layout_marginTop="80dp"
+                    android:lineSpacingExtra="5dp"
+                    android:text="2008年开始从事美国留学申请，工作十载，为许许多多不同背景及年龄层次的学生设计并成功申请到符合个人特点及未来前景规划的理想院校，有着丰富的美国院校考察经历，帮组乜有出国学习经历的家长和同学们更好的理解国外的学习和生活方式，更准确的选择定位合适的学校" />
+            </FrameLayout>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@color/colorWhite"
+                android:paddingTop="15dp"
+                android:paddingEnd="45dp">
+
+                <TableRow android:layout_marginBottom="15dp">
+
+                    <TextView
+                        style="@style/text_16_33"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="姓名" />
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="35dp"
+                        android:layout_weight="2"
+                        android:background="@drawable/bg_e6ecf8_radius_18dp"
+                        android:hint="请输入您的真实姓名"
+                        android:paddingStart="10dp"
+                        android:textColor="@color/color33"
+                        android:textColorHint="@color/colorCC" />
+                </TableRow>
+
+                <TableRow android:layout_marginBottom="15dp">
+
+                    <TextView
+                        style="@style/text_16_33"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="电话" />
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="35dp"
+                        android:layout_weight="2"
+                        android:background="@drawable/bg_e6ecf8_radius_18dp"
+                        android:hint="请输入您的手机号码"
+                        android:paddingStart="10dp"
+                        android:textColor="@color/color33"
+                        android:textColorHint="@color/colorCC" />
+                </TableRow>
+
+                <TableRow android:layout_marginBottom="15dp">
+
+                    <TextView
+                        style="@style/text_16_33"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="最就读学校" />
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="35dp"
+                        android:layout_weight="2"
+                        android:background="@drawable/bg_e6ecf8_radius_18dp"
+                        android:hint="请输入您的真实姓名"
+                        android:paddingStart="10dp"
+                        android:textColor="@color/color33"
+                        android:textColorHint="@color/colorCC" />
+                </TableRow>
+
+                <TableRow android:layout_marginBottom="15dp">
+
+                    <TextView
+                        style="@style/text_16_33"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="申请地区" />
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="35dp"
+                        android:layout_weight="2"
+                        android:background="@drawable/bg_e6ecf8_radius_18dp"
+                        android:hint="请输入您的真实姓名"
+                        android:paddingStart="10dp"
+                        android:textColor="@color/color33"
+                        android:textColorHint="@color/colorCC" />
+                </TableRow>
+
+                <TableRow android:layout_marginBottom="40dp">
+
+                    <TextView
+                        style="@style/text_16_33"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="申请学校" />
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="35dp"
+                        android:layout_weight="2"
+                        android:background="@drawable/bg_e6ecf8_radius_18dp"
+                        android:hint="请输入您的真实姓名"
+                        android:paddingStart="10dp"
+                        android:textColor="@color/color33"
+                        android:textColorHint="@color/colorCC" />
+                </TableRow>
+
+                <Button
+                    style="@style/button_confirm"
+                    android:layout_marginStart="55dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="咨询" />
+            </TableLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

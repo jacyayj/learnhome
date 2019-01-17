@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="item"
+            type="pro.haichuang.learn.home.ui.activity.index.itemmodel.ZhiYuanModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@drawable/divider_vertical_e0"
+        android:orientation="vertical"
+        android:paddingTop="15dp"
+        android:showDividers="middle">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="10dp">
+
+                    <TextView
+                        style="@style/text_16_33"
+                        android:drawableStart="@drawable/icon_point_green"
+                        android:drawablePadding="15dp"
+                        android:text="天津大学"
+                        android:textColor="#ff2f2f33"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        style="@style/text_12_F38787"
+                        android:layout_marginHorizontal="5dp"
+                        android:background="@drawable/stroke_f39369_radius_4dp"
+                        android:paddingHorizontal="5dp"
+                        android:paddingVertical="2dp"
+                        android:text="综合 理工"
+                        android:textColor="@color/colorF69656" />
+
+                    <TextView
+                        style="@style/text_16_8E8E99"
+                        android:drawableStart="@drawable/icon_location"
+                        android:drawablePadding="5dp"
+                        android:text="成都" />
+                </LinearLayout>
+
+                <TextView
+                    style="@style/text_14_8E8E99"
+                    android:layout_marginTop="3dp"
+                    android:paddingStart="35dp"
+                    android:text="建议F志愿" />
+
+                <TextView
+                    style="@style/text_14_8E8E99"
+                    android:layout_marginTop="3dp"
+                    android:paddingStart="35dp"
+                    android:text="排名:13" />
+
+                <TextView
+                    style="@style/text_14_8E8E99"
+                    android:layout_marginTop="3dp"
+                    android:paddingStart="35dp"
+                    android:text="特色:211 985 双一流 国重 艺术" />
+
+                <TextView
+                    style="@style/text_14_8E8E99"
+                    android:layout_marginTop="3dp"
+                    android:paddingStart="35dp"
+                    android:paddingBottom="10dp"
+                    android:text="性质:公立" />
+
+                <TextView
+                    style="@style/text_14_99"
+                    android:paddingStart="35dp"
+                    android:paddingBottom="10dp"
+                    android:text="金融学（管理类）"
+                    android:textColor="@color/colorF39369"
+                    android:visibility="@{item.zizhu ? View.VISIBLE : View.GONE}" />
+            </LinearLayout>
+
+            <CheckedTextView
+                android:id="@+id/choose_zhiyuan"
+                style="@style/text_14_99"
+                android:layout_width="70dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/selector_ff3333_e0"
+                android:checked="@{item.checked}"
+                android:drawableEnd="@{item.choosed ? @drawable/icon_arrow_up_white : @drawable/selector_arrow_down}"
+                android:drawablePadding="5dp"
+                android:gravity="center"
+                android:onClick="@{item::choose}"
+                android:paddingHorizontal="7dp"
+                android:paddingVertical="4dp"
+                android:text="@{item.zhiyuan}"
+                android:textColor="@color/color_99_ff" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_title"
+            android:divider="@drawable/divider_horizontal_e0"
+            android:dividerPadding="15dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:showDividers="middle">
+
+            <TextView
+                android:id="@+id/to_choose_zhuanye"
+                style="@style/text_16_33"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="选择专业" />
+
+            <TextView
+                android:id="@+id/to_details"
+                style="@style/text_16_33"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="查看详情" />
+        </LinearLayout>
+    </LinearLayout>
+</layout>

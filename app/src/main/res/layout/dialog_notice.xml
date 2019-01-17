@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/colorWhite"
+    android:showDividers="middle">
+
+    <TextView
+        android:id="@+id/msg_title"
+        style="@style/text_16_00"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:paddingVertical="15dp"
+        android:text="确定清空聊天记录" />
+
+    <TextView
+        android:id="@+id/msg_content"
+        style="@style/text_12_99"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginBottom="10dp"
+        android:text="款项将在1-7个工作日按照支付路径原路返回至用户的支付账户"
+        android:visibility="gone" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/colorE0E0E0" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@drawable/divider_horizontal_d7dde0"
+        android:dividerPadding="20dp"
+        android:orientation="horizontal"
+        android:showDividers="middle">
+
+        <TextView
+            android:id="@+id/cancel"
+            style="@style/text_16_3D6399"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingVertical="20dp"
+            android:text="取消" />
+
+        <TextView
+            android:id="@+id/confirm"
+            style="@style/text_16_3D6399"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingVertical="20dp"
+            android:text="确定" />
+    </LinearLayout>
+</LinearLayout>

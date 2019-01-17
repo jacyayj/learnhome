@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="item"
+            type="Integer" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="10dp">
+
+        <com.yhy.widget.core.img.round.CircleImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@mipmap/ic_launcher_round" />
+
+        <TextView
+            style="@style/text_13_66"
+            android:layout_marginStart="40dp"
+            android:text="开车的人"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            style="@style/text_10_99"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
+            android:text="11.13 14:39"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            style="@style/text_17_33"
+            android:layout_marginStart="40dp"
+            android:paddingBottom="5dp"
+            android:text="有道理~"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/to_details"
+            android:layout_width="70dp"
+            android:layout_height="25dp"
+            android:background="@drawable/bg_f0f7fa_radius_5dp"
+            android:gravity="center"
+            android:text="查看详情"
+            android:textColor="@color/colorB3"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias=".5" />
+    </android.support.constraint.ConstraintLayout>
+</layout>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="item"
+            type="pro.haichuang.learn.home.ui.activity.mine.itemmodel.PwdModel" />
+    </data>
+
+    <EditText xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/stroke_99_radius_5dp"
+        android:gravity="center"
+        android:inputType="numberPassword"
+        android:maxLength="1"
+        android:padding="3dp"
+        android:password="false"
+        android:text="@={item.pwd}"
+        android:textColor="@color/color00"
+        android:textSize="25sp" />
+</layout>

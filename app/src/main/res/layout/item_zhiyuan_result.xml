@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="item"
+            type="Integer" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_title"
+            android:background="@color/color64E1FA"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="10dp">
+
+            <TextView
+                style="@style/text_17_FF"
+                android:layout_weight="1"
+                android:text="A志愿" />
+
+            <CheckedTextView
+                android:id="@+id/choose_zhiyuan"
+                style="@style/text_17_FF"
+                android:drawableEnd="@drawable/selector_sj_white"
+                android:text="调整顺序" />
+        </LinearLayout>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:paddingStart="10dp"
+                android:paddingTop="10dp">
+
+                <TextView
+                    style="@style/text_14_ff"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/bg_e0_radius_5dp"
+                    android:paddingHorizontal="5dp"
+                    android:paddingVertical="2dp"
+                    android:text="0302" />
+
+                <TextView
+                    style="@style/text_16_33"
+                    android:drawableEnd="@drawable/icon_point_green"
+                    android:drawablePadding="10dp"
+                    android:text="北京理工大学" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/text_16_99"
+                android:layout_marginTop="5dp"
+                android:paddingStart="57dp"
+                android:text="2018计划:3人" />
+
+            <TableRow
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    style="@style/text_16_99"
+                    android:layout_marginEnd="10dp"
+                    android:paddingStart="57dp"
+                    android:text="服从调剂:" />
+
+                <RadioGroup
+                    android:checkedButton="@id/agree"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/agree"
+                        style="@style/wrap_layout"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/selector_stroke_ff3333_99"
+                        android:button="@null"
+                        android:paddingHorizontal="5dp"
+                        android:text="服从"
+                        android:textColor="@color/color_ff3333_99"
+                        android:textSize="15sp" />
+
+                    <RadioButton
+                        android:id="@+id/disagree"
+                        style="@style/wrap_layout"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/selector_stroke_ff3333_99"
+                        android:button="@null"
+                        android:paddingHorizontal="5dp"
+                        android:text="不服从"
+                        android:textColor="@color/color_ff3333_99"
+                        android:textSize="15sp" />
+                </RadioGroup>
+
+                <ImageView android:src="@drawable/icon_notice_grey" />
+            </TableRow>
+
+            <TextView
+                style="@style/text_16_99"
+                android:layout_marginTop="10dp"
+                android:paddingStart="57dp"
+                android:text="2017最低位次:1028" />
+
+            <TextView
+                style="@style/text_16_99"
+                android:layout_marginTop="10dp"
+                android:paddingStart="57dp"
+                android:paddingBottom="15sp"
+                android:text="2017最低分:605" />
+
+        </TableLayout>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/stroke_e0e0e0"
+            android:divider="@drawable/divider_vertical_e0"
+            android:showDividers="middle">
+
+            <TableRow
+                android:divider="@drawable/divider_horizontal_e0"
+                android:showDividers="middle">
+
+                <TextView
+                    style="@style/text_14_33"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/height_title"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="专业代码" />
+
+                <TextView
+                    style="@style/text_14_33"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/height_title"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="专业概率" />
+
+                <TextView
+                    style="@style/text_14_33"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/height_title"
+                    android:layout_weight="3"
+                    android:gravity="center_vertical"
+                    android:paddingStart="10dp"
+                    android:text="开设专业" />
+            </TableRow>
+
+            <TableRow
+                android:divider="@drawable/divider_horizontal_e0"
+                android:showDividers="middle">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:paddingTop="15sp">
+
+                    <TextView
+                        style="@style/text_14_ff"
+                        android:layout_width="40dp"
+                        android:layout_height="20dp"
+                        android:layout_marginEnd="5dp"
+                        android:background="@drawable/bg_e0_radius_5dp"
+                        android:gravity="center"
+                        android:text="9" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:paddingTop="20dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_point_green" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="15sp">
+
+                    <TextView
+                        style="@style/text_10_99"
+                        android:paddingTop="15dp"
+                        android:text="社会科学实验班(精品文科班，包含专业：经济学、社会工作、法学、英语、德语、日语、西班牙语、七中，英语。日语、德语专业方向学费为6000元/年)"
+                        android:textColor="@color/color282828" />
+
+                    <TextView
+                        style="@style/text_10_99"
+                        android:paddingVertical="10dp"
+                        android:text="计划数:3人  学制:4年  学费:5000元" />
+                </LinearLayout>
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
+</layout>

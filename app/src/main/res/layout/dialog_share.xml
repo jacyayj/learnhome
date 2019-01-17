@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    android:background="@color/colorWhite"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/text_15_00"
+        android:layout_marginStart="15dp"
+        android:paddingTop="30dp"
+        android:text="转发到" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="30dp"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/text_13_99"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/share_btn_tail"
+            android:drawablePadding="15dp"
+            android:gravity="center"
+            android:text="发送给朋友" />
+
+        <TextView
+            style="@style/text_13_99"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/share_btn_qq"
+            android:drawablePadding="15dp"
+            android:gravity="center"
+            android:text="QQ" />
+
+        <TextView
+            style="@style/text_13_99"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/share_btn_wx"
+            android:drawablePadding="15dp"
+            android:gravity="center"
+            android:text="微信" />
+
+        <TextView
+            style="@style/text_13_99"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/share_btn_pyq"
+            android:drawablePadding="15dp"
+            android:gravity="center"
+            android:text="朋友圈" />
+    </LinearLayout>
+</FrameLayout>

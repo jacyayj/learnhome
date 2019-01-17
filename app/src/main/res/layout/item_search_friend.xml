@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="item"
+            type="Integer" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:paddingVertical="10dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="15dp">
+
+        <com.yhy.widget.core.img.round.RoundImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="20dp"
+            android:src="@mipmap/ic_launcher"
+            app:riv_radius="3dp" />
+
+        <TextView
+            style="@style/text_18_33"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:text="好好先生" />
+
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/bg_32c8fa_radius_5dp"
+            android:gravity="center"
+            android:text="加好友"
+            android:textColor="@color/colorWhite"
+            android:textSize="13sp" />
+    </LinearLayout>
+</layout>

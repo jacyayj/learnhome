@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="item"
+            type="pro.haichuang.learn.home.ui.activity.message.itemmodel.MessageCenterModel" />
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="10dp">
+
+        <com.yhy.widget.core.img.round.RoundImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@mipmap/ic_launcher"
+            app:riv_radius="2dp" />
+
+        <TextView
+            style="@style/text_17_00"
+            android:layout_marginStart="65dp"
+            android:text="欣柏通讯" />
+
+        <TextView
+            style="@style/text_15_99"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="65dp"
+            android:text="我是付辛博" />
+
+        <TextView
+            android:id="@+id/agree"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/bg_32c8fa_radius_5dp"
+            android:gravity="center"
+            android:text="同意"
+            android:textColor="@color/colorWhite"
+            android:textSize="13sp"
+            android:visibility="@{item.status == 0 ? View.VISIBLE : View.GONE}" />
+
+        <TextView
+            android:id="@+id/reject"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="15dp"
+            android:layout_toLeftOf="@id/agree"
+            android:background="@drawable/bg_d2_radius_5dp"
+            android:gravity="center"
+            android:text="拒绝"
+            android:textColor="@color/color33"
+            android:textSize="13sp"
+            android:visibility="@{item.status == 0 ? View.VISIBLE : View.GONE}" />
+
+        <TextView
+            style="@style/text_15_99"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:text="@{item.status == 1 ? `已同意` : `已拒绝`}"
+            android:textColor="@color/color88"
+            android:visibility="@{item.status == 0 ? View.GONE : View.VISIBLE}" />
+    </RelativeLayout>
+</layout>

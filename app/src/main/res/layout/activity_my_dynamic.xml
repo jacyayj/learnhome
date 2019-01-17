@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.activity.mine.MyDynamicActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_title"
+        android:background="@color/colorWhite">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="15sp"
+            android:src="@drawable/icon_back" />
+
+        <TextView
+            style="@style/text_18_33"
+            android:layout_gravity="center"
+            android:text="我的动态" />
+
+        <TextView
+            android:layout_width="65dp"
+            android:layout_height="25dp"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/bg_64e1fa_radius_2dp"
+            android:gravity="center"
+            android:text="发布"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp" />
+    </FrameLayout>
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="1dp"
+        android:background="@color/colorWhite"
+        android:divider="@null"
+        android:dividerHeight="5dp" />
+</LinearLayout>

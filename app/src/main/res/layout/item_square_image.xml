@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="pro.haichuang.learn.home.utils.ImageBinding" />
+
+        <variable
+            name="item"
+            type="pro.haichuang.learn.home.bean.ImageBean" />
+    </data>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <pro.haichuang.learn.home.ui.weight.SquareImageView
+            android:id="@+id/image"
+            release_url="@{item.url}"
+            android:layout_width="match_parent"
+            android:src="@drawable/icon_take_photo"
+            android:layout_height="match_parent" />
+
+        <ImageView
+            android:id="@+id/delete"
+            style="@style/wrap_layout"
+            android:layout_gravity="end"
+            android:src="@drawable/icon_release_delete"
+            android:visibility="@{item.canDelete ? View.VISIBLE : View.GONE}" />
+    </FrameLayout>
+</layout>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="pro.haichuang.learn.home.utils.ImageBinding" />
+
+        <variable
+            name="item"
+            type="pro.haichuang.learn.home.ui.fragment.itemview.ItemMine" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="15dp">
+
+        <ImageView
+            drawable="@{item.icon}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp" />
+
+        <TextView
+            style="@style/text_16_33"
+            android:layout_weight="1"
+            android:text="@{item.text}" />
+
+        <TextView
+            style="@style/text_16_33"
+            android:text="028-45215789"
+            android:textColor="@color/color32C8FA"
+            android:visibility="@{item.canJump ? View.GONE : View.VISIBLE}" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_arrow_next"
+            android:visibility="@{item.canJump ? View.VISIBLE : View.GONE}" />
+    </LinearLayout>
+</layout>

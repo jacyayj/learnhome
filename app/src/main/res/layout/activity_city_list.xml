@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorF0F7FA"
+    android:divider="@drawable/divider_vertical_e0"
+    android:orientation="vertical"
+    android:showDividers="middle"
+    tools:context=".ui.activity.CityListActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorWhite"
+        android:paddingVertical="10dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:onClick="back"
+            android:paddingHorizontal="15dp"
+            android:src="@drawable/icon_close_blue"
+            tools:ignore="OnClick" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/bg_ebf2f5_radius_13dp"
+            android:drawableStart="@drawable/icon_index_search"
+            android:drawablePadding="5dp"
+            android:gravity="center_vertical"
+            android:hint="城市名/拼音"
+            android:paddingStart="8dp"
+            android:textColor="@color/color33"
+            android:textColorHint="@color/colorCCC4CC"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_title"
+        android:background="@color/colorWhite"
+        android:gravity="center_vertical"
+        android:paddingStart="15dp"
+        android:text="当前城市:成都"
+        android:textColor="@color/color33"
+        android:textSize="16sp" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite"
+            android:divider="@drawable/divider_vertical_e0" />
+
+        <pro.haichuang.learn.home.ui.weight.SideBar
+            android:id="@+id/slide"
+            android:layout_width="30dp"
+            android:paddingStart="10dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginVertical="30dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="end" />
+
+        <TextView
+            android:id="@+id/text_dialog"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:textSize="30sp"
+            android:visibility="gone"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/bg_80ff_radius_10p"
+            android:gravity="center" />
+    </FrameLayout>
+</LinearLayout>

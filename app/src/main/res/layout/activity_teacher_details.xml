@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="model"
+            type="pro.haichuang.learn.home.ui.activity.index.viewmodel.TeacherDetailsModel" />
+    </data>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorF0F7FA"
+        android:orientation="vertical"
+        tools:context="pro.haichuang.learn.home.ui.activity.index.TeacherDetailsActivity">
+
+        <include layout="@layout/layout_title" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/height_title">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:paddingHorizontal="15dp"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="10dp">
+
+                    <TableRow android:layout_marginBottom="20dp">
+
+                        <com.yhy.widget.core.img.round.CircleImageView
+                            android:layout_width="46dp"
+                            android:layout_height="46dp"
+                            android:layout_marginTop="5dp"
+                            android:src="@mipmap/ic_launcher_round" />
+
+                        <LinearLayout
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                style="@style/text_16_18191A"
+                                android:layout_weight="1"
+                                android:text="范美忠" />
+
+                            <TextView
+                                style="@style/text_12_939799"
+                                android:text="在线时间：8:00-21：00空闲时间" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="60dp"
+                            android:layout_height="25dp"
+                            android:background="@drawable/bg_f0f7fa_radius_5dp"
+                            android:gravity="center"
+                            android:text="关注"
+                            android:textColor="@color/color32C8FA"
+                            android:textSize="15sp" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <FrameLayout android:layout_weight="1">
+
+                            <TextView
+                                style="@style/text_13_99"
+                                android:layout_gravity="center"
+                                android:drawableStart="@drawable/icon_zixun"
+                                android:drawablePadding="2dp"
+                                android:text="咨询1096" />
+                        </FrameLayout>
+
+                        <FrameLayout android:layout_weight="1">
+
+                            <TextView
+                                style="@style/text_13_99"
+                                android:layout_gravity="center"
+                                android:drawableStart="@drawable/icon_xinli_comment"
+                                android:drawablePadding="2dp"
+                                android:text="评论196" />
+                        </FrameLayout>
+
+                        <FrameLayout android:layout_weight="1">
+
+                            <TextView
+                                style="@style/text_13_99"
+                                android:layout_gravity="center"
+                                android:drawableStart="@drawable/icon_heart_grey"
+                                android:drawablePadding="2dp"
+                                android:text="关注5212" />
+                        </FrameLayout>
+
+                    </TableRow>
+                </TableLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/colorWhite"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/text_17_33"
+                        android:drawableStart="@drawable/icon_sanchang"
+                        android:drawablePadding="5dp"
+                        android:padding="15dp"
+                        android:text="擅长" />
+
+                    <TextView
+                        style="@style/text_16_33"
+                        android:paddingHorizontal="15dp"
+                        android:paddingBottom="15dp"
+                        android:text="老师介绍：毕业于北京大学历史系，长期任职于基础教育领域，对中文学科教育有独到的见解和研究。" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@color/colorE0E0E0" />
+
+                    <TextView
+                        style="@style/text_17_33"
+                        android:drawableStart="@drawable/icon_jianjie"
+                        android:drawablePadding="5dp"
+                        android:padding="15dp"
+                        android:text="简介" />
+
+                    <TextView
+                        style="@style/text_16_33"
+                        android:paddingHorizontal="15dp"
+                        android:paddingBottom="15dp"
+                        android:text="老师介绍：毕业于北京大学历史系，长期任职于基础教育领域，对中文学科教育有独到的见解和研究。" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/colorWhite"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/text_17_33"
+                        android:drawableStart="@drawable/icon_sanchang"
+                        android:drawablePadding="5dp"
+                        android:paddingVertical="10dp"
+                        android:paddingStart="15dp"
+                        android:text="咨询评论" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@color/colorE0E0E0" />
+
+                    <pro.haichuang.learn.home.ui.weight.VerticalRecyclerView
+                        android:id="@+id/comment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/bg_confirm_btn2"
+            android:orientation="horizontal"
+            android:visibility="@{model.online ? View.VISIBLE : View.GONE}">
+
+            <TextView
+                android:id="@+id/online"
+                style="@style/text_16_ff"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="在线咨询" />
+
+            <TextView
+                android:id="@+id/off_online"
+                style="@style/text_16_ff"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="线下预约" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/to_yuyue"
+            style="@style/button_confirm"
+            android:layout_gravity="bottom"
+            android:layout_marginHorizontal="55dp"
+            android:layout_marginBottom="10dp"
+            android:text="线下预约"
+            android:visibility="@{model.online ? View.GONE : View.VISIBLE}" />
+    </FrameLayout>
+</layout>

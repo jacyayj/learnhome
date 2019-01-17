@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.activity.index.ZhiYuanPiCiActivity">
+
+    <include layout="@layout/layout_title" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_title"
+        android:background="@color/colorFFF4E5"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/text_16_33"
+            android:text="根据您当前的成绩，您最适合填报" />
+
+        <TextView
+            style="@style/text_16_33"
+            android:text=" 本一批"
+            android:textColor="@color/colorFF4343" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/color96E6FA"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/text_14_33"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="报考批次" />
+
+        <TextView
+            style="@style/text_14_33"
+            android:layout_width="0dp"
+            android:layout_weight="1.4"
+            android:gravity="center"
+            android:text="2018批次控制线" />
+
+        <TextView
+            style="@style/text_14_33"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="操作" />
+    </LinearLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/stroke_e0e0e0"
+        android:divider="@drawable/divider_vertical_e0"
+        android:showDividers="middle">
+
+        <TableRow
+            android:divider="@drawable/divider_horizontal_e0"
+            android:gravity="center_vertical"
+            android:showDividers="middle">
+
+            <TextView
+                style="@style/text_14_33"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="本一批" />
+
+            <TextView
+                style="@style/text_14_33"
+                android:layout_width="0dp"
+                android:layout_weight="1.4"
+                android:gravity="center"
+                android:text="文科553.理科546" />
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/to_details_1"
+                    style="@style/text_14_fa"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/selector_00ccff_e0"
+                    android:onClick="toDetails"
+                    android:paddingHorizontal="7dp"
+                    android:paddingVertical="3dp"
+                    android:text="开始"
+                    android:textColor="@color/color_fa_99" />
+            </FrameLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_height="40dp"
+            android:divider="@drawable/divider_horizontal_e0"
+            android:gravity="center_vertical"
+            android:showDividers="middle">
+
+            <TextView
+                style="@style/text_14_33"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="本一批" />
+
+            <TextView
+                style="@style/text_14_33"
+                android:layout_width="0dp"
+                android:layout_weight="1.4"
+                android:gravity="center"
+                android:text="文科553.理科546" />
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/to_details_2"
+                    style="@style/text_14_fa"
+                    android:layout_gravity="center"
+                    android:background="@drawable/selector_00ccff_e0"
+                    android:enabled="false"
+                    android:onClick="toDetails"
+                    android:paddingHorizontal="7dp"
+                    android:paddingVertical="3dp"
+                    android:text="开始"
+                    android:textColor="@color/color_fa_99" />
+            </FrameLayout>
+        </TableRow>
+
+        <TableRow
+            android:divider="@drawable/divider_horizontal_e0"
+            android:gravity="center_vertical"
+            android:showDividers="middle">
+
+            <TextView
+                style="@style/text_14_33"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="本一批" />
+
+            <TextView
+                style="@style/text_14_33"
+                android:layout_width="0dp"
+                android:layout_weight="1.4"
+                android:gravity="center"
+                android:text="文科553.理科546" />
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/to_details_3"
+                    style="@style/text_14_fa"
+                    android:layout_gravity="center"
+                    android:background="@drawable/selector_00ccff_e0"
+                    android:enabled="false"
+                    android:onClick="toDetails"
+                    android:paddingHorizontal="7dp"
+                    android:paddingVertical="3dp"
+                    android:text="开始"
+                    android:textColor="@color/color_fa_99" />
+            </FrameLayout>
+        </TableRow>
+    </TableLayout>
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/text_17_33"
+                android:drawableStart="@drawable/icon_zhiyuan_notice"
+                android:drawablePadding="6dp"
+                android:paddingStart="10dp"
+                android:paddingTop="25dp"
+                android:text="重要提示" />
+
+            <TextView
+                style="@style/text_14_13C1FF"
+                android:layout_marginTop="15dp"
+                android:paddingHorizontal="10dp"
+                android:text="1、本系统依据历年院校录取数据提供高考志愿填报智能模拟功能，不等同于实际的网上填报志愿，建议考生在填报志愿时，结合本系统的推荐以完善志愿表；
+
+2、2018计划数已根据《四川招生计划》同步更新；
+
+3、2017年专业录取相关数据已更新；
+
+4、2012-2017各院校录取数据，参考各省市出版的填报指南以及各本专科院校的官网历年录取数据；
+
+5、您正在使用的是四川版，提供“普通类文理科本一批、本二批、专科批、”3个批次的志愿智能模拟功能，您可以按系统的重点填报提示选择适合自己的批次模拟，也可直接选择自己关注的批次模拟；
+
+6、在正式填报时，以教育考试院公布的最新招生计划为准"
+                android:textColor="@color/color18191A" />
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

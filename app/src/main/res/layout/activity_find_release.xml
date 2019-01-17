@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="model"
+            type="pro.haichuang.learn.home.ui.activity.find.viewmodel.FindReleaseModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorF0F7FA"
+        android:orientation="vertical"
+        tools:context="pro.haichuang.learn.home.ui.activity.find.FindReleaseActivity">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_title"
+            android:background="@color/colorWhite">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:onClick="back"
+                android:paddingHorizontal="15sp"
+                android:src="@drawable/icon_back" />
+
+            <TextView
+                android:layout_width="65dp"
+                android:layout_height="25dp"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginEnd="15sp"
+                android:background="@drawable/bg_7fceff_radius_4dp"
+                android:gravity="center"
+                android:text="发 布"
+                android:textColor="@color/colorWhite"
+                android:textSize="17sp" />
+        </FrameLayout>
+
+        <EditText
+            style="@style/text_18_CC"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="1dp"
+            android:background="@color/colorWhite"
+            android:gravity="start"
+            android:hint="请输入标题"
+            android:padding="15sp"
+            android:textColor="@color/color00"
+            android:textColorHint="@color/colorCC" />
+
+        <EditText
+            style="@style/text_18_CC"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/colorWhite"
+            android:gravity="start"
+            android:hint="请输入内容"
+            android:padding="15sp"
+            android:textColor="@color/color00"
+            android:textColorHint="@color/colorCC" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/colorWhite"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="15sp">
+
+            <TextView
+                style="@style/text_16_33"
+                android:drawableStart="@drawable/icon_upload_photo"
+                android:drawablePadding="5dp"
+                android:text="上传照片" />
+
+            <TextView
+                style="@style/text_16_99"
+                android:text="(最多9张)" />
+        </LinearLayout>
+
+        <pro.haichuang.learn.home.ui.weight.ReleaseRecyclerView
+            android:id="@+id/grid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:paddingHorizontal="15sp"
+            android:paddingVertical="5dp" />
+    </LinearLayout>
+</layout>

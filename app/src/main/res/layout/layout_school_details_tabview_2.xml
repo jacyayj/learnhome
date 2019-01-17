@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tab_view2"
+    android:visibility="gone"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TableRow>
+
+        <TextView
+            style="@style/text_14_002133"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:paddingHorizontal="15dp"
+            android:paddingTop="15dp"
+            android:text="地域得分：10.00" />
+
+        <TextView
+            style="@style/text_14_002133"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:paddingStart="15dp"
+            android:paddingTop="15dp"
+            android:text="城市得分：10.00" />
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            style="@style/text_14_002133"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:paddingHorizontal="15dp"
+            android:paddingTop="15dp"
+            android:text="属性得分：10.00" />
+
+        <TextView
+            style="@style/text_14_002133"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:paddingStart="15dp"
+            android:paddingTop="15dp"
+            android:text="综合实力得分：29.88" />
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            style="@style/text_14_002133"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:paddingHorizontal="15dp"
+            android:paddingTop="15dp"
+            android:text="就业得分：19.00" />
+
+        <TextView
+            style="@style/text_14_002133"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:paddingStart="15dp"
+            android:paddingTop="15dp"
+            android:text="总分：98.71" />
+    </TableRow>
+
+    <TextView
+        style="@style/text_14_002133"
+        android:paddingHorizontal="15dp"
+        android:paddingTop="15dp"
+        android:text="在川招生的348所一本院校中求学价值得分排位：1" />
+
+    <TextView
+        style="@style/text_14_002133"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="15dp"
+        android:text="在川招生的1249所一本院校中求学价值得分排位：1" />
+
+    <View
+        android:layout_height=".5dp"
+        android:background="@color/colorE0E0E0" />
+
+    <RadioGroup
+        android:id="@+id/child_tab"
+        android:layout_height="44dp"
+        android:checkedButton="@id/tab1"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/tab1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/color_fa_32c8fa"
+            android:button="@null"
+            android:gravity="center"
+            android:text="地域指标"
+            android:textColor="@color/color_00_33" />
+
+        <RadioButton
+            android:id="@+id/tab2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/color_fa_32c8fa"
+            android:button="@null"
+            android:gravity="center"
+            android:text="教学指标"
+            android:textColor="@color/color_00_33" />
+
+        <RadioButton
+            android:id="@+id/tab3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/color_fa_32c8fa"
+            android:button="@null"
+            android:gravity="center"
+            android:text="专业指标"
+            android:textColor="@color/color_00_33" />
+
+        <RadioButton
+            android:id="@+id/tab4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/color_fa_32c8fa"
+            android:button="@null"
+            android:gravity="center"
+            android:text="就业指标"
+            android:textColor="@color/color_00_33" />
+
+        <RadioButton
+            android:id="@+id/tab5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/color_fa_32c8fa"
+            android:button="@null"
+            android:gravity="center"
+            android:text="其他指标"
+            android:textColor="@color/color_00_33" />
+    </RadioGroup>
+
+    <View
+        android:layout_height=".5dp"
+        android:background="@color/colorE0E0E0" />
+
+    <include layout="@layout/layout_school_details_tabchildview_1"/>
+    <include layout="@layout/layout_school_details_tabchildview_2"/>
+    <include layout="@layout/layout_school_details_tabchildview_3"/>
+    <include layout="@layout/layout_school_details_tabchildview_4"/>
+    <include layout="@layout/layout_school_details_tabchildview_5"/>
+</TableLayout>

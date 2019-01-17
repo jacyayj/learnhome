@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="model"
+            type="pro.haichuang.learn.home.ui.activity.mine.viewmodel.PaymentModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        android:orientation="vertical"
+        tools:context=".ui.activity.mine.PaymentActivity">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/icon_bg_wallet">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/height_title"
+                android:onClick="back"
+                android:paddingHorizontal="15dp"
+                android:src="@drawable/icon_back_white"
+                tools:ignore="OnClick" />
+
+            <TextView
+                style="@style/text_17_33"
+                android:layout_height="@dimen/height_title"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:text="收银台"
+                android:textColor="@color/colorWhite" />
+
+            <LinearLayout
+                style="@style/wrap_layout"
+                android:layout_gravity="center_horizontal"
+                android:gravity="bottom"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/wrap_layout"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="8dp"
+                    android:src="@drawable/icon_money_white" />
+
+                <TextView
+                    style="@style/wrap_layout"
+                    android:drawablePadding="10dp"
+                    android:paddingTop="70dp"
+                    android:text="0.0"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="36sp" />
+
+                <TextView
+                    style="@style/text_12_99"
+                    android:text="元"
+                    android:textColor="@color/colorWhite" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/text_14_99"
+                android:layout_gravity="center_horizontal"
+                android:paddingTop="120dp"
+                android:text="余额充值"
+                android:textColor="@color/colorWhite" />
+
+        </FrameLayout>
+
+        <TextView
+            style="@style/text_17_28282B"
+            android:drawableStart="@drawable/icon_wallet"
+            android:drawablePadding="5dp"
+            android:paddingStart="25dp"
+            android:paddingTop="15dp"
+            android:text="选择支付方式" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingStart="50dp">
+
+            <TextView
+                style="@style/text_14_99"
+                android:text="剩余支付时间"
+                android:textColor="@color/colorB3" />
+
+            <TextView
+                style="@style/text_14_99"
+                android:text="04分52秒"
+                android:textColor="@color/colorFF4C4C" />
+
+            <TextView
+                style="@style/text_14_99"
+                android:text="，逾期订单将自动取消"
+                android:textColor="@color/colorB3" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/colorE0E0E0" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <CheckedTextView
+                android:id="@+id/wallet"
+                style="@style/text_16_33"
+                android:layout_width="match_parent"
+                android:checked="@{model.type == 0}"
+                android:drawableStart="@drawable/icon_yue_pay_small"
+                android:drawableEnd="@drawable/selector_single_choose"
+                android:drawablePadding="20dp"
+                android:gravity="center_vertical"
+                android:onClick="@{model::togglePay}"
+                android:paddingHorizontal="25dp"
+                android:paddingVertical="15dp"
+                android:tag="0"
+                android:text="XX钱包" />
+
+            <TextView
+                android:id="@+id/label"
+                style="@style/text_12_99"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="125dp"
+                android:text="（账户余额:￥0"
+                android:textColor="@color/color33" />
+
+            <TextView
+                android:id="@+id/to_payment"
+                style="@style/text_12_99"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/label"
+                android:text="余额不足？去充值）" />
+        </RelativeLayout>
+
+        <CheckedTextView
+            android:id="@+id/wechat_pay"
+            style="@style/text_16_33"
+            android:layout_width="match_parent"
+            android:checked="@{model.type == 1}"
+            android:drawableStart="@drawable/icon_wechat_pay"
+            android:drawableEnd="@drawable/selector_single_choose"
+            android:drawablePadding="20dp"
+            android:gravity="center_vertical"
+            android:onClick="@{model::togglePay}"
+            android:paddingHorizontal="25dp"
+            android:paddingVertical="15dp"
+            android:tag="1"
+            android:text="微信" />
+
+        <CheckedTextView
+            android:id="@+id/alipay"
+            style="@style/text_16_33"
+            android:layout_width="match_parent"
+            android:checked="@{model.type == 2}"
+            android:drawableStart="@drawable/icon_alipay"
+            android:drawableEnd="@drawable/selector_single_choose"
+            android:drawablePadding="20dp"
+            android:gravity="center_vertical"
+            android:onClick="@{model::togglePay}"
+            android:paddingHorizontal="25dp"
+            android:paddingVertical="15dp"
+            android:tag="2"
+            android:text="支付宝" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/colorE0E0E0" />
+
+        <Button
+            style="@style/button_confirm"
+            android:layout_marginHorizontal="55dp"
+            android:layout_marginTop="40dp"
+            android:text="确认充值" />
+    </LinearLayout>
+</layout>

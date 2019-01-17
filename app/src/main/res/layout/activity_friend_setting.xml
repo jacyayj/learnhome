@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:divider="@drawable/divider_vertical_d7dde0"
+    android:orientation="vertical"
+    android:showDividers="middle|end"
+    tools:context=".ui.activity.message.FriendSettingActivity">
+
+    <include layout="@layout/layout_title" />
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/colorWhite"
+        android:padding="10dp">
+
+        <com.yhy.widget.core.img.round.CircleImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@mipmap/ic_launcher_round" />
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/text_17_33"
+            android:layout_marginStart="75dp"
+            android:layout_marginTop="10dp"
+            android:text="钟丽君"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            style="@style/text_14_66"
+            android:layout_marginStart="15dp"
+            android:background="@drawable/bg_f5_radius_10dp"
+            android:drawableStart="@drawable/icon_edit_blue"
+            android:drawablePadding="5dp"
+            android:paddingHorizontal="4dp"
+            android:paddingVertical="2dp"
+            android:text="备注"
+            app:layout_constraintBaseline_toBaselineOf="@id/title"
+            app:layout_constraintStart_toEndOf="@id/title" />
+
+        <TextView
+            style="@style/text_14_99"
+            android:layout_marginStart="75dp"
+            android:layout_marginTop="35dp"
+            android:text="地址：四川 成都"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            style="@style/text_14_99"
+            android:layout_marginStart="75dp"
+            android:layout_marginTop="55dp"
+            android:text="昵称：noaml"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
+    <CheckBox
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/colorWhite"
+        android:button="@null"
+        android:drawableEnd="@drawable/selector_toggle"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="15dp"
+        android:text="置顶聊天"
+        android:textColor="@color/color_4d"
+        android:textSize="17sp" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:paddingStart="15dp">
+
+        <CheckBox
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite"
+            android:button="@null"
+            android:drawableEnd="@drawable/selector_toggle"
+            android:gravity="start"
+            android:paddingTop="7dp"
+            android:paddingEnd="15dp"
+            android:text="屏蔽消息"
+            android:textColor="@color/color_4d"
+            android:textSize="17sp" />
+
+        <TextView
+            style="@style/text_14_99"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="5dp"
+            android:text="开启后，将不再接收她的消息" />
+
+    </FrameLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+    <TextView
+        android:id="@+id/clear_history"
+        style="@style/text_17_FF4C4C"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorWhite"
+        android:gravity="center"
+        android:text="清除聊天记录" />
+</LinearLayout>

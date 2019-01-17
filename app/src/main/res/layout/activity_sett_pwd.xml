@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="model"
+            type="pro.haichuang.learn.home.ui.activity.mine.viewmodel.SettPwdModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.activity.mine.SettPwdActivity">
+
+        <include layout="@layout/layout_title" />
+
+        <TextView
+            android:id="@+id/notice"
+            style="@style/text_16_99"
+            android:layout_gravity="center_horizontal"
+            android:paddingVertical="50dp"
+            android:text="@{model.step == 0 ? `输入原密码` : (model.step == 1 ? `输入密码` : `再次输入密码`)}" />
+
+        <com.maning.pswedittextlibrary.MNPasswordEditText
+            android:id="@+id/pwd"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginHorizontal="20dp"
+            android:focusableInTouchMode="true"
+            android:inputType="numberPassword"
+            android:maxLength="6"
+            android:textSize="10sp"
+            app:mnPsw_border_color="@color/color99"
+            app:mnPsw_border_radius="5dp"
+            app:mnPsw_border_width="1dp"
+            app:mnPsw_cover_circle_color="@color/color00"
+            app:mnPsw_item_margin="10dp"
+            app:mnPsw_style="StyleOneself"
+            app:mnPsw_text_color="@color/color00" />
+    </LinearLayout>
+</layout>

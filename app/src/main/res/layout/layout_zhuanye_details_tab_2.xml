@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/zhuanye_details_tab2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/stroke_e0e0e0"
+    android:layout_marginTop="5dp"
+    android:orientation="vertical"
+    android:visibility="gone">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:divider="@drawable/divider_horizontal_e0"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:showDividers="middle">
+
+        <TextView
+            style="@style/text_14_33"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="专业名称" />
+
+        <FrameLayout
+            android:id="@+id/legend"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                style="@style/text_14_33"
+                android:layout_gravity="center"
+                android:drawableEnd="@drawable/icon_shuoming"
+                android:drawablePadding="5dp"
+                android:text="图标说明" />
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@drawable/divider_vertical_e0" />
+
+    <pro.haichuang.learn.home.ui.weight.AutoListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@drawable/divider_vertical_e0" />
+</LinearLayout>

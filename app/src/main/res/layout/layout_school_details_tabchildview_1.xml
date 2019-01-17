@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/child_tab_view1"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <TextView
+        style="@style/text_14_002133"
+        android:paddingStart="15dp"
+        android:paddingTop="15dp"
+        android:text="省份：北京" />
+
+    <TextView
+        style="@style/text_14_002133"
+        android:paddingStart="15dp"
+        android:paddingTop="15dp"
+        android:text="地域级别：华北、发达地区" />
+
+    <TextView
+        style="@style/text_14_002133"
+        android:paddingStart="15dp"
+        android:paddingTop="15dp"
+        android:text="城市：北京市" />
+
+    <TextView
+        style="@style/text_14_002133"
+        android:paddingStart="15dp"
+        android:paddingTop="15dp"
+        android:text="城市级别：直辖市" />
+
+
+</LinearLayout>

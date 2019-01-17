@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="item"
+            type="pro.haichuang.learn.home.ui.activity.index.itemmodel.ItemCompareModel" />
+    </data>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="85dp"
+        android:onClick="@{item::toggleChecked}">
+
+        <ImageView
+            android:layout_width="75dp"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:src="@mipmap/ic_launcher" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="75dp"
+            android:paddingEnd="15dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="15dp"
+                android:gravity="center_vertical"
+                android:paddingEnd="20dp">
+
+                <TextView
+                    style="@style/text_14_13C1FF"
+                    android:layout_marginEnd="3dp"
+                    android:text="0052"
+                    android:textSize="12sp" />
+
+                <TextView
+                    style="@style/text_16_33"
+                    android:layout_marginEnd="3dp"
+                    android:text="浙江大学" />
+
+                <TextView
+                    style="@style/text_14_13C1FF"
+                    android:background="@drawable/stroke_13aeff_radius_8dp"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="1dp"
+                    android:text="文科"
+                    android:textSize="12sp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    style="@style/text_14_ff"
+                    android:background="@color/colorF0F7FA"
+                    android:paddingHorizontal="5dp"
+                    android:paddingVertical="1dp"
+                    android:text="2017年"
+                    android:textColor="@color/colorABB0B3" />
+            </LinearLayout>
+
+            <TableRow
+                android:layout_weight="1"
+                android:gravity="center_vertical">
+
+                <TextView
+                    style="@style/text_14_99"
+                    android:layout_weight="1"
+                    android:text="本科第一批录取院校"
+                    android:textColor="@color/color939799" />
+
+                <CheckedTextView
+                    style="@style/text_14_33"
+                    android:checked="@{item.checked}"
+                    android:drawableEnd="@{item.compare ? @drawable/selector_multiple_choose : null }"
+                    android:text="1378/1723人" />
+            </TableRow>
+
+            <TextView
+                style="@style/text_14_99"
+                android:paddingBottom="5dp"
+                android:drawableStart="@drawable/icon_location"
+                android:drawablePadding="5dp"
+                android:text="四川"
+                android:textColor="@color/color939799" />
+        </TableLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="10dp"
+            android:background="@color/colorE0E0E0" />
+    </FrameLayout>
+</layout>

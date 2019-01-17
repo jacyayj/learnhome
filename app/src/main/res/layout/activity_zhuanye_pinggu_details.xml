@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.activity.index.ZhuanYePingGuDetailsActivity">
+
+    <include layout="@layout/layout_title" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        android:divider="@drawable/divider_vertical_e0"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingHorizontal="10dp"
+        android:showDividers="middle">
+
+        <TextView
+            style="@style/text_16_00"
+            android:gravity="center"
+            android:paddingVertical="5dp"
+            android:text="0602 中国史" />
+
+        <TextView
+            style="@style/text_14_00"
+            android:layout_width="match_parent"
+            android:lineSpacingExtra="3dp"
+            android:paddingVertical="3dp"
+            android:text="      本一级学科中，全国具有“博士一级”授权的高校供46所，本次40所参评；还有部分“博士二级”授权和硕士授权的高校参加了评估；参评高校供58所。
+注：以下得分相同的高校按学校代码顺序排序" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:divider="@drawable/divider_horizontal_e0"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:showDividers="middle">
+
+            <TextView
+                style="@style/text_14_00"
+                android:layout_width="0dp"
+                android:layout_weight="1.5"
+                android:gravity="center"
+                android:text="学校代码及院校" />
+
+            <TextView
+                style="@style/text_14_00"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="学科整体水平得分" />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@drawable/divider_vertical_e0" />
+    </LinearLayout>
+
+</LinearLayout>

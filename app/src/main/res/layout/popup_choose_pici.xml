@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="95dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_choose_pici"
+    android:orientation="vertical"
+    android:padding="15dp">
+
+    <TextView
+        android:id="@+id/pici_1"
+        style="@style/text_16_33"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="本一批" />
+
+    <TextView
+        android:id="@+id/pici_2"
+        style="@style/text_16_33"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="本二批" />
+
+    <TextView
+        android:id="@+id/pici_3"
+        style="@style/text_16_33"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="专科批" />
+</LinearLayout>

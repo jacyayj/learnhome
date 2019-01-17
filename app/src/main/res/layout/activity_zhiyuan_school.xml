@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.activity.index.ZhiYuanSchoolActivity">
+
+    <include layout="@layout/layout_title" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_title"
+        android:background="@color/colorWhite"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="15dp"
+        android:paddingEnd="10dp">
+
+        <TextView
+            style="@style/text_16_33"
+            android:layout_weight="1"
+            android:text="2018年计划" />
+
+        <TextView
+            style="@style/text_18_ff"
+            android:text="8 ↑"
+            android:textColor="@color/colorFF3333" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/color64E1FA"
+        android:divider="@drawable/divider_horizontal_ff"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:showDividers="middle">
+
+        <TextView
+            style="@style/text_14_ff"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="年份" />
+
+        <TextView
+            style="@style/text_14_ff"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="2017" />
+
+        <TextView
+            style="@style/text_14_ff"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="2016" />
+
+        <TextView
+            style="@style/text_14_ff"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="2015" />
+    </LinearLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/stroke_e0e0e0"
+        android:divider="@drawable/divider_vertical_e0"
+        android:showDividers="middle">
+
+        <TableRow
+            android:divider="@drawable/divider_horizontal_e0"
+            android:showDividers="middle">
+
+            <TextView
+                style="@style/text_14_33"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="录取人数" />
+
+            <TextView
+                style="@style/text_14_33"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="872" />
+
+            <TextView
+                style="@style/text_14_33"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="872" />
+
+            <TextView
+                style="@style/text_14_33"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="872" />
+        </TableRow>
+        <TableRow
+            android:divider="@drawable/divider_horizontal_e0"
+            android:showDividers="middle">
+
+            <TextView
+                style="@style/text_14_33"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="最低分" />
+
+            <TextView
+                style="@style/text_14_33"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="872" />
+
+            <TextView
+                style="@style/text_14_33"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="872" />
+
+            <TextView
+                style="@style/text_14_33"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="872" />
+        </TableRow>
+        <TableRow
+            android:divider="@drawable/divider_horizontal_e0"
+            android:showDividers="middle">
+
+            <TextView
+                style="@style/text_14_33"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="院校线差分" />
+
+            <TextView
+                style="@style/text_14_33"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="872" />
+
+            <TextView
+                style="@style/text_14_33"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="872" />
+
+            <TextView
+                style="@style/text_14_33"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="872" />
+        </TableRow>
+        <TableRow
+            android:divider="@drawable/divider_horizontal_e0"
+            android:showDividers="middle">
+
+            <TextView
+                style="@style/text_14_33"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="最低位次" />
+
+            <TextView
+                style="@style/text_14_33"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="872" />
+
+            <TextView
+                style="@style/text_14_33"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="872" />
+
+            <TextView
+                style="@style/text_14_33"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="872" />
+        </TableRow>
+    </TableLayout>
+</LinearLayout>

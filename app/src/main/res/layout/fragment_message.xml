@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_title"
+        android:background="@color/colorWhite">
+
+        <TextView
+            style="@style/text_18_00"
+            android:layout_gravity="center"
+            android:text="消息" />
+
+        <TextView
+            android:id="@+id/to_message_center"
+            style="@style/text_14_32C8FA"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/stroke_32c8fa_radius_5dp"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="4dp"
+            android:text="好友申请" />
+    </FrameLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@drawable/divider_vertical_d7dde0"
+            android:orientation="vertical"
+            android:showDividers="middle">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/to_search_message"
+                android:background="@color/colorWhite"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_f8_stroke_cc_radius_2dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        style="@style/wrap_layout"
+                        android:layout_marginEnd="7dp"
+                        android:src="@drawable/icon_message_search" />
+
+                    <TextView
+                        style="@style/text_15_aa"
+                        android:hint="搜索用户" />
+                </LinearLayout>
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:background="@color/colorWhite"
+                android:drawableStart="@drawable/icon_message_system"
+                android:drawableEnd="@drawable/icon_arrow_next"
+                android:drawablePadding="15dp"
+                android:gravity="center_vertical"
+                android:paddingVertical="10dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="15dp"
+                android:text="系统消息"
+                android:textColor="@color/color33"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:background="@color/colorWhite"
+                android:drawableStart="@drawable/icon_message_comment"
+                android:drawableEnd="@drawable/icon_arrow_next"
+                android:drawablePadding="15dp"
+                android:gravity="center_vertical"
+                android:paddingVertical="10dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="15dp"
+                android:text="评论"
+                android:textColor="@color/color33"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:background="@color/colorWhite"
+                android:drawableStart="@drawable/icon_message_praise"
+                android:drawableEnd="@drawable/icon_arrow_next"
+                android:drawablePadding="15dp"
+                android:gravity="center_vertical"
+                android:paddingVertical="10dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="15dp"
+                android:text="点赞"
+                android:textColor="@color/color33"
+                android:textSize="18sp" />
+
+            <pro.haichuang.learn.home.ui.weight.VerticalRecyclerView
+                android:id="@+id/contact_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorWhite" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

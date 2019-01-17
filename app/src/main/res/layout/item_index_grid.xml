@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <import type="pro.haichuang.learn.home.utils.ImageBinding" />
+
+        <variable
+            name="item"
+            type="pro.haichuang.learn.home.bean.IconLabel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingVertical="15dp">
+
+        <ImageView
+            style="@style/wrap_layout"
+            drawable="@{item.icon}"
+            android:layout_marginBottom="5dp" />
+
+        <TextView
+            style="@style/text_12_2E3133"
+            android:text="@{item.label}" />
+    </LinearLayout>
+</layout>

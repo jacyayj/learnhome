@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:orientation="vertical"
+    tools:context=".ui.activity.index.PlanCompareActivity">
+
+    <include layout="@layout/layout_title" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@drawable/divider_vertical_d7dde0"
+        android:showDividers="middle">
+
+        <TableRow
+            android:divider="@drawable/divider_horizontal_d7dde0"
+            android:showDividers="middle">
+
+            <TextView
+                style="@style/text_12_2E3133"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:paddingVertical="15dp"
+                android:paddingStart="10dp"
+                android:text="院校名称"
+                android:textColor="@color/color002133" />
+
+            <TextView
+                style="@style/text_12_2E3133"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:paddingVertical="15dp"
+                android:text="北京大学"
+                android:textColor="@color/color002133" />
+
+            <TextView
+                style="@style/text_12_2E3133"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:paddingVertical="15dp"
+                android:text="北京大学"
+                android:textColor="@color/color002133" />
+        </TableRow>
+        <TableRow
+            android:divider="@drawable/divider_horizontal_d7dde0"
+            android:showDividers="middle">
+
+            <TextView
+                style="@style/text_12_2E3133"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:paddingVertical="15dp"
+                android:paddingStart="10dp"
+                android:text="科类"
+                android:textColor="@color/color002133" />
+
+            <TextView
+                style="@style/text_12_2E3133"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:paddingVertical="15dp"
+                android:text="科类"
+                android:textColor="@color/color002133" />
+
+            <TextView
+                style="@style/text_12_2E3133"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:paddingVertical="15dp"
+                android:text="文科"
+                android:textColor="@color/color002133" />
+        </TableRow>
+        <TableRow
+            android:divider="@drawable/divider_horizontal_d7dde0"
+            android:showDividers="middle">
+
+            <TextView
+                style="@style/text_12_2E3133"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:paddingVertical="15dp"
+                android:paddingStart="10dp"
+                android:text="批次"
+                android:textColor="@color/color002133" />
+
+            <TextView
+                style="@style/text_12_2E3133"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:paddingVertical="15dp"
+                android:text="本科第一批录取院校"
+                android:textColor="@color/color002133" />
+
+            <TextView
+                style="@style/text_12_2E3133"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:paddingVertical="15dp"
+                android:text="本科第一批录取院校"
+                android:textColor="@color/color002133" />
+        </TableRow>
+        <TableRow
+            android:divider="@drawable/divider_horizontal_d7dde0"
+            android:showDividers="middle">
+
+            <TextView
+                style="@style/text_12_2E3133"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:paddingVertical="15dp"
+                android:paddingStart="10dp"
+                android:text="去年招新"
+                android:textColor="@color/color002133" />
+
+            <TextView
+                style="@style/text_12_2E3133"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:paddingVertical="15dp"
+                android:text="23"
+                android:textColor="@color/color002133" />
+
+            <TextView
+                style="@style/text_12_2E3133"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:paddingVertical="15dp"
+                android:text="23"
+                android:textColor="@color/color002133" />
+        </TableRow>
+        <TableRow
+            android:divider="@drawable/divider_horizontal_d7dde0"
+            android:showDividers="middle">
+
+            <TextView
+                style="@style/text_12_2E3133"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:paddingVertical="15dp"
+                android:paddingStart="10dp"
+                android:text="今年招新"
+                android:textColor="@color/color002133" />
+
+            <TextView
+                style="@style/text_12_2E3133"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:paddingVertical="15dp"
+                android:text="23"
+                android:textColor="@color/color002133" />
+
+            <TextView
+                style="@style/text_12_2E3133"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:paddingVertical="15dp"
+                android:text="23"
+                android:textColor="@color/color002133" />
+        </TableRow>
+        <TableRow
+            android:divider="@drawable/divider_horizontal_d7dde0"
+            android:showDividers="middle">
+
+            <TextView
+                style="@style/text_12_2E3133"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:paddingVertical="15dp"
+                android:paddingStart="10dp"
+                android:text="是否招新"
+                android:textColor="@color/color002133" />
+
+            <TextView
+                style="@style/text_12_2E3133"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:paddingVertical="15dp"
+                android:text="是"
+                android:textColor="@color/color002133" />
+
+            <TextView
+                style="@style/text_12_2E3133"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:paddingVertical="15dp"
+                android:text="否"
+                android:textColor="@color/color002133" />
+        </TableRow>
+    </TableLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorD7DDE0" />
+</LinearLayout>

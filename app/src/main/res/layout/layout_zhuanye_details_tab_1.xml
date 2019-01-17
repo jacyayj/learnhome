@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:id="@+id/zhuanye_details_tab1"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/text_14_002133"
+        android:layout_marginTop="15dp"
+        android:paddingStart="15dp"
+        android:text="专业名称：哲学" />
+
+    <TextView
+        style="@style/text_14_002133"
+        android:layout_marginTop="15dp"
+        android:paddingStart="15dp"
+        android:text="专业门类：哲学类" />
+
+    <TextView
+        style="@style/text_14_002133"
+        android:layout_marginTop="15dp"
+        android:paddingStart="15dp"
+        android:text="专业层次：哲学/哲学类" />
+
+    <TextView
+        style="@style/text_14_002133"
+        android:layout_marginTop="15dp"
+        android:paddingStart="15dp"
+        android:text="年度毕业生规模：1000-2000" />
+
+    <TextView
+        style="@style/text_14_002133"
+        android:layout_marginTop="15dp"
+        android:paddingStart="15dp"
+        android:text="就业率区间：B-" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="20dp"
+        android:background="@color/colorD7DEE0" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingStart="30dp">
+
+        <TextView
+            style="@style/text_14_ff"
+            android:layout_marginEnd="5dp"
+            android:background="@color/color66"
+            android:paddingHorizontal="3dp"
+            android:text="学制"
+            android:textStyle="bold" />
+
+        <TextView
+            style="@style/text_14_00"
+            android:text="4年" />
+
+        <TextView
+            style="@style/text_14_ff"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="5dp"
+            android:background="@color/color66"
+            android:paddingHorizontal="3dp"
+            android:text="学位"
+            android:textStyle="bold" />
+
+        <TextView
+            style="@style/text_14_00"
+            android:text="哲学学士" />
+    </LinearLayout>
+
+    <TextView
+        style="@style/text_14_ff"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        android:background="@color/color66"
+        android:paddingHorizontal="3dp"
+        android:text="学习目标"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="5dp"
+        android:paddingHorizontal="10dp"
+        android:paddingTop="10dp"
+        android:text="      年度毕业生规模年度毕业生规模年度毕业生规模年度毕业生规模年度毕业生规模年度毕业生规模年度毕业生规模年度毕业生规模年度毕业生规模年度毕业生规模年度毕业生规模年度毕业生规模"
+        android:textColor="@color/color00"
+        android:textSize="14sp" />
+
+    <TextView
+        style="@style/text_14_ff"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        android:background="@color/color66"
+        android:paddingHorizontal="3dp"
+        android:text="学习要求"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="5dp"
+        android:paddingHorizontal="10dp"
+        android:paddingTop="10dp"
+        android:text="      年度毕业生规模年度毕业生规模年度毕业生规模年度毕业生规模年度毕业生规模年度毕业生规模年度毕业生规模年度毕业生规模年度毕业生规模年度毕业生规模年度毕业生规模年度毕业生规模"
+        android:textColor="@color/color00"
+        android:textSize="14sp" />
+</LinearLayout>

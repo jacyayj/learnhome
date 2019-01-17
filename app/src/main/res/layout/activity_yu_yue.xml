@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="model"
+            type="pro.haichuang.learn.home.ui.activity.find.viewmodel.YuYueModel" />
+    </data>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        android:orientation="vertical"
+        tools:context="pro.haichuang.learn.home.ui.activity.find.YuYueActivity">
+
+        <include layout="@layout/layout_title" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/height_title">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="15dp"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="10dp">
+
+                    <com.yhy.widget.core.img.round.CircleImageView
+                        android:layout_width="46dp"
+                        android:layout_height="46dp"
+                        android:layout_marginTop="5dp"
+                        android:src="@mipmap/ic_launcher_round" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/text_16_18191A"
+                            android:layout_weight="1"
+                            android:text="范美忠" />
+
+                        <TextView
+                            style="@style/text_12_939799"
+                            android:text="擅长：针对中文学科教育有独特的见解和研究" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:background="@color/colorF0F7FA" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingBottom="15dp">
+
+                    <TextView
+                        style="@style/text_17_33"
+                        android:drawableStart="@drawable/icon_pen"
+                        android:drawablePadding="5dp"
+                        android:padding="15dp"
+                        android:text="问题描述" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="140dp"
+                        android:layout_marginHorizontal="15dp"
+                        android:background="@color/colorF0F7FA"
+                        android:gravity="start"
+                        android:hint="请写清楚需要咨询老师的问题，老师会及时回复"
+                        android:padding="10dp"
+                        android:textColor="@color/color33"
+                        android:textColorHint="@color/colorC4CACC"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/text_17_33"
+                        android:drawableStart="@drawable/icon_camera"
+                        android:drawablePadding="5dp"
+                        android:padding="15dp"
+                        android:text="图片" />
+
+                    <pro.haichuang.learn.home.ui.weight.ReleaseRecyclerView
+                        android:id="@+id/grid"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="15dp"
+                        android:paddingBottom="15dp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="@color/colorF0F7FA" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/text_17_33"
+                        android:drawableStart="@drawable/icon_time"
+                        android:drawablePadding="5dp"
+                        android:padding="15dp"
+                        android:text="预约沟通时间" />
+
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:checkedButton="@id/time_1"
+                        android:divider="@drawable/divider_horizontal_8dp"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="15dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="10dp"
+                        android:showDividers="middle">
+
+                        <RadioButton
+                            android:id="@+id/time_1"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/selector_time"
+                            android:button="@null"
+                            android:gravity="center"
+                            android:text="09:00-11:00"
+                            android:textColor="@color/color_time"
+                            android:textSize="17sp" />
+
+                        <RadioButton
+                            android:id="@+id/time_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/selector_time"
+                            android:button="@null"
+                            android:gravity="center"
+                            android:text="12:00-14:00"
+                            android:textColor="@color/color_time"
+                            android:textSize="17sp" />
+
+                        <RadioButton
+                            android:id="@+id/time_3"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/selector_time"
+                            android:button="@null"
+                            android:gravity="center"
+                            android:text="14:00-16:00"
+                            android:textColor="@color/color_time"
+                            android:textSize="17sp" />
+                    </RadioGroup>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="15dp">
+
+                    <TextView
+                        style="@style/text_16_00"
+                        android:layout_marginEnd="30dp"
+                        android:text="姓名" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/stroke_cc"
+                        android:hint="请输入姓名"
+                        android:paddingStart="15dp"
+                        android:textColor="@color/color33"
+                        android:textColorHint="@color/color9A9A9A" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="15dp"
+                    android:paddingBottom="15dp">
+
+                    <TextView
+                        style="@style/text_16_00"
+                        android:layout_marginEnd="30dp"
+                        android:text="电话" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/stroke_cc"
+                        android:hint="请输入电话"
+                        android:paddingStart="15dp"
+                        android:textColor="@color/color33"
+                        android:textColorHint="@color/color9A9A9A" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/yu_yue"
+                    style="@style/button_confirm"
+                    android:layout_marginHorizontal="55dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:text="预约咨询" />
+            </LinearLayout>
+        </ScrollView>
+
+    </FrameLayout>
+</layout>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginVertical="10dp"
+        android:background="@drawable/bg_ebf2f5_radius_13dp"
+        android:paddingStart="5dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="5dp"
+            android:src="@drawable/icon_index_search" />
+
+        <TextView
+            style="@style/text_14_CCC4CC"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:text="高考改革" />
+    </LinearLayout>
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        app:tabIndicatorColor="@color/color32C8FA"
+        app:tabIndicatorFullWidth="false"
+        app:tabIndicatorHeight="2dp"
+        app:tabMode="scrollable"
+        app:tabTextAppearance="@style/find_menu">
+
+        <android.support.design.widget.TabItem
+            style="@style/match_layout"
+            android:layout_marginHorizontal="15dp"
+            android:text="家庭教育" />
+
+        <android.support.design.widget.TabItem
+            style="@style/match_layout"
+            android:layout_marginHorizontal="15dp"
+            android:text="值得关注" />
+
+        <android.support.design.widget.TabItem
+            style="@style/match_layout"
+            android:layout_marginHorizontal="15dp"
+            android:text="网内关注" />
+
+        <android.support.design.widget.TabItem
+            style="@style/match_layout"
+            android:layout_marginHorizontal="15dp"
+            android:text="成长记录" />
+
+        <android.support.design.widget.TabItem
+            style="@style/match_layout"
+            android:layout_marginHorizontal="15dp"
+            android:text="成长记录2" />
+    </android.support.design.widget.TabLayout>
+
+    <LinearLayout
+        android:id="@+id/ad_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorF0F7FA"
+        android:orientation="horizontal"
+        android:paddingHorizontal="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2.5dp"
+            android:layout_weight="1"
+            android:background="@color/colorWhite"
+            android:elevation="3dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="#ff0" />
+
+            <TextView
+                style="@style/text_14_00"
+                android:padding="10dp"
+                android:text="那些被过度管教成长的孩子，会丢掉一些生活意义" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2.5dp"
+            android:layout_weight="1"
+            android:background="@color/colorWhite"
+            android:elevation="3dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="#ff0" />
+
+            <TextView
+                style="@style/text_14_00"
+                android:padding="10dp"
+                android:text="70岁老人抗被褥送孙子开学报到 隔代教育不容易！" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite"
+            android:divider="@color/colorF0F7FA"
+            android:dividerHeight="0.5dp" />
+
+        <ImageView
+            android:id="@+id/to_release"
+            style="@style/wrap_layout"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="25dp"
+            android:background="@drawable/icon_find_release"
+            android:elevation="5dp" />
+    </FrameLayout>
+</LinearLayout>

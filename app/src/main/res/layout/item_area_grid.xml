@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="item"
+            type="pro.haichuang.learn.home.bean.AreaBean" />
+    </data>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/bg_ff_stroke_d2_radius_3">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@{item.showIcon ? @drawable/icon_location_blue : null}"
+            android:drawablePadding="5dp"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:text="@{item.name}"
+            android:textColor="@color/color33"
+            android:textSize="16sp" />
+    </FrameLayout>
+</layout>

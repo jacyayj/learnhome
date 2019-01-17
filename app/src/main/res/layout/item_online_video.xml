@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="item"
+            type="Integer" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="18dp"
+        android:paddingVertical="10dp">
+
+        <VideoView
+            android:id="@+id/video"
+            android:layout_width="match_parent"
+            android:layout_height="150dp" />
+
+        <TextView
+            style="@style/text_16_00"
+            android:layout_marginTop="5dp"
+            android:text="杨老师教你填志愿"
+            app:layout_constraintTop_toBottomOf="@id/video" />
+
+        <com.yhy.widget.core.img.round.CircleImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="30dp"
+            android:src="@mipmap/ic_launcher_round"
+            app:layout_constraintTop_toBottomOf="@id/video" />
+
+        <TextView
+            style="@style/text_14_33"
+            android:layout_marginStart="35dp"
+            android:paddingBottom="5dp"
+            android:text="杨子健"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            style="@style/text_14_99"
+            android:paddingBottom="5dp"
+            android:text="2018-09-01"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+</layout>

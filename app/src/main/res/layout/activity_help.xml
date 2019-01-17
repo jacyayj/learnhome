@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.activity.mine.HelpActivity">
+
+    <include layout="@layout/layout_title" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:background="@color/colorWhite"
+        android:divider="@drawable/divider_vertical_e0"
+        android:orientation="vertical"
+        android:showDividers="middle">
+
+        <TextView
+            style="@style/text_16_33"
+            android:layout_height="45dp"
+            android:drawableStart="@drawable/icon_question"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:paddingStart="15dp"
+            android:text="手机收不到验证码？"
+            android:textStyle="bold" />
+
+        <TextView
+            style="@style/text_16_99"
+            android:padding="15dp"
+            android:text="支付时微信号与登陆时绑定的微信号是不同的，用支付时使用的微信号登录就可以查询"
+            android:textColor="@color/color77" />
+    </LinearLayout>
+</LinearLayout>

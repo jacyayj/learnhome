@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="item"
+            type="pro.haichuang.learn.home.ui.activity.mine.itemmodel.OrderModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@drawable/divider_vertical_e0"
+        android:orientation="vertical"
+        android:showDividers="middle">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="15dp"
+            android:paddingTop="17dp"
+            android:paddingBottom="10dp">
+
+            <com.yhy.widget.core.img.round.CircleImageView
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:layout_marginEnd="10dp"
+                android:src="@mipmap/ic_launcher_round" />
+
+            <TextView
+                style="@style/text_16_33"
+                android:text="范美忠" />
+
+            <TextView
+                style="@style/text_10_99"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5dp"
+                android:background="@drawable/stroke_13aeff_radius_8dp"
+                android:paddingHorizontal="5dp"
+                android:paddingVertical="1dp"
+                android:text="文科"
+                android:textColor="@color/color32C8FA" />
+
+            <TextView
+                style="@style/text_10_99"
+                android:background="@drawable/stroke_13aeff_radius_8dp"
+                android:paddingHorizontal="5dp"
+                android:paddingVertical="1dp"
+                android:text="初中->高中"
+                android:textColor="@color/color32C8FA" />
+
+            <TextView
+                style="@style/text_16_33"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="6.00元" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/operation"
+            style="@style/text_14_32C8FA"
+            android:layout_width="60dp"
+            android:layout_height="25dp"
+            android:layout_gravity="end"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="11dp"
+            android:background="@{item.type == 2 ? @drawable/stroke_e0_radius_5dp : @drawable/stroke_32c8fa_radius_5dp}"
+            android:gravity="center"
+            android:text="@{item.text}"
+            android:textColor="@{item.type == 2 ? @color/colorE0E0E0 : @color/color32C8FA}" />
+    </LinearLayout>
+</layout>

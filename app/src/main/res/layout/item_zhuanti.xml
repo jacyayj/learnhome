@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="item"
+            type="Integer" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_white_radius_5dp"
+        android:orientation="vertical">
+
+        <com.yhy.widget.core.img.round.RoundImageView
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:background="@mipmap/ic_launcher"
+            app:riv_radius_left_top="5dp"
+            app:riv_radius_right_top="5dp" />
+
+        <TextView
+            style="@style/text_15_33"
+            android:paddingVertical="@dimen/sp_10"
+            android:paddingStart="12dp"
+            android:text="大学生方程式空气动力学讲座" />
+
+        <TextView
+            style="@style/text_12_99"
+            android:drawableStart="@drawable/icon_location"
+            android:drawablePadding="5dp"
+            android:paddingStart="12dp"
+            android:text="成都市成都电子科技大学一号演播室" />
+
+        <TextView
+            style="@style/text_12_99"
+            android:drawableStart="@drawable/icon_location"
+            android:drawablePadding="5dp"
+            android:paddingStart="12dp"
+            android:paddingTop="@dimen/sp_10"
+            android:paddingBottom="3dp"
+            android:text="2018-10-22" />
+    </LinearLayout>
+</layout>

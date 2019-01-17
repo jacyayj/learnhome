@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/child_tab_view2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="gone">
+
+    <TextView
+        style="@style/text_14_002133"
+        android:paddingStart="15dp"
+        android:paddingTop="15dp"
+        android:text="国家重点一级学科数：18" />
+
+    <TextView
+        style="@style/text_14_002133"
+        android:paddingStart="15dp"
+        android:paddingTop="15dp"
+        android:text="国家重点一级学科数：25" />
+
+    <TextView
+        style="@style/text_14_002133"
+        android:paddingStart="15dp"
+        android:paddingTop="15dp"
+        android:text="国家重点一级学科数：3" />
+
+    <TableLayout
+        android:layout_marginTop="20dp"
+        android:divider="@drawable/divider_vertical_d7dde0"
+        android:showDividers="end|middle|beginning">
+
+        <TableRow
+            android:divider="@drawable/divider_horizontal_d7dde0"
+            android:showDividers="middle">
+
+            <TextView
+                style="@style/text_14_002133"
+                android:layout_width="0dp"
+                android:layout_weight="1.1"
+                android:paddingVertical="15dp"
+                android:paddingStart="15dp"
+                android:text="博士学位授权数" />
+
+            <TextView
+                style="@style/text_14_002133"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingVertical="15dp"
+                android:text="一级学科:50" />
+
+            <TextView
+                style="@style/text_14_002133"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingVertical="15dp"
+                android:text="二级学科:198" />
+        </TableRow>
+
+        <TableRow
+            android:divider="@drawable/divider_horizontal_d7dde0"
+            android:showDividers="middle">
+
+            <TextView
+                style="@style/text_14_002133"
+                android:layout_width="0dp"
+                android:layout_weight="1.1"
+                android:paddingVertical="15dp"
+                android:paddingStart="15dp"
+                android:text="博士学位授权数" />
+
+            <TextView
+                style="@style/text_14_002133"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingVertical="15dp"
+                android:text="一级学科:50" />
+
+            <TextView
+                style="@style/text_14_002133"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingVertical="15dp"
+                android:text="二级学科:198" />
+        </TableRow>
+
+        <TextView
+            style="@style/text_14_002133"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:paddingVertical="15dp"
+            android:paddingStart="15dp"
+            android:text="专任教学数：4431人" />
+    </TableLayout>
+
+</TableLayout>

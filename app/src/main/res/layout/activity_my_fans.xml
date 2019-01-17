@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="model"
+            type="pro.haichuang.learn.home.ui.activity.mine.viewmodel.MyFansModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="pro.haichuang.learn.home.ui.activity.mine.MyFansActivity">
+        <include layout="@layout/layout_title" />
+
+        <TextView
+            style="@style/match_layout"
+            android:layout_height="45dp"
+            android:gravity="center"
+            android:text="你还没有粉丝哦"
+            android:textColor="#ffc4cacc"
+            android:textSize="14sp" />
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="1dp"
+            android:divider="@null"
+            android:background="@color/colorWhite" />
+    </LinearLayout>
+</layout>

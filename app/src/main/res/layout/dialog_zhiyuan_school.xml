@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingHorizontal="40dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_white_radius_5dp"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/text_16_33"
+            android:paddingStart="10dp"
+            android:paddingTop="15dp"
+            android:textStyle="bold"
+            android:text="数据说明" />
+        <TextView
+            style="@style/text_16_33"
+            android:layout_marginTop="10dp"
+            android:paddingHorizontal="10dp"
+            android:paddingBottom="20dp"
+            android:text="1、本版本已使用考试院发布2018计划数；\n\n
+2、2012-2017各院校录取数据，参考各省市出版的填报指南以及各本专科院校的官网历年录取数据；\n\n
+3、2018年院校数据可在分数线功能中查询，有关专业数据将在考试院公布后即时更新（考试院公布时间2019年5月）；"
+            android:textColor="#ff333333"
+            android:textSize="16sp"
+            />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/icon_dialog_close" />
+</LinearLayout>

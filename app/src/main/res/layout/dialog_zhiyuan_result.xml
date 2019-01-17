@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingHorizontal="40dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_white_radius_5dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/text_16_33"
+                android:layout_marginEnd="20dp"
+                android:paddingStart="30dp"
+                android:paddingTop="30dp"
+                android:paddingBottom="15dp"
+                android:text="志愿" />
+
+            <TextView
+                style="@style/text_16_33"
+                android:text="院校" />
+        </LinearLayout>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp">
+
+            <TableRow android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@color/colorFFAA3B"
+                    android:gravity="center"
+                    android:text="A"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    style="@style/match_layout"
+                    android:layout_weight="1"
+                    android:background="@drawable/stroke_e0e0e0"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="10dp">
+
+                    <TextView
+                        style="@style/text_16_00"
+                        android:singleLine="true"
+                        android:text="四川大学" />
+
+                    <Button
+                        style="@style/text_16_ff"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@color/colorFFAA3B"
+                        android:text="2" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_zhiyuan_delete" />
+                </LinearLayout>
+            </TableRow>
+
+            <TableRow android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@color/colorFFCA3B"
+                    android:gravity="center"
+                    android:text="B"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    style="@style/match_layout"
+                    android:layout_weight="1"
+                    android:background="@drawable/stroke_e0e0e0"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="10dp">
+
+                    <TextView
+                        style="@style/text_16_00"
+                        android:singleLine="true"
+                        android:text="四川大学" />
+
+                    <Button
+                        style="@style/text_16_ff"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@color/colorFFCA3B"
+                        android:text="2" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_zhiyuan_delete" />
+                </LinearLayout>
+            </TableRow>
+
+            <TableRow android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@color/color8FCF61"
+                    android:gravity="center"
+                    android:text="C"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    style="@style/match_layout"
+                    android:layout_weight="1"
+                    android:background="@drawable/stroke_e0e0e0"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="10dp">
+
+                    <TextView
+                        style="@style/text_16_00"
+                        android:singleLine="true"
+                        android:text="四川大学" />
+
+                    <Button
+                        style="@style/text_16_ff"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@color/color8FCF61"
+                        android:text="2" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_zhiyuan_delete" />
+                </LinearLayout>
+            </TableRow>
+
+            <TableRow android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@color/color83DCE4"
+                    android:gravity="center"
+                    android:text="D"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    style="@style/match_layout"
+                    android:layout_weight="1"
+                    android:background="@drawable/stroke_e0e0e0"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="10dp">
+
+                    <TextView
+                        style="@style/text_16_00"
+                        android:singleLine="true"
+                        android:text="四川大学" />
+
+                    <Button
+                        style="@style/text_16_ff"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@color/color83DCE4"
+                        android:text="2" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_zhiyuan_delete" />
+                </LinearLayout>
+            </TableRow>
+
+            <TableRow android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@color/color7CBCF8"
+                    android:gravity="center"
+                    android:text="E"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    style="@style/match_layout"
+                    android:layout_weight="1"
+                    android:background="@drawable/stroke_e0e0e0"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="10dp">
+
+                    <TextView
+                        style="@style/text_16_00"
+                        android:singleLine="true"
+                        android:text="四川大学" />
+
+                    <Button
+                        style="@style/text_16_ff"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@color/color7CBCF8"
+                        android:text="2" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_zhiyuan_delete" />
+                </LinearLayout>
+            </TableRow>
+
+            <TableRow android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@color/colorC68CEA"
+                    android:gravity="center"
+                    android:text="F"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    style="@style/match_layout"
+                    android:layout_weight="1"
+                    android:background="@drawable/stroke_e0e0e0"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="10dp">
+
+                    <TextView
+                        style="@style/text_16_00"
+                        android:singleLine="true"
+                        android:text="四川大学" />
+
+                    <Button
+                        style="@style/text_16_ff"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@color/colorC68CEA"
+                        android:text="2" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_zhiyuan_delete" />
+                </LinearLayout>
+            </TableRow>
+
+            <TableRow android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@color/colorEA8CCE"
+                    android:gravity="center"
+                    android:text="G"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    style="@style/match_layout"
+                    android:layout_weight="1"
+                    android:background="@drawable/stroke_e0e0e0"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="10dp">
+
+                    <TextView
+                        style="@style/text_16_00"
+                        android:singleLine="true"
+                        android:text="四川大学" />
+
+                    <Button
+                        style="@style/text_16_ff"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@color/colorEA8CCE"
+                        android:text="2" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_zhiyuan_delete" />
+                </LinearLayout>
+            </TableRow>
+
+            <TableRow android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@color/color8C91EA"
+                    android:gravity="center"
+                    android:text="H"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    style="@style/match_layout"
+                    android:layout_weight="1"
+                    android:background="@drawable/stroke_e0e0e0"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="10dp">
+
+                    <TextView
+                        style="@style/text_16_00"
+                        android:singleLine="true"
+                        android:text="四川大学" />
+
+                    <Button
+                        style="@style/text_16_ff"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@color/color8C91EA"
+                        android:text="2" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_zhiyuan_delete" />
+                </LinearLayout>
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@color/color95D13F"
+                    android:gravity="center"
+                    android:text="I"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    style="@style/match_layout"
+                    android:layout_weight="1"
+                    android:background="@drawable/stroke_e0e0e0"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="10dp">
+
+                    <TextView
+                        style="@style/text_16_00"
+                        android:singleLine="true"
+                        android:text="四川大学" />
+
+                    <Button
+                        style="@style/text_16_ff"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@color/color95D13F"
+                        android:text="2" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_zhiyuan_delete" />
+                </LinearLayout>
+            </TableRow>
+        </TableLayout>
+
+        <Button
+            android:id="@+id/confirm"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginVertical="10dp"
+            android:background="@drawable/bg_32c8fa_radius_5dp"
+            android:text="生成志愿表"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:id="@+id/close"
+        android:src="@drawable/icon_dialog_close" />
+</LinearLayout>

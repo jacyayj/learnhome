@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="item"
+            type="Integer" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/text_16_33"
+            android:paddingVertical="15dp"
+            android:paddingStart="10dp"
+            android:text="你怎么还没有过来，地址我马上发你......" />
+
+        <TextView
+            style="@style/text_14_99"
+            android:paddingBottom="10dp"
+            android:layout_gravity="end"
+            android:paddingEnd="15dp"
+            android:text="今天 来自钟文" />
+    </LinearLayout>
+</layout>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="item"
+            type="Integer" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="10dp">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.yhy.widget.core.img.round.CircleImageView
+                android:id="@+id/to_index"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/ic_launcher_round" />
+
+            <TextView
+                style="@style/text_13_66"
+                android:layout_marginStart="40dp"
+                android:text="歪猴桑"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                style="@style/text_10_99"
+                android:layout_marginStart="40dp"
+                android:text="11.13 14:39"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </android.support.constraint.ConstraintLayout>
+
+        <TextView
+            style="@style/text_17_33"
+            android:layout_marginStart="40dp"
+            android:paddingVertical="10dp"
+            android:text="有道理~" />
+
+        <pro.haichuang.learn.home.ui.weight.VerticalRecyclerView
+            android:id="@+id/comment_child"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/colorF6F6F6"
+            android:divider="@null"
+            android:dividerHeight="10dp"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="15dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|end">
+
+            <TextView
+                style="@style/text_14_99"
+                android:layout_marginEnd="10dp"
+                android:drawableEnd="@drawable/icon_details_praise"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
+                android:text="486" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/icon_details_comment" />
+        </LinearLayout>
+    </LinearLayout>
+
+</layout>

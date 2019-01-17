@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="item"
+            type="pro.haichuang.learn.home.ui.activity.mine.itemmodel.ItemFile" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="15dp">
+
+        <TextView
+            style="@style/text_17_66"
+            android:text="@{item.title}"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/content"
+            style="@style/text_17_00"
+            android:layout_weight="1"
+            android:background="@null"
+            android:drawableEnd="@{item.canChoose ? @drawable/icon_sj_down : null}"
+            android:drawablePadding="5dp"
+            android:gravity="end"
+            android:focusable="@{!item.canChoose}"
+            android:text="@{item.content}" />
+    </LinearLayout>
+</layout>

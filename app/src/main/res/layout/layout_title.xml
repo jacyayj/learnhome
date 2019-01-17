@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="pro.haichuang.learn.home.utils.ImageBinding" />
+
+        <variable
+            name="title"
+            type="pro.haichuang.learn.home.config.TitleModel" />
+    </data>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/title_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_title"
+        android:background="@color/colorWhite">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:onClick="@{title::leftClick}"
+            android:orientation="horizontal"
+            android:paddingStart="15dp"
+            android:visibility="@{title.showLeft ? View.VISIBLE : View.GONE}">
+
+            <ImageView
+                drawable="@{title.titleLeftIcon}"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="10dp" />
+
+            <TextView
+                android:id="@+id/tv"
+                style="@style/text_16_33"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="10dp"
+                android:gravity="center"
+                android:text="@{title.titleLeftText}" />
+        </LinearLayout>
+
+        <TextView
+            style="@style/text_18_00"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@{title.title}" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:gravity="center"
+            android:onClick="@{title::rightClick}"
+            android:orientation="horizontal"
+            android:paddingEnd="15dp"
+            android:visibility="@{title.showRight ? View.VISIBLE : View.GONE}">
+
+            <TextView
+                style="@style/text_16_33"
+                android:layout_height="match_parent"
+                android:paddingStart="10dp"
+                android:enabled="@{title.titleRightText.isEmpty()}"
+                android:gravity="center"
+                android:text="@{title.titleRightText}" />
+
+            <ImageView
+                drawable="@{title.titleRightIcon}"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingStart="10dp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_gravity="bottom"
+            android:background="@color/colorCCDCE0"
+            android:visibility="@{title.showBottomeLine ? View.VISIBLE : View.GONE}" />
+    </FrameLayout>
+</layout>

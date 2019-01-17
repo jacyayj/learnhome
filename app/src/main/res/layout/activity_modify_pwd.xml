@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="model"
+            type="pro.haichuang.learn.home.ui.activity.login.viewmodel.ForgetPwdModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.activity.login.ModifyPwdActivity">
+
+        <include layout="@layout/layout_title" />
+
+        <ImageView
+            style="@style/wrap_layout"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="25dp"
+            android:src="@drawable/icon_login_logo" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@drawable/divider_vertical_e0"
+            android:orientation="vertical"
+            android:layout_marginTop="15dp"
+            android:paddingHorizontal="60dp"
+            android:showDividers="middle">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/wrap_layout"
+                    android:src="@drawable/icon_login_phone" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="请输入手机号"
+                    android:singleLine="true"
+                    android:text="@={model.phone}"
+                    android:textColor="@color/color33"
+                    android:textColorHint="@color/colorCCDCE0"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/icon_login_clear" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/wrap_layout"
+                    android:src="@drawable/icon_login_code" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="请输入验证码"
+                    android:singleLine="true"
+                    android:text="@={model.code}"
+                    android:textColor="@color/color33"
+                    android:textColorHint="@color/colorCCDCE0"
+                    android:textSize="16sp" />
+
+                <TextView
+                    style="@style/text_14_64E1FA"
+                    android:background="@drawable/stroke_64e1fa_radius_13dp"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="5dp"
+                    android:text="验证码" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/wrap_layout"
+                    android:src="@drawable/icon_login_pwd" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="设置密码"
+                    android:singleLine="true"
+                    android:text="@={model.pwd}"
+                    android:textColor="@color/color33"
+                    android:textColorHint="@color/colorCCDCE0"
+                    android:textSize="16sp" />
+
+                <CheckBox
+                    style="@style/wrap_layout"
+                    android:button="@drawable/selector_eye" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/wrap_layout"
+                    android:src="@drawable/icon_login_pwd" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="确认密码"
+                    android:singleLine="true"
+                    android:text="@={model.confirmPwd}"
+                    android:textColor="@color/color33"
+                    android:textColorHint="@color/colorCCDCE0"
+                    android:textSize="16sp" />
+
+                <CheckBox
+                    style="@style/wrap_layout"
+                    android:button="@drawable/selector_eye" />
+            </LinearLayout>
+
+            <Button
+
+                style="@style/button_confirm"
+                android:layout_marginTop="30dp"
+                android:text="注册" />
+        </LinearLayout>
+    </LinearLayout>
+</layout>

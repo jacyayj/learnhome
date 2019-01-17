@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorF0F7FA"
+    android:orientation="vertical"
+    tools:context=".ui.activity.mine.ModifyNameActivity">
+
+    <include layout="@layout/layout_title" />
+
+    <EditText
+        android:id="@+id/input"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/colorWhite"
+        android:gravity="center_vertical"
+        android:paddingStart="20dp"
+        android:textColor="@color/color33"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/save"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorC8F2FA"
+        android:text="保存"
+        android:textColor="@color/color32C8FA"
+        android:textSize="18sp" />
+</LinearLayout>

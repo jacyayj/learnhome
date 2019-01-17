@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_white_radius_5dp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/msg_title"
+        style="@style/text_16_33"
+        android:paddingVertical="15dp"
+        android:text="友情提示"
+        android:textStyle="bold" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/colorE0E0E0" />
+
+    <TextView
+        style="@style/text_18_33"
+        android:gravity="center"
+        android:paddingVertical="20dp"
+        android:text="请全部填报才可生成志愿表" />
+
+    <Button
+        android:id="@+id/confirm"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginHorizontal="45dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/bg_32c8fa_radius_5dp"
+        android:text="我知道了"
+        android:textColor="@color/colorWhite"
+        android:textSize="18sp" />
+</LinearLayout>

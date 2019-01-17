@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorF0F7FA"
+    android:orientation="vertical"
+    tools:context=".ui.activity.index.ZhaoShengPlanActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_title"
+        android:background="@color/colorWhite"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:onClick="back"
+            android:paddingHorizontal="15dp"
+            android:src="@drawable/icon_back"
+            tools:ignore="OnClick" />
+
+        <LinearLayout
+            android:id="@+id/search_view"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_ebf2f5_radius_13dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                style="@style/wrap_layout"
+                android:layout_marginHorizontal="10dp"
+                android:src="@drawable/icon_friend_search" />
+
+            <EditText
+                style="@style/match_layout"
+                android:background="@null"
+                android:hint="搜索学校/专业名称"
+                android:textColor="@color/color33"
+                android:textColorHint="@color/colorCCC4CC"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/search_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/icon_search_blue" />
+
+        <LinearLayout
+            android:id="@+id/compare_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="end|center_vertical"
+            android:orientation="horizontal"
+            android:paddingEnd="15dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/confirm"
+                style="@style/text_16_ff"
+                android:layout_width="60dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="7dp"
+                android:background="@drawable/bg_7fceff_radius_4dp"
+                android:gravity="center"
+                android:text="确定" />
+
+            <TextView
+                android:id="@+id/cancel"
+                style="@style/text_16_70CAE0"
+                android:layout_width="60dp"
+                android:layout_height="25dp"
+                android:background="@drawable/stroke_7fd2ff_radius_5dp"
+                android:gravity="center"
+                android:text="取消" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginTop="45dp"
+        android:background="@color/white"
+        app:tabIndicatorHeight="0dp"
+        app:tabMode="fixed"
+        app:tabTextAppearance="@style/choose_menu" />
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="92dp"
+        android:background="@color/colorWhite"
+        android:divider="@null" />
+
+    <Button
+        android:id="@+id/compare"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="end|bottom"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="45dp"
+        android:background="@drawable/bg_float_btn"
+        android:elevation="5dp"
+        android:padding="0dp"
+        android:text="对比"
+        android:textColor="@color/colorWhite"
+        android:textSize="16sp" />
+</FrameLayout>

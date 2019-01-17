@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="model"
+            type="pro.haichuang.learn.home.ui.activity.mine.viewmodel.BindVipModel" />
+    </data>
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        android:orientation="vertical"
+        tools:context="pro.haichuang.learn.home.ui.activity.mine.BindVipActivity">
+
+        <include layout="@layout/layout_title" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/text_17_28282B"
+                    android:layout_marginVertical="15dp"
+                    android:drawableStart="@drawable/icon_wallet"
+                    android:drawablePadding="5dp"
+                    android:paddingStart="10dp"
+                    android:text="选择支付方式" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="20dp">
+
+                    <CheckedTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="7.5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/selector_zxzf"
+                        android:checked="@{model.online}"
+                        android:onClick="@{model::toggleOnline}" />
+
+                    <CheckedTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="7.5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/selector_card"
+                        android:checked="@{!model.online}"
+                        android:onClick="@{model::toggleOnline}" />
+                </LinearLayout>
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="@{model.online ? View.GONE : View.VISIBLE}">
+
+                    <TextView
+                        style="@style/text_16_33"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="20dp"
+                        android:paddingStart="10dp"
+                        android:text="请输入序列号和验证码"
+                        android:textColor="@color/colorB3" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/height_title"
+                        android:layout_marginHorizontal="50dp"
+                        android:background="@drawable/stroke_1fd0fe_radius_5dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="15dp">
+
+                        <TextView
+                            style="@style/text_16_1FD0FE"
+                            android:text="序列号:" />
+
+                        <EditText
+                            style="@style/text_16_33"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            android:gravity="center_vertical" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/height_title"
+                        android:layout_marginHorizontal="50dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/stroke_1fd0fe_radius_5dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="15dp">
+
+                        <TextView
+                            style="@style/text_16_1FD0FE"
+                            android:text="验证码:" />
+
+                        <EditText
+                            style="@style/text_16_33"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            android:gravity="center_vertical" />
+                    </LinearLayout>
+
+                    <Button
+                        style="@style/button_confirm"
+                        android:layout_marginHorizontal="55dp"
+                        android:layout_marginVertical="15dp"
+                        android:text="确认升级" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:visibility="@{model.online ? View.VISIBLE : View.GONE}">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/text_13_00"
+                            android:drawableStart="@drawable/icon_money_yellow"
+                            android:drawablePadding="5dp"
+                            android:text="0.0"
+                            android:textSize="36sp" />
+
+                        <TextView
+                            style="@style/text_12_99"
+                            android:text="元"
+                            android:textColor="@color/color00" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/text_16_b3"
+                            android:text="购买：" />
+
+                        <TextView
+                            style="@style/text_16_00"
+                            android:text="升级成为会员"
+                            android:textColor="@color/color00" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/text_16_b3"
+                            android:text="支付方式：" />
+
+                        <TextView
+                            style="@style/text_16_00"
+                            android:text="在线支付"
+                            android:textColor="@color/color00" />
+                    </LinearLayout>
+
+                    <Button
+                        style="@style/button_confirm"
+                        android:layout_marginHorizontal="55dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="25dp"
+                        android:text="确认购买" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:background="@color/colorF0F7FA" />
+
+                <TextView
+                    style="@style/text_17_28282B"
+                    android:layout_marginVertical="15dp"
+                    android:drawableStart="@drawable/icon_sjxz"
+                    android:drawablePadding="5dp"
+                    android:paddingStart="10dp"
+                    android:text="升级须知" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:src="@drawable/icon_bid_vip_bottom" />
+
+                    <TextView
+                        style="@style/wrap_layout"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginBottom="70dp"
+                        android:lineSpacingExtra="3dp"
+                        android:text="@string/sjxz"
+                        android:textColor="#ff18181a"
+                        android:textSize="14sp" />
+                </FrameLayout>
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+</layout>

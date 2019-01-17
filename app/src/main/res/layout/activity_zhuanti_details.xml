@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical"
+    tools:context=".ui.activity.mine.OrderActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_title"
+        android:background="@color/colorWhite"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:onClick="back"
+            android:paddingHorizontal="15dp"
+            android:src="@drawable/icon_back"
+            tools:ignore="OnClick" />
+
+        <TextView
+            style="@style/text_16_33"
+            android:layout_gravity="center"
+            android:text="讲座详情" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingEnd="15dp"
+                android:button="@drawable/icon_heart_blue" />
+
+            <ImageView
+                android:id="@+id/to_share"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingEnd="15dp"
+                android:src="@drawable/icon_share_blue" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorF0F7FA">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorE0E0E0" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:layout_margin="15dp"
+                    android:background="@mipmap/ic_launcher" />
+
+                <TextView
+                    style="@style/text_20_00"
+                    android:paddingStart="15dp"
+                    android:paddingBottom="20dp"
+                    android:text="大学生方程式空气动力学讲座 "
+                    android:textColor="@color/color33" />
+
+                <TextView
+                    style="@style/text_14_99"
+                    android:drawableStart="@drawable/icon_person"
+                    android:drawablePadding="6dp"
+                    android:paddingStart="15dp"
+                    android:paddingBottom="20dp"
+                    android:text="已报名:115人" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="15dp"
+                    android:background="@color/colorE0E0E0" />
+
+                <TextView
+                    style="@style/text_13_00"
+                    android:padding="15dp"
+                    android:text="演讲老师"
+                    android:textColor="@color/color32C8FA" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="15dp"
+                    android:paddingBottom="20dp">
+
+                    <com.yhy.widget.core.img.round.CircleImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginEnd="@dimen/sp_10"
+                        android:src="@mipmap/ic_launcher" />
+
+                    <TextView
+                        style="@style/text_16_33"
+                        android:text="方世文"
+                        android:textColor="@color/color66" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@color/colorWhite"
+                android:orientation="vertical"
+                android:paddingHorizontal="15dp">
+
+                <TextView
+                    style="@style/text_16_33"
+                    android:drawableStart="@drawable/icon_time"
+                    android:drawablePadding="15dp"
+                    android:gravity="center_vertical"
+                    android:paddingVertical="15dp"
+                    android:text="2018-10-22 14:00~17:00" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorE0E0E0" />
+
+                <TextView
+                    style="@style/text_16_33"
+                    android:drawableStart="@drawable/icon_location_orange"
+                    android:drawablePadding="15dp"
+                    android:paddingVertical="15dp"
+                    android:text="四川-金牛区-成都大学锦江校区艺术楼4楼演播厅" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@color/colorWhite"
+                android:orientation="vertical"
+                android:paddingHorizontal="15dp">
+
+                <TextView
+                    style="@style/text_13_00"
+                    android:layout_marginBottom="5dp"
+                    android:padding="15dp"
+                    android:text="活动说明"
+                    android:textColor="@color/color32C8FA" />
+
+                <TextView
+                    style="@style/text_16_33"
+                    android:paddingHorizontal="15dp"
+                    android:paddingBottom="50dp"
+                    android:text="2014年创办上海翕和视觉设计事务所，成为国内最具前瞻性依托互联网为企业及个人提供设计顾问服务的公司。多领域的设计从业经验融合互联网自由链接的架构理念，倡导个人价值的独立性，为客户提供专属定制 的设计服务。
+
+设计领域涵盖平面视觉，形象包装，平台产品建设，影视概念设定，游戏美术指导，广告插画等" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorE0E0E0" />
+
+                <Button
+                    android:id="@+id/confirm"
+                    style="@style/button_confirm"
+                    android:layout_marginHorizontal="55dp"
+                    android:text="立即报名" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

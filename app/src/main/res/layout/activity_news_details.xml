@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorF0F7FA"
+    android:orientation="vertical"
+    tools:context=".ui.activity.news.NewsDetailsActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_title"
+        android:background="@color/colorWhite">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:onClick="back"
+            android:paddingHorizontal="15dp"
+            android:src="@drawable/icon_back"
+            tools:ignore="OnClick" />
+
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/stroke_7fd2ff_radius_5dp"
+            android:gravity="center"
+            android:text="收藏"
+            android:textColor="@color/color7FCEFF"
+            android:textSize="15sp" />
+    </FrameLayout>
+
+    <TextView
+        style="@style/text_20_00"
+        android:layout_marginTop="1dp"
+        android:background="@color/colorWhite"
+        android:padding="15dp"
+        android:text="[政策]2018年普通高校在川招生专科批录取院校调档线" />
+
+    <TextView
+        style="@style/text_12_99"
+        android:layout_width="match_parent"
+        android:background="@color/colorWhite"
+        android:gravity="end"
+        android:paddingEnd="15dp"
+        android:paddingBottom="20dp"
+        android:text="2018-09-01四川省教育考试院" />
+</LinearLayout>

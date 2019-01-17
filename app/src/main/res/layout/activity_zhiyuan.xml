@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_zhi_yuan"
+    android:orientation="vertical"
+    tools:context=".ui.activity.index.ZhiYuanActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_title">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="15dp"
+            android:onClick="back"
+            android:src="@drawable/icon_back_white" />
+
+        <TextView
+            style="@style/text_17_FF"
+            android:layout_gravity="center"
+            android:text="志愿模拟填报" />
+
+        <CheckBox
+            android:id="@+id/choose_province"
+            style="@style/text_17_FF"
+            android:layout_height="match_parent"
+            android:layout_gravity="end|center_vertical"
+            android:button="@null"
+            android:drawableEnd="@drawable/selector_sj_white"
+            android:drawablePadding="5dp"
+            android:paddingHorizontal="15dp"
+            android:text="四川" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="40dp"
+        android:background="@drawable/bg_white_radius_8dp"
+        android:orientation="vertical"
+        android:paddingTop="50dp"
+        android:paddingBottom="15dp">
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:checkedButton="@id/like"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/text_14_33"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="科类选择" />
+
+            <RadioButton
+                android:id="@+id/like"
+                style="@style/text_16_00"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:button="@null"
+                android:drawableStart="@drawable/selector_multiple_choose"
+                android:drawablePadding="10dp"
+                android:singleLine="true"
+                android:text="文科" />
+
+            <RadioButton
+                android:id="@+id/wenke"
+                style="@style/text_16_00"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:button="@null"
+                android:drawableStart="@drawable/selector_multiple_choose"
+                android:drawablePadding="10dp"
+                android:singleLine="true"
+                android:text="理科" />
+        </RadioGroup>
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tab"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="30dp"
+            app:tabIndicatorColor="@color/color32C8FA"
+            app:tabIndicatorFullWidth="true"
+            app:tabIndicatorHeight="1dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="25dp">
+
+            <TextView
+                android:id="@+id/spinner"
+                style="@style/text_17_00"
+                android:layout_marginEnd="10dp"
+                android:gravity="center"
+                android:text="本一批"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/input"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_fa_stroke_e0"
+                android:hint="高考分数"
+                android:paddingStart="10dp"
+                android:textColor="@color/color33"
+                android:textColorHint="@color/colorC9C8CC"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/to_result"
+            style="@style/button_confirm"
+            android:layout_margin="15dp"
+            android:text="模拟填报" />
+    </LinearLayout>
+</FrameLayout>

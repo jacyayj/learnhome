@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="item"
+            type="pro.haichuang.learn.home.ui.activity.index.itemmodel.ItemZuanYeModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:divider="@drawable/divider_horizontal_e0"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:showDividers="middle">
+
+        <TextView
+            style="@style/text_14_33"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@{item.name}" />
+
+        <TextView
+            style="@style/text_14_33"
+            android:layout_width="0dp"
+            android:layout_weight="1.7"
+            android:gravity="center"
+            android:text="@{item.type}" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/text_12_F38787"
+                android:text="70000-80000"
+                android:background="@drawable/bg_white_8ed4e0_3dp"
+                android:paddingHorizontal="2dp"
+                android:textColor="@color/colorWhite" />
+            <TextView
+                style="@style/text_12_F38787"
+                android:textColor="@color/colorWhite"
+                android:text="B+"
+                android:layout_marginStart="5dp"
+                android:gravity="center"
+                android:background="@drawable/icon_legend_red_light"/>
+        </LinearLayout>
+    </LinearLayout>
+</layout>

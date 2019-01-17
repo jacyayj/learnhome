@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorF0F7FA"
+    android:orientation="vertical"
+    android:divider="@drawable/divider_vertical_e0"
+    android:showDividers="middle"
+    tools:context=".ui.activity.mine.CollectActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_title"
+        android:background="@color/colorWhite"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:onClick="back"
+            android:paddingHorizontal="15dp"
+            android:src="@drawable/icon_back"
+            tools:ignore="OnClick" />
+
+        <LinearLayout
+            android:id="@+id/search_view"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_ebf2f5_radius_13dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                style="@style/wrap_layout"
+                android:layout_marginHorizontal="10dp"
+                android:src="@drawable/icon_friend_search" />
+
+            <EditText
+                style="@style/match_layout"
+                android:background="@null"
+                android:hint="搜索关键词"
+                android:textColor="@color/color33"
+                android:textColorHint="@color/colorCCC4CC"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/search_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/icon_search_blue" />
+
+        <LinearLayout
+            android:id="@+id/compare_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="end|center_vertical"
+            android:orientation="horizontal"
+            android:paddingEnd="15dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/cancel"
+                style="@style/text_16_ff"
+                android:layout_width="60dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="7dp"
+                android:background="@drawable/bg_7fceff_radius_4dp"
+                android:gravity="center"
+                android:text="取消" />
+
+            <TextView
+                android:id="@+id/confirm"
+                style="@style/text_16_ff"
+                android:layout_width="60dp"
+                android:layout_height="25dp"
+                android:background="@drawable/bg_7fceff_radius_4dp"
+                android:gravity="center"
+                android:text="确定" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite">
+
+        <TableRow>
+
+            <TextView
+                style="@style/text_16_32C8FA"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingVertical="15dp"
+                android:text="链接" />
+
+            <TextView
+                style="@style/text_16_32C8FA"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingVertical="15dp"
+                android:text="学校" />
+
+            <TextView
+                style="@style/text_16_32C8FA"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingVertical="15dp"
+                android:text="专业" />
+
+            <TextView
+                style="@style/text_16_32C8FA"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingVertical="15dp"
+                android:text="老师" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                style="@style/text_16_32C8FA"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingBottom="15dp"
+                android:text="讲座" />
+
+            <TextView
+                style="@style/text_16_32C8FA"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingBottom="15dp"
+                android:text="聊天" />
+
+            <View
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <View
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+        </TableRow>
+    </TableLayout>
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        android:divider="@color/colorF0F7FA"
+        android:dividerHeight="5dp"/>
+</LinearLayout>

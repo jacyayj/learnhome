@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:orientation="vertical"
+    tools:context=".ui.activity.index.SchoolDetailsActivity">
+
+    <include layout="@layout/layout_title" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/colorWhite">
+
+        <ImageView
+            android:layout_width="75dp"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_launcher" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="75dp"
+            android:paddingVertical="15dp">
+
+            <TableRow>
+
+                <TextView
+                    style="@style/text_16_33"
+                    android:layout_marginEnd="5dp"
+                    android:text="浙江大学" />
+
+                <TextView
+                    android:background="@drawable/bg_e5f5ff_stroke_32c8fa_radius_15dp"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="2dp"
+                    android:text="公办"
+                    android:textColor="@color/color32C8FA"
+                    android:textSize="12sp" />
+            </TableRow>
+
+            <TextView
+                style="@style/text_14_99"
+                android:layout_marginTop="5dp"
+                android:text="一本院校"
+                android:textColor="@color/color939799" />
+        </TableLayout>
+    </FrameLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/colorF0F7FA" />
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/colorWhite"
+        app:tabIndicatorColor="@color/color32C8FA"
+        app:tabIndicatorFullWidth="false"
+        app:tabIndicatorHeight="2dp"
+        app:tabMode="fixed"
+        app:tabTextAppearance="@style/find_menu">
+
+        <android.support.design.widget.TabItem
+            style="@style/match_layout"
+            android:layout_marginHorizontal="15dp"
+            android:text="高校计划" />
+
+        <android.support.design.widget.TabItem
+            style="@style/match_layout"
+            android:layout_marginHorizontal="15dp"
+            android:text="高校简介" />
+
+        <android.support.design.widget.TabItem
+            style="@style/match_layout"
+            android:layout_marginHorizontal="15dp"
+            android:text="招生简章" />
+    </android.support.design.widget.TabLayout>
+
+    <LinearLayout
+        android:id="@+id/tab_view1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_title"
+            android:background="@color/colorWhite"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/text_14_002133"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:paddingStart="15dp"
+                android:text="招生代码:0552" />
+
+            <TextView
+                style="@style/text_14_002133"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="招生人数:24" />
+
+            <TextView
+                style="@style/text_14_002133"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="年份:2017" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@color/colorF0F7FA" />
+
+        <TextView
+            style="@style/text_14_002133"
+            android:layout_marginTop="5dp"
+            android:paddingStart="15dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="10dp"
+            android:text="计划说明" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:background="@drawable/stroke_d7dee0"
+            android:divider="@drawable/divider_vertical_d7dde0"
+            android:showDividers="middle">
+
+            <TableRow
+                android:divider="@drawable/divider_horizontal_d7dde0"
+                android:showDividers="middle">
+
+                <TextView
+                    style="@style/text_14_002133"
+                    android:layout_width="0dp"
+                    android:layout_weight="1.1"
+                    android:gravity="center"
+                    android:paddingVertical="10dp"
+                    android:text="专业名称" />
+
+                <TextView
+                    style="@style/text_14_002133"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:paddingVertical="10dp"
+                    android:text="专业代码" />
+
+                <TextView
+                    style="@style/text_14_002133"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:paddingVertical="10dp"
+                    android:text="计划数" />
+
+                <TextView
+                    style="@style/text_14_002133"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:paddingVertical="10dp"
+                    android:text="学制" />
+
+                <TextView
+                    style="@style/text_14_002133"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:paddingVertical="10dp"
+                    android:text="学费" />
+            </TableRow>
+
+            <TableRow
+                android:divider="@drawable/divider_horizontal_d7dde0"
+                android:showDividers="middle">
+
+                <TextView
+                    style="@style/text_14_002133"
+                    android:layout_width="0dp"
+                    android:layout_weight="1.1"
+                    android:gravity="center"
+                    android:paddingVertical="10dp"
+                    android:text="护理学" />
+
+                <TextView
+                    style="@style/text_14_002133"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:paddingVertical="10dp"
+                    android:text="082" />
+
+                <TextView
+                    style="@style/text_14_002133"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:paddingVertical="10dp"
+                    android:text="24" />
+
+                <TextView
+                    style="@style/text_14_002133"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:paddingVertical="10dp"
+                    android:text="4年" />
+
+                <TextView
+                    style="@style/text_14_002133"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:paddingVertical="10dp"
+                    android:text="4920" />
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tab_view2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="15dp"
+        android:visibility="gone">
+
+        <TextView
+            style="@style/text_14_002133"
+            android:paddingTop="15dp"
+            android:text="院校名称：四川大学(护理)" />
+
+        <TextView
+            style="@style/text_14_002133"
+            android:paddingTop="15dp"
+            android:text="类型：医药" />
+
+        <TextView
+            style="@style/text_14_002133"
+            android:paddingTop="15dp"
+            android:text="性质：公办" />
+
+        <TextView
+            style="@style/text_14_002133"
+            android:paddingTop="15dp"
+            android:text="重点建设：211.985，卓越工程师，卓越医生" />
+
+        <TextView
+            style="@style/text_14_002133"
+            android:paddingTop="15dp"
+            android:text="省份：四川" />
+
+        <TextView
+            style="@style/text_14_002133"
+            android:paddingTop="15dp"
+            android:text="地址：四川省成都市锦江区名将路297号" />
+
+        <TextView
+            style="@style/text_14_002133"
+            android:paddingTop="15dp"
+            android:text="联系电话：78954621382/1845215621" />
+
+        <TextView
+            style="@style/text_14_002133"
+            android:paddingTop="15dp"
+            android:text="网址：www.scdx.com" />
+    </LinearLayout>
+
+    <include layout="@layout/layout_jianzhang" />
+</LinearLayout>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorF0F7FA"
+    android:orientation="vertical"
+    tools:context=".ui.activity.mine.MyFollowActivity">
+
+    <include layout="@layout/layout_title" />
+
+    <TextView
+        style="@style/match_layout"
+        android:layout_height="45dp"
+        android:gravity="center"
+        android:text="你还没有关注的好友"
+        android:textColor="#ffc4cacc"
+        android:textSize="14sp" />
+
+    <TextView
+        style="@style/match_layout"
+        android:layout_height="40dp"
+        android:background="@color/colorWhite"
+        android:drawableStart="@drawable/icon_mine_follow_start"
+        android:drawablePadding="5dp"
+        android:gravity="center_vertical"
+        android:paddingStart="15dp"
+        android:text="热门推荐好友"
+        android:textColor="#ff002133"
+        android:textSize="17sp" />
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="1dp"
+        android:divider="@null"
+        android:background="@color/colorWhite" />
+</LinearLayout>

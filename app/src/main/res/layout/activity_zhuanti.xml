@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorF0F7FA"
+    android:orientation="vertical"
+    tools:context=".ui.activity.mine.OrderActivity">
+
+    <include layout="@layout/layout_title" />
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorF0F7FA"
+        android:divider="@color/colorF0F7FA"
+        android:dividerHeight="10dp"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="@dimen/sp_10" />
+</LinearLayout>

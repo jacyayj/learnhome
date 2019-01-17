@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="pro.haichuang.learn.home">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:name=".config.BaseApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/MyAppTheme"
+        tools:replace="android:theme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity
+            android:name=".ui.activity.login.LoginActivity"
+            android:windowSoftInputMode="stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.activity.MainActivity" />
+        <activity android:name=".ui.activity.CityListActivity" android:windowSoftInputMode="adjustNothing"/>
+        <activity android:name=".ui.activity.login.RegisterActivity" />
+        <activity android:name=".ui.activity.login.ModifyPwdActivity" />
+        <activity android:name=".ui.activity.login.CompleteInfoActivity" />
+        <activity
+            android:name=".ui.activity.find.FindDetailsActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".ui.activity.find.FindReleaseActivity" />
+        <activity android:name=".ui.activity.find.PersonalIndexActivity" />
+        <activity android:name=".ui.activity.message.FriendSearchActivity" />
+        <activity android:name=".ui.activity.message.FriendSettingActivity" />
+        <activity android:name=".ui.activity.news.NewsDetailsActivity" />
+        <activity android:name=".ui.activity.mine.MineSettingActivity" />
+        <activity android:name=".ui.activity.mine.ModifyNameActivity" />
+        <activity android:name=".ui.activity.mine.MyFollowActivity" />
+        <activity android:name=".ui.activity.mine.MyFansActivity" />
+        <activity android:name=".ui.activity.mine.MyDynamicActivity" />
+        <activity android:name=".ui.activity.mine.MyCommentActivity" />
+        <activity android:name=".ui.activity.mine.SettPwdActivity" />
+        <activity android:name=".ui.activity.mine.FeedbackActivity" />
+        <activity android:name=".ui.activity.mine.HelpActivity" />
+        <activity android:name=".ui.activity.mine.AboutActivity" />
+        <activity android:name=".ui.activity.mine.QuestionActivity" />
+        <activity android:name=".ui.activity.mine.WalletActivity" />
+        <activity android:name=".ui.activity.mine.PayDetailsActivity" />
+        <activity android:name=".ui.activity.mine.PaymentActivity" />
+        <activity
+            android:name=".ui.activity.mine.BindVipActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".ui.activity.mine.OrderActivity" />
+        <activity android:name=".ui.activity.mine.OrderCommentActivity" />
+        <activity android:name=".ui.activity.mine.OrderDetailsActivity" />
+        <activity android:name=".ui.activity.mine.CollectActivity" />
+        <activity android:name=".ui.activity.mine.JoinGroupActivity" />
+        <activity android:name=".ui.activity.message.MessageCenterActivity" />
+        <activity android:name=".ui.activity.mine.FileActivity" />
+        <activity android:name=".ui.activity.index.HeightSchoolActivity" />
+        <activity android:name=".ui.activity.index.OnlineVideoActivity" />
+        <activity android:name=".ui.activity.index.XinLiActivity" />
+        <activity android:name=".ui.activity.index.TeacherDetailsActivity" />
+        <activity android:name=".ui.activity.find.YuYueActivity" />
+        <activity android:name=".ui.activity.index.NoteBookActivity" />
+        <activity android:name=".ui.activity.index.ZhaoShengActivity" />
+        <activity
+            android:name=".ui.activity.index.LiuXueActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".ui.activity.index.OnlineTeacherActivity" />
+        <activity android:name=".ui.activity.index.VRActivity" />
+        <activity android:name=".ui.activity.index.LiuXueDetailsActivity" />
+        <activity android:name=".ui.activity.index.LiuXueZiXunActivity" />
+        <activity android:name=".ui.activity.index.DataSearchActivity" />
+        <activity
+            android:name=".ui.activity.index.ZhaoShengPlanActivity"
+            android:windowSoftInputMode="adjustNothing|stateHidden" />
+        <activity
+            android:name=".ui.activity.index.HeightSchoolSearchActivity"
+            android:windowSoftInputMode="adjustNothing|stateHidden" />
+        <activity android:name=".ui.activity.index.ZhuanYeSearchActivity" />
+        <activity android:name=".ui.activity.index.PlanCompareActivity" />
+        <activity android:name=".ui.activity.index.SchoolDetailsActivity" />
+        <activity android:name=".ui.activity.index.HeightSchoolDetailsActivity" />
+        <activity android:name=".ui.activity.index.ZhuanYeDetailsActivity" />
+        <activity android:name=".ui.activity.index.ZhuanYePingGuDetailsActivity" />
+        <activity android:name=".ui.activity.index.ZhiYuanActivity" />
+        <activity android:name=".ui.activity.index.ZhiYuanPiCiActivity" />
+        <activity android:name=".ui.activity.index.ZhiYuanDetailsActivity" />
+        <activity android:name=".ui.activity.index.ZhiYuanSchoolActivity" />
+        <activity android:name=".ui.activity.index.ZhiYuanZhuanYeActivity" />
+        <activity android:name=".ui.activity.index.ZhiYuanResultActivity" />
+        <activity android:name=".ui.activity.index.ZhuanTiActivity" />
+        <activity android:name=".ui.activity.index.ZhuanTiDetailsActivity" />
+        <activity android:name=".ui.activity.index.ZhuanTiSignupActivity" />
+    </application>
+
+</manifest>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/tab_view1"
+    android:paddingHorizontal="15dp">
+
+    <TextView
+        style="@style/text_14_002133"
+        android:paddingTop="15dp"
+        android:text="院校名称：浙江大学" />
+
+    <TextView
+        style="@style/text_14_002133"
+        android:paddingTop="15dp"
+        android:text="类型：综合" />
+
+    <TextView
+        style="@style/text_14_002133"
+        android:paddingTop="15dp"
+        android:text="性质：公办" />
+
+    <TextView
+        style="@style/text_14_002133"
+        android:paddingTop="15dp"
+        android:text="重点建设：双一流重点建设高校，211.985，卓越医生， 卓越法律" />
+
+    <TextView
+        style="@style/text_14_002133"
+        android:paddingTop="15dp"
+        android:text="省份：浙江" />
+
+    <TextView
+        style="@style/text_14_002133"
+        android:paddingTop="15dp"
+        android:text="地址：浙江省汪明市锦江区名将路297号" />
+
+    <TextView
+        style="@style/text_14_002133"
+        android:paddingTop="15dp"
+        android:text="联系电话：010-62751407" />
+
+    <TextView
+        style="@style/text_14_002133"
+        android:paddingTop="15dp"
+        android:text="网址：www.scdx.com" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="-5dp"
+        android:layout_marginVertical="15dp" />
+
+    <TextView
+        style="@style/text_14_002133"
+        android:lineSpacingExtra="10dp"
+        android:layout_marginHorizontal="-5dp"
+        android:text="浙江大学（Zhejiang University），简称“浙大”，坐落于“人间天堂”杭州。前身是1897年创建的求是书院，是中国人自己最早创办的现代高等学府之一。1928年更名为国立浙江大学。中华民国时期，浙江大学在竺可桢老校长的带领下，崛起为民国最高学府之一，被英国学者李约瑟誉为“东方剑桥”，迎来了浙大百年历史上最辉煌的时期。竺可桢老校" />
+</LinearLayout>

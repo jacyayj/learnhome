@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ### Windows template
 # Windows thumbnail cache files
 Thumbs.db
@@ -184,3 +185,15 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 fastlane/readme.md
+=======
+*.iml
+.gradle
+/local.properties
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+>>>>>>> 91e4093014faee53d9a727f29b880288724c9480

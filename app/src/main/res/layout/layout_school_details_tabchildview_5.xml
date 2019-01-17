@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/child_tab_view5"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:divider="@drawable/divider_vertical_d7dde0"
+    android:showDividers="end|middle"
+    android:visibility="gone">
+
+
+    <TableRow
+        android:divider="@drawable/divider_horizontal_d7dde0"
+        android:showDividers="middle">
+
+        <TextView
+            style="@style/text_14_002133"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingVertical="15dp"
+            android:text="教师水平" />
+
+        <TextView
+            style="@style/text_14_002133"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingVertical="15dp"
+            android:text="名次：4" />
+
+        <TextView
+            style="@style/text_14_002133"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingVertical="15dp"
+            android:text="级别：A++" />
+    </TableRow>
+
+    <TableRow
+        android:divider="@drawable/divider_horizontal_d7dde0"
+        android:showDividers="middle">
+
+        <TextView
+            style="@style/text_14_002133"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingVertical="15dp"
+            android:text="新生质量" />
+
+        <TextView
+            style="@style/text_14_002133"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingVertical="15dp"
+            android:text="名次：1" />
+
+        <TextView
+            style="@style/text_14_002133"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingVertical="15dp"
+            android:text="级别：A++" />
+    </TableRow>
+
+    <TableRow
+        android:divider="@drawable/divider_horizontal_d7dde0"
+        android:showDividers="middle">
+
+        <TextView
+            style="@style/text_14_002133"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingVertical="15dp"
+            android:text="毕业生质量" />
+
+        <TextView
+            style="@style/text_14_002133"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingVertical="15dp"
+            android:text="名次：20" />
+
+        <TextView
+            style="@style/text_14_002133"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingVertical="15dp"
+            android:text="级别：A++" />
+    </TableRow>
+
+</TableLayout>

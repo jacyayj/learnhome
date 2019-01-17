@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="item"
+            type="Integer" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@drawable/divider_vertical_e0"
+        android:orientation="horizontal"
+        android:paddingStart="10dp"
+        android:paddingTop="15dp"
+        android:showDividers="middle">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/text_16_33"
+                android:text="金融学" />
+
+            <TextView
+                style="@style/text_14_8E8E99"
+                android:layout_marginTop="10dp"
+                android:lineSpacingExtra="10dp"
+                android:paddingBottom="30dp"
+                android:text="学历层次：本科专业类别：金融学类> 金融学
+\n授予学位：经济学学士修学年限：四年" />
+        </LinearLayout>
+
+        <Button
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="10dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/stroke_32c8fa_radius_5dp"
+            android:text="推荐"
+            android:textColor="@color/color32C8FA"
+            android:textSize="14sp" />
+    </LinearLayout>
+</layout>

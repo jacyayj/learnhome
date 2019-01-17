@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="model"
+            type="pro.haichuang.learn.home.ui.activity.find.viewmodel.FindDetailsModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorF0F7FA"
+        android:orientation="vertical"
+        tools:context="pro.haichuang.learn.home.ui.activity.find.FindDetailsActivity">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_title"
+            android:background="@color/colorWhite">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:onClick="back"
+                android:paddingHorizontal="15dp"
+                android:src="@drawable/icon_back" />
+
+            <ImageView
+                android:id="@+id/share"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="end"
+                android:paddingEnd="15dp"
+                android:src="@drawable/icon_share_blue" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:layout_toLeftOf="@id/share"
+                android:paddingEnd="15dp"
+                android:button="@drawable/selector_heart" />
+        </RelativeLayout>
+
+        <TextView
+            style="@style/text_20_00"
+            android:layout_marginTop="1dp"
+            android:background="@color/colorWhite"
+            android:padding="15dp"
+            android:text="呼伦贝尔，我想重新认识你，从你的名字开始" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="3dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:paddingHorizontal="15dp"
+                    android:paddingVertical="12dp">
+
+                    <com.yhy.widget.core.img.round.CircleImageView
+                        android:id="@+id/to_index"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@mipmap/ic_launcher_round" />
+
+                    <TextView
+                        style="@style/text_13_00"
+                        android:layout_marginStart="40dp"
+                        android:text="灵芝" />
+
+                    <TextView
+                        style="@style/text_10_99"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="40dp"
+                        android:text="11.13 14:39" />
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="65dp"
+                        android:background="@drawable/bg_f0f7fa_radius_5dp"
+                        android:gravity="center"
+                        android:text="点赞"
+                        android:textColor="@color/color32C8FA"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="end"
+                        android:background="@drawable/bg_f0f7fa_radius_5dp"
+                        android:gravity="center"
+                        android:text="关注"
+                        android:textColor="@color/color32C8FA"
+                        android:textSize="15sp" />
+                </FrameLayout>
+
+                <TextView
+                    style="@style/text_17_33"
+                    android:background="@color/colorWhite"
+                    android:paddingHorizontal="15dp"
+                    android:paddingBottom="10dp"
+                    android:text="参考消息网8月31日报道 彭博新闻社网站8月30日发表题为《中国拥有成为超级大国所需的实力吗？》的文章。" />
+
+                <pro.haichuang.learn.home.ui.weight.AutoGridView
+                    android:id="@+id/images"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:horizontalSpacing="10dp"
+                    android:numColumns="3"
+                    android:paddingHorizontal="15dp"
+                    android:paddingBottom="15dp"
+                    android:verticalSpacing="10dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="15dp">
+
+                    <TextView
+                        style="@style/text_17_00"
+                        android:layout_weight="1"
+                        android:text="评论" />
+
+                    <TextView
+                        style="@style/text_14_99"
+                        android:drawableEnd="@drawable/icon_arrow_next"
+                        android:drawablePadding="4dp"
+                        android:text="查看全部789个评论" />
+                </LinearLayout>
+
+                <pro.haichuang.learn.home.ui.weight.VerticalRecyclerView
+                    android:id="@+id/comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite" />
+            </LinearLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:background="@color/colorWhite"
+            android:orientation="horizontal"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="10dp">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_f8_stroke_cc_radius_2dp"
+                android:hint="写点什么吧…"
+                android:maxLines="5"
+                android:minHeight="30dp"
+                android:paddingStart="5dp"
+                android:textColor="@color/color00"
+                android:textColorHint="@color/color99"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_64e1fa_radius_2dp"
+                android:gravity="center"
+                android:text="发送"
+                android:textColor="@color/colorWhite"
+                android:textSize="17sp" />
+        </LinearLayout>
+    </LinearLayout>
+</layout>

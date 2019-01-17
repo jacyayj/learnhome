@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="item"
+            type="pro.haichuang.learn.home.bean.LetterBean" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@color/colorF0F7FA"
+            android:gravity="center_vertical"
+            android:paddingStart="15dp"
+            android:text="@{item.letter}"
+            android:textColor="@color/color66"
+            android:textSize="14sp" />
+
+        <pro.haichuang.learn.home.ui.weight.LetterListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:divider="@drawable/divider_vertical_f0f7fa_pd_15"
+            android:visibility="@{item.grid ? View.GONE : View.VISIBLE}"
+            app:data="@{item.areas}" />
+
+        <pro.haichuang.learn.home.ui.weight.LetterGridView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:background="@color/colorWhite"
+            android:horizontalSpacing="15dp"
+            android:numColumns="3"
+            android:padding="15dp"
+            android:verticalSpacing="15dp"
+            android:visibility="@{item.grid ? View.VISIBLE : View.GONE}"
+            app:data="@{item.areas}" />
+    </LinearLayout>
+</layout>

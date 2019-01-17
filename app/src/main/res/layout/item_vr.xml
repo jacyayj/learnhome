@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="item"
+            type="Integer" />
+    </data>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="85dp">
+
+        <ImageView
+            android:layout_width="75dp"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:src="@mipmap/ic_launcher" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="75dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="10dp">
+
+            <TableRow>
+
+                <TextView
+                    style="@style/text_16_33"
+                    android:text="浙江大学" />
+            </TableRow>
+
+            <TextView
+                style="@style/text_14_99"
+                android:layout_width="1dp"
+                android:text="本科第二批录取院校"
+                android:textColor="@color/color939799" />
+
+            <pro.haichuang.learn.home.ui.weight.HorizontalRecyclerView android:id="@+id/star" />
+        </TableLayout>
+
+        <Button
+            android:layout_width="70dp"
+            android:layout_height="30dp"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/icon_vr_btn"
+            android:text="VR看校"
+            android:textColor="@color/colorWhite"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_gravity="bottom"
+            android:background="@color/colorE0E0E0"
+            android:layout_marginStart="75dp" />
+    </FrameLayout>
+</layout>

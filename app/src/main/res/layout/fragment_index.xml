@@ -98,6 +98,7 @@
                     app:riv_radius="5dp" />
 
                 <TableRow android:layout_marginTop="5dp">
+
                     <com.yhy.widget.core.img.round.RoundImageView
                         android:layout_width="0dp"
                         android:layout_height="100dp"
@@ -129,7 +130,10 @@
 
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_margin="8dp"
+                    android:src="@drawable/icon_new" />
             </FrameLayout>
 
             <FrameLayout

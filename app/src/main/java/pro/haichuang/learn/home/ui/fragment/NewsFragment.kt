@@ -14,7 +14,7 @@ import pro.haichuang.learn.home.ui.activity.news.NewsDetailsActivity
 
 @ContentView(R.layout.fragment_news)
 class NewsFragment : BaseFragment() {
-    private val tabBeans by lazy { arrayListOf(TabBean("高考政策"), TabBean(true, "信息资讯"), TabBean("高考习题"), TabBean(true, "热点问答")) }
+    private val tabBeans by lazy { arrayListOf(TabBean("高考政策"), TabBean( "信息资讯"), TabBean("高考习题"), TabBean(true, "热点问答")) }
 
     override fun initData() {
         listView.adapter = CommonAdapter(layoutInflater, R.layout.item_find_other, arrayListOf(1, 2, 3, 4, 5, 6, 7, 8, 9))

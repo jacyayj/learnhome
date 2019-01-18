@@ -64,6 +64,7 @@
             android:textColor="@color/colorWhite" />
 
         <TextView
+            android:id="@+id/to_tixian"
             android:layout_width="70dp"
             android:layout_height="30dp"
             android:layout_gravity="center_horizontal|bottom"
@@ -101,13 +102,13 @@
         android:text="充值金额仅用于系统消费，不退不转，请按需充值" />
 
     <Button
+        android:id="@+id/to_payment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="55dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/bg_confirm_btn"
         android:text="确认充值"
-        android:id="@+id/to_payment"
         android:textColor="@color/colorWhite"
         android:textSize="16sp" />
 </LinearLayout>

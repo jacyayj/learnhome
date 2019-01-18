@@ -46,19 +46,21 @@
             android:textSize="24sp" />
 
         <RelativeLayout
+            android:id="@+id/wallet_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:tag="0">
 
             <CheckedTextView
                 android:id="@+id/wallet"
                 style="@style/text_16_33"
                 android:layout_width="match_parent"
+                android:checked="true"
                 android:drawableStart="@drawable/icon_yue_pay_small"
                 android:drawableEnd="@drawable/selector_single_choose_small"
                 android:drawablePadding="10dp"
                 android:gravity="center_vertical"
                 android:paddingHorizontal="15dp"
-                android:tag="0"
                 android:text="XX钱包"
                 android:textSize="12sp" />
 
@@ -71,13 +73,17 @@
                 android:textColor="@color/color33"
                 android:textSize="9sp" />
 
-            <TextView
+            <com.yhy.widget.core.text.LineTextView xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/to_payment"
                 style="@style/text_12_99"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/label"
                 android:text="余额不足？去充值）"
-                android:textSize="9sp" />
+                android:textSize="9sp"
+                app:ltv_line_interval="1dp"
+                app:ltv_line_size="0.5dp"
+                app:ltv_line_color="@color/color99"
+                app:ltv_line_style="underline" />
         </RelativeLayout>
 
         <CheckedTextView
@@ -87,7 +93,7 @@
             android:layout_marginTop="20dp"
             android:drawableStart="@drawable/icon_wechat_pay_small"
             android:drawableEnd="@drawable/selector_single_choose_small"
-            android:drawablePadding="20dp"
+            android:drawablePadding="10dp"
             android:gravity="center_vertical"
             android:paddingHorizontal="15dp"
             android:tag="1"

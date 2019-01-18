@@ -18,5 +18,6 @@ class WalletActivity : BaseActivity() {
     override fun initListener() {
         to_payment.setOnClickListener { mStartActivity(PaymentActivity::class.java) }
         to_pay_details.setOnClickListener { mStartActivity(PayDetailsActivity::class.java) }
+        to_tixian.setOnClickListener { mStartActivity(TiXianActivity::class.java) }
     }
 }

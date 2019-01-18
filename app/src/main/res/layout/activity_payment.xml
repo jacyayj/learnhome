@@ -112,17 +112,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="25dp"
+                android:src="@drawable/icon_yue_pay_small" />
+
             <CheckedTextView
                 android:id="@+id/wallet"
                 style="@style/text_16_33"
                 android:layout_width="match_parent"
+                android:layout_marginStart="75dp"
                 android:checked="@{model.type == 0}"
-                android:drawableStart="@drawable/icon_yue_pay_small"
-                android:drawableEnd="@drawable/selector_single_choose"
-                android:drawablePadding="20dp"
+                android:drawableEnd="@drawable/selector_single_choose_small"
                 android:gravity="center_vertical"
                 android:onClick="@{model::togglePay}"
-                android:paddingHorizontal="25dp"
+                android:paddingEnd="25dp"
                 android:paddingVertical="15dp"
                 android:tag="0"
                 android:text="XX钱包" />
@@ -135,12 +141,16 @@
                 android:text="（账户余额:￥0"
                 android:textColor="@color/color33" />
 
-            <TextView
+            <com.yhy.widget.core.text.LineTextView xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/to_payment"
                 style="@style/text_12_99"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/label"
-                android:text="余额不足？去充值）" />
+                android:text="余额不足？去充值）"
+                app:ltv_line_interval="1dp"
+                app:ltv_line_size="0.5dp"
+                app:ltv_line_color="@color/color99"
+                app:ltv_line_style="underline" />
         </RelativeLayout>
 
         <CheckedTextView
@@ -149,7 +159,7 @@
             android:layout_width="match_parent"
             android:checked="@{model.type == 1}"
             android:drawableStart="@drawable/icon_wechat_pay"
-            android:drawableEnd="@drawable/selector_single_choose"
+            android:drawableEnd="@drawable/selector_single_choose_small"
             android:drawablePadding="20dp"
             android:gravity="center_vertical"
             android:onClick="@{model::togglePay}"
@@ -164,7 +174,7 @@
             android:layout_width="match_parent"
             android:checked="@{model.type == 2}"
             android:drawableStart="@drawable/icon_alipay"
-            android:drawableEnd="@drawable/selector_single_choose"
+            android:drawableEnd="@drawable/selector_single_choose_small"
             android:drawablePadding="20dp"
             android:gravity="center_vertical"
             android:onClick="@{model::togglePay}"

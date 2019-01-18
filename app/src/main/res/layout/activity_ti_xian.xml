@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorF0F7FA"
+    android:orientation="vertical"
+    tools:context=".ui.activity.mine.TiXianActivity">
+
+    <include layout="@layout/layout_title" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/bg_fa_top_radius_10"
+        android:drawableStart="@drawable/icon_wechat_pay_small"
+        android:drawablePadding="5dp"
+        android:gravity="center_vertical"
+        android:paddingStart="20dp"
+        android:text="微信提现"
+        android:textColor="@color/color00"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:background="@drawable/bg_ff_bottom_radius_10"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/text_16_00"
+            android:paddingVertical="15dp"
+            android:paddingStart="20dp"
+            android:text="提现金额" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/text_16_00"
+                android:layout_marginEnd="5dp"
+                android:paddingStart="20dp"
+                android:paddingBottom="10dp"
+                android:text="¥"
+                android:textSize="24sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:inputType="numberDecimal"
+                android:paddingBottom="10dp"
+                android:textColor="@color/color00"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginHorizontal="10dp"
+            android:background="@color/colorCC" />
+
+        <TextView
+            style="@style/text_12_99"
+            android:padding="15dp"
+            android:text="零钱余额¥480.50元"
+            android:textColor="@color/color66" />
+
+        <Button
+            style="@style/button_confirm"
+            android:layout_marginHorizontal="40dp"
+            android:text="提现" />
+
+        <TextView
+            style="@style/text_12_99"
+            android:layout_gravity="center_horizontal"
+            android:paddingBottom="15dp"
+            android:text="2小时内到账"
+            android:textColor="@color/color66" />
+    </LinearLayout>
+</LinearLayout>

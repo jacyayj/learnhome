@@ -13,8 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/MyAppTheme"
-        tools:replace="android:theme"
-        tools:ignore="GoogleAppIndexingWarning">
+        tools:ignore="GoogleAppIndexingWarning"
+        tools:replace="android:theme">
         <activity
             android:name=".ui.activity.login.LoginActivity"
             android:windowSoftInputMode="stateHidden">
@@ -25,7 +25,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activity.MainActivity" />
-        <activity android:name=".ui.activity.CityListActivity" android:windowSoftInputMode="adjustNothing"/>
+        <activity
+            android:name=".ui.activity.CityListActivity"
+            android:windowSoftInputMode="adjustNothing" />
         <activity android:name=".ui.activity.login.RegisterActivity" />
         <activity android:name=".ui.activity.login.ModifyPwdActivity" />
         <activity android:name=".ui.activity.login.CompleteInfoActivity" />
@@ -97,6 +99,7 @@
         <activity android:name=".ui.activity.index.ZhuanTiActivity" />
         <activity android:name=".ui.activity.index.ZhuanTiDetailsActivity" />
         <activity android:name=".ui.activity.index.ZhuanTiSignupActivity" />
+        <activity android:name=".ui.activity.mine.TiXianActivity"></activity>
     </application>
 
 </manifest>

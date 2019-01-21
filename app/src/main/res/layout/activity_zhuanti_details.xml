@@ -132,7 +132,7 @@
 
                 <TextView
                     style="@style/text_16_33"
-                    android:drawableStart="@drawable/icon_time"
+                    android:drawableStart="@drawable/icon_time_light"
                     android:drawablePadding="15dp"
                     android:gravity="center_vertical"
                     android:paddingVertical="15dp"

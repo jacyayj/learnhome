@@ -40,5 +40,6 @@ class IndexFragment : BaseFragment() {
             mStartActivity(FindDetailsActivity::class.java)
         }
         to_zhuanti.setOnClickListener { mStartActivity(ZhuanTiActivity::class.java) }
+        to_search.setOnClickListener { mStartActivity(SearchActivity::class.java) }
     }
 }

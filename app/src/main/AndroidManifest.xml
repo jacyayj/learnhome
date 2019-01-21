@@ -15,6 +15,7 @@
         android:theme="@style/MyAppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:theme">
+        <activity android:name=".ui.activity.index.SearchActivity"></activity>
         <activity
             android:name=".ui.activity.login.LoginActivity"
             android:windowSoftInputMode="stateHidden">
@@ -99,7 +100,7 @@
         <activity android:name=".ui.activity.index.ZhuanTiActivity" />
         <activity android:name=".ui.activity.index.ZhuanTiDetailsActivity" />
         <activity android:name=".ui.activity.index.ZhuanTiSignupActivity" />
-        <activity android:name=".ui.activity.mine.TiXianActivity"></activity>
+        <activity android:name=".ui.activity.mine.TiXianActivity" />
     </application>
 
 </manifest>

@@ -26,7 +26,7 @@
                 style="@style/wrap_layout"
                 android:onClick="back"
                 android:padding="15dp"
-                android:src="@drawable/icon_back"
+                android:src="@drawable/icon_back_white"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.yhy.widget.core.img.round.CircleImageView

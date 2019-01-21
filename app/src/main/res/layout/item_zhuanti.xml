@@ -37,7 +37,7 @@
 
         <TextView
             style="@style/text_12_99"
-            android:drawableStart="@drawable/icon_location"
+            android:drawableStart="@drawable/icon_time_grey"
             android:drawablePadding="5dp"
             android:paddingStart="12dp"
             android:paddingTop="@dimen/sp_10"

@@ -27,7 +27,7 @@ object DataUtils {
         data.add(ItemMine(R.drawable.icon_mine_wdye, "我的余额"))
         data.add(ItemMine(R.drawable.icon_mine_jrsq, "加入社群"))
         data.add(ItemMine(R.drawable.icon_mine_wdsc, "我的收藏"))
-        data.add(ItemMine(R.drawable.icon_mine_wddd, "我的订单"))
+        data.add(ItemMine(R.drawable.icon_mine_wddd, "我的订单").apply { hasOrder = true })
         data.add(ItemMine(R.drawable.icon_mine_grda, "个人档案"))
         data.add(ItemMine(R.drawable.icon_mine_yqhy, "邀请好友"))
         data.add(ItemMine(R.drawable.icon_mine_lxwm, "联系我们", false))
@@ -125,6 +125,7 @@ object DataUtils {
         data.add("艺术")
         return data
     }
+
     fun formatZuanYeData(): ArrayList<String> {
         val data = ArrayList<String>()
         data.add("哲学")

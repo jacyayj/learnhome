@@ -18,7 +18,7 @@ import q.rorbin.badgeview.QBadgeView
 class OrderActivity : BaseActivity() {
 
     private val noticeDialog by lazy { NoticeDialog(this) }
-    private val data by lazy { arrayListOf(OrderModel(0), OrderModel(1), OrderModel(2), OrderModel(3)) }
+    private val data by lazy { arrayListOf(OrderModel(1), OrderModel(1), OrderModel(2), OrderModel(3)) }
 
     override fun initData() {
         titleModel.title = "我的订单"

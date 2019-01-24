@@ -11,6 +11,7 @@ import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.annotation.ContentView
 import pro.haichuang.learn.home.config.BaseFragment
 import pro.haichuang.learn.home.ui.activity.mine.*
+import pro.haichuang.learn.home.ui.dialog.InvateDialog
 import pro.haichuang.learn.home.utils.DataUtils
 import pro.haichuang.learn.home.utils.ImageBinding
 
@@ -29,6 +30,7 @@ class MineFragment : BaseFragment() {
                 2 -> mStartActivity(CollectActivity::class.java)
                 3 -> mStartActivity(OrderActivity::class.java)
                 4 -> mStartActivity(FileActivity::class.java)
+                5 -> InvateDialog(context!!).show()
             }
         }
         header.setOnClickListener {

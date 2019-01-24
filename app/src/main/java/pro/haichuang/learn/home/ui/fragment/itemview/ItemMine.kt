@@ -24,6 +24,8 @@ class ItemMine : BaseObservable {
 
     var text = ""
 
+    var hasOrder = false
+
     @Bindable
     var subText = ""
         set(value) {

@@ -1,12 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorF0F7FA"
-    android:orientation="vertical"
     android:divider="@drawable/divider_vertical_e0"
+    android:orientation="vertical"
     android:showDividers="middle"
     tools:context=".ui.activity.mine.CollectActivity">
 
+    <include layout="@layout/layout_title" />
+
+    <android.support.design.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="40dp"
+        app:cardElevation="8dp"
+        android:background="@color/colorWhite"
+        app:contentPadding="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.yhy.widget.core.img.round.CircleImageView
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_marginEnd="16dp"
+                    android:src="@mipmap/ic_launcher" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/text_17_00"
+                        android:layout_weight="1"
+                        android:text="升学之家讨论群" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/text_13_00"
+                            android:layout_marginEnd="10dp"
+                            android:text="sxzj123456" />
+
+                        <TextView
+                            style="@style/text_14_ff"
+                            android:background="@drawable/bg_32c8fa_radius_2dp"
+                            android:paddingHorizontal="5dp"
+                            android:text="复制账号" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <pro.haichuang.learn.home.ui.weight.SquareImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="25dp"
+                android:background="#ff0" />
+
+            <TextView
+                style="@style/text_14_99"
+                android:layout_gravity="center_horizontal"
+                android:text="扫描图中二维码加入社群" />
+        </LinearLayout>
+
+    </android.support.design.card.MaterialCardView>
 </LinearLayout>

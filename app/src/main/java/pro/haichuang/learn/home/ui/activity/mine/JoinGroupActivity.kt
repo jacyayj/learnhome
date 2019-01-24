@@ -9,5 +9,6 @@ import pro.haichuang.learn.home.config.BaseActivity
 class JoinGroupActivity : BaseActivity() {
 
     override fun initData() {
+        titleModel.title = "加入社群"
     }
 }

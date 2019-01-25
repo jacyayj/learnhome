@@ -28,18 +28,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <TextView
                 style="@style/text_16_33"
                 android:text="@{item.text}" />
+
             <com.yhy.widget.core.img.round.CircleImageView
-                android:layout_width="12dp"
-                android:layout_height="12dp"
+                android:layout_width="6dp"
+                android:layout_height="6dp"
                 android:layout_marginStart="5dp"
-                android:layout_marginBottom="15dp"
-                android:visibility="@{item.hasOrder ? View.VISIBLE : View.GONE}"
-                android:src="#f00"/>
+                android:src="#f00"
+                android:visibility="@{item.hasOrder ? View.VISIBLE : View.GONE}" />
         </LinearLayout>
 
         <TextView

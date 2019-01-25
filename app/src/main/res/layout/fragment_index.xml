@@ -12,7 +12,7 @@
         android:background="@color/colorWhite"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingHorizontal="15dp">
+        android:paddingStart="15dp">
 
         <TextView
             style="@style/text_10_726E72"
@@ -33,7 +33,6 @@
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_marginStart="10dp"
-            android:layout_marginEnd="15dp"
             android:layout_weight="1"
             android:background="@drawable/bg_ebf2f5_radius_13dp"
             android:paddingStart="5dp">
@@ -42,19 +41,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="5dp"
-                android:src="@drawable/icon_index_search" />
+                android:src="@drawable/icon_message_search" />
 
             <TextView
                 style="@style/text_14_CCC4CC"
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:gravity="center_vertical"
-                android:text="高考分数评估" />
+                android:text="高考分数评估"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <ImageView
+            android:id="@+id/show_operation"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:paddingHorizontal="15dp"
             android:src="@drawable/icon_add" />
     </LinearLayout>
 
@@ -66,21 +68,25 @@
             style="@style/match_layout"
             android:orientation="vertical">
 
-            <TextView
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:background="@mipmap/ic_launcher"
-                android:gravity="center"
-                android:text="这是广告图"
-                android:textColor="@color/colorWhite"
-                android:textSize="25sp" />
+                android:background="#ff0"
+                android:padding="20dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@mipmap/ic_launcher"
+                    android:gravity="center" />
+            </FrameLayout>
 
             <pro.haichuang.learn.home.ui.weight.GridRecyclerView
                 android:id="@+id/grid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="10dp"
-                android:background="@drawable/bg_white_radius_4dp_shadow_c4c9cc"
+                android:background="@color/colorWhite"
                 android:paddingBottom="5dp" />
 
             <TableLayout
@@ -93,7 +99,6 @@
                     android:id="@+id/to_zhuanti"
                     android:layout_width="0dp"
                     android:layout_height="100dp"
-                    android:layout_marginEnd="2.5dp"
                     android:layout_weight="1"
                     android:src="@mipmap/ic_launcher"
                     app:riv_radius="5dp" />
@@ -105,7 +110,7 @@
                         android:layout_height="100dp"
                         android:layout_marginEnd="2.5dp"
                         android:layout_weight="1"
-                        android:background="@mipmap/ic_launcher"
+                        android:src="@mipmap/ic_launcher"
                         app:riv_radius="5dp" />
 
                     <com.yhy.widget.core.img.round.RoundImageView
@@ -120,30 +125,13 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.yhy.widget.core.img.round.RoundImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="90dp"
-                    android:layout_margin="10dp"
-                    android:src="@mipmap/ic_launcher"
-                    app:riv_radius="5dp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_margin="8dp"
-                    android:src="@drawable/icon_new" />
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal">
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:background="@color/colorWhite">
 
                 <View
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="1dp"
                     android:layout_gravity="center"
                     android:background="@color/color8A9499" />
@@ -152,10 +140,15 @@
                     style="@style/text_13_8A9499"
                     android:layout_gravity="center"
                     android:layout_marginVertical="5dp"
-                    android:background="@color/colorF0F7FA"
+                    android:background="@color/colorWhite"
                     android:paddingHorizontal="5dp"
                     android:text="热门推荐" />
             </FrameLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/colorE0E0E0" />
 
             <pro.haichuang.learn.home.ui.weight.AutoListView
                 android:id="@+id/listView"

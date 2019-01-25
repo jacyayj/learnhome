@@ -54,7 +54,7 @@
             android:layout_centerVertical="true"
             android:layout_marginEnd="15dp"
             android:layout_toLeftOf="@id/agree"
-            android:background="@drawable/bg_d2_radius_5dp"
+            android:background="@drawable/stroke_99_radius_5dp"
             android:gravity="center"
             android:text="拒绝"
             android:textColor="@color/color33"

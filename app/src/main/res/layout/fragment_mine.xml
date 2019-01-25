@@ -68,7 +68,6 @@
         android:layout_marginTop="-20dp"
         android:background="@drawable/bg_white_radius_5dp"
         android:divider="@drawable/divider_horizontal_e0"
-        android:dividerPadding="10dp"
         android:elevation="1dp"
         android:showDividers="middle">
 

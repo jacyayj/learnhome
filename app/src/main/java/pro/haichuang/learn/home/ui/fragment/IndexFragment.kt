@@ -10,6 +10,7 @@ import pro.haichuang.learn.home.config.BaseFragment
 import pro.haichuang.learn.home.ui.activity.CityListActivity
 import pro.haichuang.learn.home.ui.activity.find.FindDetailsActivity
 import pro.haichuang.learn.home.ui.activity.index.*
+import pro.haichuang.learn.home.ui.dialog.IndexOperationPopup
 import pro.haichuang.learn.home.utils.DataUtils
 
 @ContentView(R.layout.fragment_index)
@@ -38,6 +39,9 @@ class IndexFragment : BaseFragment() {
     override fun initListener() {
         listView.setOnItemClickListener { _, _, position, _ ->
             mStartActivity(FindDetailsActivity::class.java)
+        }
+        show_operation.setOnClickListener {
+            IndexOperationPopup(it).show()
         }
         to_zhuanti.setOnClickListener { mStartActivity(ZhuanTiActivity::class.java) }
         to_search.setOnClickListener { mStartActivity(SearchActivity::class.java) }

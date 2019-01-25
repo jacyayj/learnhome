@@ -18,7 +18,6 @@ class GridRecyclerView : SwipeMenuRecyclerView {
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
     init {
-        layoutManager = GridLayoutManager(context,5)
-        addItemDecoration(DefaultItemDecoration(context.mgetColor(R.color.colorD7DDE0), 0, context.mgetDimension(R.dimen.divider_size)))
+        layoutManager = GridLayoutManager(context, 5)
     }
 }

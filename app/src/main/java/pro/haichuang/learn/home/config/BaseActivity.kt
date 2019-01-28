@@ -1,15 +1,31 @@
 package pro.haichuang.learn.home.config
 
+import android.app.ProgressDialog
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
+import com.google.gson.Gson
+import com.jacy.kit.config.toast
+import com.vondear.rxtool.RxEncryptTool
+import com.zhouyou.http.EasyHttp
+import com.zhouyou.http.callback.CallBackProxy
+import com.zhouyou.http.callback.CallClazzProxy
+import com.zhouyou.http.callback.ProgressDialogCallBack
+import com.zhouyou.http.callback.SimpleCallBack
+import com.zhouyou.http.exception.ApiException
+import com.zhouyou.http.model.HttpParams
+import com.zhouyou.http.subsciber.IProgressDialog
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.layout_title.*
 import pro.haichuang.learn.home.BR
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.annotation.ContentView
+import pro.haichuang.learn.home.bean.Response
+import pro.haichuang.learn.home.net.Url
+import pro.haichuang.learn.home.utils.mlog
+import javax.security.auth.callback.Callback
 
 /**
  * Created by jacy on 2018/7/24.
@@ -73,5 +89,15 @@ abstract class BaseActivity : AppCompatActivity() {
     fun back(view: View) {
         finish()
     }
+
+    fun post(url: String, params: HttpParams) {
+        val request = EasyHttp.post(url).params(params)
+        request.execute(object : ProgressDialogCallBack<Response<String>>(IProgressDialog { ProgressDialog(this) }) {
+            override fun onSuccess(t: Response<String>?) {
+                toast(t?.msg)
+            }
+        })
+    }
+
 
 }

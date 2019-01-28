@@ -100,7 +100,7 @@
                     android:layout_width="0dp"
                     android:layout_height="100dp"
                     android:layout_weight="1"
-                    android:src="@mipmap/ic_launcher"
+                    android:src="#ff0"
                     app:riv_radius="5dp" />
 
                 <TableRow android:layout_marginTop="5dp">
@@ -110,7 +110,7 @@
                         android:layout_height="100dp"
                         android:layout_marginEnd="2.5dp"
                         android:layout_weight="1"
-                        android:src="@mipmap/ic_launcher"
+                        android:src="#f00"
                         app:riv_radius="5dp" />
 
                     <com.yhy.widget.core.img.round.RoundImageView
@@ -118,7 +118,7 @@
                         android:layout_height="100dp"
                         android:layout_marginStart="2.5dp"
                         android:layout_weight="1"
-                        android:src="@mipmap/ic_launcher"
+                        android:src="#f90"
                         app:riv_radius="5dp" />
                 </TableRow>
             </TableLayout>

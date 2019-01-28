@@ -3,10 +3,12 @@ package pro.haichuang.learn.home.ui.activity.login
 import android.support.design.widget.TabLayout
 import android.view.View
 import com.jacy.kit.config.mStartActivity
+import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.activity_login.*
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.annotation.ContentView
 import pro.haichuang.learn.home.config.DataBindingActivity
+import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.MainActivity
 import pro.haichuang.learn.home.ui.activity.login.viewmodel.LoginModel
 
@@ -18,6 +20,9 @@ class LoginActivity : DataBindingActivity<LoginModel>() {
         titleModel.showRight = true
         titleModel.showBottomeLine = false
         titleModel.titleRightText = "注册"
+//        val params = HttpParams()
+//        params.put("path","gkzc")
+//        post(Url.News.List, params)
     }
 
     override fun initListener() {

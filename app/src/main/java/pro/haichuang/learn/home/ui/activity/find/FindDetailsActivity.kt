@@ -6,7 +6,7 @@ import com.jacy.kit.config.mStartActivity
 import kotlinx.android.synthetic.main.activity_find_details.*
 import kotlinx.android.synthetic.main.item_find_details_comment.view.*
 import pro.haichuang.learn.home.R
-import pro.haichuang.learn.home.annotation.ContentView
+import com.jacy.kit.config.ContentView
 import pro.haichuang.learn.home.bean.ImageBean
 import pro.haichuang.learn.home.config.DataBindingActivity
 import pro.haichuang.learn.home.ui.activity.find.itemmodel.CommentModel

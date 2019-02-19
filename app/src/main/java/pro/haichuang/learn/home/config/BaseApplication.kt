@@ -2,10 +2,12 @@ package pro.haichuang.learn.home.config
 
 import android.app.Application
 import android.content.Context
+import android.support.multidex.MultiDex
 import com.google.gson.GsonBuilder
 //import android.support.multidex.MultiDex
 import com.vondear.rxtool.RxTool
 import com.zhouyou.http.EasyHttp
+import com.zhouyou.http.cache.model.CacheMode
 import com.zhouyou.http.model.HttpParams
 import pro.haichuang.learn.home.net.CustomInterceptor
 import retrofit2.converter.gson.GsonConverterFactory
@@ -19,11 +21,12 @@ class BaseApplication : Application() {
         EasyHttp.getInstance()
                 .debug("http_params", true)
                 .addInterceptor(CustomInterceptor())
+                .setCacheMode(CacheMode.NO_CACHE)
                 .setBaseUrl("http://118.24.80.29:8080/learn-home-server/api/app/")
     }
 
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
-//        MultiDex.install(base)
+        MultiDex.install(base)
     }
 }

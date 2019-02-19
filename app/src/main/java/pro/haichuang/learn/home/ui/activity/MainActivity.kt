@@ -3,7 +3,7 @@ package pro.haichuang.learn.home.ui.activity
 import android.support.v4.app.FragmentPagerAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import pro.haichuang.learn.home.R
-import pro.haichuang.learn.home.annotation.ContentView
+import com.jacy.kit.config.ContentView
 import pro.haichuang.learn.home.config.BaseActivity
 import pro.haichuang.learn.home.ui.fragment.*
 

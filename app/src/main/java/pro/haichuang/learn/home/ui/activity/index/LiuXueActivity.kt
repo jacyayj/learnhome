@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.activity_liu_xue.*
 import kotlinx.android.synthetic.main.item_liu_xue.view.*
 import pro.haichuang.learn.home.BR
 import pro.haichuang.learn.home.R
-import pro.haichuang.learn.home.annotation.ContentView
+import com.jacy.kit.config.ContentView
 import pro.haichuang.learn.home.bean.TabBean
 import pro.haichuang.learn.home.config.BaseActivity
 import pro.haichuang.learn.home.ui.dialog.SingleChoosePopup

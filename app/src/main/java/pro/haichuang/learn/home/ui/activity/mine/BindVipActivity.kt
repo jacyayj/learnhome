@@ -1,6 +1,6 @@
 package pro.haichuang.learn.home.ui.activity.mine
 
-import pro.haichuang.learn.home.annotation.ContentView
+import com.jacy.kit.config.ContentView
 import pro.haichuang.learn.home.config.DataBindingActivity
 import pro.haichuang.learn.home.ui.activity.mine.viewmodel.BindVipModel
 import pro.haichuang.learn.home.R

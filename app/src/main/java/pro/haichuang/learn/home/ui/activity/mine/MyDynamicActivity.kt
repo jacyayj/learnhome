@@ -4,7 +4,7 @@ import com.jacy.kit.adapter.CommonAdapter
 import kotlinx.android.synthetic.main.activity_my_dynamic.*
 import kotlinx.android.synthetic.main.item_mine_index.view.*
 import pro.haichuang.learn.home.R
-import pro.haichuang.learn.home.annotation.ContentView
+import com.jacy.kit.config.ContentView
 import pro.haichuang.learn.home.config.BaseActivity
 
 

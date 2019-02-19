@@ -4,7 +4,7 @@ import com.jacy.kit.adapter.CommonAdapter
 import com.jacy.kit.config.mStartActivity
 import kotlinx.android.synthetic.main.activity_online_teacher.*
 import kotlinx.android.synthetic.main.item_xinli.view.*
-import pro.haichuang.learn.home.annotation.ContentView
+import com.jacy.kit.config.ContentView
 import pro.haichuang.learn.home.config.BaseActivity
 import pro.haichuang.learn.home.R
 

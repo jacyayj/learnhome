@@ -3,7 +3,7 @@ package pro.haichuang.learn.home.ui.activity.message
 import com.jacy.kit.adapter.CommonAdapter
 import kotlinx.android.synthetic.main.activity_message_center.*
 import pro.haichuang.learn.home.R
-import pro.haichuang.learn.home.annotation.ContentView
+import com.jacy.kit.config.ContentView
 import pro.haichuang.learn.home.config.BaseActivity
 import pro.haichuang.learn.home.ui.activity.message.itemmodel.MessageCenterModel
 

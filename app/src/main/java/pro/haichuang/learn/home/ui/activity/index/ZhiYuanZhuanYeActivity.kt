@@ -5,7 +5,7 @@ import com.jacy.kit.adapter.CommonAdapter
 import kotlinx.android.synthetic.main.activity_zhiyuan_zhuanye.*
 import kotlinx.android.synthetic.main.item_zhiyuan_zhuanye.view.*
 import pro.haichuang.learn.home.R
-import pro.haichuang.learn.home.annotation.ContentView
+import com.jacy.kit.config.ContentView
 import pro.haichuang.learn.home.config.BaseActivity
 import pro.haichuang.learn.home.ui.dialog.LegendDialog
 

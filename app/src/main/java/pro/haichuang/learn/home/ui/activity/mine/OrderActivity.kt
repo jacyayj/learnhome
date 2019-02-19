@@ -6,7 +6,7 @@ import com.jacy.kit.config.mStartActivity
 import kotlinx.android.synthetic.main.activity_order.*
 import kotlinx.android.synthetic.main.item_order.view.*
 import pro.haichuang.learn.home.R
-import pro.haichuang.learn.home.annotation.ContentView
+import com.jacy.kit.config.ContentView
 import pro.haichuang.learn.home.config.BaseActivity
 import pro.haichuang.learn.home.ui.activity.mine.itemmodel.OrderModel
 import pro.haichuang.learn.home.ui.dialog.NoticeDialog

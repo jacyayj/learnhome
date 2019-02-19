@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.layout_zuanye_tab_1.*
 import kotlinx.android.synthetic.main.layout_zuanye_tab_2.*
 import kotlinx.android.synthetic.main.layout_zuanye_tab_3.*
 import pro.haichuang.learn.home.BR
-import pro.haichuang.learn.home.annotation.ContentView
+import com.jacy.kit.config.ContentView
 import pro.haichuang.learn.home.config.BaseActivity
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.bean.TabBean

@@ -3,7 +3,7 @@ package pro.haichuang.learn.home.ui.activity
 import kotlinx.android.synthetic.main.activity_city_list.*
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.adapter.CityListAdapter
-import pro.haichuang.learn.home.annotation.ContentView
+import com.jacy.kit.config.ContentView
 import pro.haichuang.learn.home.config.BaseActivity
 import pro.haichuang.learn.home.ui.weight.SideBar
 

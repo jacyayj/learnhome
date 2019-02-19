@@ -5,7 +5,7 @@ import com.jacy.kit.adapter.CommonRecyclerAdapter
 import com.jacy.kit.config.mStartActivity
 import kotlinx.android.synthetic.main.fragment_index.*
 import pro.haichuang.learn.home.R
-import pro.haichuang.learn.home.annotation.ContentView
+import com.jacy.kit.config.ContentView
 import pro.haichuang.learn.home.config.BaseFragment
 import pro.haichuang.learn.home.ui.activity.CityListActivity
 import pro.haichuang.learn.home.ui.activity.find.FindDetailsActivity

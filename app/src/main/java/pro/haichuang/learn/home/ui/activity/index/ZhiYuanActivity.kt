@@ -8,7 +8,7 @@ import com.jacy.kit.config.mStartActivity
 import com.jacy.kit.config.show
 import kotlinx.android.synthetic.main.activity_zhiyuan.*
 import pro.haichuang.learn.home.BR
-import pro.haichuang.learn.home.annotation.ContentView
+import com.jacy.kit.config.ContentView
 import pro.haichuang.learn.home.config.BaseActivity
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.bean.TabBean

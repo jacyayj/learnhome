@@ -7,7 +7,7 @@ import com.jacy.kit.config.mStartActivity
 import com.jacy.kit.config.show
 import kotlinx.android.synthetic.main.fragment_find.*
 import pro.haichuang.learn.home.R
-import pro.haichuang.learn.home.annotation.ContentView
+import com.jacy.kit.config.ContentView
 import pro.haichuang.learn.home.config.BaseFragment
 import pro.haichuang.learn.home.ui.activity.find.FindDetailsActivity
 import pro.haichuang.learn.home.ui.activity.find.FindReleaseActivity

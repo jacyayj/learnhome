@@ -3,7 +3,7 @@ package pro.haichuang.learn.home.ui.activity.login
 import com.jacy.kit.config.mStartActivity
 import kotlinx.android.synthetic.main.activity_complete_info.*
 import pro.haichuang.learn.home.R
-import pro.haichuang.learn.home.annotation.ContentView
+import com.jacy.kit.config.ContentView
 import pro.haichuang.learn.home.config.DataBindingActivity
 import pro.haichuang.learn.home.ui.activity.MainActivity
 import pro.haichuang.learn.home.ui.activity.login.viewmodel.CompleteInfoModel

@@ -7,7 +7,7 @@ import com.luck.picture.lib.config.PictureConfig
 import kotlinx.android.synthetic.main.activity_find_release.*
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.adapter.ReleaseImageAdapter
-import pro.haichuang.learn.home.annotation.ContentView
+import com.jacy.kit.config.ContentView
 import pro.haichuang.learn.home.config.DataBindingActivity
 import pro.haichuang.learn.home.ui.activity.find.viewmodel.FindReleaseModel
 

@@ -2,7 +2,7 @@ package pro.haichuang.learn.home.ui.activity.index
 
 import com.jacy.kit.adapter.CommonAdapter
 import kotlinx.android.synthetic.main.activity_online_video.*
-import pro.haichuang.learn.home.annotation.ContentView
+import com.jacy.kit.config.ContentView
 import pro.haichuang.learn.home.config.BaseActivity
 import pro.haichuang.learn.home.R
 

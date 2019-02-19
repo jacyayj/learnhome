@@ -4,7 +4,7 @@ import com.jacy.kit.adapter.CommonRecyclerAdapter
 import com.jacy.kit.config.mStartActivity
 import kotlinx.android.synthetic.main.activity_teacher_details.*
 import kotlinx.android.synthetic.main.item_find_details_comment.view.*
-import pro.haichuang.learn.home.annotation.ContentView
+import com.jacy.kit.config.ContentView
 import pro.haichuang.learn.home.config.DataBindingActivity
 import pro.haichuang.learn.home.ui.activity.index.viewmodel.TeacherDetailsModel
 import pro.haichuang.learn.home.R

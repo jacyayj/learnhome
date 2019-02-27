@@ -23,12 +23,17 @@ android {
     }
     compileSdkVersion 28
     defaultConfig {
-        applicationId "pro.haichuang.learn.home"
+        applicationId "pro.haichuang.learn.home.android"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            //设置支持的SO库架构
+            abiFilters "armeabi-v7a", "x86", "arm64-v8a", "x86_64"
+        }
     }
     dataBinding {
         enabled = true
@@ -58,5 +63,5 @@ dependencies {
     //角标控件
     implementation 'q.rorbin:badgeview:1.1.3'
     implementation 'com.github.jacyayj:develop-kit:0.2.4.3'
-//    implementation project(':lib')
+    implementation project(':uikit')
 }

@@ -1,10 +1,10 @@
 package pro.haichuang.learn.home.ui.activity.index.viewmodel
 
-import android.databinding.BaseObservable
+import pro.haichuang.learn.home.bean.BaseModel
 import android.databinding.Bindable
 import pro.haichuang.learn.home.BR
 
-class TeacherDetailsModel : BaseObservable() {
+class TeacherDetailsModel : BaseModel() {
 
     @Bindable
     var online = false

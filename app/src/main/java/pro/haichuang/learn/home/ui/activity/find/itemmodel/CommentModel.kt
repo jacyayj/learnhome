@@ -1,8 +1,8 @@
 package pro.haichuang.learn.home.ui.activity.find.itemmodel
 
-import android.databinding.BaseObservable
+import pro.haichuang.learn.home.bean.BaseModel
 
-class CommentModel : BaseObservable() {
+class CommentModel : BaseModel() {
 
     var name = "戴若木鸡"
 

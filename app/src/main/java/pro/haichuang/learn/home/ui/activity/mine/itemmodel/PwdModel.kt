@@ -1,10 +1,10 @@
 package pro.haichuang.learn.home.ui.activity.mine.itemmodel
 
-import android.databinding.BaseObservable
+import pro.haichuang.learn.home.bean.BaseModel
 import android.databinding.Bindable
 import pro.haichuang.learn.home.BR
 
-class PwdModel : BaseObservable() {
+class PwdModel : BaseModel() {
 
     @Bindable
     var pwd = ""

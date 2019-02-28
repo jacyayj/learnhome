@@ -1,6 +1,6 @@
 package pro.haichuang.learn.home.ui.activity.mine.viewmodel
 
-import android.databinding.BaseObservable
+import pro.haichuang.learn.home.bean.BaseModel
 
-class MyFansModel : BaseObservable() {
+class MyFansModel : BaseModel() {
 }

@@ -1,11 +1,11 @@
 package pro.haichuang.learn.home.ui.activity.mine.viewmodel
 
-import android.databinding.BaseObservable
+import pro.haichuang.learn.home.bean.BaseModel
 import android.databinding.Bindable
 import android.view.View
 import com.android.databinding.library.baseAdapters.BR
 
-class BindVipModel : BaseObservable() {
+class BindVipModel : BaseModel() {
 
     @Bindable
     var online = true

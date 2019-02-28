@@ -1,11 +1,11 @@
 package pro.haichuang.learn.home.ui.activity.mine.itemmodel
 
-import android.databinding.BaseObservable
+import pro.haichuang.learn.home.bean.BaseModel
 import android.databinding.Bindable
 import android.view.View
 import pro.haichuang.learn.home.BR
 
-class FollowModel :BaseObservable(){
+class FollowModel :BaseModel(){
 
     @Bindable
     var follow = false

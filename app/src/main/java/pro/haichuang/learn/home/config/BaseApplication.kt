@@ -12,6 +12,7 @@ import com.vondear.rxtool.RxTool
 import com.zhouyou.http.EasyHttp
 import com.zhouyou.http.cache.model.CacheMode
 import pro.haichuang.learn.home.net.CustomInterceptor
+import retrofit2.converter.gson.GsonConverterFactory
 
 class BaseApplication : Application() {
 
@@ -20,6 +21,7 @@ class BaseApplication : Application() {
         RxTool.init(this)
         EasyHttp.init(this)
         EasyHttp.getInstance()
+                .addConverterFactory(GsonConverterFactory.create())
                 .debug("http_params", true)
                 .addInterceptor(CustomInterceptor())
                 .setCacheMode(CacheMode.NO_CACHE)

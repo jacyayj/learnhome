@@ -1,10 +1,10 @@
 package pro.haichuang.learn.home.ui.activity.login.viewmodel
 
-import android.databinding.BaseObservable
+import pro.haichuang.learn.home.bean.BaseModel
 import android.databinding.Bindable
 import com.android.databinding.library.baseAdapters.BR
 
-class ForgetPwdModel : BaseObservable() {
+class ForgetPwdModel : BaseModel() {
 
     @Bindable
     var phone = ""

@@ -6,10 +6,13 @@ import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.mStartActivity
 import com.jacy.kit.config.toast
 import com.zhouyou.http.EasyHttp
+import com.zhouyou.http.callback.SimpleCallBack
+import com.zhouyou.http.exception.ApiException
+import com.zhouyou.http.model.ApiResult
+import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.activity_login.*
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.config.DataBindingActivity
-import pro.haichuang.learn.home.net.MyCallBack
 import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.MainActivity
 import pro.haichuang.learn.home.ui.activity.login.viewmodel.LoginModel
@@ -22,11 +25,6 @@ class LoginActivity : DataBindingActivity<LoginModel>() {
         titleModel.showRight = true
         titleModel.showBottomeLine = false
         titleModel.titleRightText = "注册"
-//        val params = HttpParams()
-//        params.put("path", "gkzc")
-//        post<String>(Url.News.List, params)
-//        if (NIMUtil.isMainProcess(this))
-//            NimUIKit.init(this)
     }
 
     override fun initListener() {
@@ -59,20 +57,22 @@ class LoginActivity : DataBindingActivity<LoginModel>() {
             mStartActivity(MainActivity::class.java)
         }
         confirm_normal.setOnClickListener {
-            mStartActivity(MainActivity::class.java)
+            autoPost<String>(Url.User.Login)
         }
 
         fetch_sms.setOnClickListener {
             toast("开始发送")
-            EasyHttp.post(Url.Sms.Send)
-                    .params("mobile", "18384124448")
-                    .params("sendType", "1")
-                    .execute(MyCallBack<String>(this))
+            val params = HttpParams()
+            params.put("username", "18384124448")
+            params.put("password", "1")
+            post<String>(Url.Sms.Send, params)
         }
     }
-    override fun onSuccess(result: Any?) {
+
+    override fun onSuccess(url: String, result: Any?) {
         toast("发送成功")
     }
+
     fun tourIn(view: View) {
         mStartActivity(MainActivity::class.java)
     }

@@ -3,9 +3,15 @@ package pro.haichuang.learn.home.config
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import com.android.databinding.library.baseAdapters.BR
+import com.google.gson.Gson
+import com.zhouyou.http.EasyHttp
+import com.zhouyou.http.model.HttpParams
+import pro.haichuang.learn.home.bean.BaseModel
+import pro.haichuang.learn.home.net.MyCallBack
+import pro.haichuang.learn.home.utils.mlog
 import java.lang.reflect.ParameterizedType
 
-open class DataBindingActivity<T> : BaseActivity() {
+open class DataBindingActivity<T : BaseModel> : BaseActivity() {
 
     open val model: T by lazy { getClassInstance().newInstance() }
     private val binding by lazy { DataBindingUtil.setContentView<ViewDataBinding>(this, getLayoutId()) }
@@ -30,4 +36,13 @@ open class DataBindingActivity<T> : BaseActivity() {
             Any::class.java as Class<T>//若没有给定泛型，则返回Object类
         }
     }
+
+
+    fun <T> autoPost(url: String, showLoading: Boolean = true) {
+        if (model.checkSuccess(url))
+            EasyHttp.post(url)
+                    .params(model.getParams(url))
+                    .execute(MyCallBack<T>(url, this, showLoading))
+    }
+
 }

@@ -1,10 +1,10 @@
 package pro.haichuang.learn.home.bean
 
-import android.databinding.BaseObservable
+import pro.haichuang.learn.home.bean.BaseModel
 import android.databinding.Bindable
 import com.android.databinding.library.baseAdapters.BR
 
-class ImageBean : BaseObservable() {
+class ImageBean : BaseModel() {
 
     @Bindable
     var canDelete = false

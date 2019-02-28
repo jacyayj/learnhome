@@ -2,7 +2,6 @@ package pro.haichuang.learn.home.bean
 
 import android.databinding.BaseObservable
 import android.databinding.Bindable
-import android.view.View
 import com.android.databinding.library.baseAdapters.BR
 
 class TabBean : BaseObservable {

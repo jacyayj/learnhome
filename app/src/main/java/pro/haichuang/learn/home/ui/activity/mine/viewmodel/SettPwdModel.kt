@@ -1,10 +1,10 @@
 package pro.haichuang.learn.home.ui.activity.mine.viewmodel
 
-import android.databinding.BaseObservable
 import android.databinding.Bindable
 import com.android.databinding.library.baseAdapters.BR
+import pro.haichuang.learn.home.bean.BaseModel
 
-class SettPwdModel : BaseObservable() {
+class SettPwdModel : BaseModel() {
 
     var originPwd = ""
 

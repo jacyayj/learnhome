@@ -1,13 +1,13 @@
 package pro.haichuang.learn.home.ui.activity.index.itemmodel
 
-import android.databinding.BaseObservable
+import pro.haichuang.learn.home.bean.BaseModel
 import android.databinding.Bindable
 import android.view.View
 import com.android.databinding.library.baseAdapters.BR
 import com.jacy.kit.config.mStartActivity
 import pro.haichuang.learn.home.ui.activity.index.SchoolDetailsActivity
 
-class ItemCompareModel : BaseObservable() {
+class ItemCompareModel : BaseModel() {
 
     @Bindable
     var compare = false

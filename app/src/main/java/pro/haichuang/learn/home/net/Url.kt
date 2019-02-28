@@ -20,5 +20,11 @@ object Url {
 
     }
 
+    object User{
+        private const val base = "user/"
 
+        const val Login ="${base}login"
+
+        const val Register ="${base}register"
+    }
 }

@@ -1,12 +1,12 @@
 package pro.haichuang.learn.home.config
 
-import android.databinding.BaseObservable
+import pro.haichuang.learn.home.bean.BaseModel
 import android.databinding.Bindable
 import android.view.View
 import pro.haichuang.learn.home.BR
 import pro.haichuang.learn.home.R
 
-class TitleModel : BaseObservable() {
+class TitleModel : BaseModel() {
 
     @Bindable
     var showBottomeLine = true

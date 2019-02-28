@@ -1,6 +1,6 @@
 package pro.haichuang.learn.home.ui.activity.find.viewmodel
 
-import android.databinding.BaseObservable
+import pro.haichuang.learn.home.bean.BaseModel
 
-class FindDetailsModel : BaseObservable() {
+class FindDetailsModel : BaseModel() {
 }

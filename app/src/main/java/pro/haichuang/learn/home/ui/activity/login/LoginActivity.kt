@@ -4,9 +4,13 @@ import android.support.design.widget.TabLayout
 import android.view.View
 import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.mStartActivity
+import com.jacy.kit.config.toast
+import com.zhouyou.http.EasyHttp
 import kotlinx.android.synthetic.main.activity_login.*
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.config.DataBindingActivity
+import pro.haichuang.learn.home.net.MyCallBack
+import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.MainActivity
 import pro.haichuang.learn.home.ui.activity.login.viewmodel.LoginModel
 
@@ -57,8 +61,18 @@ class LoginActivity : DataBindingActivity<LoginModel>() {
         confirm_normal.setOnClickListener {
             mStartActivity(MainActivity::class.java)
         }
-    }
 
+        fetch_sms.setOnClickListener {
+            toast("开始发送")
+            EasyHttp.post(Url.Sms.Send)
+                    .params("mobile", "18384124448")
+                    .params("sendType", "1")
+                    .execute(MyCallBack<String>(this))
+        }
+    }
+    override fun onSuccess(result: Any?) {
+        toast("发送成功")
+    }
     fun tourIn(view: View) {
         mStartActivity(MainActivity::class.java)
     }

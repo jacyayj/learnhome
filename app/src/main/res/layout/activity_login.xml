@@ -216,6 +216,7 @@
                             android:textSize="16sp" />
 
                         <TextView
+                            android:id="@+id/fetch_sms"
                             style="@style/text_14_64E1FA"
                             android:background="@drawable/stroke_64e1fa_radius_13dp"
                             android:paddingHorizontal="10dp"

@@ -12,4 +12,13 @@ object Url {
 
     }
 
+    object Sms{
+
+        private const val base = "sms/"
+
+        const val Send = "${base}send"
+
+    }
+
+
 }

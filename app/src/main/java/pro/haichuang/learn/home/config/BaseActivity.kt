@@ -3,6 +3,7 @@ package pro.haichuang.learn.home.config
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import com.jacy.kit.config.RootActivity
+import com.jacy.kit.config.toast
 import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.layout_title.*
 import pro.haichuang.learn.home.net.MyCallBack
@@ -32,5 +33,9 @@ abstract class BaseActivity : RootActivity() {
 
     fun <T> post(url: String, params: HttpParams, showLoading: Boolean = true) {
         request(url, params, MyCallBack<T>(this, showLoading))
+    }
+
+    override fun onError(msg: String) {
+        toast(msg)
     }
 }

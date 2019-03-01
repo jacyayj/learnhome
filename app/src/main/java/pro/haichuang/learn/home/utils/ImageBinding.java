@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import pro.haichuang.learn.home.R;
+import pro.haichuang.learn.home.net.Url;
 
 public class ImageBinding {
 
@@ -23,6 +24,14 @@ public class ImageBinding {
     @BindingAdapter({"local_url"})
     public static void displayLocal(ImageView view, String url) {
         Glide.with(view).applyDefaultRequestOptions(RequestOptions.errorOf(R.mipmap.ic_launcher_round).placeholder(R.mipmap.ic_launcher_round)).load(url).into(view);
+    }
+
+    @BindingAdapter({"net_url"})
+    public static void displayNet(ImageView view, String url) {
+        Glide.with(view)
+                .applyDefaultRequestOptions(RequestOptions.errorOf(R.mipmap.ic_launcher_round).placeholder(R.mipmap.ic_launcher_round))
+                .load(Url.base_url + url)
+                .into(view);
     }
 
     @BindingAdapter({"release_url"})

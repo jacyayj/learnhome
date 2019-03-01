@@ -8,10 +8,15 @@ import com.netease.nimlib.sdk.NIMClient
 import com.netease.nimlib.sdk.SDKOptions
 import com.netease.nimlib.sdk.StatusBarNotificationConfig
 import com.netease.nimlib.sdk.util.NIMUtil
+import com.scwang.smartrefresh.layout.SmartRefreshLayout
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter
+import com.scwang.smartrefresh.layout.header.ClassicsHeader
 import com.vondear.rxtool.RxTool
 import com.zhouyou.http.EasyHttp
 import com.zhouyou.http.cache.model.CacheMode
+import com.zhouyou.http.cookie.CookieManger
 import pro.haichuang.learn.home.net.CustomInterceptor
+import pro.haichuang.learn.home.net.Url
 import retrofit2.converter.gson.GsonConverterFactory
 
 class BaseApplication : Application() {
@@ -25,20 +30,26 @@ class BaseApplication : Application() {
                 .debug("http_params", true)
                 .addInterceptor(CustomInterceptor())
                 .setCacheMode(CacheMode.NO_CACHE)
-                .setBaseUrl("http://118.24.80.29:8080/learn-home-server/api/app/")
-        NIMClient.init(this,null,options())
+                .setCookieStore(CookieManger(this))
+                .setBaseUrl(Url.base_url)
+        NIMClient.init(this, null, options())
+        initUiKit()
+        initRefreshLayout()
+    }
 
+    private fun initUiKit() {
         if (NIMUtil.isMainProcess(this))
             NimUIKit.init(this)
     }
 
-    private fun initUiKit(){
-
+    private fun initRefreshLayout() {
+        SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, _ -> ClassicsHeader(context) }
+        SmartRefreshLayout.setDefaultRefreshFooterCreator { context, _ -> ClassicsFooter(context) }
     }
 
     private fun options(): SDKOptions {
         val options = SDKOptions()
-        options.appKey="3283d25ee2b13df2312d0741028de692"
+        options.appKey = "3283d25ee2b13df2312d0741028de692"
         options.checkManifestConfig = true
         options.statusBarNotificationConfig = StatusBarNotificationConfig()
         return options

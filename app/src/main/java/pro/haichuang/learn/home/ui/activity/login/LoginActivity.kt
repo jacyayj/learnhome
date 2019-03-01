@@ -70,7 +70,13 @@ class LoginActivity : DataBindingActivity<LoginModel>() {
     }
 
     override fun onSuccess(url: String, result: Any?) {
-        toast("发送成功")
+        when (url) {
+            Url.User.Login -> {
+                toast("登录成功")
+                mStartActivity(MainActivity::class.java)
+                finish()
+            }
+        }
     }
 
     fun tourIn(view: View) {

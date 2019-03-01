@@ -115,7 +115,7 @@
         <activity
             android:name=".ui.activity.index.LiuXueActivity"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".ui.activity.index.OnlineTeacherActivity" />
+        <activity android:name=".ui.activity.index.TeacherActivity" />
         <activity android:name=".ui.activity.index.VRActivity" />
         <activity android:name=".ui.activity.index.LiuXueDetailsActivity" />
         <activity android:name=".ui.activity.index.LiuXueZiXunActivity" />

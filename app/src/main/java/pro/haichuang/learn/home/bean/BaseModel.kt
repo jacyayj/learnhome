@@ -20,6 +20,8 @@ open class BaseModel : BaseObservable() {
         return params
     }
 
+    var JSESSIONID = ""
+
     open fun checkSuccess(url: String) = true
 
 }

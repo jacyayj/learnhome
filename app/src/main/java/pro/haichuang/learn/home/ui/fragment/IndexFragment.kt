@@ -20,7 +20,7 @@ class IndexFragment : BaseFragment() {
         grid.setSwipeItemClickListener { _, position ->
             when (position) {
                 0 -> mStartActivity(ZhiYuanActivity::class.java)
-                1 -> mStartActivity(OnlineTeacherActivity::class.java)
+                1 -> mStartActivity(TeacherActivity::class.java)
                 2 -> mStartActivity(VRActivity::class.java)
                 3 -> mStartActivity(DataSearchActivity::class.java)
                 4 -> mStartActivity(LiuXueActivity::class.java)

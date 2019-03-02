@@ -32,6 +32,7 @@ class LoginModel : BaseModel() {
             notifyPropertyChanged(BR.pwd)
         }
 
+    @Params([Url.Sms.Send], "mobile")
     @Bindable
     var phone = ""
         set(value) {
@@ -46,6 +47,9 @@ class LoginModel : BaseModel() {
             notifyPropertyChanged(BR.code)
         }
 
+    @Params([Url.Sms.Send], "sendType")
+    private val sendType = "2"
+
     override fun checkSuccess(url: String): Boolean {
         return when (url) {
             Url.User.Login -> {
@@ -59,6 +63,19 @@ class LoginModel : BaseModel() {
                         false
                     }
                     !RxRegTool.isMobileSimple(user) -> {
+                        toast("请输入正确的手机号")
+                        false
+                    }
+                    else -> true
+                }
+            }
+            Url.Sms.Send -> {
+                when {
+                    phone.isEmpty() -> {
+                        toast("请输入手机号")
+                        false
+                    }
+                    !RxRegTool.isMobileSimple(phone) -> {
                         toast("请输入正确的手机号")
                         false
                     }

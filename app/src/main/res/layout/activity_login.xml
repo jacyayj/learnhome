@@ -107,6 +107,7 @@
                             android:src="@drawable/icon_login_pwd" />
 
                         <EditText
+                            android:id="@+id/pwd"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginStart="8dp"
@@ -120,7 +121,8 @@
                             android:textColorHint="@color/colorCCDCE0"
                             android:textSize="16sp" />
 
-                        <CheckBox
+                        <pro.haichuang.learn.home.ui.weight.PasswordToggle
+                            android:id="@+id/pwd_toggle"
                             style="@style/wrap_layout"
                             android:button="@drawable/selector_eye" />
                     </LinearLayout>
@@ -170,6 +172,7 @@
                             android:src="@drawable/icon_login_phone" />
 
                         <EditText
+                            android:id="@+id/phone"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginStart="8dp"
@@ -182,10 +185,10 @@
                             android:textColorHint="@color/colorCCDCE0"
                             android:textSize="16sp" />
 
-                        <ImageView
+                        <pro.haichuang.learn.home.ui.weight.ClearImage
+                            android:id="@+id/clear"
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:src="@drawable/icon_login_clear" />
+                            android:layout_height="match_parent" />
                     </LinearLayout>
 
                     <View
@@ -216,7 +219,7 @@
                             android:textColorHint="@color/colorCCDCE0"
                             android:textSize="16sp" />
 
-                        <TextView
+                        <pro.haichuang.learn.home.ui.weight.VerificationCodeTextView
                             android:id="@+id/fetch_sms"
                             style="@style/text_14_64E1FA"
                             android:background="@drawable/stroke_64e1fa_radius_13dp"

@@ -48,13 +48,18 @@ open class DataBindingActivity<T : BaseModel> : BaseActivity() {
                 request.addInterceptor {
                     val response = it.proceed(it.request())
                     val headers = response.headers()
-                    model.JSESSIONID = headers.value(0).split(";")[0].split("=")[1]
+                    if (headers.size() > 0) {
+                        val cookie = headers.value(0)
+                        mlog.v("cookie : $cookie")
+                        if (cookie.contains("JSESSIONID"))
+                            model.JSESSIONID = cookie.split(";")[0].split("=")[1]
+                    }
                     response
                 }
             }
             //需要附带验证码的接口，将JSESSIONID附加在cookie上传给服务器
             if (url == Url.User.Register)
-                request.addCookie("JSESSIONID",model.JSESSIONID)
+                request.addCookie("JSESSIONID", model.JSESSIONID)
             request.execute(MyCallBack<T>(url, this, showLoading))
         }
     }

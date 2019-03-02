@@ -49,7 +49,7 @@ class BaseApplication : Application() {
 
     private fun options(): SDKOptions {
         val options = SDKOptions()
-        options.appKey = "3283d25ee2b13df2312d0741028de692"
+        options.appKey = "60999e6f4a584cc1a99b837b06a40653"
         options.checkManifestConfig = true
         options.statusBarNotificationConfig = StatusBarNotificationConfig()
         return options

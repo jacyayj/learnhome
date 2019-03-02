@@ -2,6 +2,7 @@ package pro.haichuang.learn.home.ui.activity.login
 
 import com.google.gson.Gson
 import com.jacy.kit.config.ContentView
+import com.jacy.kit.config.toast
 import com.zhouyou.http.EasyHttp
 import kotlinx.android.synthetic.main.activity_register.*
 import pro.haichuang.learn.home.R
@@ -20,7 +21,10 @@ class RegisterActivity : DataBindingActivity<RegisterModel>() {
     }
 
     override fun initListener() {
-        fetch_sms.setOnClickListener {
+        clear.setEdit(phone)
+        pwd_toggle.setEdit(pwd)
+        confirm_pwd_toggle.setEdit(confirm_pwd)
+        fetch_sms.requestCode = {
             autoPost<String>(Url.Sms.Send)
         }
         register.setOnClickListener {
@@ -30,7 +34,11 @@ class RegisterActivity : DataBindingActivity<RegisterModel>() {
 
     override fun onSuccess(url: String, result: Any?) {
         when (url) {
-            Url.Sms.Send -> model.code = result.toString()
+            Url.Sms.Send -> {
+                fetch_sms.notifyCount()
+                model.code = result.toString()
+                toast("发送成功")
+            }
             Url.User.Register -> finish()
         }
     }

@@ -15,7 +15,11 @@ class VerificationCodeTextView : TextView {
     private var time = 60
     private var hand: Handler? = null
     var requestCode: () -> Unit = {}
-    var notifyCount: () -> Unit = {
+    fun notifyCount() {
+        hand?.sendEmptyMessage(0x01)
+    }
+
+    init {
         if (hand == null)
             hand = @SuppressLint("HandlerLeak")
             object : Handler() {
@@ -35,13 +39,12 @@ class VerificationCodeTextView : TextView {
                             else -> {
                                 isEnabled = true
                                 text = "重新获取"
-                                time = 5
+                                time = 60
                             }
                         }
                     }
                 }
             }
-        hand?.sendEmptyMessage(0x01)
     }
 
     init {

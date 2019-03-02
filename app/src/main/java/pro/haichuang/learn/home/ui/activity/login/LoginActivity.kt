@@ -60,17 +60,21 @@ class LoginActivity : DataBindingActivity<LoginModel>() {
             autoPost<String>(Url.User.Login)
         }
 
-        fetch_sms.setOnClickListener {
-            toast("开始发送")
-            val params = HttpParams()
-            params.put("username", "18384124448")
-            params.put("password", "1")
-            post<String>(Url.Sms.Send, params)
+        fetch_sms.requestCode = {
+            autoPost<String>(Url.Sms.Send)
         }
+
+        pwd_toggle.setEdit(pwd)
+        clear.setEdit(phone)
     }
 
     override fun onSuccess(url: String, result: Any?) {
         when (url) {
+            Url.Sms.Send -> {
+                fetch_sms.notifyCount()
+                model.code = result.toString()
+                toast("发送成功")
+            }
             Url.User.Login -> {
                 toast("登录成功")
                 mStartActivity(MainActivity::class.java)

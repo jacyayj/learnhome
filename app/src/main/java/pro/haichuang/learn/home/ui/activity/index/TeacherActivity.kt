@@ -7,6 +7,7 @@ import com.jacy.kit.config.mStartActivity
 import kotlinx.android.synthetic.main.activity_online_teacher.*
 import kotlinx.android.synthetic.main.item_xinli.view.*
 import com.jacy.kit.config.ContentView
+import com.jacy.kit.config.toast
 import com.zhouyou.http.model.HttpParams
 import pro.haichuang.learn.home.config.BaseActivity
 import pro.haichuang.learn.home.R
@@ -15,7 +16,6 @@ import pro.haichuang.learn.home.config.Constants.TEACHER_ID
 import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.index.itemmodel.ItemTeacherModel
 import pro.haichuang.learn.home.utils.GsonUtil
-import pro.haichuang.learn.home.utils.mlog
 
 
 @ContentView(R.layout.activity_online_teacher)
@@ -31,13 +31,12 @@ class TeacherActivity : BaseActivity() {
     override fun initData() {
         titleModel.title = "名师在线"
         listView.adapter = adapter
-        val params = HttpParams()
-        params.put("pageNo", "1")
-        params.put("pageSize", "20")
-        post<RowsBean<ItemTeacherModel>>(Url.Teacher.List, params)
+        pageUrl = Url.Teacher.List
+        refresh_layout.autoRefresh()
     }
+
     override fun onSuccess(url: String, result: Any?) {
         val rows = GsonUtil.parseRows(result, ItemTeacherModel::class.java)
-        rows.list?.let { adapter.refresh(it) }
+        rows.list?.let { dealRows(adapter, it) }
     }
 }

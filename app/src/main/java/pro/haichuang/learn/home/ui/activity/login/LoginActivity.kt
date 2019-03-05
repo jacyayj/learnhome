@@ -1,10 +1,19 @@
 package pro.haichuang.learn.home.ui.activity.login
 
+import android.content.Context
+import android.content.Intent
+import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.view.View
 import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.mStartActivity
+import com.jacy.kit.config.toJson
 import com.jacy.kit.config.toast
+import com.tencent.connect.share.QQShare
+import com.tencent.mm.opensdk.modelmsg.WXAppExtendObject
+import com.tencent.tauth.IUiListener
+import com.tencent.tauth.Tencent
+import com.tencent.tauth.UiError
 import com.zhouyou.http.EasyHttp
 import com.zhouyou.http.callback.SimpleCallBack
 import com.zhouyou.http.exception.ApiException
@@ -16,9 +25,11 @@ import pro.haichuang.learn.home.config.DataBindingActivity
 import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.MainActivity
 import pro.haichuang.learn.home.ui.activity.login.viewmodel.LoginModel
+import pro.haichuang.learn.home.utils.ShareUtils
+import pro.haichuang.learn.home.utils.mlog
 
 @ContentView(R.layout.activity_login)
-class LoginActivity : DataBindingActivity<LoginModel>() {
+class LoginActivity : DataBindingActivity<LoginModel>(), IUiListener {
 
     override fun initData() {
         titleModel.showLeft = false
@@ -45,10 +56,15 @@ class LoginActivity : DataBindingActivity<LoginModel>() {
             mStartActivity(RegisterActivity::class.java)
         }
         to_qq.setOnClickListener {
-            mStartActivity(CompleteInfoActivity::class.java)
+//            ShareUtils.shareToQQ(this)
+            ShareUtils.loginToQQ(this,this)
+//            mStartActivity(CompleteInfoActivity::class.java)
         }
         to_wechat.setOnClickListener {
-            mStartActivity(CompleteInfoActivity::class.java)
+//            ShareUtils.shareToWx(this)
+//            ShareUtils.shareToCircle(this)
+            ShareUtils.loginToWx()
+//            mStartActivity(CompleteInfoActivity::class.java)
         }
         to_forget.setOnClickListener {
             mStartActivity(ModifyPwdActivity::class.java)
@@ -85,5 +101,20 @@ class LoginActivity : DataBindingActivity<LoginModel>() {
 
     fun tourIn(view: View) {
         mStartActivity(MainActivity::class.java)
+    }
+    override fun onComplete(p0: Any?) {
+        toast("登录成功")
+        mlog.v("onComplete : ${p0?.toJson()}")
+    }
+
+    override fun onCancel() {
+    }
+
+    override fun onError(p0: UiError?) {
+        mlog.v("onError : ${p0?.errorCode}")
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        Tencent.handleResultData(data,this)
     }
 }

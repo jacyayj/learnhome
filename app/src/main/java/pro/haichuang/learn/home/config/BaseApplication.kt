@@ -11,6 +11,7 @@ import com.netease.nimlib.sdk.util.NIMUtil
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
+import com.tencent.mm.opensdk.openapi.WXAPIFactory
 import com.vondear.rxtool.RxTool
 import com.zhouyou.http.EasyHttp
 import com.zhouyou.http.cache.model.CacheMode
@@ -59,4 +60,5 @@ class BaseApplication : Application() {
         super.attachBaseContext(base)
         MultiDex.install(base)
     }
+
 }

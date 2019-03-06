@@ -23,4 +23,15 @@ object GsonUtil {
         return rows
     }
 
+    fun <T> parseObject(result: Any?, clazz: Class<T>): T = Gson().fromJson<T>(result?.toJson(), clazz)
+
+    fun <T> parseArray(result: Any?, clazz: Class<T>): ArrayList<T> {
+        val array = ArrayList<T>()
+        val gson = Gson()
+        JsonParser().parse(result?.toJson()).asJsonArray?.forEach {
+            array.add(gson.fromJson(it, clazz))
+        }
+        return array
+    }
+
 }

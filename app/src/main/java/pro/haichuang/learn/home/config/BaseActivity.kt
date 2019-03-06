@@ -15,6 +15,7 @@ import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.layout_title.*
 import pro.haichuang.learn.home.net.MyCallBack
 import pro.haichuang.learn.home.R
+import pro.haichuang.learn.home.utils.SPUtils
 
 /**
  * Created by jacy on 2018/7/24.
@@ -51,10 +52,14 @@ abstract class BaseActivity : RootActivity(), OnRefreshLoadMoreListener {
         }
     }
 
-    fun <T> post(url: String, params: HttpParams, showLoading: Boolean = true) {
+    fun post(url: String, params: HttpParams, showLoading: Boolean = true, needSession: Boolean = false) {
+        if (needSession)
+            SPUtils.session?.let {
+                params.put("sessionKey", it)
+            }
         EasyHttp.post(url)
                 .params(params)
-                .execute(MyCallBack<T>(url, this, showLoading))
+                .execute(MyCallBack(url, this, showLoading))
     }
 
     fun <T> dealRows(adapter: Any, data: MutableList<T>) {
@@ -82,20 +87,20 @@ abstract class BaseActivity : RootActivity(), OnRefreshLoadMoreListener {
         isLoadMore = false
         page = 1
         pageParams.put("pageNo", page.toString())
-        post<String>(pageUrl, pageParams, false)
+        post(pageUrl, pageParams, false)
     }
 
     override fun onLoadMore(refreshLayout: RefreshLayout) {
         isLoadMore = true
         page++
         pageParams.put("pageNo", page.toString())
-        post<String>(pageUrl, pageParams, false)
+        post(pageUrl, pageParams, false)
     }
 
     override fun onFinish() {
         super.onFinish()
         refreshLayout?.finishLoadMore()
-        refreshLayout.finishRefresh()
+        refreshLayout?.finishRefresh()
     }
 
     override fun onError(msg: String) {

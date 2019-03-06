@@ -21,10 +21,13 @@ import com.zhouyou.http.model.ApiResult
 import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.activity_login.*
 import pro.haichuang.learn.home.R
+import pro.haichuang.learn.home.bean.LoginInfo
 import pro.haichuang.learn.home.config.DataBindingActivity
 import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.MainActivity
 import pro.haichuang.learn.home.ui.activity.login.viewmodel.LoginModel
+import pro.haichuang.learn.home.utils.GsonUtil
+import pro.haichuang.learn.home.utils.SPUtils
 import pro.haichuang.learn.home.utils.ShareUtils
 import pro.haichuang.learn.home.utils.mlog
 
@@ -32,6 +35,10 @@ import pro.haichuang.learn.home.utils.mlog
 class LoginActivity : DataBindingActivity<LoginModel>(), IUiListener {
 
     override fun initData() {
+        SPUtils.session?.let {
+            mStartActivity(MainActivity::class.java)
+            finish()
+        }
         titleModel.showLeft = false
         titleModel.showRight = true
         titleModel.showBottomeLine = false
@@ -56,12 +63,12 @@ class LoginActivity : DataBindingActivity<LoginModel>(), IUiListener {
             mStartActivity(RegisterActivity::class.java)
         }
         to_qq.setOnClickListener {
-//            ShareUtils.shareToQQ(this)
-            ShareUtils.loginToQQ(this,this)
+            //            ShareUtils.shareToQQ(this)
+            ShareUtils.loginToQQ(this, this)
 //            mStartActivity(CompleteInfoActivity::class.java)
         }
         to_wechat.setOnClickListener {
-//            ShareUtils.shareToWx(this)
+            //            ShareUtils.shareToWx(this)
 //            ShareUtils.shareToCircle(this)
             ShareUtils.loginToWx()
 //            mStartActivity(CompleteInfoActivity::class.java)
@@ -73,11 +80,11 @@ class LoginActivity : DataBindingActivity<LoginModel>(), IUiListener {
             mStartActivity(MainActivity::class.java)
         }
         confirm_normal.setOnClickListener {
-            autoPost<String>(Url.User.Login)
+            autoPost(Url.User.Login)
         }
 
         fetch_sms.requestCode = {
-            autoPost<String>(Url.Sms.Send)
+            autoPost(Url.Sms.Send)
         }
 
         pwd_toggle.setEdit(pwd)
@@ -92,6 +99,8 @@ class LoginActivity : DataBindingActivity<LoginModel>(), IUiListener {
                 toast("发送成功")
             }
             Url.User.Login -> {
+                val info = GsonUtil.parseObject(result, LoginInfo::class.java)
+                SPUtils.session = info.sessionKey
                 toast("登录成功")
                 mStartActivity(MainActivity::class.java)
                 finish()
@@ -102,6 +111,7 @@ class LoginActivity : DataBindingActivity<LoginModel>(), IUiListener {
     fun tourIn(view: View) {
         mStartActivity(MainActivity::class.java)
     }
+
     override fun onComplete(p0: Any?) {
         toast("登录成功")
         mlog.v("onComplete : ${p0?.toJson()}")
@@ -113,8 +123,9 @@ class LoginActivity : DataBindingActivity<LoginModel>(), IUiListener {
     override fun onError(p0: UiError?) {
         mlog.v("onError : ${p0?.errorCode}")
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        Tencent.handleResultData(data,this)
+        Tencent.handleResultData(data, this)
     }
 }

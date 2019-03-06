@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import com.android.databinding.library.baseAdapters.BR
 import com.google.gson.Gson
+import com.jacy.kit.config.copy
 import com.zhouyou.http.EasyHttp
 import com.zhouyou.http.model.HttpParams
 import pro.haichuang.learn.home.bean.BaseModel
@@ -38,8 +39,13 @@ open class DataBindingActivity<T : BaseModel> : BaseActivity() {
         }
     }
 
+    fun notifyModel(model: T) {
+        this.model.copy(model)
+        binding.setVariable(BR.model,model)
+        binding.executePendingBindings()
+    }
 
-    fun <T> autoPost(url: String, showLoading: Boolean = true) {
+    fun autoPost(url: String, showLoading: Boolean = true) {
         if (model.checkSuccess(url)) {
             val request = EasyHttp.post(url)
                     .params(model.getParams(url))
@@ -60,7 +66,7 @@ open class DataBindingActivity<T : BaseModel> : BaseActivity() {
             //需要附带验证码的接口，将JSESSIONID附加在cookie上传给服务器
             if (url == Url.User.Register)
                 request.addCookie("JSESSIONID", model.JSESSIONID)
-            request.execute(MyCallBack<T>(url, this, showLoading))
+            request.execute(MyCallBack(url, this, showLoading))
         }
     }
 

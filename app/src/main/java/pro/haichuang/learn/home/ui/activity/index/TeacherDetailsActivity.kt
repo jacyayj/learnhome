@@ -38,7 +38,7 @@ class TeacherDetailsActivity : DataBindingActivity<TeacherDetailsModel>() {
 
         val params = HttpParams()
         params.put("id", id.toString())
-        post<String>(Url.Teacher.Get, params)
+        post(Url.Teacher.Get, params)
     }
 
     override fun onSuccess(url: String, result: Any?) {

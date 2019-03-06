@@ -25,10 +25,10 @@ class RegisterActivity : DataBindingActivity<RegisterModel>() {
         pwd_toggle.setEdit(pwd)
         confirm_pwd_toggle.setEdit(confirm_pwd)
         fetch_sms.requestCode = {
-            autoPost<String>(Url.Sms.Send)
+            autoPost(Url.Sms.Send)
         }
         register.setOnClickListener {
-            autoPost<String>(Url.User.Register)
+            autoPost(Url.User.Register)
         }
     }
 

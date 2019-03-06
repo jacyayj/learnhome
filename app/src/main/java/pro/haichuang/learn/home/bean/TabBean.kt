@@ -3,10 +3,11 @@ package pro.haichuang.learn.home.bean
 import android.databinding.BaseObservable
 import android.databinding.Bindable
 import com.android.databinding.library.baseAdapters.BR
+import com.google.gson.annotations.SerializedName
 
 class TabBean : BaseObservable {
 
-    constructor( text: String) : super() {
+    constructor(text: String) : super() {
         this.text = text
     }
 
@@ -14,11 +15,13 @@ class TabBean : BaseObservable {
         this.vip = vip
         this.text = text
     }
-    constructor(text: String,notice: Boolean) : super() {
+
+    constructor(text: String, notice: Boolean) : super() {
         this.notice = notice
         this.text = text
     }
 
+    var id = 0
 
     @Bindable
     var checked = false
@@ -27,6 +30,7 @@ class TabBean : BaseObservable {
             notifyPropertyChanged(BR.checked)
         }
 
+    @SerializedName("viewVip")
     @Bindable
     var vip = false
         set(value) {
@@ -40,5 +44,9 @@ class TabBean : BaseObservable {
             field = value
             notifyPropertyChanged(BR.notice)
         }
+
+    @SerializedName("name")
     var text = ""
+
+    var path = ""
 }

@@ -9,9 +9,9 @@ import com.zhouyou.http.exception.ApiException
 import pro.haichuang.learn.home.bean.Response
 import pro.haichuang.learn.home.utils.mlog
 
-class MyCallBack<T>(private val url:String,private val callBack: HttpCallBack, private val showProgress: Boolean = false) : SimpleCallBack<String>() {
+class MyCallBack(private val url:String,private val callBack: HttpCallBack, private val showProgress: Boolean = false) : SimpleCallBack<String>() {
     override fun onSuccess(t: String?) {
-        val response = Gson().fromJson<Response<T>>(t, object : TypeToken<Response<T>>() {}.type)
+        val response = Gson().fromJson<Response<Any>>(t, object : TypeToken<Response<Any>>() {}.type)
         if (response.code == 200)
             callBack.onSuccess(url,response.body)
         else

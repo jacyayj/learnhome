@@ -2,6 +2,7 @@ package pro.haichuang.learn.home.ui.fragment
 
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
+import android.support.design.widget.TabLayout
 import com.jacy.kit.adapter.CommonAdapter
 import com.jacy.kit.config.mStartActivity
 import kotlinx.android.synthetic.main.fragment_news.*
@@ -10,21 +11,38 @@ import pro.haichuang.learn.home.BR
 import com.jacy.kit.config.ContentView
 import pro.haichuang.learn.home.bean.TabBean
 import pro.haichuang.learn.home.config.BaseFragment
+import pro.haichuang.learn.home.config.Constants
+import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.news.NewsDetailsActivity
+import pro.haichuang.learn.home.ui.fragment.itemview.ItemNews
+import pro.haichuang.learn.home.utils.GsonUtil
 
 @ContentView(R.layout.fragment_news)
 class NewsFragment : BaseFragment() {
-    private val tabBeans by lazy { arrayListOf(TabBean("高考政策"), TabBean( "信息资讯"), TabBean("高考习题"), TabBean(true, "热点问答")) }
 
+    private lateinit var tabBeans: ArrayList<TabBean>
+    private val adapter by lazy { CommonAdapter<ItemNews>(layoutInflater, R.layout.item_find_other) }
     override fun initData() {
-        listView.adapter = CommonAdapter(layoutInflater, R.layout.item_find_other, arrayListOf(1, 2, 3, 4, 5, 6, 7, 8, 9))
-        initTab()
+        listView.adapter = adapter
+        post(Url.News.Channel)
     }
 
     override fun initListener() {
         listView.setOnItemClickListener { _, _, position, _ ->
-            mStartActivity(NewsDetailsActivity::class.java)
+            mStartActivity(NewsDetailsActivity::class.java, Pair(Constants.NEWS_ID, adapter.getItem(position).id))
         }
+        tab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabReselected(p0: TabLayout.Tab?) {
+            }
+
+            override fun onTabUnselected(p0: TabLayout.Tab?) {
+            }
+
+            override fun onTabSelected(p0: TabLayout.Tab?) {
+                pageParams.put("path", tabBeans[p0?.position ?: 0].path)
+                refresh_layout.autoRefresh()
+            }
+        })
     }
 
     private fun initTab() {
@@ -36,4 +54,19 @@ class NewsFragment : BaseFragment() {
         }
     }
 
+    override fun onSuccess(url: String, result: Any?) {
+        when (url) {
+            Url.News.List -> {
+                val rows = GsonUtil.parseRows(result, ItemNews::class.java)
+                rows.list?.let { dealRows(adapter, it) }
+            }
+            Url.News.Channel -> {
+                tabBeans = GsonUtil.parseArray(result, TabBean::class.java)
+                initTab()
+                pageUrl = Url.News.List
+                pageParams.put("path", "gkzc")
+                refresh_layout.autoRefresh()
+            }
+        }
+    }
 }

@@ -30,13 +30,14 @@
                 tools:ignore="OnClick" />
 
             <TextView
+                android:id="@+id/collect"
                 android:layout_width="60dp"
                 android:layout_height="30dp"
                 android:layout_gravity="end|center_vertical"
                 android:layout_marginEnd="15dp"
                 android:background="@drawable/stroke_7fd2ff_radius_5dp"
                 android:gravity="center"
-                android:text="收藏"
+                android:text="@{model.hasCollect ? `已收藏` : `收藏`}"
                 android:textColor="@color/color7FCEFF"
                 android:textSize="15sp" />
         </FrameLayout>

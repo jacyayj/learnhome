@@ -3,13 +3,16 @@ package pro.haichuang.learn.home.ui.activity.mine
 import android.app.Activity
 import android.content.Intent
 import com.jacy.kit.adapter.CommonAdapter
+import com.jacy.kit.config.ContentView
+import com.vondear.rxtool.RxActivityTool
 import kotlinx.android.synthetic.main.activity_mine_setting.*
 import pro.haichuang.learn.home.R
-import com.jacy.kit.config.ContentView
 import pro.haichuang.learn.home.config.BaseActivity
+import pro.haichuang.learn.home.ui.activity.login.LoginActivity
 import pro.haichuang.learn.home.ui.activity.login.ModifyPwdActivity
 import pro.haichuang.learn.home.ui.dialog.NoticeDialog
 import pro.haichuang.learn.home.utils.DataUtils
+import pro.haichuang.learn.home.utils.SPUtils
 
 
 @ContentView(R.layout.activity_mine_setting)
@@ -31,6 +34,10 @@ class MineSettingActivity : BaseActivity() {
                 5 -> startActivity(Intent(this, QuestionActivity::class.java))
                 6 -> startActivity(Intent(this, AboutActivity::class.java))
             }
+        }
+        login_out.setOnClickListener {
+            SPUtils.clear()
+            RxActivityTool.skipActivityAndFinishAll(this, LoginActivity::class.java)
         }
     }
 

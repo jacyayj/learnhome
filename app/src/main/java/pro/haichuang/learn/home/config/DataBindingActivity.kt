@@ -3,10 +3,7 @@ package pro.haichuang.learn.home.config
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import com.android.databinding.library.baseAdapters.BR
-import com.google.gson.Gson
-import com.jacy.kit.config.copy
 import com.zhouyou.http.EasyHttp
-import com.zhouyou.http.model.HttpParams
 import pro.haichuang.learn.home.bean.BaseModel
 import pro.haichuang.learn.home.net.MyCallBack
 import pro.haichuang.learn.home.net.Url
@@ -15,10 +12,11 @@ import java.lang.reflect.ParameterizedType
 
 open class DataBindingActivity<T : BaseModel> : BaseActivity() {
 
-    open val model: T by lazy { getClassInstance().newInstance() }
+    lateinit var model: T
     private val binding by lazy { DataBindingUtil.setContentView<ViewDataBinding>(this, getLayoutId()) }
 
     override fun initDatabinding() {
+        model = getClassInstance().newInstance()
         binding.setVariable(BR.model, model)
     }
 
@@ -40,8 +38,8 @@ open class DataBindingActivity<T : BaseModel> : BaseActivity() {
     }
 
     fun notifyModel(model: T) {
-        this.model.copy(model)
-        binding.setVariable(BR.model,model)
+        this.model = model
+        binding.setVariable(BR.model, model)
         binding.executePendingBindings()
     }
 

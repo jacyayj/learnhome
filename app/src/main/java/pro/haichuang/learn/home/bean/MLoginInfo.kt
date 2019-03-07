@@ -1,6 +1,6 @@
 package pro.haichuang.learn.home.bean
 
-class LoginInfo {
+class MLoginInfo {
 
     var sessionKey = ""
 

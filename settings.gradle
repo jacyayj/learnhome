@@ -1,1 +1,2 @@
-include ':app', ':uikit'
+include ':app', ':uikit', ':nimui'
+project(':nimui').projectDir = new File('NIM_Android_UIKit-master')

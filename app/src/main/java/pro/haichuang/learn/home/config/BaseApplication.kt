@@ -11,13 +11,13 @@ import com.netease.nimlib.sdk.util.NIMUtil
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
-import com.tencent.mm.opensdk.openapi.WXAPIFactory
 import com.vondear.rxtool.RxTool
 import com.zhouyou.http.EasyHttp
 import com.zhouyou.http.cache.model.CacheMode
 import com.zhouyou.http.cookie.CookieManger
 import pro.haichuang.learn.home.net.CustomInterceptor
 import pro.haichuang.learn.home.net.Url
+import pro.haichuang.learn.home.utils.SPUtils
 import retrofit2.converter.gson.GsonConverterFactory
 
 class BaseApplication : Application() {
@@ -33,14 +33,15 @@ class BaseApplication : Application() {
                 .setCacheMode(CacheMode.NO_CACHE)
                 .setCookieStore(CookieManger(this))
                 .setBaseUrl(Url.base_url)
-        NIMClient.init(this, null, options())
+        NIMClient.init(this, SPUtils.loginInfo, options())
         initUiKit()
         initRefreshLayout()
     }
 
     private fun initUiKit() {
-        if (NIMUtil.isMainProcess(this))
+        if (NIMUtil.isMainProcess(this)) {
             NimUIKit.init(this)
+        }
     }
 
     private fun initRefreshLayout() {

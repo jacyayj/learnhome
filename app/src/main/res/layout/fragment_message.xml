@@ -104,7 +104,7 @@
                 android:textColor="@color/color33"
                 android:textSize="18sp" />
 
-            <pro.haichuang.learn.home.ui.weight.VerticalRecyclerView
+            <ListView
                 android:id="@+id/contact_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

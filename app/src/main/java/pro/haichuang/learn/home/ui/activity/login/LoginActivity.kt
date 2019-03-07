@@ -1,27 +1,21 @@
 package pro.haichuang.learn.home.ui.activity.login
 
-import android.content.Context
 import android.content.Intent
-import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.view.View
 import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.mStartActivity
 import com.jacy.kit.config.toJson
 import com.jacy.kit.config.toast
-import com.tencent.connect.share.QQShare
-import com.tencent.mm.opensdk.modelmsg.WXAppExtendObject
+import com.netease.nim.uikit.api.NimUIKit
+import com.netease.nimlib.sdk.RequestCallback
+import com.netease.nimlib.sdk.auth.LoginInfo
 import com.tencent.tauth.IUiListener
 import com.tencent.tauth.Tencent
 import com.tencent.tauth.UiError
-import com.zhouyou.http.EasyHttp
-import com.zhouyou.http.callback.SimpleCallBack
-import com.zhouyou.http.exception.ApiException
-import com.zhouyou.http.model.ApiResult
-import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.activity_login.*
 import pro.haichuang.learn.home.R
-import pro.haichuang.learn.home.bean.LoginInfo
+import pro.haichuang.learn.home.bean.MLoginInfo
 import pro.haichuang.learn.home.config.DataBindingActivity
 import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.MainActivity
@@ -99,11 +93,24 @@ class LoginActivity : DataBindingActivity<LoginModel>(), IUiListener {
                 toast("发送成功")
             }
             Url.User.Login -> {
-                val info = GsonUtil.parseObject(result, LoginInfo::class.java)
+                val info = GsonUtil.parseObject(result, MLoginInfo::class.java)
                 SPUtils.session = info.sessionKey
-                toast("登录成功")
-                mStartActivity(MainActivity::class.java)
-                finish()
+                NimUIKit.login(LoginInfo("im_test007", "im_test007"), object : RequestCallback<LoginInfo> {
+                    override fun onSuccess(p0: LoginInfo?) {
+                        SPUtils.loginInfo = p0
+                        NimUIKit.loginSuccess(p0?.account)
+                        toast("登录成功")
+                        mStartActivity(MainActivity::class.java)
+                        finish()
+                    }
+
+                    override fun onFailed(p0: Int) {
+                        toast("登录失败   $p0")
+                    }
+
+                    override fun onException(p0: Throwable?) {
+                    }
+                })
             }
         }
     }

@@ -14,7 +14,10 @@ import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.netease.nim.uikit.R;
 import com.netease.nim.uikit.common.fragment.TFragment;
 import com.netease.nim.uikit.common.util.log.LogUtil;
 import com.netease.nim.uikit.common.util.sys.ReflectionUtil;
@@ -30,6 +33,9 @@ public abstract class UI extends AppCompatActivity {
 
     private Toolbar toolbar;
 
+    private TextView title_tv;
+    private ImageView back_iv;
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -37,7 +43,6 @@ public abstract class UI extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         LogUtil.ui("activity: " + getClass().getSimpleName() + " onCreate()");
     }
 
@@ -77,21 +82,44 @@ public abstract class UI extends AppCompatActivity {
 
     public void setToolBar(int toolBarId, ToolBarOptions options) {
         toolbar = findViewById(toolBarId);
-        if (options.titleId != 0) {
-            toolbar.setTitle(options.titleId);
-        }
-        if (!TextUtils.isEmpty(options.titleString)) {
-            toolbar.setTitle(options.titleString);
-        }
-        if (options.logoId != 0) {
-            toolbar.setLogo(options.logoId);
-        }
-        setSupportActionBar(toolbar);
+        title_tv = findView(R.id.title_text);
+        back_iv = findView(R.id.back);
+        if (toolbar != null) {
+            if (options.titleId != 0) {
+                toolbar.setTitle(options.titleId);
+                title_tv.setText(options.titleId);
+            }
+            if (!TextUtils.isEmpty(options.titleString)) {
+                toolbar.setTitle(options.titleString);
+                title_tv.setText(options.titleString);
+            }
+            if (options.logoId != 0) {
+                toolbar.setLogo(options.logoId);
+            }
+            setSupportActionBar(toolbar);
 
-        if (options.isNeedNavigate) {
-            toolbar.setNavigationIcon(options.navigateId);
-            toolbar.setContentInsetStartWithNavigation(0);
-            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            if (options.isNeedNavigate) {
+                toolbar.setNavigationIcon(options.navigateId);
+                toolbar.setContentInsetStartWithNavigation(0);
+                toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        onNavigateUpClicked();
+                    }
+                });
+            }
+        }
+        if (title_tv != null) {
+            if (options.titleId != 0) {
+                title_tv.setText(options.titleId);
+            }
+            if (!TextUtils.isEmpty(options.titleString)) {
+                title_tv.setText(options.titleString);
+            }
+        }
+
+        if (back_iv != null) {
+            back_iv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     onNavigateUpClicked();
@@ -129,6 +157,8 @@ public abstract class UI extends AppCompatActivity {
         if (toolbar != null) {
             toolbar.setTitle(title);
         }
+        if (title_tv != null)
+            title_tv.setText(title);
     }
 
     public void setSubTitle(String subTitle) {

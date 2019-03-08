@@ -1,8 +1,8 @@
 package pro.haichuang.learn.home.bean
 
 import android.databinding.BaseObservable
+import com.jacy.kit.net.Params
 import com.zhouyou.http.model.HttpParams
-import pro.haichuang.learn.home.net.Params
 
 open class BaseModel : BaseObservable() {
 

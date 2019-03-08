@@ -9,13 +9,19 @@
 
     <include layout="@layout/layout_title" />
 
-    <ListView
-        android:id="@+id/listView"
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@id/refresh_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorF0F7FA"
-        android:divider="@color/colorF0F7FA"
-        android:dividerHeight="10dp"
-        android:paddingHorizontal="20dp"
-        android:paddingTop="@dimen/sp_10" />
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorF0F7FA"
+            android:divider="@color/colorF0F7FA"
+            android:dividerHeight="10dp"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="@dimen/sp_10" />
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </LinearLayout>

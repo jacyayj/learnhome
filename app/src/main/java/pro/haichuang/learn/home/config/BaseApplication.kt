@@ -4,6 +4,8 @@ import android.app.Application
 import android.content.Context
 import android.support.multidex.MultiDex
 import com.netease.nim.uikit.api.NimUIKit
+import com.netease.nim.uikit.api.model.session.SessionCustomization
+import com.netease.nim.uikit.business.session.actions.BaseAction
 import com.netease.nimlib.sdk.NIMClient
 import com.netease.nimlib.sdk.SDKOptions
 import com.netease.nimlib.sdk.StatusBarNotificationConfig
@@ -17,6 +19,8 @@ import com.zhouyou.http.cache.model.CacheMode
 import com.zhouyou.http.cookie.CookieManger
 import pro.haichuang.learn.home.net.CustomInterceptor
 import pro.haichuang.learn.home.net.Url
+import pro.haichuang.learn.home.ui.activity.message.FriendSettingActivity
+import pro.haichuang.learn.home.ui.im.CollectAction
 import pro.haichuang.learn.home.utils.SPUtils
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -41,6 +45,12 @@ class BaseApplication : Application() {
     private fun initUiKit() {
         if (NIMUtil.isMainProcess(this)) {
             NimUIKit.init(this)
+            NimUIKit.setSettingClass(FriendSettingActivity::class.java)
+            NimUIKit.setCommonP2PSessionCustomization(SessionCustomization().apply {
+                val action = ArrayList<BaseAction>()
+                action.add((CollectAction()))
+                actions = action
+            })
         }
     }
 

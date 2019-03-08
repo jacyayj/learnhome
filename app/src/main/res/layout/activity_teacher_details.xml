@@ -5,6 +5,8 @@
 
         <import type="android.view.View" />
 
+        <import type="pro.haichuang.learn.home.utils.ImageBinding" />
+
         <variable
             name="model"
             type="pro.haichuang.learn.home.ui.activity.index.viewmodel.TeacherDetailsModel" />
@@ -21,6 +23,7 @@
         <include layout="@layout/layout_title" />
 
         <ScrollView
+            android:id="@+id/root"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/height_title">
@@ -38,13 +41,15 @@
                     android:paddingTop="15dp"
                     android:paddingBottom="10dp">
 
-                    <TableRow android:layout_marginBottom="20dp">
+                    <TableRow
+                        android:layout_marginBottom="20dp"
+                        android:gravity="center_vertical">
 
                         <com.yhy.widget.core.img.round.CircleImageView
+                            net_url="@{model.teacherImg}"
                             android:layout_width="46dp"
                             android:layout_height="46dp"
-                            android:layout_marginTop="5dp"
-                            android:src="@mipmap/ic_launcher_round" />
+                            android:layout_marginTop="5dp" />
 
                         <LinearLayout
                             android:layout_height="match_parent"
@@ -56,12 +61,13 @@
                                 style="@style/text_16_18191A"
                                 android:layout_weight="1"
                                 android:paddingTop="10dp"
-                                android:text="范美忠" />
+                                android:text="@{model.teachername}" />
 
                             <TextView
                                 style="@style/text_12_939799"
+                                android:paddingTop="10dp"
                                 android:paddingBottom="10dp"
-                                android:text="在线时间：8:00-21：00空闲时间" />
+                                android:text="@{`在线时间：`+model.beginTime+` - `+model.endTime+`空闲时间`}" />
                         </LinearLayout>
 
                         <TextView
@@ -83,7 +89,7 @@
                                 android:layout_gravity="center"
                                 android:drawableStart="@drawable/icon_zixun"
                                 android:drawablePadding="2dp"
-                                android:text="咨询1096" />
+                                android:text="@{`咨询`+model.questionCount}" />
                         </FrameLayout>
 
                         <FrameLayout android:layout_weight="1">
@@ -93,7 +99,7 @@
                                 android:layout_gravity="center"
                                 android:drawableStart="@drawable/icon_xinli_comment"
                                 android:drawablePadding="2dp"
-                                android:text="评论196" />
+                                android:text="@{`评论`+model.commentCount}" />
                         </FrameLayout>
 
                         <FrameLayout android:layout_weight="1">
@@ -103,7 +109,7 @@
                                 android:layout_gravity="center"
                                 android:drawableStart="@drawable/icon_heart_grey"
                                 android:drawablePadding="2dp"
-                                android:text="关注5212" />
+                                android:text="@{`关注`+model.attentionCount}" />
                         </FrameLayout>
 
                     </TableRow>
@@ -127,7 +133,7 @@
                         style="@style/text_16_33"
                         android:paddingHorizontal="15dp"
                         android:paddingBottom="15dp"
-                        android:text="老师介绍：毕业于北京大学历史系，长期任职于基础教育领域，对中文学科教育有独到的见解和研究。" />
+                        android:text="@{`老师介绍：`+model.skill}" />
 
                     <View
                         android:layout_width="match_parent"
@@ -146,7 +152,7 @@
                         style="@style/text_16_33"
                         android:paddingHorizontal="15dp"
                         android:paddingBottom="15dp"
-                        android:text="老师介绍：毕业于北京大学历史系，长期任职于基础教育领域，对中文学科教育有独到的见解和研究。" />
+                        android:text="@{model.intro}" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -170,7 +176,7 @@
                         android:layout_marginStart="10dp"
                         android:background="@color/colorE0E0E0" />
 
-                    <pro.haichuang.learn.home.ui.weight.VerticalRecyclerView
+                    <pro.haichuang.learn.home.ui.weight.AutoListView
                         android:id="@+id/comment"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

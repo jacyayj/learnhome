@@ -3,7 +3,7 @@ package com.netease.nim.uikit.business.session.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import com.netease.nim.uikit.common.ToastHelper;
+import android.view.View;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -17,6 +17,7 @@ import com.netease.nim.uikit.api.wrapper.NimToolBarOptions;
 import com.netease.nim.uikit.business.session.constant.Extras;
 import com.netease.nim.uikit.business.session.fragment.MessageFragment;
 import com.netease.nim.uikit.business.uinfo.UserInfoHelper;
+import com.netease.nim.uikit.common.ToastHelper;
 import com.netease.nim.uikit.common.activity.ToolBarOptions;
 import com.netease.nim.uikit.impl.NimUIKitImpl;
 import com.netease.nimlib.sdk.NIMClient;
@@ -195,6 +196,10 @@ public class P2PMessageActivity extends BaseMessageActivity {
         fragment.setArguments(arguments);
         fragment.setContainerId(R.id.message_fragment_container);
         return fragment;
+    }
+
+    public void toSetting(View view) {
+        startActivity(new Intent(this, NimUIKitImpl.getSettingClass()));
     }
 
     @Override

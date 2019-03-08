@@ -16,7 +16,6 @@ import com.netease.nim.uikit.business.ait.AitManager;
 import com.netease.nim.uikit.business.session.actions.BaseAction;
 import com.netease.nim.uikit.business.session.actions.ImageAction;
 import com.netease.nim.uikit.business.session.actions.LocationAction;
-import com.netease.nim.uikit.business.session.actions.VideoAction;
 import com.netease.nim.uikit.business.session.constant.Extras;
 import com.netease.nim.uikit.business.session.module.Container;
 import com.netease.nim.uikit.business.session.module.ModuleProxy;
@@ -191,7 +190,7 @@ public class MessageFragment extends TFragment implements ModuleProxy {
     Observer<List<IMMessage>> incomingMessageObserver = new Observer<List<IMMessage>>() {
         @Override
         public void onEvent(List<IMMessage> messages) {
-            onMessageIncoming(messages);
+            MessageFragment.this.onMessageIncoming(messages);
         }
     };
 
@@ -379,8 +378,8 @@ public class MessageFragment extends TFragment implements ModuleProxy {
     // 操作面板集合
     protected List<BaseAction> getActionList() {
         List<BaseAction> actions = new ArrayList<>();
-        actions.add(new ImageAction());
-        actions.add(new VideoAction());
+        actions.add(new ImageAction(true));
+        actions.add(new ImageAction(false));
         actions.add(new LocationAction());
 
         if (customization != null && customization.actions != null) {

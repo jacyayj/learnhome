@@ -4,6 +4,7 @@ object Url {
 
     const val app_key = "s3o8KTWUsN25JnuIE97T6zHcIo6BOdOw"
     const val base_url = "http://118.24.80.29:8080/learn-home-server/api/app/"
+    const val image_base_url = "http://118.24.80.29:8080/learn-home-server"
 
     object Sms {
 
@@ -43,6 +44,15 @@ object Url {
         private const val base = "content/"
 
         const val Collect = "${base}collect"
+    }
 
+    object Lecture{
+        private const val base = "lecture/"
+
+        const val Apply = "${base}apply"
+
+        const val List = "${base}list"
+
+        const val Get = "${base}get"
     }
 }

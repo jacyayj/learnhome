@@ -4,11 +4,11 @@ import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.support.design.widget.TabLayout
 import com.jacy.kit.adapter.CommonAdapter
+import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.mStartActivity
 import kotlinx.android.synthetic.main.fragment_news.*
-import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.BR
-import com.jacy.kit.config.ContentView
+import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.bean.TabBean
 import pro.haichuang.learn.home.config.BaseFragment
 import pro.haichuang.learn.home.config.Constants

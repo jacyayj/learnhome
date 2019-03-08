@@ -30,7 +30,7 @@ public class ImageBinding {
     public static void displayNet(ImageView view, String url) {
         Glide.with(view)
                 .applyDefaultRequestOptions(RequestOptions.errorOf(R.mipmap.ic_launcher_round).placeholder(R.mipmap.ic_launcher_round))
-                .load(Url.base_url + url)
+                .load(Url.image_base_url + url)
                 .into(view);
     }
 

@@ -227,7 +227,7 @@ public class RecentContactsFragment extends TFragment {
     OnlineStateChangeObserver onlineStateChangeObserver = new OnlineStateChangeObserver() {
         @Override
         public void onlineStateChange(Set<String> accounts) {
-            notifyDataSetChanged();
+            RecentContactsFragment.this.notifyDataSetChanged();
         }
     };
 
@@ -388,7 +388,6 @@ public class RecentContactsFragment extends TFragment {
     }
 
     private static Comparator<RecentContact> comp = new Comparator<RecentContact>() {
-
         @Override
         public int compare(RecentContact o1, RecentContact o2) {
             // 先比较置顶tag
@@ -602,7 +601,6 @@ public class RecentContactsFragment extends TFragment {
 
     protected void refreshViewHolderByIndex(final int index) {
         getActivity().runOnUiThread(new Runnable() {
-
             @Override
             public void run() {
                 adapter.notifyItemChanged(index);
@@ -619,7 +617,7 @@ public class RecentContactsFragment extends TFragment {
             userInfoObserver = new UserInfoObserver() {
                 @Override
                 public void onUserInfoChanged(List<String> accounts) {
-                    refreshMessages(false);
+                    RecentContactsFragment.this.refreshMessages(false);
                 }
             };
         }

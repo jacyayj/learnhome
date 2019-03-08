@@ -5,7 +5,6 @@ import android.content.Context;
 
 import com.netease.nim.uikit.R;
 import com.netease.nim.uikit.common.media.picker.activity.PickImageActivity;
-import com.netease.nim.uikit.common.ui.dialog.CustomAlertDialog;
 import com.netease.nim.uikit.common.util.storage.StorageType;
 import com.netease.nim.uikit.common.util.storage.StorageUtil;
 import com.netease.nim.uikit.common.util.string.StringUtil;
@@ -55,45 +54,28 @@ public class PickImageHelper {
     /**
      * 打开图片选择器
      */
-    public static void pickImage(final Context context, final int requestCode, final PickImageOption option) {
+    public static void pickImage(final Context context, final int requestCode, final PickImageOption option, boolean isChoose) {
         if (context == null) {
             return;
         }
-
-        CustomAlertDialog dialog = new CustomAlertDialog(context);
-        dialog.setTitle(option.titleResId);
-
-        dialog.addItem(context.getString(R.string.input_panel_take), new CustomAlertDialog.onSeparateItemClickListener() {
-            @Override
-            public void onClick() {
-                int from = PickImageActivity.FROM_CAMERA;
-                if (!option.crop) {
-                    PickImageActivity.start((Activity) context, requestCode, from, option.outputPath, option.multiSelect, 1,
-                            true, false, 0, 0);
-                } else {
-                    PickImageActivity.start((Activity) context, requestCode, from, option.outputPath, false, 1,
-                            false, true, option.cropOutputImageWidth, option.cropOutputImageHeight);
-                }
-
+        if (isChoose) {
+            int from = PickImageActivity.FROM_LOCAL;
+            if (!option.crop) {
+                PickImageActivity.start((Activity) context, requestCode, from, option.outputPath, option.multiSelect,
+                        option.multiSelectMaxCount, true, false, 0, 0);
+            } else {
+                PickImageActivity.start((Activity) context, requestCode, from, option.outputPath, false, 1,
+                        false, true, option.cropOutputImageWidth, option.cropOutputImageHeight);
             }
-        });
-
-        dialog.addItem(context.getString(R.string.choose_from_photo_album), new CustomAlertDialog
-                .onSeparateItemClickListener() {
-            @Override
-            public void onClick() {
-                int from = PickImageActivity.FROM_LOCAL;
-                if (!option.crop) {
-                    PickImageActivity.start((Activity) context, requestCode, from, option.outputPath, option.multiSelect,
-                            option.multiSelectMaxCount, true, false, 0, 0);
-                } else {
-                    PickImageActivity.start((Activity) context, requestCode, from, option.outputPath, false, 1,
-                            false, true, option.cropOutputImageWidth, option.cropOutputImageHeight);
-                }
-
+        } else {
+            int from = PickImageActivity.FROM_CAMERA;
+            if (!option.crop) {
+                PickImageActivity.start((Activity) context, requestCode, from, option.outputPath, option.multiSelect, 1,
+                        true, false, 0, 0);
+            } else {
+                PickImageActivity.start((Activity) context, requestCode, from, option.outputPath, false, 1,
+                        false, true, option.cropOutputImageWidth, option.cropOutputImageHeight);
             }
-        });
-
-        dialog.show();
+        }
     }
 }

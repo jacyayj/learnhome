@@ -2,6 +2,7 @@ package com.netease.nim.uikit.business.session.actions;
 
 import android.content.Intent;
 import android.text.TextUtils;
+
 import com.netease.nim.uikit.common.ToastHelper;
 
 import com.netease.nim.uikit.R;
@@ -32,18 +33,20 @@ public abstract class PickImageAction extends BaseAction {
 
     private boolean multiSelect;
     private boolean crop = false;
+    private boolean isChoose;
 
     protected abstract void onPicked(File file);
 
-    protected PickImageAction(int iconResId, int titleId, boolean multiSelect) {
+    protected PickImageAction(int iconResId, int titleId, boolean multiSelect,boolean isChoose) {
         super(iconResId, titleId);
         this.multiSelect = multiSelect;
+        this.isChoose = isChoose;
     }
 
     @Override
     public void onClick() {
         int requestCode = makeRequestCode(RequestCode.PICK_IMAGE);
-        showSelector(getTitleId(), requestCode, multiSelect, tempFile());
+        showSelector(getTitleId(), requestCode, multiSelect, tempFile(),isChoose);
     }
 
     private String tempFile() {
@@ -54,7 +57,7 @@ public abstract class PickImageAction extends BaseAction {
     /**
      * 打开图片选择器
      */
-    private void showSelector(int titleId, final int requestCode, final boolean multiSelect, final String outPath) {
+    private void showSelector(int titleId, final int requestCode, final boolean multiSelect, final String outPath, boolean isChoose) {
         PickImageHelper.PickImageOption option = new PickImageHelper.PickImageOption();
         option.titleResId = titleId;
         option.multiSelect = multiSelect;
@@ -64,7 +67,7 @@ public abstract class PickImageAction extends BaseAction {
         option.cropOutputImageHeight = PORTRAIT_IMAGE_WIDTH;
         option.outputPath = outPath;
 
-        PickImageHelper.pickImage(getActivity(), requestCode, option);
+        PickImageHelper.pickImage(getActivity(), requestCode, option, isChoose);
     }
 
     @Override

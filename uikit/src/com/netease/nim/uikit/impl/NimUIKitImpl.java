@@ -83,6 +83,9 @@ public final class NimUIKitImpl {
     // 自己的用户帐号
     private static String account;
 
+    //设置activity
+    private static Class settingClass;
+
     private static UIKitOptions options;
 
     // 用户信息提供者
@@ -224,8 +227,8 @@ public final class NimUIKitImpl {
     }
 
     /*
-    * ****************************** 登录登出 ******************************
-    */
+     * ****************************** 登录登出 ******************************
+     */
     public static AbortableFuture<LoginInfo> login(LoginInfo loginInfo, final RequestCallback<LoginInfo> callback) {
 
         AbortableFuture<LoginInfo> loginRequest = NIMClient.getService(AuthService.class).login(loginInfo);
@@ -538,8 +541,8 @@ public final class NimUIKitImpl {
     }
 
     /*
-    * ****************************** 在线状态 ******************************
-    */
+     * ****************************** 在线状态 ******************************
+     */
 
     public static void setOnlineStateContentProvider(OnlineStateContentProvider onlineStateContentProvider) {
         NimUIKitImpl.onlineStateContentProvider = onlineStateContentProvider;
@@ -570,9 +573,17 @@ public final class NimUIKitImpl {
         return UserPreferences.isEarPhoneModeEnable();
     }
 
+    public static void setSettingClass(Class settingClass) {
+        NimUIKitImpl.settingClass = settingClass;
+    }
+
+    public static Class getSettingClass() {
+        return settingClass;
+    }
+
     /*
-    * ****************************** basic ******************************
-    */
+     * ****************************** basic ******************************
+     */
     public static Context getContext() {
         return context;
     }

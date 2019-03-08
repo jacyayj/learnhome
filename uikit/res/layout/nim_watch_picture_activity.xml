@@ -10,33 +10,34 @@
 
 
     <!-- <include layout="@layout/watch_picture_show_more_action_layout" /> -->
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/app_bar_layout"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        app:elevation="0dp">
+        android:layout_height="44dp">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:subtitleTextAppearance="@style/Toolbar.SubTitleText"
-            app:titleTextAppearance="@style/Toolbar.TitleText">
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="15dp"
+            android:src="@drawable/icon_back_white" />
 
-            <TextView
-                android:id="@+id/actionbar_menu"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:gravity="center_vertical"
-                android:layout_gravity="right|center"
-                android:background="@drawable/nim_ic_menu_selector"
-                android:layout_marginRight="15dp" />
-        </android.support.v7.widget.Toolbar>
+        <TextView
+            android:id="@+id/title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="#fff"
+            android:textSize="18sp" />
 
-    </android.support.design.widget.AppBarLayout>
-
+        <TextView
+            android:id="@+id/actionbar_menu"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:gravity="center_vertical"
+            android:layout_gravity="end|center"
+            android:background="@drawable/nim_ic_menu_selector"
+            android:layout_marginRight="15dp" />
+    </FrameLayout>
     <android.support.v4.view.ViewPager
         android:id="@+id/view_pager_image"
         android:layout_width="match_parent"

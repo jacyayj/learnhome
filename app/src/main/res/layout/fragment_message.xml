@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_title"
@@ -35,9 +37,9 @@
             android:showDividers="middle">
 
             <FrameLayout
+                android:id="@+id/to_search_message"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/to_search_message"
                 android:background="@color/colorWhite"
                 android:padding="10dp">
 
@@ -104,11 +106,11 @@
                 android:textColor="@color/color33"
                 android:textSize="18sp" />
 
-            <ListView
-                android:id="@+id/contact_view"
+            <fragment
+                android:id="@+id/recent_contacts_fragment"
+                android:name="com.netease.nim.uikit.business.recent.RecentContactsFragment"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/colorWhite" />
+                android:layout_height="match_parent" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

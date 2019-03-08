@@ -6,4 +6,6 @@ object Constants {
 
     const val NEWS_ID = "news_id"
 
+    const val ZHUANTI_ID = "zhuanti_id"
+
 }

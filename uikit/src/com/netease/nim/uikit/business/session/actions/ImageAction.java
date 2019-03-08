@@ -13,8 +13,8 @@ import java.io.File;
  */
 public class ImageAction extends PickImageAction {
 
-    public ImageAction() {
-        super(R.drawable.nim_message_plus_photo_selector, R.string.input_panel_photo, true);
+    public ImageAction(boolean isChoose) {
+        super(R.drawable.xc,isChoose ? R.string.input_panel_photo : R.string.input_panel_camera, true, isChoose);
     }
 
     @Override

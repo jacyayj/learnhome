@@ -93,6 +93,11 @@ public class NimUIKit {
         NimUIKitImpl.init(context, option, userInfoProvider, contactProvider);
     }
 
+
+    public static void setSettingClass(Class clzz) {
+        NimUIKitImpl.setSettingClass(clzz);
+    }
+
     /**
      * 获取配置项
      *
@@ -345,10 +350,10 @@ public class NimUIKit {
     /**
      * 同 {@link NimUIKitImpl#startTeamSession(Context, String)},同时聊天界面打开后，列表跳转至anchor位置
      *
-     * @param context 上下文
-     * @param tid     群id
+     * @param context       上下文
+     * @param tid           群id
      * @param customization 定制化信息。针对不同的聊天对象，可提供不同的定制化。
-     * @param anchor  跳转到指定消息的位置，不需要跳转填null
+     * @param anchor        跳转到指定消息的位置，不需要跳转填null
      */
     public static void startTeamSession(Context context, String tid, SessionCustomization customization, IMMessage anchor) {
         NimUIKitImpl.startTeamSession(context, tid, customization, anchor);
@@ -567,6 +572,7 @@ public class NimUIKit {
 
     /**
      * 获取在线状态变更通知接口
+     *
      * @return
      */
     public static OnlineStateChangeObservable getOnlineStateChangeObservable() {

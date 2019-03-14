@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/color66"
         android:textSize="15sp"
-        app:content="@{item.content}"
-        app:name="@{item.name}"
-        app:repeatName="@{item.repeatName}" />
+        app:content="@{item.text}"
+        app:name="@{item.commenter.realname}"
+        app:repeatName="@{item.parentName}" />
 </layout>

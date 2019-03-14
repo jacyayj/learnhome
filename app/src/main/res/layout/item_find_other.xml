@@ -21,7 +21,7 @@
             android:ellipsize="end"
             android:lineSpacingExtra="5dp"
             android:maxLines="2"
-            android:text="@{`【`+item.typeName+`】`+item.title}"
+            android:text="@{(item.typeName.isEmpty() ? `` :`【`+item.typeName+`】`)+item.title}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 

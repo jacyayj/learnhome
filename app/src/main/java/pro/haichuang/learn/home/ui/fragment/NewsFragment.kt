@@ -6,6 +6,7 @@ import android.support.design.widget.TabLayout
 import com.jacy.kit.adapter.CommonAdapter
 import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.mStartActivity
+import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.fragment_news.*
 import pro.haichuang.learn.home.BR
 import pro.haichuang.learn.home.R
@@ -39,12 +40,14 @@ class NewsFragment : BaseFragment() {
             }
 
             override fun onTabSelected(p0: TabLayout.Tab?) {
-                pageParams.put("path", tabBeans[p0?.position ?: 0].path)
                 refresh_layout.autoRefresh()
             }
         })
     }
 
+    override fun setPageParams(pageParams: HttpParams) {
+        pageParams.put("path", tabBeans[tab.selectedTabPosition].path)
+    }
     private fun initTab() {
         for (bean in tabBeans) {
             val binding = DataBindingUtil.inflate<ViewDataBinding>(layoutInflater, R.layout.item_tab_vip_14, tab, false)
@@ -64,7 +67,6 @@ class NewsFragment : BaseFragment() {
                 tabBeans = GsonUtil.parseArray(result, TabBean::class.java)
                 initTab()
                 pageUrl = Url.News.List
-                pageParams.put("path", "gkzc")
                 refresh_layout.autoRefresh()
             }
         }

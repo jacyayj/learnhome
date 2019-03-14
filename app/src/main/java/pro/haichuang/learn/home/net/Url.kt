@@ -20,6 +20,8 @@ object Url {
         const val Login = "${base}login"
 
         const val Register = "${base}register"
+
+        const val Attention = "${base}attention"
     }
 
     object Teacher {
@@ -44,9 +46,11 @@ object Url {
         private const val base = "content/"
 
         const val Collect = "${base}collect"
+
+        const val Up = "${base}up"
     }
 
-    object Lecture{
+    object Lecture {
         private const val base = "lecture/"
 
         const val Apply = "${base}apply"
@@ -54,5 +58,39 @@ object Url {
         const val List = "${base}list"
 
         const val Get = "${base}get"
+    }
+
+    object VR {
+        private const val base = "college/vr/"
+
+        const val List = "${base}list"
+    }
+
+    object Publish {
+        private const val base = "publish/"
+
+        const val Get = "${base}get"
+
+        const val List = "${base}list"
+
+        const val Channel = "${base}channel"
+
+        const val Save = "${base}save"
+    }
+
+    object Upload {
+        private const val base = "upload/"
+
+        const val Upload = "${base}upload"
+    }
+
+    object Comment {
+        private const val base = "comment/"
+
+        const val List = "${base}list"
+
+        const val Save = "${base}save"
+
+        const val Up = "${base}up"
     }
 }

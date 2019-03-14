@@ -10,11 +10,14 @@ import com.jacy.kit.config.toast
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
+import com.vondear.rxtool.RxEncryptTool
 import com.zhouyou.http.EasyHttp
+import com.zhouyou.http.model.HttpHeaders
 import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.layout_title.*
-import pro.haichuang.learn.home.net.MyCallBack
 import pro.haichuang.learn.home.R
+import pro.haichuang.learn.home.net.MyCallBack
+import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.utils.SPUtils
 
 /**
@@ -52,34 +55,52 @@ abstract class BaseActivity : RootActivity(), OnRefreshLoadMoreListener {
         }
     }
 
-    fun post(url: String, params: HttpParams, showLoading: Boolean = true, needSession: Boolean = false) {
+    open fun setPageParams(pageParams: HttpParams) {}
+
+    fun post(url: String, params: HttpParams = HttpParams(), showLoading: Boolean = true, needSession: Boolean = false, headers: HttpHeaders = HttpHeaders(), success: () -> Unit = {}) {
         if (needSession)
             SPUtils.session?.let {
                 params.put("sessionKey", it)
             }
         EasyHttp.post(url)
-                .params(params)
-                .execute(MyCallBack(url, this, showLoading))
+                .headers(headers)
+                .params(sign(params))
+                .execute(MyCallBack(url, this, showLoading, success))
+    }
+
+    protected fun sign(params: HttpParams): HttpParams {
+        val map = params.urlParamsMap
+        var sign = ""
+        params.put("appId", "5698402822576322")
+        params.put("nonce_str", System.currentTimeMillis().toString())
+        map.keys.toSortedSet().forEach {
+            if ("sign" != it && !map[it].isNullOrEmpty())
+                sign += "$it=${map[it]}&"
+        }
+        sign += "key=${Url.app_key}"
+        params.put("sign", RxEncryptTool.encryptMD5ToString(sign))
+        return params
     }
 
     fun <T> dealRows(adapter: Any, data: MutableList<T>) {
         if (data.isEmpty()) {
-            if (isLoadMore)
+            if (isLoadMore) {
                 toast("已经到底啦")
-            else
+                return
+            } else {
                 toast("暂无数据")
-        } else {
-            when (adapter) {
-                is CommonAdapter<*> -> if (isLoadMore)
-                    (adapter as CommonAdapter<T>).add(data)
-                else
-                    (adapter as CommonAdapter<T>).refresh(data)
-                is CommonRecyclerAdapter<*> ->
-                    if (isLoadMore)
-                        (adapter as CommonRecyclerAdapter<T>).insertData(data)
-                    else
-                        (adapter as CommonAdapter<T>).refresh(data)
             }
+        }
+        when (adapter) {
+            is CommonAdapter<*> -> if (isLoadMore)
+                (adapter as CommonAdapter<T>).add(data)
+            else
+                (adapter as CommonAdapter<T>).refresh(data)
+            is CommonRecyclerAdapter<*> ->
+                if (isLoadMore)
+                    (adapter as CommonRecyclerAdapter<T>).insertData(data)
+                else
+                    (adapter as CommonRecyclerAdapter<T>).refresh(data)
         }
     }
 
@@ -87,6 +108,7 @@ abstract class BaseActivity : RootActivity(), OnRefreshLoadMoreListener {
         isLoadMore = false
         page = 1
         pageParams.put("pageNo", page.toString())
+        setPageParams(pageParams)
         post(pageUrl, pageParams, false)
     }
 
@@ -94,6 +116,7 @@ abstract class BaseActivity : RootActivity(), OnRefreshLoadMoreListener {
         isLoadMore = true
         page++
         pageParams.put("pageNo", page.toString())
+
         post(pageUrl, pageParams, false)
     }
 

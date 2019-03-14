@@ -8,4 +8,6 @@ object Constants {
 
     const val ZHUANTI_ID = "zhuanti_id"
 
+    const val CHANNEL_ID = "channel_id"
+
 }

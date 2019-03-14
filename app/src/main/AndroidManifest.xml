@@ -2,31 +2,21 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="pro.haichuang.learn.home">
-
     <!-- 权限声明 -->
     <uses-permission
         android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
-        tools:ignore="ProtectedPermissions" />
-    <!-- 访问网络状态-->
+        tools:ignore="ProtectedPermissions" /> <!-- 访问网络状态 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <!-- 控制呼吸灯，振动器等，用于新消息提醒 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 控制呼吸灯，振动器等，用于新消息提醒 -->
     <uses-permission android:name="android.permission.FLASHLIGHT" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <!-- 外置存储存取权限 -->
+    <uses-permission android:name="android.permission.VIBRATE" /> <!-- 外置存储存取权限 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-    <!-- 8.0 系统需要-->
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-
-    <!-- 多媒体相关 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 8.0 系统需要 -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" /> <!-- 多媒体相关 -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-
-    <!-- 如果需要实时音视频通话模块，下面的权限也是必须的。否则，可以不加 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 如果需要实时音视频通话模块，下面的权限也是必须的。否则，可以不加 -->
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
@@ -37,16 +27,12 @@
     <uses-feature android:name="android.hardware.camera.autofocus" />
     <uses-feature
         android:glEsVersion="0x00020000"
-        android:required="true" />
-
-    <!-- SDK 权限申明, 第三方 APP 接入时，请将 com.netease.nim.demo 替换为自己的包名 -->
+        android:required="true" /> <!-- SDK 权限申明, 第三方 APP 接入时，请将 com.netease.nim.demo 替换为自己的包名 -->
     <!-- 和下面的 uses-permission 一起加入到你的 AndroidManifest 文件中。 -->
     <permission
         android:name="${applicationId}.permission.RECEIVE_MSG"
-        android:protectionLevel="signature" />
-    <!-- 接收 SDK 消息广播权限， 第三方 APP 接入时，请将 com.netease.nim.demo 替换为自己的包名 -->
+        android:protectionLevel="signature" /> <!-- 接收 SDK 消息广播权限， 第三方 APP 接入时，请将 com.netease.nim.demo 替换为自己的包名 -->
     <uses-permission android:name="${applicationId}.permission.RECEIVE_MSG" />
-
 
     <application
         android:name=".config.BaseApplication"
@@ -60,6 +46,7 @@
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:theme"
         tools:targetApi="n">
+        <activity android:name=".ui.activity.index.VRDetailsActivity"></activity>
         <activity android:name=".ui.activity.index.SearchActivity" />
         <activity
             android:name=".ui.activity.login.LoginActivity"
@@ -120,7 +107,9 @@
             android:name=".ui.activity.index.LiuXueActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".ui.activity.index.TeacherActivity" />
-        <activity android:name=".ui.activity.index.VRActivity" />
+        <activity
+            android:name=".ui.activity.index.VRActivity"
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".ui.activity.index.LiuXueDetailsActivity" />
         <activity android:name=".ui.activity.index.LiuXueZiXunActivity" />
         <activity android:name=".ui.activity.index.DataSearchActivity" />
@@ -145,18 +134,13 @@
         <activity android:name=".ui.activity.index.ZhuanTiActivity" />
         <activity android:name=".ui.activity.index.ZhuanTiDetailsActivity" />
         <activity android:name=".ui.activity.index.ZhuanTiSignupActivity" />
-        <activity android:name=".ui.activity.mine.TiXianActivity" />
-
-
-        <!-- 云信后台服务，请使用独立进程。 -->
+        <activity android:name=".ui.activity.mine.TiXianActivity" /> <!-- 云信后台服务，请使用独立进程。 -->
         <service
             android:name="com.netease.nimlib.service.NimService"
-            android:process=":core" />
-        <!-- 云信后台辅助服务 -->
+            android:process=":core" /> <!-- 云信后台辅助服务 -->
         <service
             android:name="com.netease.nimlib.service.NimService$Aux"
-            android:process=":core" />
-        <!-- 云信监视系统启动和网络变化的广播接收器，保持和 NimService 同一进程 -->
+            android:process=":core" /> <!-- 云信监视系统启动和网络变化的广播接收器，保持和 NimService 同一进程 -->
         <receiver
             android:name="com.netease.nimlib.service.NimReceiver"
             android:exported="false"
@@ -165,22 +149,15 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
-        </receiver>
-        <!-- 云信进程间通信 Receiver -->
-        <receiver android:name="com.netease.nimlib.service.ResponseReceiver" />
-
-        <!-- 云信进程间通信service -->
-        <service android:name="com.netease.nimlib.service.ResponseService" />
-
-        <!-- 云信进程间通信provider -->
+        </receiver> <!-- 云信进程间通信 Receiver -->
+        <receiver android:name="com.netease.nimlib.service.ResponseReceiver" /> <!-- 云信进程间通信service -->
+        <service android:name="com.netease.nimlib.service.ResponseService" /> <!-- 云信进程间通信provider -->
         <!-- android:authorities="{包名}.ipc.provider", 请将com.netease.nim.demo替换为自己的包名 -->
         <provider
             android:name="com.netease.nimlib.ipc.NIMContentProvider"
             android:authorities="${applicationId}.ipc.provider"
             android:exported="false"
-            android:process=":core" />
-
-        <!--QQ分享-->
+            android:process=":core" /> <!-- QQ分享 -->
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
@@ -197,13 +174,10 @@
         <activity
             android:name="com.tencent.connect.common.AssistActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-
-        <!--微信分享-->
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" /> <!-- 微信分享 -->
         <activity
             android:name=".wxapi.WXEntryActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
     </application>
 
 </manifest>

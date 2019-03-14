@@ -9,14 +9,16 @@ import com.jacy.kit.config.toast
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
+import com.vondear.rxtool.RxEncryptTool
 import com.zhouyou.http.EasyHttp
 import com.zhouyou.http.model.HttpParams
-import pro.haichuang.learn.home.net.MyCallBack
 import pro.haichuang.learn.home.R
+import pro.haichuang.learn.home.net.MyCallBack
+import pro.haichuang.learn.home.net.Url
 
 abstract class BaseFragment : RootFragment(), OnRefreshLoadMoreListener {
 
-    open val pageParams by lazy { HttpParams() }
+    private val pageParams by lazy { HttpParams() }
 
     private val refreshLayout by lazy { view?.findViewById<SmartRefreshLayout>(R.id.refresh_layout) }
 
@@ -31,8 +33,23 @@ abstract class BaseFragment : RootFragment(), OnRefreshLoadMoreListener {
 
     fun post(url: String, params: HttpParams=HttpParams(), showLoading: Boolean = true) {
         EasyHttp.post(url)
-                .params(params)
+                .params(sign(params))
                 .execute(MyCallBack(url, this, showLoading))
+    }
+    open fun setPageParams(pageParams: HttpParams) {}
+
+    private fun sign(params: HttpParams): HttpParams {
+        val map = params.urlParamsMap
+        var sign = ""
+        params.put("appId","5698402822576322")
+        params.put("nonce_str",System.currentTimeMillis().toString())
+        map.keys.toSortedSet().forEach {
+            if ("sign" != it && !map[it].isNullOrEmpty())
+                sign += "$it=${map[it]}&"
+        }
+        sign += "key=${Url.app_key}"
+        params.put("sign", RxEncryptTool.encryptMD5ToString(sign))
+        return params
     }
 
     fun <T> dealRows(adapter: Any, data: MutableList<T>) {
@@ -41,7 +58,6 @@ abstract class BaseFragment : RootFragment(), OnRefreshLoadMoreListener {
                 toast("已经到底啦")
                 return
             } else {
-                data.clear()
                 toast("暂无数据")
             }
         }
@@ -62,6 +78,7 @@ abstract class BaseFragment : RootFragment(), OnRefreshLoadMoreListener {
         isLoadMore = false
         page = 1
         pageParams.put("pageNo", page.toString())
+        setPageParams(pageParams)
         post(pageUrl, pageParams, false)
     }
 

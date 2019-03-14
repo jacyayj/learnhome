@@ -1,22 +1,36 @@
 package pro.haichuang.learn.home.ui.fragment
 
+import android.databinding.DataBindingUtil
+import android.databinding.ViewDataBinding
 import android.support.design.widget.TabLayout
 import com.jacy.kit.adapter.CommonAdapter
+import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.gone
 import com.jacy.kit.config.mStartActivity
 import com.jacy.kit.config.show
+import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.fragment_find.*
+import pro.haichuang.learn.home.BR
 import pro.haichuang.learn.home.R
-import com.jacy.kit.config.ContentView
+import pro.haichuang.learn.home.bean.TabBean
 import pro.haichuang.learn.home.config.BaseFragment
+import pro.haichuang.learn.home.config.Constants
+import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.find.FindDetailsActivity
 import pro.haichuang.learn.home.ui.activity.find.FindReleaseActivity
+import pro.haichuang.learn.home.ui.fragment.itemview.ItemNews
+import pro.haichuang.learn.home.utils.GsonUtil
 
 @ContentView(R.layout.fragment_find)
 class FindFragment : BaseFragment() {
+    private lateinit var tabBeans: ArrayList<TabBean>
+
+    private val firstAdapter by lazy { CommonAdapter<ItemNews>(layoutInflater, R.layout.item_find_first) }
+    private val otherAdapter by lazy { CommonAdapter<ItemNews>(layoutInflater, R.layout.item_find_other) }
 
     override fun initData() {
-        listView.adapter = CommonAdapter(layoutInflater, R.layout.item_find_first, arrayListOf(1, 2, 3, 4, 5, 6, 7))
+        listView.adapter = firstAdapter
+        post(Url.Publish.Channel)
     }
 
     override fun initListener() {
@@ -28,14 +42,15 @@ class FindFragment : BaseFragment() {
             }
 
             override fun onTabSelected(p0: TabLayout.Tab?) {
+                refresh_layout.autoRefresh()
                 if (p0?.position == 0) {
                     ad_view.show()
                     to_release.show()
-                    listView.adapter = CommonAdapter(layoutInflater, R.layout.item_find_first, arrayListOf(1, 2, 3, 4, 5, 6, 7))
+                    listView.adapter = firstAdapter
                 } else {
                     ad_view.gone()
                     to_release.gone()
-                    listView.adapter = CommonAdapter(layoutInflater, R.layout.item_find_other, arrayListOf(1, 2, 3, 4, 5, 6, 7))
+                    listView.adapter = otherAdapter
                 }
             }
         })
@@ -43,7 +58,36 @@ class FindFragment : BaseFragment() {
             mStartActivity(FindReleaseActivity::class.java)
         }
         listView.setOnItemClickListener { _, _, position, _ ->
-            mStartActivity(FindDetailsActivity::class.java)
+            mStartActivity(FindDetailsActivity::class.java, Pair(Constants.NEWS_ID, if (tab.selectedTabPosition == 0) firstAdapter.getItem(position).id else otherAdapter.getItem(position).id))
+        }
+    }
+
+    override fun setPageParams(pageParams: HttpParams) {
+        pageParams.put("path", tabBeans[tab.selectedTabPosition].path)
+    }
+
+    override fun onSuccess(url: String, result: Any?) {
+        when (url) {
+            Url.Publish.Channel -> {
+                to_release.show()
+                tabBeans = GsonUtil.parseArray(result, TabBean::class.java)
+                initTab()
+                pageUrl = Url.Publish.List
+                refresh_layout.autoRefresh()
+            }
+            Url.Publish.List -> {
+                val rows = GsonUtil.parseRows(result, ItemNews::class.java)
+                rows.list?.let { dealRows(if (tab.selectedTabPosition == 0) firstAdapter else otherAdapter, it) }
+            }
+        }
+    }
+
+    private fun initTab() {
+        for (bean in tabBeans) {
+            val binding = DataBindingUtil.inflate<ViewDataBinding>(layoutInflater, R.layout.item_tab_vip, tab, false)
+            binding.setVariable(BR.item, bean)
+            binding.executePendingBindings()
+            tab.addTab(tab.newTab().setCustomView(binding.root))
         }
     }
 }

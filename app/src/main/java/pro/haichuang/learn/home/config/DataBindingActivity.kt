@@ -7,6 +7,7 @@ import com.zhouyou.http.EasyHttp
 import pro.haichuang.learn.home.bean.BaseModel
 import pro.haichuang.learn.home.net.MyCallBack
 import pro.haichuang.learn.home.net.Url
+import pro.haichuang.learn.home.utils.SPUtils
 import pro.haichuang.learn.home.utils.mlog
 import java.lang.reflect.ParameterizedType
 
@@ -43,10 +44,15 @@ open class DataBindingActivity<T : BaseModel> : BaseActivity() {
         binding.executePendingBindings()
     }
 
-    fun autoPost(url: String, showLoading: Boolean = true) {
+    fun autoPost(url: String, showLoading: Boolean = true, needSession: Boolean = false) {
         if (model.checkSuccess(url)) {
+            val params = model.getParams(url)
+            if (needSession)
+                SPUtils.session?.let {
+                    params.put("sessionKey", it)
+                }
             val request = EasyHttp.post(url)
-                    .params(model.getParams(url))
+                    .params(sign(params))
             //发送验证码成功是，拦截到请求头取到JSESSIONID
             if (url == Url.Sms.Send) {
                 request.addInterceptor {

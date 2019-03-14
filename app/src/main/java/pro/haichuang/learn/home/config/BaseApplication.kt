@@ -4,6 +4,8 @@ import android.app.Application
 import android.content.Context
 import android.support.multidex.MultiDex
 import com.netease.nim.uikit.api.NimUIKit
+import com.netease.nim.uikit.api.UIKitOptions
+import com.netease.nim.uikit.api.model.location.LocationProvider
 import com.netease.nim.uikit.api.model.session.SessionCustomization
 import com.netease.nim.uikit.business.session.actions.BaseAction
 import com.netease.nimlib.sdk.NIMClient
@@ -16,8 +18,6 @@ import com.scwang.smartrefresh.layout.header.ClassicsHeader
 import com.vondear.rxtool.RxTool
 import com.zhouyou.http.EasyHttp
 import com.zhouyou.http.cache.model.CacheMode
-import com.zhouyou.http.cookie.CookieManger
-import pro.haichuang.learn.home.net.CustomInterceptor
 import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.message.FriendSettingActivity
 import pro.haichuang.learn.home.ui.im.CollectAction
@@ -33,9 +33,7 @@ class BaseApplication : Application() {
         EasyHttp.getInstance()
                 .addConverterFactory(GsonConverterFactory.create())
                 .debug("http_params", true)
-                .addInterceptor(CustomInterceptor())
                 .setCacheMode(CacheMode.NO_CACHE)
-                .setCookieStore(CookieManger(this))
                 .setBaseUrl(Url.base_url)
         NIMClient.init(this, SPUtils.loginInfo, options())
         initUiKit()
@@ -44,8 +42,19 @@ class BaseApplication : Application() {
 
     private fun initUiKit() {
         if (NIMUtil.isMainProcess(this)) {
-            NimUIKit.init(this)
+            NimUIKit.init(this, UIKitOptions().apply {
+
+            })
             NimUIKit.setSettingClass(FriendSettingActivity::class.java)
+            NimUIKit.setLocationProvider(object :LocationProvider{
+                override fun requestLocation(context: Context?, callback: LocationProvider.Callback?) {
+
+                }
+
+                override fun openMap(context: Context?, longitude: Double, latitude: Double, address: String?) {
+
+                }
+            })
             NimUIKit.setCommonP2PSessionCustomization(SessionCustomization().apply {
                 val action = ArrayList<BaseAction>()
                 action.add((CollectAction()))

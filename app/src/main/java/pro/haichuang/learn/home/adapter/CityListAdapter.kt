@@ -13,13 +13,11 @@ import pro.haichuang.learn.home.BR
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.bean.AreaBean
 import pro.haichuang.learn.home.bean.LetterBean
-import java.io.BufferedReader
-import java.io.IOException
-import java.io.InputStreamReader
+import pro.haichuang.learn.home.utils.FileUtils.readArea
 
 class CityListAdapter(private var context: Activity) : BaseAdapter() {
     private val A_Z by lazy { arrayOf("定位", "热门", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z") }
-    private val areas by lazy { Gson().fromJson<ArrayList<AreaBean>>(readArea(), object : TypeToken<ArrayList<AreaBean>>() {}.type) }
+    private val areas by lazy { Gson().fromJson<ArrayList<AreaBean>>(readArea(context), object : TypeToken<ArrayList<AreaBean>>() {}.type) }
     private val data by lazy {
         val temp = ArrayList<LetterBean>()
         A_Z.forEachIndexed { i, letter ->
@@ -62,22 +60,4 @@ class CityListAdapter(private var context: Activity) : BaseAdapter() {
 
     override fun getCount() = A_Z.size
 
-    private fun readArea(): String {
-        try {
-            val inputStreamReader = InputStreamReader(context.resources.assets.open("area.text"), "UTF-8")
-            val bufferedReader = BufferedReader(inputStreamReader)
-            var line: String?
-            var result = ""
-            while (true) {
-                line = bufferedReader.readLine()
-                if (line.isNullOrEmpty())
-                    break
-                result += line
-            }
-            return result
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
-        return ""
-    }
 }

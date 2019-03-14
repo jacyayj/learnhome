@@ -9,12 +9,13 @@ import com.zhouyou.http.exception.ApiException
 import pro.haichuang.learn.home.bean.Response
 import pro.haichuang.learn.home.utils.mlog
 
-class MyCallBack(private val url:String,private val callBack: HttpCallBack, private val showProgress: Boolean = false) : SimpleCallBack<String>() {
+class MyCallBack(private val url: String, private val callBack: HttpCallBack, private val showProgress: Boolean = false, private val success: () -> Unit = {}) : SimpleCallBack<String>() {
     override fun onSuccess(t: String?) {
         val response = Gson().fromJson<Response<Any>>(t, object : TypeToken<Response<Any>>() {}.type)
-        if (response.code == 200)
-            callBack.onSuccess(url,response.body)
-        else
+        if (response.code == 200) {
+            callBack.onSuccess(url, response.body)
+            success()
+        } else
             toast(response.message + "   " + response.code)
     }
 

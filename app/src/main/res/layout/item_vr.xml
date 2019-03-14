@@ -3,9 +3,11 @@
 
     <data>
 
+        <import type="pro.haichuang.learn.home.utils.ImageBinding" />
+
         <variable
             name="item"
-            type="Integer" />
+            type="pro.haichuang.learn.home.ui.activity.index.itemmodel.ItemVrModel" />
     </data>
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -13,10 +15,10 @@
         android:layout_height="85dp">
 
         <ImageView
+            net_url="@{item.logo}"
             android:layout_width="75dp"
             android:layout_height="match_parent"
-            android:padding="10dp"
-            android:src="@mipmap/ic_launcher" />
+            android:padding="10dp" />
 
         <TableLayout
             android:layout_width="match_parent"
@@ -25,23 +27,33 @@
             android:paddingTop="15dp"
             android:paddingBottom="10dp">
 
-            <TableRow>
+            <TableRow android:layout_marginBottom="2dp">
 
                 <TextView
                     style="@style/text_16_33"
-                    android:text="浙江大学" />
+                    android:layout_marginEnd="5dp"
+                    android:text="@{item.collegeName}" />
+
+                <TextView
+                    style="@style/wrap_layout"
+                    android:background="@drawable/stroke_13aeff_radius_8dp"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="1dp"
+                    android:text="@{item.provinceStr}"
+                    android:textColor="@color/color13AEFF"
+                    android:textSize="12sp" />
             </TableRow>
 
             <TextView
                 style="@style/text_14_99"
-                android:layout_width="1dp"
-                android:text="本科第二批录取院校"
+                android:text="@{item.batchStr}"
                 android:textColor="@color/color939799" />
 
             <pro.haichuang.learn.home.ui.weight.HorizontalRecyclerView android:id="@+id/star" />
         </TableLayout>
 
         <Button
+            android:id="@+id/to_details"
             android:layout_width="70dp"
             android:layout_height="30dp"
             android:layout_gravity="end|center_vertical"
@@ -55,7 +67,7 @@
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:layout_gravity="bottom"
-            android:background="@color/colorE0E0E0"
-            android:layout_marginStart="75dp" />
+            android:layout_marginStart="75dp"
+            android:background="@color/colorE0E0E0" />
     </FrameLayout>
 </layout>

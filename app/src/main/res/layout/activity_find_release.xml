@@ -29,6 +29,7 @@
                 android:src="@drawable/icon_back" />
 
             <TextView
+                android:id="@+id/release"
                 android:layout_width="65dp"
                 android:layout_height="25dp"
                 android:layout_gravity="end|center_vertical"
@@ -40,27 +41,49 @@
                 android:textSize="17sp" />
         </FrameLayout>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:background="@color/colorWhite"
+            android:paddingStart="@dimen/text_size_15"
+            android:paddingTop="10dp"
+            android:text="选择分类"
+            android:textColor="@color/color33"
+            android:textSize="16sp" />
+
+        <pro.haichuang.learn.home.ui.weight.HorizontalRecyclerView
+            android:id="@+id/tab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="10dp" />
+
         <EditText
             style="@style/text_18_CC"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:layout_marginTop="1dp"
+            android:layout_marginTop="10dp"
             android:background="@color/colorWhite"
             android:gravity="start"
             android:hint="请输入标题"
             android:padding="15sp"
+            android:text="@={model.title}"
             android:textColor="@color/color00"
             android:textColorHint="@color/colorCC" />
 
         <EditText
             style="@style/text_18_CC"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:background="@color/colorWhite"
             android:gravity="start"
             android:hint="请输入内容"
+            android:minHeight="100dp"
             android:padding="15sp"
+            android:text="@={model.txt}"
             android:textColor="@color/color00"
             android:textColorHint="@color/colorCC" />
 

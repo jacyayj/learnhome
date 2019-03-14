@@ -35,33 +35,7 @@
         app:tabIndicatorFullWidth="false"
         app:tabIndicatorHeight="2dp"
         app:tabMode="scrollable"
-        app:tabTextAppearance="@style/find_menu">
-
-        <android.support.design.widget.TabItem
-            style="@style/match_layout"
-            android:layout_marginHorizontal="15dp"
-            android:text="家庭教育" />
-
-        <android.support.design.widget.TabItem
-            style="@style/match_layout"
-            android:layout_marginHorizontal="15dp"
-            android:text="值得关注" />
-
-        <android.support.design.widget.TabItem
-            style="@style/match_layout"
-            android:layout_marginHorizontal="15dp"
-            android:text="网内关注" />
-
-        <android.support.design.widget.TabItem
-            style="@style/match_layout"
-            android:layout_marginHorizontal="15dp"
-            android:text="成长记录" />
-
-        <android.support.design.widget.TabItem
-            style="@style/match_layout"
-            android:layout_marginHorizontal="15dp"
-            android:text="成长记录2" />
-    </android.support.design.widget.TabLayout>
+        app:tabTextAppearance="@style/find_menu" />
 
     <LinearLayout
         android:id="@+id/ad_view"
@@ -118,13 +92,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ListView
-            android:id="@+id/listView"
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/refresh_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorWhite"
-            android:divider="@color/colorF0F7FA"
-            android:dividerHeight="0.5dp" />
+            android:background="@color/colorWhite">
+
+            <ListView
+                android:id="@+id/listView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@color/colorF0F7FA"
+                android:dividerHeight="0.5dp" />
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
         <ImageView
             android:id="@+id/to_release"
@@ -133,6 +113,7 @@
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="25dp"
             android:background="@drawable/icon_find_release"
-            android:elevation="5dp" />
+            android:elevation="5dp"
+            android:visibility="gone" />
     </FrameLayout>
 </LinearLayout>

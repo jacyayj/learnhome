@@ -1,10 +1,14 @@
 package pro.haichuang.learn.home.bean
 
-import pro.haichuang.learn.home.bean.BaseModel
 import android.databinding.Bindable
 import com.android.databinding.library.baseAdapters.BR
 
-class ImageBean : BaseModel() {
+class ImageBean : BaseModel {
+    constructor(picPaths: String) : super() {
+        this.picPaths = picPaths
+    }
+
+    constructor() : super()
 
     @Bindable
     var canDelete = false
@@ -13,7 +17,20 @@ class ImageBean : BaseModel() {
             notifyPropertyChanged(BR.canDelete)
         }
 
-    var url = ""
 
+    @Bindable
+    var take = false
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.take)
+        }
 
+    @Bindable
+    var picPaths = ""
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.picPaths)
+        }
+    var uploadPath = ""
+    var picDescs = ""
 }

@@ -1,6 +1,7 @@
 package pro.haichuang.learn.home.ui.fragment.itemview
 
 import android.databinding.BaseObservable
+import pro.haichuang.learn.home.bean.ImageBean
 
 class ItemNews : BaseObservable() {
 
@@ -9,4 +10,8 @@ class ItemNews : BaseObservable() {
     var releaseDate = ""
     var title = ""
     var typeName = ""
+    var picArr: ArrayList<ImageBean>? = null
+    val picPath
+        get() = if (picArr.isNullOrEmpty()) "" else picArr?.get(0)?.picPaths ?: ""
+
 }

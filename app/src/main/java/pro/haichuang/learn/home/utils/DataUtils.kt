@@ -1,7 +1,11 @@
 package pro.haichuang.learn.home.utils
 
+import android.content.Context
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.bean.IconLabel
+import pro.haichuang.learn.home.bean.NameId
 import pro.haichuang.learn.home.ui.activity.mine.itemmodel.ItemFile
 import pro.haichuang.learn.home.ui.fragment.itemview.ItemMine
 
@@ -60,39 +64,12 @@ object DataUtils {
         return data
     }
 
-    fun formatProvinceData(): ArrayList<String> {
-        val data = ArrayList<String>()
-        data.add("四川")
-        data.add("重庆")
-        data.add("北京")
-        data.add("天津")
-        data.add("上海")
-        data.add("河北")
-        data.add("山西")
-        data.add("内蒙古")
-        data.add("辽宁")
-        data.add("吉林")
-        data.add("黑龙江")
-        data.add("江苏")
-        data.add("浙江")
-        data.add("安徽")
-        data.add("福建")
-        data.add("四川")
-        data.add("重庆")
-        data.add("北京")
-        data.add("天津")
-        data.add("上海")
-        data.add("河北")
-        data.add("山西")
-        data.add("内蒙古")
-        data.add("辽宁")
-        data.add("吉林")
-        data.add("黑龙江")
-        data.add("江苏")
-        data.add("浙江")
-        data.add("安徽")
-        data.add("福建")
-        return data
+    private var province: String? = null
+
+    fun formatProvinceData(context: Context): ArrayList<NameId>? {
+        if (province == null)
+            province = FileUtils.readProvince(context)
+        return Gson().fromJson<ArrayList<NameId>>(province, object : TypeToken<ArrayList<NameId>>() {}.type)
     }
 
     fun formatSchoolRatingData(): ArrayList<String> {
@@ -101,6 +78,7 @@ object DataUtils {
         data.add("985")
         data.add("示范高职")
         data.add("骨干高职")
+        data.add("卓越工程师")
         data.add("卓越医生")
         data.add("卓越法律")
         data.add("双一流高校")
@@ -108,21 +86,32 @@ object DataUtils {
         return data
     }
 
+    fun formatPiciData(): ArrayList<String> {
+        val data = ArrayList<String>()
+        data.add("本科提前批次")
+        data.add("本科第一批次")
+        data.add("本科第二批次")
+        data.add("本科预科")
+        data.add("专科提前批次")
+        data.add("专科批次")
+        return data
+    }
+
     fun formatSchoolTypeData(): ArrayList<String> {
         val data = ArrayList<String>()
-        data.add("综合")
-        data.add("体育")
-        data.add("民族")
-        data.add("军事")
+        data.add("综合类")
+        data.add("理工类")
+        data.add("师范类")
+        data.add("农林类")
+        data.add("政法类")
+        data.add("医药类")
+        data.add("财经类")
+        data.add("民族类")
+        data.add("语言类")
+        data.add("艺术类")
+        data.add("体育类")
+        data.add("军事类")
         data.add("公安")
-        data.add("理工")
-        data.add("财经")
-        data.add("政法")
-        data.add("师范")
-        data.add("医药")
-        data.add("农林")
-        data.add("语言")
-        data.add("艺术")
         return data
     }
 
@@ -141,6 +130,7 @@ object DataUtils {
         data.add("管理学")
         data.add("其他")
         data.add("军事类")
+        data.add("公安")
         return data
     }
 

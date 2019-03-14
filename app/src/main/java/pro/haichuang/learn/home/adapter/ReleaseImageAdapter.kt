@@ -15,17 +15,18 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.android.databinding.library.baseAdapters.BR
+import com.jacy.kit.config.toast
 import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureConfig
-import kotlinx.android.synthetic.main.item_square_image.view.*
+import kotlinx.android.synthetic.main.item_square_image_release.view.*
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.bean.ImageBean
 
 class ReleaseImageAdapter(private val context: Activity) : RecyclerView.Adapter<ReleaseImageAdapter.CommonHolder>() {
     private val inflater by lazy { LayoutInflater.from(context) }
-    private val data by lazy { ArrayList<String>() }
+    private val data by lazy { ArrayList<ImageBean>() }
 
-    private fun remove(position:Int) {
+    private fun remove(position: Int) {
         this.data.removeAt(position)
         notifyItemRemoved(position)
         if (position != data.size)
@@ -33,39 +34,62 @@ class ReleaseImageAdapter(private val context: Activity) : RecyclerView.Adapter<
     }
 
     fun insert(path: String) {
-        data.add(0, path)
+        data.add(0, ImageBean(path))
         if (data.size == 9)
             notifyItemRemoved(8)
         notifyItemInserted(0)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = CommonHolder(DataBindingUtil.inflate(inflater, R.layout.item_square_image, parent, false))
+    fun insertUpload(localPath: String, uploadPath: String) {
+        data.find { localPath == it.picPaths }?.uploadPath = uploadPath
+    }
+
+    fun getPicPaths(): String {
+        var pics = ""
+        data.forEach empty@{
+            if (it.uploadPath.isEmpty()) {
+                toast("图片正在上传")
+                return@empty
+            }
+            pics += "${it.uploadPath},"
+        }
+        return pics.removeSuffix(",")
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = CommonHolder(DataBindingUtil.inflate(inflater, R.layout.item_square_image_release, parent, false))
 
     override fun getItemCount(): Int = if (data.size < 9) data.size + 1 else 9
 
     override fun onBindViewHolder(holder: CommonHolder, position: Int) {
-        val canDelete = position != data.size
-        val item = ImageBean()
-        item.canDelete = canDelete
-        holder.itemView.apply {
-            image.setOnClickListener {
-                if (canDelete.not())
-                    PictureSelector.create(this@ReleaseImageAdapter.context)
-                            .openGallery(PictureConfig.TYPE_IMAGE)
-                            .compress(true)
-                            .maxSelectNum(9 - data.size)
-                            .isCamera(true)
-                            .previewImage(true)
-                            .selectionMode(PictureConfig.MULTIPLE)
-                            .forResult(PictureConfig.CHOOSE_REQUEST)
-            }
-            delete.setOnClickListener {
-                remove(position)
-            }
-        }
+        val item =
+                if (position == data.size) {
+                    val temp = ImageBean()
+                    temp.canDelete = false
+                    temp.take = true
+                    holder.itemView.apply {
+                        take.setOnClickListener {
+                            PictureSelector.create(this@ReleaseImageAdapter.context)
+                                    .openGallery(PictureConfig.TYPE_IMAGE)
+                                    .compress(true)
+                                    .maxSelectNum(9 - data.size)
+                                    .isCamera(true)
+                                    .previewImage(true)
+                                    .selectionMode(PictureConfig.MULTIPLE)
+                                    .forResult(PictureConfig.CHOOSE_REQUEST)
+                        }
+                        holder.itemView.delete.setOnClickListener(null)
+                    }
+                    temp
+                } else {
+                    val temp = data[position]
+                    temp.canDelete = true
+                    holder.itemView.take.setOnClickListener(null)
+                    holder.itemView.delete.setOnClickListener {
+                        remove(position)
+                    }
+                    temp
+                }
         holder.binding.let {
-            if (canDelete)
-                item.url = data[position]
             it.setVariable(BR.item, item)
             it.executePendingBindings()
         }

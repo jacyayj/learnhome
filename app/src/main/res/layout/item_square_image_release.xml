@@ -17,10 +17,17 @@
         android:layout_height="wrap_content">
 
         <pro.haichuang.learn.home.ui.weight.SquareImageView
-            android:id="@+id/image"
-            net_url="@{item.picPaths}"
+            local_url="@{item.picPaths}"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
+        <pro.haichuang.learn.home.ui.weight.SquareImageView
+            android:id="@+id/take"
+            android:visibility="@{item.take ? View.VISIBLE : View.GONE}"
+            android:layout_width="match_parent"
+            android:src="@drawable/icon_take_photo"
+            android:layout_height="match_parent" />
+
         <ImageView
             android:id="@+id/delete"
             style="@style/wrap_layout"

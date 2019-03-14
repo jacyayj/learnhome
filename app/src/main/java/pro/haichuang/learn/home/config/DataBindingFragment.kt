@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.view.View
+import pro.haichuang.learn.home.BR
 import java.lang.reflect.ParameterizedType
 
 abstract class DataBindingFragment<T> : BaseFragment() {
@@ -15,7 +16,7 @@ abstract class DataBindingFragment<T> : BaseFragment() {
     private val binding by lazy { view?.let { DataBindingUtil.bind<ViewDataBinding>(it) } }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        binding?.setVariable(BR.model, model)
+        binding?.setVariable(BR.model, model)
         super.onViewCreated(view, savedInstanceState)
     }
 

@@ -23,6 +23,8 @@ class TabBean : BaseObservable {
 
     var id = 0
 
+    var listType = 0
+
     @Bindable
     var checked = false
         set(value) {

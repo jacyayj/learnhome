@@ -63,6 +63,7 @@
             android:layout_weight="1"
             app:srlFooterTriggerRate="2">
 
+
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -116,7 +117,7 @@
                             android:layout_gravity="end"
                             android:background="@drawable/bg_f0f7fa_radius_5dp"
                             android:gravity="center"
-                            android:text="关注"
+                            android:text="@{model.author.hasAttention ? `已关注` : `关注`}"
                             android:textColor="@color/color32C8FA"
                             android:textSize="15sp" />
                     </FrameLayout>
@@ -158,15 +159,24 @@
                             style="@style/text_14_99"
                             android:drawableEnd="@drawable/icon_arrow_next"
                             android:drawablePadding="4dp"
-                            android:text="查看全部789个评论" />
+                            android:text="@{`查看全部`+model.commentsCount+`个评论`}" />
                     </LinearLayout>
 
-                    <pro.haichuang.learn.home.ui.weight.AutoListView
-                        android:id="@+id/listView"
+                    <com.yhy.widget.layout.status.StatusLayout
+                        android:id="@+id/status_layout"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/colorWhite"
-                        android:paddingBottom="10dp" />
+                        android:layout_height="match_parent">
+
+                        <pro.haichuang.learn.home.ui.weight.VerticalRecyclerView
+                            android:id="@+id/listView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/colorWhite"
+                            android:paddingBottom="10dp"
+                            android:tag="success" />
+
+                        <include layout="@layout/layout_empty_comment" />
+                    </com.yhy.widget.layout.status.StatusLayout>
                 </LinearLayout>
 
             </ScrollView>

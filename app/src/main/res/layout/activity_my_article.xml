@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.activity.mine.MyDynamicActivity">
+    tools:context=".ui.activity.mine.MyArticleActivity">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -23,6 +23,7 @@
             android:text="我的动态" />
 
         <TextView
+            android:id="@+id/to_release"
             android:layout_width="65dp"
             android:layout_height="25dp"
             android:layout_gravity="end|center_vertical"
@@ -34,12 +35,18 @@
             android:textSize="18sp" />
     </FrameLayout>
 
-    <ListView
-        android:id="@+id/listView"
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@id/refresh_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="1dp"
-        android:background="@color/colorWhite"
-        android:divider="@null"
-        android:dividerHeight="5dp" />
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="1dp"
+            android:background="@color/colorWhite"
+            android:divider="@color/colorF0F7FA"
+            android:dividerHeight="5dp" />
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </LinearLayout>

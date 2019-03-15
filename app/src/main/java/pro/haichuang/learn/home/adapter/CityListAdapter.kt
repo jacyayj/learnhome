@@ -35,7 +35,7 @@ class CityListAdapter(private var context: Activity) : BaseAdapter() {
         }
         temp
     }
-
+    var result: (city: String) -> Unit = {}
     fun getChoosePosition(letter: String) = data.indexOf(data.find { it.letter.contains(letter) })
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
@@ -44,6 +44,9 @@ class CityListAdapter(private var context: Activity) : BaseAdapter() {
         else
             DataBindingUtil.getBinding(convertView)
         val item = data[position]
+        item.areas.forEach {
+            it.result = result
+        }
         if (position == 0) {
             item.grid = true
         } else if (position == 1) {

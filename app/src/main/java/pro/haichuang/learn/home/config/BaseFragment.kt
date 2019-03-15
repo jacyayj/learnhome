@@ -15,6 +15,7 @@ import com.zhouyou.http.model.HttpParams
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.net.MyCallBack
 import pro.haichuang.learn.home.net.Url
+import pro.haichuang.learn.home.utils.SPUtils
 
 abstract class BaseFragment : RootFragment(), OnRefreshLoadMoreListener {
 
@@ -31,18 +32,33 @@ abstract class BaseFragment : RootFragment(), OnRefreshLoadMoreListener {
         refreshLayout?.setOnRefreshLoadMoreListener(this)
     }
 
-    fun post(url: String, params: HttpParams=HttpParams(), showLoading: Boolean = true) {
+    fun post(url: String, params: HttpParams = HttpParams(), showLoading: Boolean = true, needSession: Boolean = false) {
+        if (needSession)
+            SPUtils.session?.let {
+                params.put("sessionKey", it)
+            }
         EasyHttp.post(url)
                 .params(sign(params))
                 .execute(MyCallBack(url, this, showLoading))
     }
+
     open fun setPageParams(pageParams: HttpParams) {}
+    open fun fetchPageData(loadMore: Boolean = false, showLoading: Boolean = true) {
+        isLoadMore = loadMore
+        if (loadMore)
+            page++
+        else
+            page = 1
+        pageParams.put("pageNo", page.toString())
+        setPageParams(pageParams)
+        post(pageUrl, pageParams, showLoading)
+    }
 
     private fun sign(params: HttpParams): HttpParams {
         val map = params.urlParamsMap
         var sign = ""
-        params.put("appId","5698402822576322")
-        params.put("nonce_str",System.currentTimeMillis().toString())
+        params.put("appId", "5698402822576322")
+        params.put("nonce_str", System.currentTimeMillis().toString())
         map.keys.toSortedSet().forEach {
             if ("sign" != it && !map[it].isNullOrEmpty())
                 sign += "$it=${map[it]}&"
@@ -75,18 +91,11 @@ abstract class BaseFragment : RootFragment(), OnRefreshLoadMoreListener {
     }
 
     override fun onRefresh(refreshLayout: RefreshLayout) {
-        isLoadMore = false
-        page = 1
-        pageParams.put("pageNo", page.toString())
-        setPageParams(pageParams)
-        post(pageUrl, pageParams, false)
+        fetchPageData(loadMore = false, showLoading = false)
     }
 
     override fun onLoadMore(refreshLayout: RefreshLayout) {
-        isLoadMore = true
-        page++
-        pageParams.put("pageNo", page.toString())
-        post(pageUrl, pageParams, false)
+        fetchPageData(loadMore = true, showLoading = false)
     }
 
     override fun onFinish() {

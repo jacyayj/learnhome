@@ -2,7 +2,7 @@
 <layout>
 
     <data>
-
+        <import type="pro.haichuang.learn.home.utils.ImageBinding"/>
         <variable
             name="item"
             type="pro.haichuang.learn.home.ui.activity.mine.itemmodel.FollowModel" />
@@ -17,6 +17,7 @@
         <com.yhy.widget.core.img.round.CircleImageView
             android:layout_width="45dp"
             android:layout_height="45dp"
+            net_url="@{item.userImg}"
             android:src="@mipmap/ic_launcher_round"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -25,8 +26,8 @@
         <TextView
             style="@style/text_17_00"
             android:layout_marginStart="55dp"
-            android:paddingTop="15dp"
-            android:text="文泉Suen"
+            android:paddingTop="10dp"
+            android:text="@{item.realname}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,17 +35,17 @@
             style="@style/text_14_99"
             android:layout_marginStart="55dp"
             android:paddingBottom="10dp"
-            android:text="120回答  4820关注"
+            android:text="@{item.totalPublish+`回答     `+item.totalFans+`关注`}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
+            android:id="@+id/do_follow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_f0f7fa_radius_5dp"
             android:paddingHorizontal="8dp"
             android:paddingVertical="4dp"
-            android:onClick="@{item::toggleFollow}"
             android:text="@{item.follow ? `取消关注` : `+ 关注`}"
             android:textColor="@color/color13C1FF"
             android:textSize="15sp"

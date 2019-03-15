@@ -42,7 +42,7 @@ class FindFragment : BaseFragment() {
             }
 
             override fun onTabSelected(p0: TabLayout.Tab?) {
-                refresh_layout.autoRefresh()
+                fetchPageData()
                 if (p0?.position == 0) {
                     ad_view.show()
                     to_release.show()
@@ -69,11 +69,9 @@ class FindFragment : BaseFragment() {
     override fun onSuccess(url: String, result: Any?) {
         when (url) {
             Url.Publish.Channel -> {
-                to_release.show()
+                pageUrl = Url.Publish.List
                 tabBeans = GsonUtil.parseArray(result, TabBean::class.java)
                 initTab()
-                pageUrl = Url.Publish.List
-                refresh_layout.autoRefresh()
             }
             Url.Publish.List -> {
                 val rows = GsonUtil.parseRows(result, ItemNews::class.java)

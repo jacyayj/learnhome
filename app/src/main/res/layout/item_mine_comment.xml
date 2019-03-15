@@ -2,10 +2,10 @@
 <layout>
 
     <data>
-
+        <import type="pro.haichuang.learn.home.utils.ImageBinding"/>
         <variable
             name="item"
-            type="Integer" />
+            type="pro.haichuang.learn.home.ui.activity.find.itemmodel.CommentModel" />
     </data>
 
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -18,19 +18,19 @@
         <com.yhy.widget.core.img.round.CircleImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@mipmap/ic_launcher_round" />
+            net_url="@{item.commenter.userImg}" />
 
         <TextView
             style="@style/text_13_66"
             android:layout_marginStart="40dp"
-            android:text="开车的人"
+            android:text="@{item.commenter.realname}"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             style="@style/text_10_99"
             android:layout_marginStart="40dp"
             android:layout_marginTop="20dp"
-            android:text="11.13 14:39"
+            android:text="@{item.createTime}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,7 +38,7 @@
             style="@style/text_17_33"
             android:layout_marginStart="40dp"
             android:paddingBottom="5dp"
-            android:text="有道理~"
+            android:text="@{item.text}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 

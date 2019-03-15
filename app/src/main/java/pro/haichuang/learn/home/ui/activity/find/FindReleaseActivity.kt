@@ -10,6 +10,7 @@ import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureConfig
 import com.scwang.smartrefresh.layout.util.DensityUtil
 import com.yanzhenjie.recyclerview.swipe.widget.DefaultItemDecoration
+import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.activity_find_release.*
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.adapter.ReleaseImageAdapter
@@ -18,7 +19,8 @@ import pro.haichuang.learn.home.config.DataBindingActivity
 import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.find.viewmodel.FindReleaseModel
 import pro.haichuang.learn.home.utils.GsonUtil
-import pro.haichuang.learn.home.utils.HttpUtils
+import pro.haichuang.learn.home.utils.SPUtils
+import java.io.File
 
 
 @ContentView(R.layout.activity_find_release)
@@ -61,6 +63,9 @@ class FindReleaseActivity : DataBindingActivity<FindReleaseModel>() {
                     }
                 }
             }
+            Url.Upload.Upload -> {
+                adapter.insertUpload(GsonUtil.getString(result, "fileName"), GsonUtil.getString(result, "uploadPath"))
+            }
         }
     }
 
@@ -70,10 +75,13 @@ class FindReleaseActivity : DataBindingActivity<FindReleaseModel>() {
             when (requestCode) {
                 PictureConfig.CHOOSE_REQUEST -> {
                     PictureSelector.obtainMultipleResult(data).forEach { m ->
-                        adapter.insert(m.compressPath)
-                        HttpUtils.upLoadFile(m.compressPath) {
-                            adapter.insertUpload(m.compressPath, it)
-                        }
+                        val file = File(m.compressPath)
+                        adapter.insert(m.compressPath, file.name)
+                        val params = HttpParams()
+                        params.put("mobile", SPUtils.phone)
+                        params.put("type", "image")
+                        params.put("uploadFile", file, null)
+                        post(Url.Upload.Upload, params)
                     }
                 }
             }

@@ -18,6 +18,7 @@ import com.scwang.smartrefresh.layout.header.ClassicsHeader
 import com.vondear.rxtool.RxTool
 import com.zhouyou.http.EasyHttp
 import com.zhouyou.http.cache.model.CacheMode
+import com.zhouyou.http.cookie.CookieManger
 import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.message.FriendSettingActivity
 import pro.haichuang.learn.home.ui.im.CollectAction
@@ -34,6 +35,10 @@ class BaseApplication : Application() {
                 .addConverterFactory(GsonConverterFactory.create())
                 .debug("http_params", true)
                 .setCacheMode(CacheMode.NO_CACHE)
+                .setReadTimeOut(10 * 1000)
+                .setWriteTimeOut(10 * 1000)
+                .setConnectTimeout(10 * 1000)
+                .setCookieStore(CookieManger(this))
                 .setBaseUrl(Url.base_url)
         NIMClient.init(this, SPUtils.loginInfo, options())
         initUiKit()

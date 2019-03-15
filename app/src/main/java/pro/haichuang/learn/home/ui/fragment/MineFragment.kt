@@ -3,16 +3,19 @@ package pro.haichuang.learn.home.ui.fragment
 import android.app.Activity
 import android.content.Intent
 import com.jacy.kit.adapter.CommonAdapter
+import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.mStartActivity
 import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureConfig
 import kotlinx.android.synthetic.main.fragment_mine.*
 import pro.haichuang.learn.home.R
-import com.jacy.kit.config.ContentView
+import pro.haichuang.learn.home.bean.UserInfo
 import pro.haichuang.learn.home.config.BaseFragment
+import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.mine.*
 import pro.haichuang.learn.home.ui.dialog.InvateDialog
 import pro.haichuang.learn.home.utils.DataUtils
+import pro.haichuang.learn.home.utils.GsonUtil
 import pro.haichuang.learn.home.utils.ImageBinding
 
 @ContentView(R.layout.fragment_mine)
@@ -20,6 +23,18 @@ class MineFragment : BaseFragment() {
 
     override fun initData() {
         listView.adapter = CommonAdapter(layoutInflater, R.layout.item_mine, DataUtils.formatMineListData())
+        post(Url.User.Info, showLoading = false, needSession = true)
+    }
+
+    override fun onSuccess(url: String, result: Any?) {
+        val user = GsonUtil.parseObject(result, UserInfo::class.java)
+        follow_count.text = user.totalAttention.toString()
+        fans_count.text = user.totalFans.toString()
+        release_count.text = user.totalPublish.toString()
+        comment_count.text = user.totalComment.toString()
+        name.text = user.realname
+        to_vip.setImageResource(if (user.vip) R.drawable.icon_vip else R.drawable.icon_vip_not)
+        ImageBinding.displayNet(header, user.userImg)
     }
 
     override fun initListener() {
@@ -50,8 +65,8 @@ class MineFragment : BaseFragment() {
         to_my_fans.setOnClickListener {
             mStartActivity(MyFansActivity::class.java)
         }
-        to_my_dynamic.setOnClickListener {
-            mStartActivity(MyDynamicActivity::class.java)
+        to_my_article.setOnClickListener {
+            mStartActivity(MyArticleActivity::class.java)
         }
         to_my_comment.setOnClickListener {
             mStartActivity(MyCommentActivity::class.java)

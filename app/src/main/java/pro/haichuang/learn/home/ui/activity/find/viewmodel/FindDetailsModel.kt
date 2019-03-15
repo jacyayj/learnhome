@@ -12,6 +12,7 @@ class FindDetailsModel : BaseModel() {
     @Params([Url.Comment.Save], "contentId")
     var id = 0
     var views = 0
+    var commentsCount = 0
     var title = ""
     var txt = ""
     var releaseDate = ""

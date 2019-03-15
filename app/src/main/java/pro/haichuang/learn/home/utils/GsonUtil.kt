@@ -2,7 +2,6 @@ package pro.haichuang.learn.home.utils
 
 import com.google.gson.Gson
 import com.google.gson.JsonParser
-import com.google.gson.internal.LinkedTreeMap
 import com.jacy.kit.config.toJson
 import pro.haichuang.learn.home.bean.RowsBean
 
@@ -34,4 +33,5 @@ object GsonUtil {
         return array
     }
 
+    fun getString(result: Any?, key: String) = JsonParser().parse(result?.toJson()).asJsonObject.get(key).asString
 }

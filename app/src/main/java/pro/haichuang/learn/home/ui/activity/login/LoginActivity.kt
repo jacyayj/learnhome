@@ -98,6 +98,7 @@ class LoginActivity : DataBindingActivity<LoginModel>(), IUiListener {
                 NimUIKit.login(LoginInfo("im_test007", "im_test007"), object : RequestCallback<LoginInfo> {
                     override fun onSuccess(p0: LoginInfo?) {
                         SPUtils.loginInfo = p0
+                        SPUtils.phone = model.phone
                         NimUIKit.loginSuccess(p0?.account)
                         toast("登录成功")
                         mStartActivity(MainActivity::class.java)

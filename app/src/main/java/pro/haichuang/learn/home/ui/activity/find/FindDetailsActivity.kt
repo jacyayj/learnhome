@@ -1,6 +1,5 @@
 package pro.haichuang.learn.home.ui.activity.find
 
-import com.jacy.kit.adapter.CommonAdapter
 import com.jacy.kit.adapter.CommonRecyclerAdapter
 import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.mStartActivity
@@ -22,16 +21,15 @@ import pro.haichuang.learn.home.utils.GsonUtil
 
 @ContentView(R.layout.activity_find_details)
 class FindDetailsActivity : DataBindingActivity<FindDetailsModel>() {
-    private val id by lazy { intent.getIntExtra(Constants.NEWS_ID, -1) }
     private val commentAdapter by lazy {
-        CommonAdapter<CommentModel>(layoutInflater, R.layout.item_find_details_comment) { v, t, _ ->
+        CommonRecyclerAdapter<CommentModel>(layoutInflater, R.layout.item_find_details_comment,ArrayList()) { v, t, _ ->
             v.to_index.setOnClickListener {
                 mStartActivity(PersonalIndexActivity::class.java)
             }
             v.up.setOnClickListener {
                 val params = HttpParams()
                 params.put("commentId", t.id.toString())
-                post(Url.Comment.Up, params, needSession = true){
+                post(Url.Comment.Up, params, needSession = true) {
                     t.ups++
                     toast("点赞成功")
                 }
@@ -51,16 +49,17 @@ class FindDetailsActivity : DataBindingActivity<FindDetailsModel>() {
     }
     private val params by lazy {
         HttpParams().apply {
-            put("id", id.toString())
+            put("id", model.id.toString())
         }
     }
 
 
     override fun initData() {
+        model.id = intent.getIntExtra(Constants.NEWS_ID, -1)
         listView.adapter = commentAdapter
         post(Url.Publish.Get, params, needSession = true)
         pageUrl = Url.Comment.List
-        refresh_layout.autoRefresh()
+        fetchPageData()
     }
 
     override fun initListener() {
@@ -75,10 +74,16 @@ class FindDetailsActivity : DataBindingActivity<FindDetailsModel>() {
             post(Url.Content.Collect, params, needSession = true)
         }
         follow.setOnClickListener {
-            val params = HttpParams()
-            params.put("uid", model.author?.userId?.toString())
-            params.put("operate", "1")
-            post(Url.User.Attention, params, needSession = true)
+            model.author?.let {
+                val params = HttpParams()
+                params.put("attentionUserId", it.userId.toString())
+                params.put("operate", if (it.hasAttention) "0" else "1")
+                post(Url.Friend.Attention, params, needSession = true) {
+                    it.hasAttention = it.hasAttention.not()
+                    toast(if (it.hasAttention) "关注成功" else "取消关注成功")
+                }
+            }
+
         }
         up.setOnClickListener {
             val params = HttpParams()
@@ -113,13 +118,20 @@ class FindDetailsActivity : DataBindingActivity<FindDetailsModel>() {
                 refresh_layout.autoRefresh()
             }
             Url.Comment.List -> {
-                GsonUtil.parseRows(result, CommentModel::class.java).list?.let { dealRows(commentAdapter, it) }
+                GsonUtil.parseRows(result, CommentModel::class.java).list?.let {
+                    if (it.isEmpty()) {
+                        if (!isLoadMore)
+                            status_layout.showEmpty()
+                        else
+                            dealRows(commentAdapter, it)
+                    } else {
+                        dealRows(commentAdapter, it)
+                        status_layout.showSuccess()
+                    }
+                }
             }
             Url.Content.Up -> {
                 toast("点赞成功")
-            }
-            Url.User.Attention -> {
-                toast("关注成功")
             }
         }
     }

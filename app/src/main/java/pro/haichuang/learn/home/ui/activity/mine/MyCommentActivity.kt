@@ -1,25 +1,47 @@
 package pro.haichuang.learn.home.ui.activity.mine
 
 import com.jacy.kit.adapter.CommonAdapter
+import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.mStartActivity
-import kotlinx.android.synthetic.main.activity_my_dynamic.*
+import kotlinx.android.synthetic.main.activity_my_comment.*
 import kotlinx.android.synthetic.main.item_mine_comment.view.*
 import pro.haichuang.learn.home.R
-import com.jacy.kit.config.ContentView
 import pro.haichuang.learn.home.config.BaseActivity
+import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.find.FindDetailsActivity
+import pro.haichuang.learn.home.ui.activity.find.itemmodel.CommentModel
+import pro.haichuang.learn.home.utils.GsonUtil
 
 
 @ContentView(R.layout.activity_my_comment)
 class MyCommentActivity : BaseActivity() {
 
-    override fun initData() {
-        titleModel.title = "评论"
-        listView.adapter = CommonAdapter(layoutInflater, R.layout.item_mine_comment, arrayListOf(1, 2, 3, 4, 56, 78, 9)) { v, _, _ ->
+    private val adapter by lazy {
+        CommonAdapter<CommentModel>(layoutInflater, R.layout.item_mine_comment) { v, _, _ ->
             v.to_details.setOnClickListener {
                 mStartActivity(FindDetailsActivity::class.java)
             }
         }
     }
 
+    override fun initData() {
+        titleModel.title = "评论"
+        listView.adapter = adapter
+        pageUrl = Url.Comment.My
+        fetchPageData()
+    }
+
+    override fun onSuccess(url: String, result: Any?) {
+        GsonUtil.parseRows(result, CommentModel::class.java).list?.let {
+            if (it.isEmpty()) {
+                if (isLoadMore)
+                    dealRows(adapter, it)
+                else
+                    status_layout.showEmpty()
+            } else {
+                status_layout.showSuccess()
+                dealRows(adapter, it)
+            }
+        }
+    }
 }

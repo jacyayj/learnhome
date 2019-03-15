@@ -76,7 +76,7 @@
         <activity android:name=".ui.activity.mine.ModifyNameActivity" />
         <activity android:name=".ui.activity.mine.MyFollowActivity" />
         <activity android:name=".ui.activity.mine.MyFansActivity" />
-        <activity android:name=".ui.activity.mine.MyDynamicActivity" />
+        <activity android:name=".ui.activity.mine.MyArticleActivity" />
         <activity android:name=".ui.activity.mine.MyCommentActivity" />
         <activity android:name=".ui.activity.mine.SettPwdActivity" />
         <activity android:name=".ui.activity.mine.FeedbackActivity" />
@@ -95,7 +95,9 @@
         <activity android:name=".ui.activity.mine.CollectActivity" />
         <activity android:name=".ui.activity.mine.JoinGroupActivity" />
         <activity android:name=".ui.activity.message.MessageCenterActivity" />
-        <activity android:name=".ui.activity.mine.FileActivity" />
+        <activity
+            android:name=".ui.activity.mine.FileActivity"
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".ui.activity.index.HeightSchoolActivity" />
         <activity android:name=".ui.activity.index.OnlineVideoActivity" />
         <activity android:name=".ui.activity.index.XinLiActivity" />

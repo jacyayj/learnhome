@@ -2,14 +2,14 @@ package pro.haichuang.learn.home.ui.activity.find
 
 import android.app.Activity
 import android.content.Intent
+import com.jacy.kit.config.ContentView
 import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureConfig
 import kotlinx.android.synthetic.main.activity_yu_yue.*
-import com.jacy.kit.config.ContentView
-import pro.haichuang.learn.home.config.DataBindingActivity
-import pro.haichuang.learn.home.ui.activity.find.viewmodel.YuYueModel
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.adapter.ReleaseImageAdapter
+import pro.haichuang.learn.home.config.DataBindingActivity
+import pro.haichuang.learn.home.ui.activity.find.viewmodel.YuYueModel
 import pro.haichuang.learn.home.ui.dialog.PaymentDialog
 
 
@@ -32,7 +32,7 @@ class YuYueActivity : DataBindingActivity<YuYueModel>() {
             when (requestCode) {
                 PictureConfig.CHOOSE_REQUEST -> {
                     PictureSelector.obtainMultipleResult(data).forEach {
-                        adapter.insert(it.compressPath)
+                        adapter.insert(it.compressPath,"")
                     }
                 }
             }

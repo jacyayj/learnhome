@@ -1,19 +1,21 @@
 package pro.haichuang.learn.home.ui.activity.mine.itemmodel
 
-import pro.haichuang.learn.home.bean.BaseModel
 import android.databinding.Bindable
-import android.view.View
 import pro.haichuang.learn.home.BR
+import pro.haichuang.learn.home.bean.BaseModel
 
-class FansModel :BaseModel(){
+class FansModel : BaseModel() {
+
+    var id = 0
+    var totalFans = 0
+    var totalPublish = 0
+    var userImg = ""
+    var realname = ""
 
     @Bindable
-    var fans = false
+    var hasAttention = false
         set(value) {
             field = value
-            notifyPropertyChanged(BR.fans)
+            notifyPropertyChanged(BR.hasAttention)
         }
-    fun toggleFans(view: View){
-        fans = fans.not()
-    }
 }

@@ -12,7 +12,6 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
 import com.vondear.rxtool.RxEncryptTool
 import com.zhouyou.http.EasyHttp
-import com.zhouyou.http.model.HttpHeaders
 import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.layout_title.*
 import pro.haichuang.learn.home.R
@@ -57,13 +56,19 @@ abstract class BaseActivity : RootActivity(), OnRefreshLoadMoreListener {
 
     open fun setPageParams(pageParams: HttpParams) {}
 
-    fun post(url: String, params: HttpParams = HttpParams(), showLoading: Boolean = true, needSession: Boolean = false, headers: HttpHeaders = HttpHeaders(), success: () -> Unit = {}) {
+    /**
+     *@param url 接口地址
+     *@param params jiek
+     *@param showLoading 接口地址
+     *@param needSession 接口地址
+     *@param success 接口地址
+     */
+    fun post(url: String, params: HttpParams = HttpParams(), showLoading: Boolean = true, needSession: Boolean = false, success: () -> Unit = {}) {
         if (needSession)
             SPUtils.session?.let {
                 params.put("sessionKey", it)
             }
         EasyHttp.post(url)
-                .headers(headers)
                 .params(sign(params))
                 .execute(MyCallBack(url, this, showLoading, success))
     }
@@ -104,20 +109,23 @@ abstract class BaseActivity : RootActivity(), OnRefreshLoadMoreListener {
         }
     }
 
-    override fun onRefresh(refreshLayout: RefreshLayout) {
-        isLoadMore = false
-        page = 1
+    open fun fetchPageData(loadMore: Boolean = false, showLoading: Boolean = true) {
+        isLoadMore = loadMore
+        if (loadMore)
+            page++
+        else
+            page = 1
         pageParams.put("pageNo", page.toString())
         setPageParams(pageParams)
-        post(pageUrl, pageParams, false)
+        post(pageUrl, pageParams, showLoading, needSession = true)
+    }
+
+    override fun onRefresh(refreshLayout: RefreshLayout) {
+        fetchPageData(showLoading = false)
     }
 
     override fun onLoadMore(refreshLayout: RefreshLayout) {
-        isLoadMore = true
-        page++
-        pageParams.put("pageNo", page.toString())
-
-        post(pageUrl, pageParams, false)
+        fetchPageData(loadMore = true, showLoading = false)
     }
 
     override fun onFinish() {

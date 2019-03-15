@@ -4,11 +4,11 @@ import android.databinding.Bindable
 import com.android.databinding.library.baseAdapters.BR
 
 class ImageBean : BaseModel {
-    constructor(picPaths: String) : super() {
-        this.picPaths = picPaths
-    }
-
     constructor() : super()
+    constructor(picPaths: String, picDescs: String) : super() {
+        this.picPaths = picPaths
+        this.picDescs = picDescs
+    }
 
     @Bindable
     var canDelete = false

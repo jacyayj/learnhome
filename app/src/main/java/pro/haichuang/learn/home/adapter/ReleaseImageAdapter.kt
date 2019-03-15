@@ -33,15 +33,15 @@ class ReleaseImageAdapter(private val context: Activity) : RecyclerView.Adapter<
             notifyItemRangeChanged(position, data.size - position)
     }
 
-    fun insert(path: String) {
-        data.add(0, ImageBean(path))
+    fun insert(path: String,des:String) {
+        data.add(0, ImageBean(path,des))
         if (data.size == 9)
             notifyItemRemoved(8)
         notifyItemInserted(0)
     }
 
-    fun insertUpload(localPath: String, uploadPath: String) {
-        data.find { localPath == it.picPaths }?.uploadPath = uploadPath
+    fun insertUpload(des: String, uploadPath: String) {
+        data.find { des == it.picDescs }?.uploadPath = uploadPath
     }
 
     fun getPicPaths(): String {

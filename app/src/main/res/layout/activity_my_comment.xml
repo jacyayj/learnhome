@@ -9,10 +9,25 @@
 
     <include layout="@layout/layout_title" />
 
-    <ListView
-        android:background="@color/colorWhite"
-        android:id="@+id/listView"
-        android:dividerHeight=".5dp"
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <com.yhy.widget.layout.status.StatusLayout
+            android:id="@+id/status_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ListView
+                android:id="@+id/listView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorWhite"
+                android:dividerHeight=".5dp"
+                android:tag="success" />
+
+            <include layout="@layout/layout_empty_comment" />
+        </com.yhy.widget.layout.status.StatusLayout>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </LinearLayout>

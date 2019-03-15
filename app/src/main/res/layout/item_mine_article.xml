@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="pro.haichuang.learn.home.utils.ImageBinding" />
+
+        <variable
+            name="item"
+            type="pro.haichuang.learn.home.ui.activity.mine.itemmodel.ArticleModel" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/text_18_33"
+                    android:layout_width="match_parent"
+                    android:layout_marginEnd="15dp"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="@{item.title}" />
+
+                <TextView
+                    style="@style/text_14_99"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="15dp"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="军事、公安等院校体检、面试合格名单汇总：7月6日本科提前批：7月7日至14日" />
+            </LinearLayout>
+
+            <com.yhy.widget.core.img.round.RoundImageView
+                android:id="@+id/image"
+                net_url="@{item.picPath}"
+                android:layout_width="130dp"
+                android:layout_height="90dp"
+                android:visibility="@{item.picArr.isEmpty() ? View.GONE : View.VISIBLE}"
+                app:layout_constraintRight_toRightOf="parent"
+                app:riv_radius="5dp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/des"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image">
+
+            <TextView
+                style="@style/text_13_99"
+                android:layout_weight="1"
+                android:text="@{item.releaseDate}" />
+
+            <ImageView
+                android:id="@+id/delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="10dp"
+                android:src="@drawable/icon_my_delete" />
+
+            <TextView
+                style="@style/text_13_99"
+                android:text="@{item.commentsCount+`评论     `+item.views+`阅读`}" />
+        </LinearLayout>
+    </LinearLayout>
+</layout>

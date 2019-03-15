@@ -2,7 +2,7 @@
 <layout>
 
     <data>
-
+        <import type="pro.haichuang.learn.home.utils.ImageBinding"/>
         <variable
             name="item"
             type="pro.haichuang.learn.home.ui.activity.mine.itemmodel.FansModel" />
@@ -17,7 +17,7 @@
         <com.yhy.widget.core.img.round.CircleImageView
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:src="@mipmap/ic_launcher_round"
+            net_url="@{item.userImg}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias=".5" />
@@ -25,8 +25,8 @@
         <TextView
             style="@style/text_17_00"
             android:layout_marginStart="55dp"
-            android:paddingTop="15dp"
-            android:text="文泉Suen"
+            android:paddingTop="10dp"
+            android:text="@{item.realname}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,18 +34,18 @@
             style="@style/text_14_99"
             android:layout_marginStart="55dp"
             android:paddingBottom="10dp"
-            android:text="120回答  4820关注"
+            android:text="@{item.totalPublish+`回答     `+item.totalFans+`关注`}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
+            android:id="@+id/do_follow"
             android:layout_width="80dp"
             android:layout_height="35dp"
-            android:background="@{item.fans ? @drawable/stroke_e0_radius_5dp : @drawable/stroke_32c8fa_radius_5dp}"
+            android:background="@{item.hasAttention ? @drawable/stroke_e0_radius_5dp : @drawable/stroke_32c8fa_radius_5dp}"
             android:gravity="center"
-            android:onClick="@{item::toggleFans}"
-            android:text="@{item.fans ? `互相关注` : `关注`}"
-            android:textColor="@{item.fans ? @color/colorE0E0E0 : @color/color32C8FA}"
+            android:text="@{item.hasAttention ? `互相关注` : `关注`}"
+            android:textColor="@{item.hasAttention ? @color/colorE0E0E0 : @color/color32C8FA}"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

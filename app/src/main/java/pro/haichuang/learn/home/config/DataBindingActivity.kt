@@ -8,7 +8,6 @@ import pro.haichuang.learn.home.bean.BaseModel
 import pro.haichuang.learn.home.net.MyCallBack
 import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.utils.SPUtils
-import pro.haichuang.learn.home.utils.mlog
 import java.lang.reflect.ParameterizedType
 
 open class DataBindingActivity<T : BaseModel> : BaseActivity() {
@@ -60,7 +59,6 @@ open class DataBindingActivity<T : BaseModel> : BaseActivity() {
                     val headers = response.headers()
                     if (headers.size() > 0) {
                         val cookie = headers.value(0)
-                        mlog.v("cookie : $cookie")
                         if (cookie.contains("JSESSIONID"))
                             model.JSESSIONID = cookie.split(";")[0].split("=")[1]
                     }

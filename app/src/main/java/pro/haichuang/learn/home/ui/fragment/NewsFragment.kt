@@ -40,7 +40,7 @@ class NewsFragment : BaseFragment() {
             }
 
             override fun onTabSelected(p0: TabLayout.Tab?) {
-                refresh_layout.autoRefresh()
+                fetchPageData()
             }
         })
     }
@@ -64,10 +64,9 @@ class NewsFragment : BaseFragment() {
                 rows.list?.let { dealRows(adapter, it) }
             }
             Url.News.Channel -> {
+                pageUrl = Url.News.List
                 tabBeans = GsonUtil.parseArray(result, TabBean::class.java)
                 initTab()
-                pageUrl = Url.News.List
-                refresh_layout.autoRefresh()
             }
         }
     }

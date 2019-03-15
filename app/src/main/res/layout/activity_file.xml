@@ -1,156 +1,402 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/stroke_e0e0e0"
-    android:orientation="vertical"
-    tools:context=".ui.activity.mine.FileActivity">
+<layout>
 
-    <include layout="@layout/layout_title" />
+    <data>
 
-    <ScrollView
+        <import type="android.view.View" />
+
+        <variable
+            name="model"
+            type="pro.haichuang.learn.home.ui.activity.mine.viewmodel.FileModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/stroke_e0e0e0"
+        android:orientation="vertical"
+        tools:context=".ui.activity.mine.FileActivity">
 
-        <LinearLayout
+        <include layout="@layout/layout_title" />
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <TextView
-                style="@style/text_14_99"
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:gravity="center"
-                android:text="*以下信息一旦注册不能修改，请认真填写" />
-
-            <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorWhite"
-                android:padding="15dp">
-
-                <RadioGroup android:orientation="horizontal">
-
-                    <TextView
-                        style="@style/text_17_66"
-                        android:layout_width="match_parent"
-                        android:layout_weight="1"
-                        android:text="毕业年份"
-                        android:textStyle="bold" />
-
-                    <RadioButton
-                        style="@style/text_17_33"
-                        android:layout_width="match_parent"
-                        android:layout_weight="1"
-                        android:button="@null"
-                        android:drawableStart="@drawable/selector_choose_file"
-                        android:drawablePadding="5dp"
-                        android:text="2018年" />
-
-                    <RadioButton
-                        style="@style/text_17_33"
-                        android:layout_width="match_parent"
-                        android:layout_weight="1"
-                        android:button="@null"
-                        android:drawableStart="@drawable/selector_choose_file"
-                        android:drawablePadding="5dp"
-                        android:text="2019年" />
-
-                    <RadioButton
-                        style="@style/text_17_33"
-                        android:layout_width="match_parent"
-                        android:layout_weight="1"
-                        android:button="@null"
-                        android:drawableStart="@drawable/selector_choose_file"
-                        android:drawablePadding="5dp"
-                        android:text="2020年" />
-                </RadioGroup>
-
-                <RadioGroup
-                    android:layout_marginVertical="20dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        style="@style/text_17_66"
-                        android:layout_width="match_parent"
-                        android:layout_weight="1"
-                        android:text="会员类型"
-                        android:textStyle="bold" />
-
-                    <RadioButton
-                        style="@style/text_17_33"
-                        android:layout_width="match_parent"
-                        android:layout_weight="1"
-                        android:button="@null"
-                        android:drawableStart="@drawable/selector_choose_file"
-                        android:drawablePadding="5dp"
-                        android:text="普通类" />
-
-                    <RadioButton
-                        style="@style/text_17_33"
-                        android:layout_width="match_parent"
-                        android:layout_weight="1"
-                        android:button="@null"
-                        android:drawableStart="@drawable/selector_choose_file"
-                        android:drawablePadding="5dp"
-                        android:text="艺术类" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
-                </RadioGroup>
-
-                <RadioGroup android:orientation="horizontal">
-
-                    <TextView
-                        style="@style/text_17_66"
-                        android:layout_width="match_parent"
-                        android:layout_weight="1"
-                        android:text="选择科目"
-                        android:textStyle="bold" />
-
-                    <RadioButton
-                        style="@style/text_17_33"
-                        android:layout_width="match_parent"
-                        android:layout_weight="1"
-                        android:button="@null"
-                        android:drawableStart="@drawable/selector_choose_file"
-                        android:drawablePadding="5dp"
-                        android:text="文科" />
-
-                    <RadioButton
-                        style="@style/text_17_33"
-                        android:layout_width="match_parent"
-                        android:layout_weight="1"
-                        android:button="@null"
-                        android:drawableStart="@drawable/selector_choose_file"
-                        android:drawablePadding="5dp"
-                        android:text="理科" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
-                </RadioGroup>
-            </TableLayout>
-
-            <pro.haichuang.learn.home.ui.weight.AutoListView
-                android:id="@+id/listView"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="5dp"
-                android:background="@color/colorWhite"
-                android:dividerHeight="0.5dp" />
+                android:orientation="vertical">
 
-            <Button
-                style="@style/button_confirm"
-                android:layout_marginHorizontal="55dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="40dp"
-                android:text="保存" />
-        </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+                <TextView
+                    style="@style/text_14_99"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:gravity="center"
+                    android:text="*以下信息一旦注册不能修改，请认真填写"
+                    android:visibility="@{model.done ? View.GONE : View.VISIBLE}" />
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:padding="15dp">
+
+                    <RadioGroup android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/text_17_66"
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:text="毕业年份"
+                            android:textStyle="bold" />
+
+                        <RadioButton
+                            android:id="@+id/year_btn_1"
+                            style="@style/text_17_33"
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:button="@null"
+                            android:checked="@{model.fileTime ==1}"
+                            android:drawableStart="@drawable/selector_choose_file"
+                            android:drawablePadding="5dp"
+                            android:enabled="@{!model.done}"
+                            android:text="2018年" />
+
+                        <RadioButton
+                            android:id="@+id/year_btn_2"
+                            style="@style/text_17_33"
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:button="@null"
+                            android:checked="@{model.fileTime ==2}"
+                            android:drawableStart="@drawable/selector_choose_file"
+                            android:drawablePadding="5dp"
+                            android:enabled="@{!model.done}"
+                            android:text="2019年" />
+
+                        <RadioButton
+                            android:id="@+id/year_btn_3"
+                            style="@style/text_17_33"
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:button="@null"
+                            android:checked="@{model.fileTime ==3}"
+                            android:drawableStart="@drawable/selector_choose_file"
+                            android:drawablePadding="5dp"
+                            android:enabled="@{!model.done}"
+                            android:text="2020年" />
+                    </RadioGroup>
+
+                    <RadioGroup
+                        android:layout_marginVertical="20dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/text_17_66"
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:text="会员类型"
+                            android:textStyle="bold" />
+
+                        <RadioButton
+                            android:id="@+id/vip_btn_1"
+                            style="@style/text_17_33"
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:button="@null"
+                            android:checked="@{model.type == 1}"
+                            android:drawableStart="@drawable/selector_choose_file"
+                            android:drawablePadding="5dp"
+                            android:enabled="@{!model.done}"
+                            android:text="普通类" />
+
+                        <RadioButton
+                            android:id="@+id/vip_btn_2"
+                            style="@style/text_17_33"
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:button="@null"
+                            android:checked="@{model.type == 2}"
+                            android:drawableStart="@drawable/selector_choose_file"
+                            android:drawablePadding="5dp"
+                            android:enabled="@{!model.done}"
+                            android:text="艺术类" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
+                    </RadioGroup>
+
+                    <RadioGroup android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/text_17_66"
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:text="选择科目"
+                            android:textStyle="bold" />
+
+                        <RadioButton
+                            android:id="@+id/subject_btn_1"
+                            style="@style/text_17_33"
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:button="@null"
+                            android:checked="@{model.subject == 1}"
+                            android:drawableStart="@drawable/selector_choose_file"
+                            android:drawablePadding="5dp"
+                            android:enabled="@{!model.done}"
+                            android:text="文科" />
+
+                        <RadioButton
+                            android:id="@+id/subject_btn_2"
+                            style="@style/text_17_33"
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:button="@null"
+                            android:checked="@{model.subject == 2}"
+                            android:drawableStart="@drawable/selector_choose_file"
+                            android:drawablePadding="5dp"
+                            android:enabled="@{!model.done}"
+                            android:text="理科" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
+                    </RadioGroup>
+                </TableLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:divider="@drawable/divider_vertical_e0"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="15dp"
+                    android:showDividers="middle">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/text_17_66"
+                            android:text="考生姓名" />
+
+                        <EditText
+                            style="@style/text_17_00"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:drawablePadding="5dp"
+                            android:enabled="@{!model.done}"
+                            android:gravity="end"
+                            android:hint="请输入学生姓名"
+                            android:text="@={model.studentName}"
+                            android:textColorHint="@color/color99" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/text_17_66"
+                            android:text="毕业城市" />
+
+                        <TextView
+                            android:id="@+id/choose_city"
+                            style="@style/text_17_00"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:drawableEnd="@drawable/icon_sj_down"
+                            android:drawablePadding="5dp"
+                            android:enabled="@{!model.done}"
+                            android:gravity="end"
+                            android:hint="请选择毕业城市"
+                            android:text="@={model.city}"
+                            android:textColorHint="@color/color99" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/text_17_66"
+                            android:text="毕业区县" />
+
+                        <TextView
+                            android:id="@+id/choose_qx"
+                            style="@style/text_17_00"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:drawableEnd="@drawable/icon_sj_down"
+                            android:drawablePadding="5dp"
+                            android:enabled="@{!model.done}"
+                            android:gravity="end"
+                            android:hint="请选择毕业区县"
+                            android:text="@={model.district}"
+                            android:textColorHint="@color/color99" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/text_17_66"
+                            android:text="在读学校" />
+
+                        <EditText
+                            style="@style/text_17_00"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:drawablePadding="5dp"
+                            android:enabled="@{!model.done}"
+                            android:gravity="end"
+                            android:hint="请输入在读学校"
+                            android:text="@={model.school}"
+                            android:textColorHint="@color/color99" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/text_17_66"
+                            android:text="学  籍  号" />
+
+                        <EditText
+                            style="@style/text_17_00"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:drawablePadding="5dp"
+                            android:enabled="@{!model.done}"
+                            android:gravity="end"
+                            android:hint="请输入学籍号"
+                            android:text="@={model.studentCode}"
+                            android:textColorHint="@color/color99" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/text_17_66"
+                            android:text="班        级" />
+
+                        <TextView
+                            android:id="@+id/choose_class"
+                            style="@style/text_17_00"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:drawableEnd="@drawable/icon_sj_down"
+                            android:drawablePadding="5dp"
+                            android:enabled="@{!model.done}"
+                            android:gravity="end"
+                            android:hint="请选择班级"
+                            android:text="@={model.studentClass}"
+                            android:textColorHint="@color/color99" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/text_17_66"
+                            android:text="联系电话" />
+
+                        <EditText
+                            style="@style/text_17_00"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:drawablePadding="5dp"
+                            android:enabled="@{!model.done}"
+                            android:gravity="end"
+                            android:hint="请输入联系电话"
+                            android:inputType="number"
+                            android:maxLength="11"
+                            android:text="@={model.phone}"
+                            android:textColorHint="@color/color99" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/text_17_66"
+                            android:text="联 系 Q Q" />
+
+                        <EditText
+                            style="@style/text_17_00"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:drawablePadding="5dp"
+                            android:enabled="@{!model.done}"
+                            android:gravity="end"
+                            android:hint="请输入联系QQ"
+                            android:inputType="number"
+                            android:text="@={model.qq}"
+                            android:textColorHint="@color/color99" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/text_17_66"
+                            android:text="联系邮箱" />
+
+                        <EditText
+                            style="@style/text_17_00"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:drawablePadding="5dp"
+                            android:enabled="@{!model.done}"
+                            android:gravity="end"
+                            android:hint="请输入联系邮箱"
+                            android:inputType="textEmailAddress"
+                            android:text="@={model.email}"
+                            android:textColorHint="@color/color99" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/save"
+                    style="@style/button_confirm"
+                    android:layout_marginHorizontal="55dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="40dp"
+                    android:text="保存"
+                    android:visibility="@{model.done? View.GONE : View.VISIBLE}" />
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</layout>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -20,7 +21,7 @@
         android:paddingHorizontal="15dp"
         android:paddingVertical="10dp">
 
-        <android.support.constraint.ConstraintLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -28,21 +29,26 @@
                 android:id="@+id/to_index"
                 net_url="@{item.commenter.userImg}"
                 android:layout_width="30dp"
-                android:layout_height="30dp" />
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical" />
 
-            <TextView
-                style="@style/text_13_66"
-                android:layout_marginStart="40dp"
-                android:text="@{item.commenter.realname}"
-                app:layout_constraintStart_toStartOf="parent" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/dp_40"
+                android:orientation="vertical">
 
-            <TextView
-                style="@style/text_10_99"
-                android:layout_marginStart="40dp"
-                android:text="@{item.createTime}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-        </android.support.constraint.ConstraintLayout>
+                <TextView
+                    style="@style/text_13_66"
+                    android:layout_marginBottom="5dp"
+                    android:text="@{item.commenter.realname}" />
+
+                <TextView
+                    style="@style/text_10_99"
+                    android:layout_marginTop="5dp"
+                    android:text="@{item.createTime}" />
+            </LinearLayout>
+        </FrameLayout>
 
         <TextView
             style="@style/text_17_33"

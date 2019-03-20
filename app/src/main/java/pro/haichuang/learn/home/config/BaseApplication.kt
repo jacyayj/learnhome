@@ -5,7 +5,6 @@ import android.content.Context
 import android.support.multidex.MultiDex
 import com.netease.nim.uikit.api.NimUIKit
 import com.netease.nim.uikit.api.UIKitOptions
-import com.netease.nim.uikit.api.model.location.LocationProvider
 import com.netease.nim.uikit.api.model.session.SessionCustomization
 import com.netease.nim.uikit.business.session.actions.BaseAction
 import com.netease.nimlib.sdk.NIMClient
@@ -22,6 +21,7 @@ import com.zhouyou.http.cookie.CookieManger
 import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.message.FriendSettingActivity
 import pro.haichuang.learn.home.ui.im.CollectAction
+import pro.haichuang.learn.home.ui.im.location.NimDemoLocationProvider
 import pro.haichuang.learn.home.utils.SPUtils
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -35,6 +35,7 @@ class BaseApplication : Application() {
                 .addConverterFactory(GsonConverterFactory.create())
                 .debug("http_params", true)
                 .setCacheMode(CacheMode.NO_CACHE)
+                .setRetryCount(0)
                 .setReadTimeOut(10 * 1000)
                 .setWriteTimeOut(10 * 1000)
                 .setConnectTimeout(10 * 1000)
@@ -51,15 +52,7 @@ class BaseApplication : Application() {
 
             })
             NimUIKit.setSettingClass(FriendSettingActivity::class.java)
-            NimUIKit.setLocationProvider(object :LocationProvider{
-                override fun requestLocation(context: Context?, callback: LocationProvider.Callback?) {
-
-                }
-
-                override fun openMap(context: Context?, longitude: Double, latitude: Double, address: String?) {
-
-                }
-            })
+            NimUIKit.setLocationProvider(NimDemoLocationProvider())
             NimUIKit.setCommonP2PSessionCustomization(SessionCustomization().apply {
                 val action = ArrayList<BaseAction>()
                 action.add((CollectAction()))

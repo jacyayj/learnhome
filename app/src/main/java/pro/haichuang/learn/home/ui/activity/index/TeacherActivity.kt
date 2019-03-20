@@ -1,17 +1,12 @@
 package pro.haichuang.learn.home.ui.activity.index
 
-import com.google.gson.Gson
-import com.google.gson.JsonParser
 import com.jacy.kit.adapter.CommonAdapter
+import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.mStartActivity
 import kotlinx.android.synthetic.main.activity_online_teacher.*
 import kotlinx.android.synthetic.main.item_xinli.view.*
-import com.jacy.kit.config.ContentView
-import com.jacy.kit.config.toast
-import com.zhouyou.http.model.HttpParams
-import pro.haichuang.learn.home.config.BaseActivity
 import pro.haichuang.learn.home.R
-import pro.haichuang.learn.home.bean.RowsBean
+import pro.haichuang.learn.home.config.BaseActivity
 import pro.haichuang.learn.home.config.Constants.TEACHER_ID
 import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.index.itemmodel.ItemTeacherModel
@@ -32,7 +27,7 @@ class TeacherActivity : BaseActivity() {
         titleModel.title = "名师在线"
         listView.adapter = adapter
         pageUrl = Url.Teacher.List
-        refresh_layout.autoRefresh()
+        fetchPageData()
     }
 
     override fun onSuccess(url: String, result: Any?) {

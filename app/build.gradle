@@ -48,6 +48,11 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
 }
 
 dependencies {
@@ -66,4 +71,9 @@ dependencies {
     implementation project(':uikit')
     implementation files('libs/open_sdk_r6019_lite.jar')
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:5.3.1'
+
+    implementation 'com.amap.api:location:4.5.0'
+    implementation 'com.amap.api:search:6.5.0.1'
+    implementation 'com.amap.api:map2d:5.2.0'
+    implementation (name: 'alipaySdk-15.6.0-20190226104104-noUtdid', ext: 'aar')
 }

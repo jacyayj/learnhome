@@ -19,6 +19,7 @@ class ClassDialog(context: Context, private var result: (c: String) -> Unit) : D
         grid.adapter = CommonAdapter(layoutInflater, R.layout.item_class, arrayListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12))
         grid.setOnItemClickListener { _, _, position, _ ->
             result("${position + 1}班")
+            dismiss()
         }
     }
 }

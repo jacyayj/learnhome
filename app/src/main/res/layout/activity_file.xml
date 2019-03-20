@@ -43,7 +43,9 @@
                     android:background="@color/colorWhite"
                     android:padding="15dp">
 
-                    <RadioGroup android:orientation="horizontal">
+                    <RadioGroup
+                        android:id="@+id/year_group"
+                        android:orientation="horizontal">
 
                         <TextView
                             style="@style/text_17_66"
@@ -58,7 +60,7 @@
                             android:layout_width="match_parent"
                             android:layout_weight="1"
                             android:button="@null"
-                            android:checked="@{model.fileTime ==1}"
+                            android:checked="@{model.graduate ==1}"
                             android:drawableStart="@drawable/selector_choose_file"
                             android:drawablePadding="5dp"
                             android:enabled="@{!model.done}"
@@ -70,7 +72,7 @@
                             android:layout_width="match_parent"
                             android:layout_weight="1"
                             android:button="@null"
-                            android:checked="@{model.fileTime ==2}"
+                            android:checked="@{model.graduate ==2}"
                             android:drawableStart="@drawable/selector_choose_file"
                             android:drawablePadding="5dp"
                             android:enabled="@{!model.done}"
@@ -82,7 +84,7 @@
                             android:layout_width="match_parent"
                             android:layout_weight="1"
                             android:button="@null"
-                            android:checked="@{model.fileTime ==3}"
+                            android:checked="@{model.graduate ==3}"
                             android:drawableStart="@drawable/selector_choose_file"
                             android:drawablePadding="5dp"
                             android:enabled="@{!model.done}"
@@ -90,6 +92,7 @@
                     </RadioGroup>
 
                     <RadioGroup
+                        android:id="@+id/vip_group"
                         android:layout_marginVertical="20dp"
                         android:orientation="horizontal">
 
@@ -130,7 +133,9 @@
                             android:layout_weight="1" />
                     </RadioGroup>
 
-                    <RadioGroup android:orientation="horizontal">
+                    <RadioGroup
+                        android:id="@+id/subject_group"
+                        android:orientation="horizontal">
 
                         <TextView
                             style="@style/text_17_66"
@@ -215,7 +220,7 @@
                             style="@style/text_17_00"
                             android:layout_weight="1"
                             android:background="@null"
-                            android:drawableEnd="@drawable/icon_sj_down"
+                            android:drawableEnd="@{model.done ? null : @drawable/icon_sj_down}"
                             android:drawablePadding="5dp"
                             android:enabled="@{!model.done}"
                             android:gravity="end"
@@ -239,7 +244,7 @@
                             style="@style/text_17_00"
                             android:layout_weight="1"
                             android:background="@null"
-                            android:drawableEnd="@drawable/icon_sj_down"
+                            android:drawableEnd="@{model.done ? null : @drawable/icon_sj_down}"
                             android:drawablePadding="5dp"
                             android:enabled="@{!model.done}"
                             android:gravity="end"
@@ -307,7 +312,7 @@
                             style="@style/text_17_00"
                             android:layout_weight="1"
                             android:background="@null"
-                            android:drawableEnd="@drawable/icon_sj_down"
+                            android:drawableEnd="@{model.done ? null : @drawable/icon_sj_down}"
                             android:drawablePadding="5dp"
                             android:enabled="@{!model.done}"
                             android:gravity="end"

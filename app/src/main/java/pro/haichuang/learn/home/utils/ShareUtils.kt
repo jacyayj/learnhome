@@ -4,29 +4,33 @@ import android.app.Activity
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import com.jacy.kit.config.toJson
+import android.os.Handler
+import android.os.Message
+import com.alipay.sdk.app.PayTask
 import com.tencent.connect.share.QQShare
 import com.tencent.mm.opensdk.modelmsg.SendAuth
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX
 import com.tencent.mm.opensdk.modelmsg.WXMediaMessage
 import com.tencent.mm.opensdk.modelmsg.WXWebpageObject
+import com.tencent.mm.opensdk.modelpay.PayReq
 import com.tencent.mm.opensdk.openapi.WXAPIFactory
 import com.tencent.tauth.IUiListener
 import com.tencent.tauth.Tencent
-import com.tencent.tauth.UiError
-import com.vondear.rxtool.RxAppTool
 import com.vondear.rxtool.RxImageTool
-import com.vondear.rxtool.RxPictureTool
 import com.vondear.rxtool.RxTool
 import pro.haichuang.learn.home.R
+import pro.haichuang.learn.home.config.Constants
 
 
 object ShareUtils {
-    val wxApi by lazy { WXAPIFactory.createWXAPI(RxTool.getContext(), "wx9287620517c416a8", true).apply {
-        registerApp("wx9287620517c416a8")
-    } }
+    val wxApi by lazy {
+        WXAPIFactory.createWXAPI(RxTool.getContext(), "wx9287620517c416a8", true).apply {
+            registerApp("wx9287620517c416a8")
+        }
+    }
 
-    val qqApi by lazy { Tencent.createInstance("1108180837",RxTool.getContext()) }
+    val qqApi by lazy { Tencent.createInstance("1108180837", RxTool.getContext()) }
+
     fun shareToQQ(context: Activity) {
         val bundle = Bundle()
         bundle.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, QQShare.SHARE_TO_QQ_TYPE_DEFAULT)
@@ -89,8 +93,8 @@ object ShareUtils {
         wxApi.sendReq(req)
     }
 
-    fun loginToQQ(activity: Activity,listener: IUiListener) {
-        qqApi.login(activity,"all",listener)
+    fun loginToQQ(activity: Activity, listener: IUiListener) {
+        qqApi.login(activity, "all", listener)
     }
 
     fun loginToWx() {
@@ -98,5 +102,27 @@ object ShareUtils {
         req.scope = "snsapi_userinfo"
         req.state = "wechat_sdk_demo_test"
         wxApi.sendReq(req)
+    }
+
+    /**
+     * 调起微信支付的方法
+     */
+    fun toWXPay(request: PayReq) {
+        Thread(Runnable {
+            wxApi.sendReq(request)//发送调起微信的请求
+        }).start()
+    }
+
+    /**
+     * 调起微信支付的方法
+     */
+    fun toAliPay(orderInfo: String, context: Activity, handler: Handler) {
+        Thread(Runnable {
+            val payTask = PayTask(context)
+            val msg = Message()
+            msg.what = Constants.ALIPAY
+            msg.obj = payTask.payV2(orderInfo, true)
+            handler.sendMessage(msg)
+        }).start()
     }
 }

@@ -21,6 +21,7 @@ class AddressDialog(context: Context, private val result: (qx: String) -> Unit) 
         grid.adapter = adapter
         grid.setOnItemClickListener { _, _, position, _ ->
             result(adapter.getItem(position))
+            dismiss()
         }
     }
 }

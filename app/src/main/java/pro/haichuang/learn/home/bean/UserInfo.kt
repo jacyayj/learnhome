@@ -9,5 +9,7 @@ class UserInfo {
     var city = ""
     var realname = ""
     var userImg = ""
+    var imToken = ""
     var vip = false
+    var teacher = false
 }

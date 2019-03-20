@@ -5,6 +5,7 @@ import com.google.gson.Gson
 import com.jacy.kit.config.toJson
 import com.netease.nimlib.sdk.auth.LoginInfo
 import com.vondear.rxtool.RxTool
+import pro.haichuang.learn.home.bean.UserInfo
 
 object SPUtils {
 
@@ -21,6 +22,10 @@ object SPUtils {
     var loginInfo: LoginInfo?
         get() = Gson().fromJson(sp.getString("loginInfo", null), LoginInfo::class.java)
         set(value) = sp.edit().putString("loginInfo", value?.toJson()).apply()
+
+    var userInfo: UserInfo?
+        get() = Gson().fromJson(sp.getString("userInfo", null), UserInfo::class.java)
+        set(value) = sp.edit().putString("userInfo", value?.toJson()).apply()
 
     fun clear() {
         sp.edit().clear().apply()

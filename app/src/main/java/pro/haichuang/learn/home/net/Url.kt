@@ -57,6 +57,9 @@ object Url {
         const val Get = "${base}get"
 
         const val List = "${base}list"
+        const val Fee = "${base}fee"
+
+        const val Order = "${base}order"
     }
 
     /**
@@ -146,5 +149,13 @@ object Url {
         const val Save = "${base}save"
 
         const val Up = "${base}up"
+    }
+
+    object Account {
+        private const val base = "account/"
+
+        const val Fee = "${base}fee"
+
+        const val Order = "${base}vip/order"
     }
 }

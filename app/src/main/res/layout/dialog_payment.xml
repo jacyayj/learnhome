@@ -12,9 +12,9 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/total_price_tv"
             style="@style/text_20_ff"
-            android:paddingTop="35dp"
-            android:text="预约价格：5.00元" />
+            android:paddingTop="35dp" />
 
         <TextView
             style="@style/text_14_ff"
@@ -36,12 +36,12 @@
         android:paddingTop="20dp">
 
         <TextView
+            android:id="@+id/price_tv"
             style="@style/wrap_layout"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="20dp"
             android:drawableStart="@drawable/icon_money_yellow"
             android:drawablePadding="5dp"
-            android:text="5.00"
             android:textColor="@color/colorFF9E05"
             android:textSize="24sp" />
 
@@ -80,9 +80,9 @@
                 android:layout_toRightOf="@id/label"
                 android:text="余额不足？去充值）"
                 android:textSize="9sp"
+                app:ltv_line_color="@color/color99"
                 app:ltv_line_interval="1dp"
                 app:ltv_line_size="0.5dp"
-                app:ltv_line_color="@color/color99"
                 app:ltv_line_style="underline" />
         </RelativeLayout>
 

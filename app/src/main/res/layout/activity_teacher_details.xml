@@ -48,29 +48,53 @@
                         <com.yhy.widget.core.img.round.CircleImageView
                             net_url="@{model.teacherImg}"
                             android:layout_width="46dp"
-                            android:layout_height="46dp"
-                            android:layout_marginTop="5dp" />
+                            android:layout_height="46dp" />
 
                         <LinearLayout
                             android:layout_height="match_parent"
                             android:layout_marginStart="10dp"
                             android:layout_weight="1"
+                            android:gravity="center_vertical"
                             android:orientation="vertical">
 
-                            <TextView
-                                style="@style/text_16_18191A"
-                                android:layout_weight="1"
-                                android:paddingTop="10dp"
-                                android:text="@{model.teachername}" />
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    style="@style/text_16_18191A"
+                                    android:text="@{model.teachername}" />
+
+                                <TextView
+                                    style="@style/text_10_99"
+                                    android:layout_marginStart="5dp"
+                                    android:background="@{model.subject == 1 ? @drawable/stroke_ff8812_radius_8dp : @drawable/stroke_13aeff_radius_8dp}"
+                                    android:paddingHorizontal="6dp"
+                                    android:paddingVertical="3dp"
+                                    android:text="@{model.subject == 1 ? `文科` : `理科`}"
+                                    android:textColor="@{model.subject == 1 ? @color/colorFF8812 : @color/color13AEFF}" />
+
+                                <TextView
+                                    style="@style/text_10_99"
+                                    android:layout_marginStart="5dp"
+                                    android:layout_marginEnd="5dp"
+                                    android:background="@drawable/stroke_13aeff_radius_8dp"
+                                    android:paddingHorizontal="6dp"
+                                    android:paddingVertical="3dp"
+                                    android:text="初中→高中"
+                                    android:textColor="@color/color13AEFF" />
+                            </LinearLayout>
 
                             <TextView
                                 style="@style/text_12_939799"
-                                android:paddingTop="10dp"
-                                android:paddingBottom="10dp"
+                                android:layout_marginTop="5dp"
                                 android:text="@{`在线时间：`+model.beginTime+` - `+model.endTime+`空闲时间`}" />
                         </LinearLayout>
 
                         <TextView
+                            android:id="@+id/follow"
                             android:layout_width="60dp"
                             android:layout_height="25dp"
                             android:background="@drawable/bg_f0f7fa_radius_5dp"

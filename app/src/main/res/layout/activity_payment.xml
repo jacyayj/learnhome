@@ -53,7 +53,7 @@
                     style="@style/wrap_layout"
                     android:drawablePadding="10dp"
                     android:paddingTop="70dp"
-                    android:text="0.0"
+                    android:text="@{model.price}"
                     android:textColor="@color/colorWhite"
                     android:textSize="36sp" />
 
@@ -124,13 +124,13 @@
                 style="@style/text_16_33"
                 android:layout_width="match_parent"
                 android:layout_marginStart="75dp"
-                android:checked="@{model.type == 0}"
+                android:checked="@{model.type == 1}"
                 android:drawableEnd="@drawable/selector_single_choose_small"
                 android:gravity="center_vertical"
                 android:onClick="@{model::togglePay}"
                 android:paddingEnd="25dp"
                 android:paddingVertical="15dp"
-                android:tag="0"
+                android:tag="1"
                 android:text="XX钱包" />
 
             <TextView
@@ -157,7 +157,7 @@
             android:id="@+id/wechat_pay"
             style="@style/text_16_33"
             android:layout_width="match_parent"
-            android:checked="@{model.type == 1}"
+            android:checked="@{model.type == 12}"
             android:drawableStart="@drawable/icon_wechat_pay"
             android:drawableEnd="@drawable/selector_single_choose_small"
             android:drawablePadding="20dp"
@@ -165,14 +165,14 @@
             android:onClick="@{model::togglePay}"
             android:paddingHorizontal="25dp"
             android:paddingVertical="15dp"
-            android:tag="1"
+            android:tag="12"
             android:text="微信" />
 
         <CheckedTextView
             android:id="@+id/alipay"
             style="@style/text_16_33"
             android:layout_width="match_parent"
-            android:checked="@{model.type == 2}"
+            android:checked="@{model.type == 13}"
             android:drawableStart="@drawable/icon_alipay"
             android:drawableEnd="@drawable/selector_single_choose_small"
             android:drawablePadding="20dp"
@@ -180,7 +180,7 @@
             android:onClick="@{model::togglePay}"
             android:paddingHorizontal="25dp"
             android:paddingVertical="15dp"
-            android:tag="2"
+            android:tag="13"
             android:text="支付宝" />
 
         <View
@@ -191,6 +191,7 @@
             android:background="@color/colorE0E0E0" />
 
         <Button
+            android:id="@+id/pay"
             style="@style/button_confirm"
             android:layout_marginHorizontal="55dp"
             android:layout_marginTop="40dp"

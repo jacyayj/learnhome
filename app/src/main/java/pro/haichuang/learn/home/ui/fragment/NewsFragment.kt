@@ -6,6 +6,8 @@ import android.support.design.widget.TabLayout
 import com.jacy.kit.adapter.CommonAdapter
 import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.mStartActivity
+import com.vondear.rxtool.RxConstTool
+import com.vondear.rxtool.RxTimeTool
 import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.fragment_news.*
 import pro.haichuang.learn.home.BR
@@ -28,6 +30,11 @@ class NewsFragment : BaseFragment() {
         post(Url.News.Channel)
     }
 
+    override fun onResume() {
+        super.onResume()
+        day.text = getGK()
+    }
+
     override fun initListener() {
         listView.setOnItemClickListener { _, _, position, _ ->
             mStartActivity(NewsDetailsActivity::class.java, Pair(Constants.NEWS_ID, adapter.getItem(position).id))
@@ -48,6 +55,18 @@ class NewsFragment : BaseFragment() {
     override fun setPageParams(pageParams: HttpParams) {
         pageParams.put("path", tabBeans[tab.selectedTabPosition].path)
     }
+
+    private fun getGK(): String {
+        var year = 2019
+        while (true) {
+            val time = "$year-06-07 00:00:00"
+            if (time <= RxTimeTool.getCurTimeString())
+                year++
+            else
+                return RxTimeTool.getIntervalByNow(time, RxConstTool.TimeUnit.DAY).toString()
+        }
+    }
+
     private fun initTab() {
         for (bean in tabBeans) {
             val binding = DataBindingUtil.inflate<ViewDataBinding>(layoutInflater, R.layout.item_tab_vip_14, tab, false)

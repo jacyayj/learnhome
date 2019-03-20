@@ -16,13 +16,13 @@ class CommentTextView : TextView {
 
     private val nameColor by lazy { Color.parseColor("#295DA4") }
 
-    var name = ""
+    var name: String? = ""
         set(value) {
             field = value
             initText()
         }
 
-    var repeatName = ""
+    var repeatName: String? = ""
         set(value) {
             field = value
             initText()
@@ -35,12 +35,15 @@ class CommentTextView : TextView {
         }
 
     private fun initText() {
+        if (name.isNullOrEmpty() || repeatName.isNullOrEmpty())
+            return
         val textContent = "${name}回复$repeatName：$content"
-        val nameIndex = name.length
-        val repeatNameIndex = name.length + 2 + repeatName.length
+        val nameIndex = name?.length ?: 0
+        val repeatNameIndex = name?.length ?: 0 + 2 + (repeatName?.length ?: 0)
         val spannedString = SpannableString(textContent)
         spannedString.setSpan(ForegroundColorSpan(nameColor), 0, nameIndex, Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
-        spannedString.setSpan(ForegroundColorSpan(nameColor), repeatNameIndex - repeatName.length, repeatNameIndex, Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
+        spannedString.setSpan(ForegroundColorSpan(nameColor), repeatNameIndex - (repeatName?.length
+                ?: 0), repeatNameIndex, Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
         text = spannedString
     }
 }

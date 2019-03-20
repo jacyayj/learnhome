@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.dialog_payment.*
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.utils.DialogUtils
 
-class PaymentDialog(context: Context) : Dialog(context, R.style.Dialog), View.OnClickListener {
+class PaymentDialog(context: Context, private val result: (type: Int) -> Unit) : Dialog(context, R.style.Dialog), View.OnClickListener {
 
     private var payType = 0
 
@@ -18,35 +18,42 @@ class PaymentDialog(context: Context) : Dialog(context, R.style.Dialog), View.On
         setContentView(R.layout.dialog_payment)
         setCanceledOnTouchOutside(true)
         DialogUtils.initDialogWidth(window, 0.75f)
-        confirm.setOnClickListener { dismiss() }
+        confirm.setOnClickListener {
+            result(payType)
+            dismiss()
+        }
         wallet_view.setOnClickListener(this)
         wechat_pay.setOnClickListener(this)
         alipay.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
-
         when (v?.tag?.toRoundInt()) {
             0 -> {
                 wallet.isChecked = true
                 alipay.isChecked = false
                 wechat_pay.isChecked = false
-                payType = 0
+                payType = 1
             }
             1 -> {
                 wallet.isChecked = false
                 alipay.isChecked = false
                 wechat_pay.isChecked = true
-                payType = 1
+                payType = 12
             }
             2 -> {
                 wallet.isChecked = false
                 alipay.isChecked = true
                 wechat_pay.isChecked = false
-                payType = 2
+                payType = 13
             }
         }
     }
 
 
+    fun show(price: String) {
+        super.show()
+        price_tv.text = price
+        total_price_tv.text = "预约价格：${price}元"
+    }
 }

@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Handler
 import android.os.Message
+import android.widget.RadioButton
 import com.google.gson.JsonObject
 import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.toast
@@ -16,9 +17,12 @@ import kotlinx.android.synthetic.main.activity_yu_yue.*
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.adapter.ReleaseImageAdapter
 import pro.haichuang.learn.home.config.Constants
+import pro.haichuang.learn.home.config.Constants.TEACHER_HEADER
 import pro.haichuang.learn.home.config.Constants.TEACHER_ID
 import pro.haichuang.learn.home.config.Constants.TEACHER_NAME
 import pro.haichuang.learn.home.config.Constants.TEACHER_SKILL
+import pro.haichuang.learn.home.config.Constants.TEACHER_SUBJECT
+import pro.haichuang.learn.home.config.Constants.TEACHER_TYPE
 import pro.haichuang.learn.home.config.DataBindingActivity
 import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.find.viewmodel.YuYueModel
@@ -65,11 +69,18 @@ class YuYueActivity : DataBindingActivity<YuYueModel>() {
         model.id = intent.getIntExtra(TEACHER_ID, -1)
         model.name = intent.getStringExtra(TEACHER_NAME)
         model.skill = intent.getStringExtra(TEACHER_SKILL)
+        model.header = intent.getStringExtra(TEACHER_HEADER)
+        model.type = intent.getIntExtra(TEACHER_TYPE, -1)
+        model.subject = intent.getIntExtra(TEACHER_SUBJECT, -1)
+        model.appointTime = time_1.text.toString()
     }
 
     override fun initListener() {
         yu_yue.setOnClickListener {
             autoPost(Url.Teacher.Fee, needSession = true)
+        }
+        time_group.setOnCheckedChangeListener { v, checkedId ->
+            model.appointTime = v.findViewById<RadioButton>(checkedId).text.toString()
         }
     }
 
@@ -102,6 +113,7 @@ class YuYueActivity : DataBindingActivity<YuYueModel>() {
             }
             Url.Upload.Upload -> {
                 adapter.insertUpload(GsonUtil.getString(result, "fileName"), GsonUtil.getString(result, "uploadPath"))
+                model.picPaths = adapter.getPicPaths()
             }
         }
     }

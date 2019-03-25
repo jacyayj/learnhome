@@ -28,6 +28,7 @@ class YuYueModel : BaseModel() {
         }
     @Params([Url.Teacher.Order], "picPaths")
     var picPaths = ""
+
     @Bindable
     @Params([Url.Teacher.Order], "contactPhone")
     var contactPhone = ""
@@ -42,6 +43,10 @@ class YuYueModel : BaseModel() {
             field = value
             notifyPropertyChanged(BR.contactName)
         }
+
+    @Params([Url.Teacher.Order], "appointTime")
+    var appointTime = ""
+
     @Bindable
     var name = ""
         set(value) {

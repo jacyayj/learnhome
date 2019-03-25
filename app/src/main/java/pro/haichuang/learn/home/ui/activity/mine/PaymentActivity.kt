@@ -47,7 +47,7 @@ class PaymentActivity : DataBindingActivity<PaymentModel>() {
 
     override fun onSuccess(url: String, result: Any?) {
         when (url) {
-            Url.Account.Order -> {
+            Url.Account.Activate -> {
                 when (model.type) {
                     1 -> {
                         toast("钱包支付未完成")
@@ -77,7 +77,7 @@ class PaymentActivity : DataBindingActivity<PaymentModel>() {
             mStartActivity(WalletActivity::class.java)
         }
         pay.setOnClickListener {
-            autoPost(Url.Account.Order, needSession = true)
+            autoPost(Url.Account.Activate, needSession = true)
         }
     }
 }

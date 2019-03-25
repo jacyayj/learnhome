@@ -18,4 +18,6 @@ object Constants {
     const val ALIPAY = 0x3891238
 
     const val PRICE="price"
+
+    const val ORDER_NUMBER="order_number"
 }

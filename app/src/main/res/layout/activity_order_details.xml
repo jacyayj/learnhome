@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <import type="android.view.View" />
+
+        <import type="pro.haichuang.learn.home.utils.ImageBinding" />
 
         <variable
             name="model"
@@ -11,7 +13,6 @@
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -37,7 +38,7 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:paddingHorizontal="15dp"
-                    android:visibility="@{model.type == 1 ? View.GONE : View.VISIBLE}">
+                    android:visibility="@{model.canOperation ? View.GONE : View.VISIBLE}">
 
                     <TextView
                         style="@style/text_15_33"
@@ -45,15 +46,9 @@
                         android:text="订单状态" />
 
                     <TextView
-                        style="@style/text_15_FF2829"
-                        android:text="已付款"
-                        android:visibility="@{model.type == 3 ? View.VISIBLE : View.GONE}" />
-
-                    <TextView
                         style="@style/text_15_00"
-                        android:text="已退款"
-                        android:textColor="@color/color939799"
-                        android:visibility="@{model.type == 2 ? View.VISIBLE : View.GONE}" />
+                        android:text="@{model.text}"
+                        android:textColor="@{model.orderStatus == 1 ? @color/colorFF2829: @color/color939799}" />
                 </LinearLayout>
 
                 <TextView
@@ -61,7 +56,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="5dp"
                     android:text="剩余支付时间"
-                    android:visibility="@{model.type == 1 ? View.VISIBLE : View.GONE}" />
+                    android:visibility="@{model.canOperation ? View.VISIBLE : View.GONE}" />
 
                 <TextView
                     style="@style/text_18_13AEFF"
@@ -69,31 +64,30 @@
                     android:layout_marginTop="5dp"
                     android:paddingBottom="15dp"
                     android:text="14:32"
-                    android:visibility="@{model.type == 1 ? View.VISIBLE : View.GONE}" />
+                    android:visibility="@{model.canOperation ? View.VISIBLE : View.GONE}" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
                     android:background="@color/colorE0E0E0"
-                    android:visibility="@{model.type == 1 ? View.VISIBLE : View.GONE}" />
+                    android:visibility="@{model.canOperation ? View.VISIBLE : View.GONE}" />
 
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="15dp"
-                    android:visibility="@{model.type == 1 ? View.VISIBLE : View.GONE}">
+                    android:visibility="@{model.canOperation ? View.VISIBLE : View.GONE}">
 
                     <TextView
                         style="@style/text_14_33"
                         android:paddingVertical="15dp"
-                        android:text="在线支付6.00元" />
+                        android:text="@{`在线支付`+model.orderAmount+`元`}" />
 
                     <TextView
                         style="@style/text_14_33"
                         android:layout_gravity="end"
                         android:paddingVertical="15dp"
                         android:text="待付款" />
-
 
                 </FrameLayout>
 
@@ -105,7 +99,7 @@
                     android:background="@drawable/stroke_32c8fa"
                     android:text="支付"
                     android:textColor="@color/color32C8FA"
-                    android:visibility="@{model.type == 1 ? View.VISIBLE : View.GONE}" />
+                    android:visibility="@{model.canOperation ? View.VISIBLE : View.GONE}" />
 
                 <FrameLayout
                     android:layout_width="match_parent"
@@ -115,9 +109,9 @@
                     android:paddingBottom="15dp">
 
                     <com.yhy.widget.core.img.round.CircleImageView
+                        net_url="@{model.teacherInfo.teacherImg}"
                         android:layout_width="46dp"
-                        android:layout_height="46dp"
-                        android:src="@mipmap/ic_launcher_round" />
+                        android:layout_height="46dp" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -128,7 +122,7 @@
 
                         <TextView
                             style="@style/text_16_18191A"
-                            android:text="范美忠" />
+                            android:text="@{model.teacherInfo.teachername}" />
 
                         <TextView
                             style="@style/text_10_99"
@@ -137,7 +131,7 @@
                             android:background="@drawable/stroke_13aeff_radius_8dp"
                             android:paddingHorizontal="5dp"
                             android:paddingVertical="2dp"
-                            android:text="文科"
+                            android:text="@{model.teacherInfo.subject == 1 ? `文科` : `理科`}"
                             android:textColor="@color/color32C8FA" />
 
                         <TextView
@@ -153,7 +147,10 @@
                         style="@style/text_12_939799"
                         android:layout_gravity="bottom"
                         android:layout_marginStart="56dp"
-                        android:text="擅长：针对中文学科教育有独特的见解和研究" />
+                        android:layout_marginEnd="15dp"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:text="@{`擅长：`+model.teacherInfo.skill}" />
                 </FrameLayout>
 
                 <View
@@ -174,7 +171,7 @@
                     style="@style/text_14_33"
                     android:paddingStart="25dp"
                     android:paddingBottom="15dp"
-                    android:text="高考只考了608分，请老师帮我分析读哪所学校最佳" />
+                    android:text="@{model.question}" />
 
                 <View
                     android:layout_width="match_parent"
@@ -186,17 +183,19 @@
                     android:drawableStart="@drawable/icon_camera"
                     android:drawablePadding="5dp"
                     android:padding="15dp"
-                    android:text="图片" />
+                    android:text="图片"
+                    android:visibility="@{model.pictures.isEmpty() ? View.GONE : View.VISIBLE}" />
 
-                <GridView
+                <pro.haichuang.learn.home.ui.weight.AutoGridView
                     android:id="@+id/grid"
                     android:layout_width="match_parent"
-                    android:layout_height="110dp"
-                    android:layout_marginBottom="15dp"
+                    android:layout_height="wrap_content"
                     android:horizontalSpacing="8dp"
                     android:numColumns="3"
+                    app:pictures="@{model.pictures}"
                     android:paddingHorizontal="15dp"
-                    android:verticalSpacing="8dp" />
+                    android:verticalSpacing="8dp"
+                    android:visibility="@{model.pictures.isEmpty() ? View.GONE : View.VISIBLE}" />
 
                 <View
                     android:layout_width="match_parent"
@@ -213,17 +212,17 @@
                 <TextView
                     style="@style/text_17_33"
                     android:paddingStart="15dp"
-                    android:text="12:00-14:00" />
+                    android:text="@{model.appointTime}" />
 
                 <TextView
                     style="@style/text_16_00"
                     android:padding="15dp"
-                    android:text="姓名   王阳明" />
+                    android:text="@{`姓名   `+model.contactName}" />
 
                 <TextView
                     style="@style/text_16_00"
                     android:paddingStart="15dp"
-                    android:text="电话   1782038744" />
+                    android:text="@{`电话   `+model.contactPhone}" />
 
                 <Button
                     style="@style/text_17_99"
@@ -235,7 +234,7 @@
                     android:background="@drawable/stroke_32c8fa"
                     android:text="取消订单"
                     android:textColor="@color/color32C8FA"
-                    android:visibility="@{model.type == 1 ? View.VISIBLE : View.GONE}" />
+                    android:visibility="@{model.canOperation ? View.VISIBLE : View.GONE}" />
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

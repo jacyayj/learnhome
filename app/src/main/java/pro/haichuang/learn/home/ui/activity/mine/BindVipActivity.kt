@@ -23,7 +23,7 @@ class BindVipActivity : DataBindingActivity<BindVipModel>() {
     override fun onSuccess(url: String, result: Any?) {
         when (url) {
             Url.Account.Fee -> model.price = GsonUtil.getString(result, "vipFee")
-            Url.Account.Order -> {
+            Url.Account.Activate -> {
                 toast("激活成功")
                 finish()
             }
@@ -35,7 +35,7 @@ class BindVipActivity : DataBindingActivity<BindVipModel>() {
             mStartActivity(PaymentActivity::class.java, Pair(PRICE, model.price))
         }
         upgrade.setOnClickListener {
-            autoPost(Url.Account.Order, needSession = true)
+            autoPost(Url.Account.Activate, needSession = true)
         }
     }
 }

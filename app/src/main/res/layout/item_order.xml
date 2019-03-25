@@ -2,7 +2,7 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <import type="pro.haichuang.learn.home.utils.ImageBinding"/>
         <variable
             name="item"
             type="pro.haichuang.learn.home.ui.activity.mine.itemmodel.OrderModel" />
@@ -28,11 +28,12 @@
                 android:layout_width="46dp"
                 android:layout_height="46dp"
                 android:layout_marginEnd="10dp"
-                android:src="@mipmap/ic_launcher_round" />
+                net_url="@{item.teacherInfo.teacherImg}"
+                />
 
             <TextView
                 style="@style/text_16_33"
-                android:text="范美忠" />
+                android:text="@{item.teacherInfo.teachername}" />
 
             <TextView
                 style="@style/text_10_99"
@@ -41,7 +42,7 @@
                 android:background="@drawable/stroke_13aeff_radius_8dp"
                 android:paddingHorizontal="5dp"
                 android:paddingVertical="1dp"
-                android:text="文科"
+                android:text="@{item.teacherInfo.subject == 1 ? `文科` : `理科`}"
                 android:textColor="@color/color32C8FA" />
 
             <TextView
@@ -56,7 +57,7 @@
                 style="@style/text_16_33"
                 android:layout_weight="1"
                 android:gravity="end"
-                android:text="6.00元" />
+                android:text="@{item.orderAmount+`元`}" />
         </LinearLayout>
 
         <TextView
@@ -68,9 +69,9 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="11dp"
-            android:background="@{item.type == 2 ? @drawable/stroke_e0_radius_5dp : @drawable/stroke_32c8fa_radius_5dp}"
+            android:background="@{item.canClick ? @drawable/stroke_32c8fa_radius_5dp : @drawable/stroke_e0_radius_5dp}"
             android:gravity="center"
             android:text="@{item.text}"
-            android:textColor="@{item.type == 2 ? @color/colorE0E0E0 : @color/color32C8FA}" />
+            android:textColor="@{item.canClick ? @color/color32C8FA : @color/colorE0E0E0}" />
     </LinearLayout>
 </layout>

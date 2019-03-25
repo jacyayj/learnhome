@@ -57,6 +57,7 @@ object Url {
         const val Get = "${base}get"
 
         const val List = "${base}list"
+
         const val Fee = "${base}fee"
 
         const val Order = "${base}order"
@@ -151,11 +152,41 @@ object Url {
         const val Up = "${base}up"
     }
 
+    /**
+     * 用户账户相关接口
+     */
     object Account {
         private const val base = "account/"
 
         const val Fee = "${base}fee"
 
-        const val Order = "${base}vip/order"
+        const val Recharge = "${base}recharge"
+
+        const val Activate = "${base}vip/activate"
+    }
+
+    /**
+     * 订单相关接口
+     */
+    object Order{
+
+        private const val base = "order/"
+
+        const val Accept = "${base}accept"
+
+        const val Cancel = "${base}cancel"
+
+        const val Finish = "${base}finish"
+
+        const val Get = "${base}get"
+
+        const val Pay = "${base}pay"
+
+        const val Refund = "${base}refund"
+
+        const val MemberList = "${base}list/member"
+
+        const val TeacherList = "${base}list/teacher"
+
     }
 }

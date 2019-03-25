@@ -27,10 +27,10 @@ class BindVipModel : BaseModel() {
         online = online.not()
     }
 
-    @Params([Url.Account.Order], "payType")
+    @Params([Url.Account.Activate], "payType")
     var payType = 2
 
-    @Params([Url.Account.Order], "cardNo")
+    @Params([Url.Account.Activate], "cardNo")
     @Bindable
     var cardNo = ""
         set(value) {
@@ -45,7 +45,7 @@ class BindVipModel : BaseModel() {
             enPassword = RxEncryptTool.encryptMD5ToString(value)
         }
 
-    @Params([Url.Account.Order], "cardPassword")
+    @Params([Url.Account.Activate], "cardPassword")
     var enPassword = ""
 
     override fun checkSuccess(url: String): Boolean {

@@ -9,14 +9,14 @@ import pro.haichuang.learn.home.net.Url
 
 class PaymentModel : BaseModel() {
 
-    @Params([Url.Account.Order], "payType")
+    @Params([Url.Account.Activate], "payType")
     @Bindable
     var type = 0
         set(value) {
             field = value
             notifyPropertyChanged(BR.type)
         }
-    @Params([Url.Account.Order], "payType")
+    @Params([Url.Account.Activate], "payType")
     @Bindable
     var price = ""
         set(value) {

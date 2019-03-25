@@ -27,4 +27,17 @@ open class AutoGridView : GridView {
             if (!value.isNullOrEmpty())
                 adapter = CommonAdapter(LayoutInflater.from(context), R.layout.item_square_image, value)
         }
+
+    var pictures: String? = null
+        set(value) {
+
+            if (!value.isNullOrEmpty()) {
+                val imgs = ArrayList<ImageBean>()
+                value.split(",").forEach {
+                    imgs.add(ImageBean(it, ""))
+                }
+                adapter = CommonAdapter(LayoutInflater.from(context), R.layout.item_square_image, imgs)
+            }
+            field = value
+        }
 }

@@ -13,7 +13,7 @@ object SPUtils {
 
     var session: String?
         get() = sp.getString("session", null)
-        set(value) = sp.edit().putString("session", value).apply()
+        private set(value) = sp.edit().putString("session", value).apply()
 
     var phone: String?
         get() = sp.getString("phone", null)
@@ -25,7 +25,21 @@ object SPUtils {
 
     var userInfo: UserInfo?
         get() = Gson().fromJson(sp.getString("userInfo", null), UserInfo::class.java)
-        set(value) = sp.edit().putString("userInfo", value?.toJson()).apply()
+        set(value) {
+            session = value?.sessionKey
+            isVip = value?.vip ?: false
+            isTeacher = value?.teacher ?: false
+            sp.edit().putString("userInfo", value?.toJson()).apply()
+        }
+
+    var isVip: Boolean
+        get() = sp.getBoolean("isVip", false)
+        set(value) = sp.edit().putBoolean("isVip", value).apply()
+
+    var isTeacher: Boolean
+        get() = sp.getBoolean("isTeacher", false)
+        private set(value) = sp.edit().putBoolean("isTeacher", value).apply()
+
 
     fun clear() {
         sp.edit().clear().apply()

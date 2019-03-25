@@ -9,7 +9,9 @@ class UserInfo {
     var city = ""
     var realname = ""
     var userImg = ""
+    var sessionKey = ""
     var imToken = ""
+    var imAccid = ""
     var vip = false
     var teacher = false
 }

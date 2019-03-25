@@ -15,7 +15,7 @@ import com.tencent.tauth.Tencent
 import com.tencent.tauth.UiError
 import kotlinx.android.synthetic.main.activity_login.*
 import pro.haichuang.learn.home.R
-import pro.haichuang.learn.home.bean.MLoginInfo
+import pro.haichuang.learn.home.bean.UserInfo
 import pro.haichuang.learn.home.config.DataBindingActivity
 import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.MainActivity
@@ -93,9 +93,9 @@ class LoginActivity : DataBindingActivity<LoginModel>(), IUiListener {
                 toast("发送成功")
             }
             Url.User.Login -> {
-                val info = GsonUtil.parseObject(result, MLoginInfo::class.java)
-                SPUtils.session = info.sessionKey
-                NimUIKit.login(LoginInfo("im_test007", "im_test007"), object : RequestCallback<LoginInfo> {
+                val info = GsonUtil.parseObject(result, UserInfo::class.java)
+                SPUtils.userInfo = info
+                NimUIKit.login(LoginInfo(info.imAccid, info.imToken), object : RequestCallback<LoginInfo> {
                     override fun onSuccess(p0: LoginInfo?) {
                         SPUtils.loginInfo = p0
                         SPUtils.phone = model.phone

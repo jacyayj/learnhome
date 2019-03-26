@@ -10,11 +10,12 @@ import pro.haichuang.learn.home.net.Url
 
 class OrderDetailsModel : BaseModel() {
 
-    @Params([Url.Order.Get], "orderNumber")
-    var orderNumber = ""
+
+    @Params([Url.Order.Get, Url.Order.Pay, Url.Order.Cancel], "orderId")
     var id = 0
     var orderStatus = 0
     var orderType = 0
+    @Params([Url.Order.Pay], "payType")
     var payType = 0
     var acceptTime = ""
     var appointTime = ""

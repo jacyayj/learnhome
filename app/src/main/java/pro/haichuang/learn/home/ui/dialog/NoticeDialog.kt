@@ -8,14 +8,17 @@ import kotlinx.android.synthetic.main.dialog_notice.*
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.utils.DialogUtils
 
-class NoticeDialog(context: Context) : Dialog(context, R.style.Dialog) {
+class NoticeDialog(context: Context, private val result: () -> Unit = {}) : Dialog(context, R.style.Dialog) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dialog_notice)
         DialogUtils.initDialogWidth(window, 0.66f)
         cancel.setOnClickListener { dismiss() }
-        confirm.setOnClickListener { dismiss() }
+        confirm.setOnClickListener {
+            result()
+            dismiss()
+        }
     }
 
     fun show(title: String, content: String = "") {

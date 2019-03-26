@@ -43,11 +43,12 @@ class PaymentActivity : DataBindingActivity<PaymentModel>() {
 
     override fun initData() {
         model.price = intent.getStringExtra(PRICE)
+        model.recharge = intent.getBooleanExtra("isRecharge", false)
     }
 
     override fun onSuccess(url: String, result: Any?) {
         when (url) {
-            Url.Account.Activate -> {
+            Url.Account.Activate,Url.Account.Recharge -> {
                 when (model.type) {
                     1 -> {
                         toast("钱包支付未完成")
@@ -77,7 +78,10 @@ class PaymentActivity : DataBindingActivity<PaymentModel>() {
             mStartActivity(WalletActivity::class.java)
         }
         pay.setOnClickListener {
-            autoPost(Url.Account.Activate, needSession = true)
+            if (model.recharge)
+                autoPost(Url.Account.Recharge, showLoading = true, needSession = true)
+            else
+                autoPost(Url.Account.Activate, showLoading = true, needSession = true)
         }
     }
 }

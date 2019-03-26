@@ -75,5 +75,5 @@ dependencies {
     implementation 'com.amap.api:location:4.5.0'
     implementation 'com.amap.api:search:6.5.0.1'
     implementation 'com.amap.api:map2d:5.2.0'
-    implementation (name: 'alipaySdk-15.6.0-20190226104104-noUtdid', ext: 'aar')
+    implementation(name: 'alipaySdk-15.6.0-20190226104104-noUtdid', ext: 'aar')
 }

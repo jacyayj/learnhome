@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <import type="pro.haichuang.learn.home.utils.ImageBinding" />
+
+        <variable
+            name="item"
+            type="pro.haichuang.learn.home.ui.activity.mine.itemmodel.OrderModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@drawable/divider_vertical_e0"
+        android:orientation="vertical"
+        android:showDividers="middle">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="10dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="15dp"
+            android:paddingTop="17dp"
+            android:paddingBottom="10dp">
+
+            <com.yhy.widget.core.img.round.CircleImageView
+                net_url="@{item.teacherInfo.teacherImg}"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:layout_marginEnd="10dp" />
+
+            <TextView
+                style="@style/text_16_33"
+                android:text="@{item.teacherInfo.teachername}" />
+
+            <TextView
+                style="@style/text_16_33"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="@{item.orderAmount+`元`}" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/operation"
+            style="@style/text_14_32C8FA"
+            android:layout_width="60dp"
+            android:layout_height="25dp"
+            android:layout_gravity="end"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="11dp"
+            android:background="@{item.canClick ? @drawable/stroke_32c8fa_radius_5dp : @drawable/stroke_e0_radius_5dp}"
+            android:gravity="center"
+            android:text="@{item.text}"
+            android:textColor="@{item.canClick ? @color/color32C8FA : @color/colorE0E0E0}" />
+    </LinearLayout>
+</layout>

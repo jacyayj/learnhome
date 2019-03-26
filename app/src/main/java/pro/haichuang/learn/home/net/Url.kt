@@ -17,16 +17,57 @@ object Url {
     }
 
     /**
+     * 海外留学相关接口
+     */
+    object ForeignCollege {
+
+        private const val base = "foreign_college/"
+
+        const val Type = "${base}type"
+
+        const val List = "${base}list"
+
+        const val Get = "${base}get"
+    }
+
+
+    /**
+     * 状元笔记相关接口
+     */
+    object Note {
+
+        private const val base = "note/"
+
+        const val List = "${base}list"
+
+        const val Get = "${base}get"
+    }
+
+    /**
+     * 在线视频相关接口
+     */
+    object Video {
+
+        private const val base = "video/"
+
+        const val List = "${base}list"
+    }
+
+    /**
      * 用户相关接口
      */
     object User {
         private const val base = "user/"
+
+        const val Account = "${base}account"
 
         const val Login = "${base}login"
 
         const val Register = "${base}register"
 
         const val Info = "${base}info"
+
+        const val UpdateInfo = "${base}info/update"
 
         const val FileSave = "${base}file/save"
 
@@ -168,7 +209,7 @@ object Url {
     /**
      * 订单相关接口
      */
-    object Order{
+    object Order {
 
         private const val base = "order/"
 

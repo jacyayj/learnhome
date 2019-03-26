@@ -3,9 +3,11 @@
 
     <data>
 
+        <import type="pro.haichuang.learn.home.utils.ImageBinding" />
+
         <variable
             name="item"
-            type="Integer" />
+            type="pro.haichuang.learn.home.ui.activity.index.itemmodel.CollegeModel" />
     </data>
 
     <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -16,13 +18,18 @@
         app:cardBackgroundColor="@color/colorFF9E05"
         app:cardCornerRadius="5dp">
 
+        <ImageView
+            net_url="@{item.pic}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
         <TextView
             style="@style/text_15_FF2829"
             android:layout_margin="5dp"
             android:background="@drawable/bg_ff_radius_13dp"
             android:paddingHorizontal="10dp"
             android:paddingVertical="3dp"
-            android:text="美国"
+            android:text="@{item.country}"
             android:textColor="@color/colorWhite" />
 
         <TextView
@@ -32,7 +39,7 @@
             android:background="@drawable/bg_ff_radius_13dp"
             android:paddingHorizontal="10dp"
             android:paddingVertical="3dp"
-            android:text="43219美元/年"
+            android:text="@{item.tuitionFee}"
             android:textColor="@color/colorWhite" />
 
         <FrameLayout
@@ -42,22 +49,22 @@
             android:orientation="horizontal">
 
             <ImageView
+                net_url="@{item.logo}"
                 android:layout_width="55dp"
-                android:layout_height="match_parent"
-                android:src="@mipmap/ic_launcher" />
+                android:layout_height="match_parent" />
 
             <TextView
                 style="@style/text_17_00"
                 android:layout_marginHorizontal="65dp"
                 android:paddingTop="8dp"
-                android:text="美国斯坦福大学" />
+                android:text="@{item.collegeName}" />
 
             <TextView
                 style="@style/text_15_99"
                 android:layout_gravity="bottom"
                 android:layout_marginHorizontal="65dp"
                 android:paddingBottom="8dp"
-                android:text="Stanford university" />
+                android:text="@{item.englishName}" />
 
             <TextView
                 android:id="@+id/to_zixun"

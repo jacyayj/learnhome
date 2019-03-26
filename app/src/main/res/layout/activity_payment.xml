@@ -3,6 +3,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="model"
             type="pro.haichuang.learn.home.ui.activity.mine.viewmodel.PaymentModel" />
@@ -110,7 +112,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:visibility="@{model.recharge ? View.GONE : View.VISIBLE}">
 
             <ImageView
                 android:layout_width="32dp"
@@ -128,8 +131,8 @@
                 android:drawableEnd="@drawable/selector_single_choose_small"
                 android:gravity="center_vertical"
                 android:onClick="@{model::togglePay}"
-                android:paddingEnd="25dp"
                 android:paddingVertical="15dp"
+                android:paddingEnd="25dp"
                 android:tag="1"
                 android:text="XX钱包" />
 
@@ -147,9 +150,9 @@
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/label"
                 android:text="余额不足？去充值）"
+                app:ltv_line_color="@color/color99"
                 app:ltv_line_interval="1dp"
                 app:ltv_line_size="0.5dp"
-                app:ltv_line_color="@color/color99"
                 app:ltv_line_style="underline" />
         </RelativeLayout>
 

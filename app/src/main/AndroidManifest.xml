@@ -24,9 +24,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <uses-feature android:name="android.hardware.camera" />
-    <uses-feature android:name="android.hardware.camera.autofocus" />
-
-    <!--允许程序访问CellID或WiFi热点来获取粗略的位置-->
+    <uses-feature android:name="android.hardware.camera.autofocus" /> <!-- 允许程序访问CellID或WiFi热点来获取粗略的位置 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <uses-feature
@@ -50,7 +48,9 @@
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:theme"
         tools:targetApi="n">
-        <activity android:name=".ui.activity.index.VRDetailsActivity"></activity>
+        <activity android:name=".ui.activity.mine.OrderTeacherActivity"></activity>
+        <activity android:name=".ui.TestPlayActivity" />
+        <activity android:name=".ui.activity.index.VRDetailsActivity" />
         <activity android:name=".ui.activity.index.SearchActivity" />
         <activity
             android:name=".ui.activity.login.LoginActivity"
@@ -142,21 +142,19 @@
         <activity android:name=".ui.activity.index.ZhuanTiActivity" />
         <activity android:name=".ui.activity.index.ZhuanTiDetailsActivity" />
         <activity android:name=".ui.activity.index.ZhuanTiSignupActivity" />
-        <activity android:name=".ui.activity.mine.TiXianActivity" />
-        <!-- map -->
+        <activity android:name=".ui.activity.mine.TiXianActivity" /> <!-- map -->
         <activity
-            android:name="pro.haichuang.learn.home.ui.im.location.activity.LocationAmapActivity"
+            android:name=".ui.im.location.activity.LocationAmapActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/location_map"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="pro.haichuang.learn.home.ui.im.location.activity.NavigationAmapActivity"
+            android:name=".ui.im.location.activity.NavigationAmapActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/location_navigate"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <!-- 云信后台服务，请使用独立进程。 -->
+            android:theme="@style/AppTheme.NoActionBar" /> <!-- 云信后台服务，请使用独立进程。 -->
         <service
             android:name="com.netease.nimlib.service.NimService"
             android:process=":core" /> <!-- 云信后台辅助服务 -->
@@ -196,20 +194,16 @@
         <activity
             android:name="com.tencent.connect.common.AssistActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <!-- 微信分享 -->
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" /> <!-- 微信分享 -->
         <activity
             android:name=".wxapi.WXEntryActivity"
-            android:exported="true" />
-        <!-- wxpay -->
+            android:exported="true" /> <!-- wxpay -->
         <activity
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
             android:launchMode="singleTop"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <!-- 高德地图 -->
-        <service android:name="com.amap.api.location.APSService" />
-        <!-- 如果IDE是Eclipse，此处可将build.gradle中的AMAP_KEY定义拷贝过来。 -->
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" /> <!-- 高德地图 -->
+        <service android:name="com.amap.api.location.APSService" /> <!-- 如果IDE是Eclipse，此处可将build.gradle中的AMAP_KEY定义拷贝过来。 -->
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="dc2c5299ff2a28b71482f2831b05f888" />

@@ -35,9 +35,12 @@
                 android:src="@drawable/icon_friend_search" />
 
             <EditText
+                android:id="@+id/search_input"
                 style="@style/match_layout"
                 android:background="@null"
                 android:hint="搜索课程类型或者课程关键字"
+                android:imeOptions="actionSearch"
+                android:singleLine="true"
                 android:textColor="@color/color33"
                 android:textColorHint="@color/colorCCC4CC"
                 android:textSize="15sp" />
@@ -51,14 +54,20 @@
         android:background="@color/white"
         app:tabIndicatorHeight="0dp"
         app:tabMode="fixed"
-        app:tabTextAppearance="@style/find_menu"/>
+        app:tabTextAppearance="@style/find_menu" />
 
-    <ListView
-        android:id="@+id/listView"
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@id/refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorWhite"
-        android:divider="@null"
-        android:dividerHeight="10dp"
-        android:padding="10dp" />
+        android:background="@color/colorWhite">
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null"
+            android:dividerHeight="10dp"
+            android:padding="10dp" />
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </LinearLayout>

@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.jacy.kit.config.toJson
-import com.jacy.kit.config.toast
 import com.tencent.mm.opensdk.constants.ConstantsAPI
 import com.tencent.mm.opensdk.modelbase.BaseReq
 import com.tencent.mm.opensdk.modelbase.BaseResp
@@ -36,15 +35,15 @@ class WXPayEntryActivity : AppCompatActivity(), IWXAPIEventHandler {
             ConstantsAPI.COMMAND_PAY_BY_WX -> {
                 when (resp.errCode) {
                     BaseResp.ErrCode.ERR_OK -> {
-                        toast("支付成功")
+                        sendBroadcast(Intent("payResult").putExtra("payResult",0))
                         finish()
                     }
                     BaseResp.ErrCode.ERR_USER_CANCEL -> {
-                        toast("支付取消")
+                        sendBroadcast(Intent("payResult").putExtra("payResult",1))
                         finish()
                     }
                     else -> {
-                        toast("支付失败")
+                        sendBroadcast(Intent("payResult").putExtra("payResult",2))
                         finish()
                     }
                 }

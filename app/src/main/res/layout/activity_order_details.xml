@@ -92,6 +92,7 @@
                 </FrameLayout>
 
                 <Button
+                    android:id="@+id/pay"
                     style="@style/text_17_99"
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
@@ -225,6 +226,7 @@
                     android:text="@{`电话   `+model.contactPhone}" />
 
                 <Button
+                    android:id="@+id/cancel"
                     style="@style/text_17_99"
                     android:layout_width="match_parent"
                     android:layout_height="35dp"

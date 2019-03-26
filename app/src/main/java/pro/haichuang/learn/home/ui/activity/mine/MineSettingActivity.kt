@@ -21,6 +21,7 @@ class MineSettingActivity : BaseActivity() {
     override fun initData() {
         titleModel.title = "设置"
         listView.adapter = CommonAdapter(layoutInflater, R.layout.item_mine_setting, data)
+        data[0].subText = intent.getStringExtra("name")
     }
 
     override fun initListener() {
@@ -45,7 +46,10 @@ class MineSettingActivity : BaseActivity() {
         super.onActivityResult(requestCode, resultCode, i)
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
-                0x01 -> i?.getStringExtra("name")?.let { if (it.isNotEmpty()) data[0].subText = it }
+                0x01 -> {
+                    setResult(Activity.RESULT_OK)
+                    i?.getStringExtra("name")?.let { if (it.isNotEmpty()) data[0].subText = it }
+                }
             }
         }
     }

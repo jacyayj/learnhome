@@ -5,8 +5,10 @@ import android.content.Intent
 import com.jacy.kit.adapter.CommonAdapter
 import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.mStartActivity
+import com.jacy.kit.config.toast
 import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureConfig
+import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.fragment_mine.*
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.bean.UserInfo
@@ -17,6 +19,8 @@ import pro.haichuang.learn.home.ui.dialog.InvateDialog
 import pro.haichuang.learn.home.utils.DataUtils
 import pro.haichuang.learn.home.utils.GsonUtil
 import pro.haichuang.learn.home.utils.ImageBinding
+import pro.haichuang.learn.home.utils.SPUtils
+import java.io.File
 
 @ContentView(R.layout.fragment_mine)
 class MineFragment : BaseFragment() {
@@ -27,14 +31,26 @@ class MineFragment : BaseFragment() {
     }
 
     override fun onSuccess(url: String, result: Any?) {
-        val user = GsonUtil.parseObject(result, UserInfo::class.java)
-        follow_count.text = user.totalAttention.toString()
-        fans_count.text = user.totalFans.toString()
-        release_count.text = user.totalPublish.toString()
-        comment_count.text = user.totalComment.toString()
-        name.text = user.realname
-        to_vip.setImageResource(if (user.vip) R.drawable.icon_vip else R.drawable.icon_vip_not)
-        ImageBinding.displayNet(header, user.userImg)
+        when (url) {
+            Url.User.Info -> {
+                val user = GsonUtil.parseObject(result, UserInfo::class.java)
+                follow_count.text = user.totalAttention.toString()
+                fans_count.text = user.totalFans.toString()
+                release_count.text = user.totalPublish.toString()
+                comment_count.text = user.totalComment.toString()
+                name.text = user.realname
+                to_vip.setImageResource(if (user.vip) R.drawable.icon_vip else R.drawable.icon_vip_not)
+                ImageBinding.displayNet(header, user.userImg)
+            }
+            Url.Upload.Upload -> {
+                val params = HttpParams()
+                params.put("userImg", GsonUtil.getString(result, "uploadPath"))
+                post(Url.User.UpdateInfo, params, showLoading = true, needSession = true)
+            }
+            Url.User.UpdateInfo -> {
+                toast("上传成功")
+            }
+        }
     }
 
     override fun initListener() {
@@ -43,7 +59,7 @@ class MineFragment : BaseFragment() {
                 0 -> mStartActivity(WalletActivity::class.java)
                 1 -> mStartActivity(JoinGroupActivity::class.java)
                 2 -> mStartActivity(CollectActivity::class.java)
-                3 -> mStartActivity(OrderActivity::class.java)
+                3 -> if (SPUtils.isTeacher) mStartActivity(OrderTeacherActivity::class.java) else mStartActivity(OrderActivity::class.java)
                 4 -> mStartActivity(FileActivity::class.java)
                 5 -> InvateDialog(context!!).show()
             }
@@ -57,7 +73,7 @@ class MineFragment : BaseFragment() {
                     .forResult(PictureConfig.CHOOSE_REQUEST)
         }
         to_setting.setOnClickListener {
-            mStartActivity(MineSettingActivity::class.java)
+            startActivityForResult(Intent(context, MineSettingActivity::class.java).putExtra("name", name.text.toString()), 0x01)
         }
         to_my_follow.setOnClickListener {
             mStartActivity(MyFollowActivity::class.java)
@@ -76,6 +92,7 @@ class MineFragment : BaseFragment() {
         }
     }
 
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
@@ -83,7 +100,13 @@ class MineFragment : BaseFragment() {
                 PictureConfig.CHOOSE_REQUEST -> {
                     val url = PictureSelector.obtainMultipleResult(data)[0].compressPath
                     ImageBinding.displayLocal(header, url)
+                    val params = HttpParams()
+                    params.put("mobile", SPUtils.phone)
+                    params.put("type", "image")
+                    params.put("uploadFile", File(url), null)
+                    post(Url.Upload.Upload, params, showLoading = true)
                 }
+                else -> post(Url.User.Info, showLoading = false, needSession = true)
             }
         }
     }

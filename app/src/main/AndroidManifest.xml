@@ -48,9 +48,9 @@
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:theme"
         tools:targetApi="n">
-        <activity android:name=".ui.activity.mine.OrderTeacherActivity"></activity>
-        <activity android:name=".ui.TestPlayActivity" />
+        <activity android:name=".ui.activity.mine.OrderTeacherActivity"/>
         <activity android:name=".ui.activity.index.VRDetailsActivity" />
+        <activity android:name=".ui.activity.index.VideoPlayActivity" />
         <activity android:name=".ui.activity.index.SearchActivity" />
         <activity
             android:name=".ui.activity.login.LoginActivity"
@@ -103,7 +103,7 @@
             android:name=".ui.activity.mine.FileActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".ui.activity.index.HeightSchoolActivity" />
-        <activity android:name=".ui.activity.index.OnlineVideoActivity" />
+        <activity android:name=".ui.activity.index.OnlineVideoActivity" android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".ui.activity.index.XinLiActivity" />
         <activity android:name=".ui.activity.index.TeacherDetailsActivity" />
         <activity

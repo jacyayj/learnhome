@@ -3,23 +3,29 @@ package pro.haichuang.learn.home.ui.activity.index
 import android.support.design.widget.TabLayout
 import com.jacy.kit.adapter.CommonAdapter
 import com.jacy.kit.config.ContentView
+import com.jacy.kit.config.mStartActivity
 import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.activity_online_video.*
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.config.BaseActivity
+import pro.haichuang.learn.home.config.Constants.VIDEO_URL
 import pro.haichuang.learn.home.net.Url
+import pro.haichuang.learn.home.ui.activity.index.itemmodel.VideoModel
+import pro.haichuang.learn.home.utils.GsonUtil
 
 
 @ContentView(R.layout.activity_online_video)
 class OnlineVideoActivity : BaseActivity() {
+
+    private val adapter by lazy { CommonAdapter<VideoModel>(layoutInflater, R.layout.item_online_video) }
 
     private var recommend = true
 
     private var videoType = ""
 
     override fun initData() {
-        listView.adapter = CommonAdapter(layoutInflater, R.layout.item_online_video, arrayListOf(1, 2, 3, 4, 5, 6))
-        pageUrl=Url.Video.List
+        listView.adapter = adapter
+        pageUrl = Url.Video.List
         fetchPageData()
     }
 
@@ -32,6 +38,9 @@ class OnlineVideoActivity : BaseActivity() {
     }
 
     override fun initListener() {
+        listView.setOnItemClickListener { _, _, position, _ ->
+            mStartActivity(VideoPlayActivity::class.java, Pair(VIDEO_URL, adapter.getItem(position).attr?.videoUrl))
+        }
         tab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(p0: TabLayout.Tab?) {
 
@@ -56,7 +65,14 @@ class OnlineVideoActivity : BaseActivity() {
                         videoType = "理科"
                     }
                 }
+                fetchPageData()
             }
         })
+    }
+
+    override fun onSuccess(url: String, result: Any?) {
+        GsonUtil.parseRows(result, VideoModel::class.java).list?.let {
+            dealRows(adapter, it)
+        }
     }
 }

@@ -43,7 +43,7 @@ class OrderActivity : BaseActivity() {
                             toast("退款申请成功")
                         }
                     }.show("确定退款此订单？", "款项将在1-7个工作日按照支付路径原路返回至用户的支付账户")
-                    2, 3 -> mStartActivity(OrderCommentActivity::class.java)
+                    2, 3 -> mStartActivity(OrderCommentActivity::class.java, Pair(ORDER_ID, t.id))
                 }
             }
         }

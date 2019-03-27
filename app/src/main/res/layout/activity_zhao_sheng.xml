@@ -34,15 +34,15 @@
             android:layout_marginHorizontal="15dp"
             android:text="自主招生政策" />
 
-        <android.support.design.widget.TabItem
-            style="@style/match_layout"
-            android:layout_marginHorizontal="15dp"
-            android:text="主要专业" />
+        <!--<android.support.design.widget.TabItem-->
+            <!--style="@style/match_layout"-->
+            <!--android:layout_marginHorizontal="15dp"-->
+            <!--android:text="主要专业" />-->
 
-        <android.support.design.widget.TabItem
-            style="@style/match_layout"
-            android:layout_marginHorizontal="15dp"
-            android:text="报考指南" />
+        <!--<android.support.design.widget.TabItem-->
+            <!--style="@style/match_layout"-->
+            <!--android:layout_marginHorizontal="15dp"-->
+            <!--android:text="报考指南" />-->
     </android.support.design.widget.TabLayout>
 
     <TextView

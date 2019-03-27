@@ -34,6 +34,14 @@ public class ImageBinding {
                 .into(view);
     }
 
+    @BindingAdapter({"match_net_url"})
+    public static void displayMatchNet(ImageView view, String url) {
+        Glide.with(view)
+                .applyDefaultRequestOptions(RequestOptions.centerCropTransform().placeholder(R.mipmap.ic_launcher_round).error(R.mipmap.ic_launcher_round))
+                .load(Url.image_base_url + url)
+                .into(view);
+    }
+
     @BindingAdapter({"release_url"})
     public static void displayReleaseImage(ImageView view, String url) {
         if (!url.isEmpty())

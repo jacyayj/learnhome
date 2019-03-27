@@ -32,7 +32,7 @@ class LoginModel : BaseModel() {
             notifyPropertyChanged(BR.pwd)
         }
 
-    @Params([Url.Sms.Send], "mobile")
+    @Params([Url.Sms.Send, Url.User.Login], "mobile")
     @Bindable
     var phone = ""
         set(value) {
@@ -48,21 +48,29 @@ class LoginModel : BaseModel() {
         }
 
     @Params([Url.Sms.Send], "sendType")
-    private val sendType = "2"
+    private val sendType = "1"
 
     override fun checkSuccess(url: String): Boolean {
         return when (url) {
             Url.User.Login -> {
                 when {
-                    user.isEmpty() -> {
+                    !fastLogin && user.isEmpty() -> {
                         toast("请输入手机号")
+                        false
+                    }
+                    fastLogin && phone.isEmpty() -> {
+                        toast("请输入正确的手机号")
                         false
                     }
                     pwd.isEmpty() -> {
                         toast("请输入密码")
                         false
                     }
-                    !RxRegTool.isMobileSimple(user) -> {
+                    !fastLogin && !RxRegTool.isMobileSimple(user) -> {
+                        toast("请输入正确的手机号")
+                        false
+                    }
+                    fastLogin && !RxRegTool.isMobileSimple(phone) -> {
                         toast("请输入正确的手机号")
                         false
                     }

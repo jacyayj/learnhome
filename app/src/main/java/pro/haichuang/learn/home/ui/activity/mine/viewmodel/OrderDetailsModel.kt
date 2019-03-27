@@ -43,12 +43,14 @@ class OrderDetailsModel : BaseModel() {
     val canOperation
         get() = orderStatus == 0
 
+    val canComment
+        get() = (orderStatus == 2 || orderStatus == 3) && !isComment
+
     val text
         get() = when (orderStatus) {
             -1 -> "交易关闭"
             1 -> "已付款"
-            2 -> "已接单"
-            3 -> "已完成"
+            2, 3 -> if (isComment) "已完成" else "待评价"
             4 -> if (refundState) "已退款" else "退款中"
             else -> ""
         }

@@ -2,6 +2,8 @@ package pro.haichuang.learn.home.ui.activity.find
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
 import android.os.Handler
 import android.os.Message
@@ -132,6 +134,24 @@ class YuYueActivity : DataBindingActivity<YuYueModel>() {
                         params.put("uploadFile", file, null)
                         post(Url.Upload.Upload, params)
                     }
+                }
+            }
+        }
+    }
+
+    inner class PayResult : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            when (intent?.getIntExtra("payResult", -1)) {
+                0 -> {
+                    toast("支付成功")
+                    setResult(Activity.RESULT_OK)
+                    finish()
+                }
+                1 -> {
+                    toast("支付取消")
+                }
+                2 -> {
+                    toast("支付失败")
                 }
             }
         }

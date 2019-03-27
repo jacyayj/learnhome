@@ -26,10 +26,19 @@ class PaymentModel : BaseModel() {
         }
 
     @Bindable
+    var confirmStr = ""
+        get() = if (recharge) "确认充值" else "确认购买"
+    @Bindable
+    var noticeStr = ""
+        get() = if (recharge) "余额充值" else "会员升级"
+
+    @Bindable
     var recharge = false
         set(value) {
             field = value
             notifyPropertyChanged(BR.recharge)
+            notifyPropertyChanged(BR.confirmStr)
+            notifyPropertyChanged(BR.noticeStr)
         }
 
     fun togglePay(view: View) {

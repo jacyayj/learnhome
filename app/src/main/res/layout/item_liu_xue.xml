@@ -15,11 +15,10 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:elevation="5dp"
-        app:cardBackgroundColor="@color/colorFF9E05"
         app:cardCornerRadius="5dp">
 
         <ImageView
-            net_url="@{item.pic}"
+            match_net_url="@{item.pic}"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

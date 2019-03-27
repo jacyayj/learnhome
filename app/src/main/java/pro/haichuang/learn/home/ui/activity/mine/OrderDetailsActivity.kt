@@ -10,6 +10,7 @@ import android.os.Handler
 import android.os.Message
 import com.google.gson.JsonObject
 import com.jacy.kit.config.ContentView
+import com.jacy.kit.config.mStartActivity
 import com.jacy.kit.config.toast
 import com.tencent.mm.opensdk.modelpay.PayReq
 import kotlinx.android.synthetic.main.activity_order_details.*
@@ -64,6 +65,9 @@ class OrderDetailsActivity : DataBindingActivity<OrderDetailsModel>() {
         }
         cancel.setOnClickListener {
             autoPost(Url.Order.Cancel, needSession = true)
+        }
+        comment.setOnClickListener {
+            mStartActivity(OrderCommentActivity::class.java, Pair(ORDER_ID, model.id))
         }
     }
 

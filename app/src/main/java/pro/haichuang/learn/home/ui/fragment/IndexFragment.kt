@@ -2,10 +2,10 @@ package pro.haichuang.learn.home.ui.fragment
 
 import com.jacy.kit.adapter.CommonAdapter
 import com.jacy.kit.adapter.CommonRecyclerAdapter
+import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.mStartActivity
 import kotlinx.android.synthetic.main.fragment_index.*
 import pro.haichuang.learn.home.R
-import com.jacy.kit.config.ContentView
 import pro.haichuang.learn.home.config.BaseFragment
 import pro.haichuang.learn.home.ui.activity.CityListActivity
 import pro.haichuang.learn.home.ui.activity.find.FindDetailsActivity
@@ -26,7 +26,7 @@ class IndexFragment : BaseFragment() {
                 4 -> mStartActivity(LiuXueActivity::class.java)
                 5 -> mStartActivity(ZhaoShengActivity::class.java)
                 6 -> mStartActivity(NoteBookActivity::class.java)
-                7 -> mStartActivity(XinLiActivity::class.java)
+                7 -> mStartActivity(TeacherActivity::class.java, Pair("isXinLi",true))
                 8 -> mStartActivity(OnlineVideoActivity::class.java)
                 9 -> mStartActivity(HeightSchoolActivity::class.java)
             }

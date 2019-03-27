@@ -39,19 +39,11 @@
                 style="@style/text_10_99"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="5dp"
-                android:background="@drawable/stroke_13aeff_radius_8dp"
+                android:background="@drawable/stroke_ff8812_radius_8dp"
                 android:paddingHorizontal="5dp"
                 android:paddingVertical="1dp"
-                android:text="@{item.teacherInfo.subject == 1 ? `文科` : `理科`}"
-                android:textColor="@color/color32C8FA" />
-
-            <TextView
-                style="@style/text_10_99"
-                android:background="@drawable/stroke_13aeff_radius_8dp"
-                android:paddingHorizontal="5dp"
-                android:paddingVertical="1dp"
-                android:text="初中->高中"
-                android:textColor="@color/color32C8FA" />
+                android:text="@{item.teacherInfo.subjectStr}"
+                android:textColor="@color/colorFF8812" />
 
             <TextView
                 style="@style/text_16_33"

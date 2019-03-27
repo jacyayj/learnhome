@@ -3,49 +3,54 @@
 
     <data>
 
+        <import type="pro.haichuang.learn.home.utils.ImageBinding" />
+
         <variable
             name="item"
-            type="Integer" />
+            type="pro.haichuang.learn.home.ui.activity.index.itemmodel.VideoModel" />
     </data>
 
-    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:paddingHorizontal="18dp"
         android:paddingVertical="10dp">
 
-        <VideoView
-            android:id="@+id/video"
+        <ImageView
+            match_net_url="@{item.contentImg}"
             android:layout_width="match_parent"
             android:layout_height="150dp" />
 
         <TextView
             style="@style/text_16_00"
+            android:ellipsize="end"
+            android:paddingTop="10dp"
+            android:singleLine="true"
+            android:text="@{item.title}" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="杨老师教你填志愿"
-            app:layout_constraintTop_toBottomOf="@id/video" />
+            android:layout_marginBottom="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-        <com.yhy.widget.core.img.round.CircleImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginTop="30dp"
-            android:src="@mipmap/ic_launcher_round"
-            app:layout_constraintTop_toBottomOf="@id/video" />
+            <com.yhy.widget.core.img.round.CircleImageView
+                net_url="@{item.attr.authorImg}"
+                android:layout_width="24dp"
+                android:layout_height="24dp" />
 
-        <TextView
-            style="@style/text_14_33"
-            android:layout_marginStart="35dp"
-            android:paddingBottom="5dp"
-            android:text="杨子健"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            <TextView
+                style="@style/text_14_33"
+                android:layout_weight="1"
+                android:paddingStart="5dp"
+                android:text="@{item.author}" />
 
-        <TextView
-            style="@style/text_14_99"
-            android:paddingBottom="5dp"
-            android:text="2018-09-01"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-    </android.support.constraint.ConstraintLayout>
+            <TextView
+                style="@style/text_14_99"
+                android:text="@{item.releaseDate}" />
+        </LinearLayout>
+    </LinearLayout>
 </layout>

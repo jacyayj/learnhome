@@ -52,7 +52,7 @@ class VRActivity : BaseActivity() {
         listView.adapter = adapter
         initTab()
         pageUrl = Url.VR.List
-        refresh_layout.autoRefresh()
+       fetchPageData()
     }
 
     override fun setPageParams(pageParams: HttpParams) {

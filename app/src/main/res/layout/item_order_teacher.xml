@@ -20,7 +20,11 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingVertical="10dp" />
+            android:paddingVertical="10dp"
+            android:paddingStart="15dp"
+            android:text="@{`时间：`+item.createTime}"
+            android:textColor="@color/color33"
+            android:textSize="14sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,14 +36,14 @@
             android:paddingBottom="10dp">
 
             <com.yhy.widget.core.img.round.CircleImageView
-                net_url="@{item.teacherInfo.teacherImg}"
+                net_url="@{item.memberInfo.userImg}"
                 android:layout_width="46dp"
                 android:layout_height="46dp"
                 android:layout_marginEnd="10dp" />
 
             <TextView
                 style="@style/text_16_33"
-                android:text="@{item.teacherInfo.teachername}" />
+                android:text="@{item.memberInfo.realname}" />
 
             <TextView
                 style="@style/text_16_33"
@@ -57,9 +61,9 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="11dp"
-            android:background="@{item.canClick ? @drawable/stroke_32c8fa_radius_5dp : @drawable/stroke_e0_radius_5dp}"
+            android:background="@{item.teacherCanClick ? @drawable/stroke_32c8fa_radius_5dp : @drawable/stroke_e0_radius_5dp}"
             android:gravity="center"
-            android:text="@{item.text}"
-            android:textColor="@{item.canClick ? @color/color32C8FA : @color/colorE0E0E0}" />
+            android:text="@{item.teacherText}"
+            android:textColor="@{item.teacherCanClick ? @color/color32C8FA : @color/colorE0E0E0}"/>
     </LinearLayout>
 </layout>

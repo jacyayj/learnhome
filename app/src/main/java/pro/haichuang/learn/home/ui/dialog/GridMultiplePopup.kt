@@ -10,7 +10,7 @@ import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.bean.NameId
 import pro.haichuang.learn.home.utils.DataUtils
 
-class GridMultiplePopup(val view: View, result: (code: String) -> Unit = {}) : PopupWindow(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT) {
+class GridMultiplePopup(val view: View, private val needId: Boolean = true, result: (code: String) -> Unit = {}) : PopupWindow(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT) {
 
     private var type = -1
 
@@ -23,6 +23,7 @@ class GridMultiplePopup(val view: View, result: (code: String) -> Unit = {}) : P
         isOutsideTouchable = true
         contentView = layoutInflater.inflate(R.layout.popup_grid_multiple, null)
         contentView.grid.adapter = adapter
+        var lastCheckedPosition = -1
         var checkedPosition = -1
         contentView.grid.setOnItemClickListener { _, _, position, _ ->
             contentView.all.isChecked = false
@@ -31,18 +32,34 @@ class GridMultiplePopup(val view: View, result: (code: String) -> Unit = {}) : P
         contentView.all.setOnClickListener {
             if (contentView.all.isChecked.not()) {
                 contentView.all.isChecked = true
-                contentView.grid.setItemChecked(contentView.grid.checkedItemPosition, false)
+                contentView.grid.clearChoices()
                 checkedPosition = -1
             }
         }
         contentView.confirm.setOnClickListener {
             when (type) {
-                5 -> {
-                    result(if (checkedPosition == -1) "" else provinceData?.get(checkedPosition)?.id
-                            ?: "")
+                2 -> {
+                    lastCheckedPosition = checkedPosition
+                    if (checkedPosition == -1)
+                        result("")
+                    else
+                        provinceData?.get(checkedPosition)?.let {
+                            result(if (needId) it.id else it.name.replace("省", ""))
+                        }
                 }
             }
             dismiss()
+        }
+        setOnDismissListener {
+            if (lastCheckedPosition != checkedPosition) {
+                if (lastCheckedPosition == -1) {
+                    contentView.all.isChecked = true
+                    contentView.grid.clearChoices()
+                } else {
+                    contentView.all.isChecked = false
+                    contentView.grid.setItemChecked(lastCheckedPosition, true)
+                }
+            }
         }
     }
 

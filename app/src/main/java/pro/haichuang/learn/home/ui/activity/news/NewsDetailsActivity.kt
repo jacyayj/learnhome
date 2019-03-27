@@ -5,7 +5,7 @@ import com.jacy.kit.config.toast
 import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.activity_news_details.*
 import pro.haichuang.learn.home.R
-import pro.haichuang.learn.home.config.Constants
+import pro.haichuang.learn.home.config.Constants.NEWS_ID
 import pro.haichuang.learn.home.config.DataBindingActivity
 import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.utils.GsonUtil
@@ -14,11 +14,15 @@ import pro.haichuang.learn.home.utils.GsonUtil
 @ContentView(R.layout.activity_news_details)
 class NewsDetailsActivity : DataBindingActivity<NewsDetailsModel>() {
 
-
     override fun initData() {
         val params = HttpParams()
-        params.put("id", intent.getIntExtra(Constants.NEWS_ID, -1).toString())
-        post(Url.News.Get, params, needSession = true)
+        params.put("id", intent.getIntExtra(NEWS_ID, -1).toString())
+        val url = when {
+            intent.getBooleanExtra("isHeightSchool", false) -> Url.HeightSchool.Get
+            intent.getBooleanExtra("isZhaoSheng", false) -> Url.ZhaoSheng.Get
+            else -> Url.News.Get
+        }
+        post(url, params, needSession = true)
     }
 
     override fun initListener() {
@@ -32,7 +36,7 @@ class NewsDetailsActivity : DataBindingActivity<NewsDetailsModel>() {
 
     override fun onSuccess(url: String, result: Any?) {
         when (url) {
-            Url.News.Get -> {
+            Url.News.Get, Url.HeightSchool.Get, Url.ZhaoSheng.Get -> {
                 notifyModel(GsonUtil.parseObject(result, NewsDetailsModel::class.java))
                 content.loadData(model.txt)
             }

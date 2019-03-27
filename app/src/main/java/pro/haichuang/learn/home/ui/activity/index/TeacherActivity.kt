@@ -3,8 +3,9 @@ package pro.haichuang.learn.home.ui.activity.index
 import com.jacy.kit.adapter.CommonAdapter
 import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.mStartActivity
+import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.activity_online_teacher.*
-import kotlinx.android.synthetic.main.item_xinli.view.*
+import kotlinx.android.synthetic.main.item_teacher.view.*
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.config.BaseActivity
 import pro.haichuang.learn.home.config.Constants.TEACHER_ID
@@ -15,6 +16,9 @@ import pro.haichuang.learn.home.utils.GsonUtil
 
 @ContentView(R.layout.activity_online_teacher)
 class TeacherActivity : BaseActivity() {
+
+    private val isXinLi by lazy { intent.getBooleanExtra("isXinLi", false) }
+
     private val adapter by lazy {
         CommonAdapter<ItemTeacherModel>(layoutInflater, R.layout.item_teacher) { v, t, _ ->
             v.to_teacher.setOnClickListener {
@@ -24,10 +28,14 @@ class TeacherActivity : BaseActivity() {
     }
 
     override fun initData() {
-        titleModel.title = "名师在线"
+        titleModel.title = if (isXinLi) "心理舒压" else "名师在线"
         listView.adapter = adapter
         pageUrl = Url.Teacher.List
         fetchPageData()
+    }
+
+    override fun setPageParams(pageParams: HttpParams) {
+        pageParams.put("teacherType", if (isXinLi) "2" else "1")
     }
 
     override fun onSuccess(url: String, result: Any?) {

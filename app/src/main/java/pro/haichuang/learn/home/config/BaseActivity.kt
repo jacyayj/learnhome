@@ -91,6 +91,7 @@ abstract class BaseActivity : RootActivity(), OnRefreshLoadMoreListener {
         if (data.isEmpty()) {
             if (isLoadMore) {
                 toast("已经到底啦")
+                page--
                 return
             } else {
                 toast("暂无数据")

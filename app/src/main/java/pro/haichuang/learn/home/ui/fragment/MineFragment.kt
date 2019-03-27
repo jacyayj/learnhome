@@ -88,7 +88,10 @@ class MineFragment : BaseFragment() {
             mStartActivity(MyCommentActivity::class.java)
         }
         to_vip.setOnClickListener {
-            mStartActivity(BindVipActivity::class.java)
+            if (SPUtils.isVip)
+                toast("您已是VIP")
+            else
+                mStartActivity(BindVipActivity::class.java)
         }
     }
 

@@ -69,7 +69,7 @@
                 style="@style/text_14_99"
                 android:layout_gravity="center_horizontal"
                 android:paddingTop="120dp"
-                android:text="余额充值"
+                android:text="@{model.noticeStr}"
                 android:textColor="@color/colorWhite" />
 
         </FrameLayout>
@@ -137,7 +137,7 @@
                 android:text="XX钱包" />
 
             <TextView
-                android:id="@+id/label"
+                android:id="@+id/balance"
                 style="@style/text_12_99"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="125dp"
@@ -148,7 +148,7 @@
                 android:id="@+id/to_payment"
                 style="@style/text_12_99"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/label"
+                android:layout_toRightOf="@id/balance"
                 android:text="余额不足？去充值）"
                 app:ltv_line_color="@color/color99"
                 app:ltv_line_interval="1dp"
@@ -198,6 +198,6 @@
             style="@style/button_confirm"
             android:layout_marginHorizontal="55dp"
             android:layout_marginTop="40dp"
-            android:text="确认充值" />
+            android:text="@{model.confirmStr}" />
     </LinearLayout>
 </layout>

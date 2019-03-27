@@ -44,6 +44,30 @@ object Url {
     }
 
     /**
+     * 高校单招相关接口
+     */
+    object HeightSchool {
+
+        private const val base = "gxdz/"
+
+        const val List = "${base}list"
+
+        const val Get = "${base}get"
+    }
+
+    /**
+     * 自主招生相关接口
+     */
+    object ZhaoSheng {
+
+        private const val base = "zzzs/"
+
+        const val List = "${base}list"
+
+        const val Get = "${base}get"
+    }
+
+    /**
      * 在线视频相关接口
      */
     object Video {

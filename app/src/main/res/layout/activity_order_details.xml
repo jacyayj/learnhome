@@ -129,19 +129,11 @@
                             style="@style/text_10_99"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="5dp"
-                            android:background="@drawable/stroke_13aeff_radius_8dp"
+                            android:background="@drawable/stroke_ff8812_radius_8dp"
                             android:paddingHorizontal="5dp"
                             android:paddingVertical="2dp"
-                            android:text="@{model.teacherInfo.subject == 1 ? `文科` : `理科`}"
-                            android:textColor="@color/color32C8FA" />
-
-                        <TextView
-                            style="@style/text_10_99"
-                            android:background="@drawable/stroke_13aeff_radius_8dp"
-                            android:paddingHorizontal="5dp"
-                            android:paddingVertical="2dp"
-                            android:text="初中->高中"
-                            android:textColor="@color/color32C8FA" />
+                            android:text="@{model.teacherInfo.subjectStr}"
+                            android:textColor="@color/colorFF8812" />
                     </LinearLayout>
 
                     <TextView
@@ -237,6 +229,19 @@
                     android:text="取消订单"
                     android:textColor="@color/color32C8FA"
                     android:visibility="@{model.canOperation ? View.VISIBLE : View.GONE}" />
+
+                <Button
+                    android:id="@+id/comment"
+                    style="@style/text_17_99"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="@drawable/stroke_32c8fa"
+                    android:text="评价"
+                    android:textColor="@color/color32C8FA"
+                    android:visibility="@{model.canComment ? View.VISIBLE : View.GONE}" />
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

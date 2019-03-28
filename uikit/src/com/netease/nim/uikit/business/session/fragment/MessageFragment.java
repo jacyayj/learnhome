@@ -1,6 +1,9 @@
 package com.netease.nim.uikit.business.session.fragment;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -69,6 +72,7 @@ public class MessageFragment extends TFragment implements ModuleProxy {
     protected MessageListPanelEx messageListPanel;
 
     protected AitManager aitManager;
+    private UpdateReceiver updateReceiver;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -149,7 +153,7 @@ public class MessageFragment extends TFragment implements ModuleProxy {
         initAitManager();
 
         inputPanel.switchRobotMode(NimUIKitImpl.getRobotInfoProvider().getRobotByAccount(sessionId) != null);
-
+        updateReceiver = new UpdateReceiver();
         registerObservers(true);
 
         if (customization != null) {
@@ -176,6 +180,10 @@ public class MessageFragment extends TFragment implements ModuleProxy {
 
 
     private void registerObservers(boolean register) {
+        if (register)
+            getContext().registerReceiver(updateReceiver, new IntentFilter("refreshMessage"));
+        else
+            getContext().unregisterReceiver(updateReceiver);
         MsgServiceObserve service = NIMClient.getService(MsgServiceObserve.class);
         service.observeReceiveMessage(incomingMessageObserver, register);
         // 已读回执监听
@@ -350,7 +358,8 @@ public class MessageFragment extends TFragment implements ModuleProxy {
 
     @Override
     public boolean isLongClickEnabled() {
-        return !inputPanel.isRecording();
+        return false;
+//        return !inputPanel.isRecording();
     }
 
     @Override
@@ -388,4 +397,10 @@ public class MessageFragment extends TFragment implements ModuleProxy {
         return actions;
     }
 
+    class UpdateReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            messageListPanel.clearMessageList();
+        }
+    }
 }

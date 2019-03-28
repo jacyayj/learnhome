@@ -3,6 +3,7 @@ package com.netease.nim.uikit.support.glide;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -92,10 +93,10 @@ public class ImageLoaderKit {
         if (TextUtils.isEmpty(url)) {
             return;
         }
-
+        Log.v("learn_home","image :"+url);
         final int imageSize = HeadImageView.DEFAULT_AVATAR_THUMB_SIZE;
         Glide.with(context)
-                .load(url)
+                .load("http://118.24.80.29:8080/learn-home-server" + url)
                 .submit(imageSize, imageSize);
     }
 }

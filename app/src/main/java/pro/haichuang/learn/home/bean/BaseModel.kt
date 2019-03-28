@@ -15,16 +15,19 @@ open class BaseModel : BaseObservable() {
                 val present = field.getAnnotation(Params::class.java)
                 if (present.url.contains(url)) {
                     field.isAccessible = true
+                    val value = field.get(this).toString()
                     when {
-                        "password" == present.name -> params.put(present.name, RxEncryptTool.encryptMD5ToString(field.get(this).toString()).toLowerCase())
-                        url == Url.User.Login && "mobile" == present.name -> params.put("username", field.get(this).toString())
-                        else -> params.put(present.name, field.get(this).toString())
+                        needEncrypt && "password" == present.name -> params.put(present.name, RxEncryptTool.encryptMD5ToString(value).toLowerCase())
+                        url == Url.User.Login && "mobile" == present.name -> params.put("username", value)
+                        else -> params.put(present.name, value)
                     }
                 }
             }
         }
         return params
     }
+
+    var needEncrypt = true
 
     var JSESSIONID = ""
 

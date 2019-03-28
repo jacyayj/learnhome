@@ -18,19 +18,19 @@
         android:showDividers="middle">
 
         <TextView
+            android:id="@+id/question_tv"
             style="@style/text_16_33"
             android:layout_height="45dp"
             android:drawableStart="@drawable/icon_question"
             android:drawablePadding="10dp"
             android:gravity="center_vertical"
             android:paddingStart="15dp"
-            android:text="手机收不到验证码？"
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/answer_tv"
             style="@style/text_16_99"
             android:padding="15dp"
-            android:text="支付时微信号与登陆时绑定的微信号是不同的，用支付时使用的微信号登录就可以查询"
             android:textColor="@color/color77" />
     </LinearLayout>
 </LinearLayout>

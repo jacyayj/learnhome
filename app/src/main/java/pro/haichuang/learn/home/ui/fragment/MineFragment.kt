@@ -8,6 +8,10 @@ import com.jacy.kit.config.mStartActivity
 import com.jacy.kit.config.toast
 import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureConfig
+import com.netease.nimlib.sdk.NIMClient
+import com.netease.nimlib.sdk.RequestCallback
+import com.netease.nimlib.sdk.uinfo.UserService
+import com.netease.nimlib.sdk.uinfo.constant.UserInfoFieldEnum
 import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.fragment_mine.*
 import pro.haichuang.learn.home.R
@@ -25,11 +29,12 @@ import java.io.File
 @ContentView(R.layout.fragment_mine)
 class MineFragment : BaseFragment() {
 
+    private lateinit var headerUrl: String
+
     override fun initData() {
         listView.adapter = CommonAdapter(layoutInflater, R.layout.item_mine, DataUtils.formatMineListData())
         post(Url.User.Info, showLoading = false, needSession = true)
     }
-
     override fun onSuccess(url: String, result: Any?) {
         when (url) {
             Url.User.Info -> {
@@ -38,17 +43,37 @@ class MineFragment : BaseFragment() {
                 fans_count.text = user.totalFans.toString()
                 release_count.text = user.totalPublish.toString()
                 comment_count.text = user.totalComment.toString()
-                name.text = user.realname
+                if (SPUtils.isTeacher) {
+                    name.text = user.teachername
+                    ImageBinding.displayNet(header, user.teacherImg)
+                } else {
+                    name.text = user.realname
+                    ImageBinding.displayNet(header, user.userImg)
+                }
                 to_vip.setImageResource(if (user.vip) R.drawable.icon_vip else R.drawable.icon_vip_not)
-                ImageBinding.displayNet(header, user.userImg)
             }
             Url.Upload.Upload -> {
                 val params = HttpParams()
-                params.put("userImg", GsonUtil.getString(result, "uploadPath"))
+                headerUrl = GsonUtil.getString(result, "uploadPath")
+                params.put("userImg", headerUrl)
                 post(Url.User.UpdateInfo, params, showLoading = true, needSession = true)
             }
             Url.User.UpdateInfo -> {
-                toast("上传成功")
+                val filed = HashMap<UserInfoFieldEnum, String>()
+                filed[UserInfoFieldEnum.AVATAR] = headerUrl
+                NIMClient.getService(UserService::class.java).updateUserInfo(filed as Map<UserInfoFieldEnum, Any>?).setCallback(object : RequestCallback<Void> {
+                    override fun onSuccess(p0: Void?) {
+                        toast("上传成功")
+                    }
+
+                    override fun onFailed(p0: Int) {
+                        toast("上传失败 $p0")
+                    }
+
+                    override fun onException(p0: Throwable?) {
+                        toast("上传出错 ${p0?.message}")
+                    }
+                })
             }
         }
     }

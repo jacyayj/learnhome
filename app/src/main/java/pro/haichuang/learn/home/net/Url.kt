@@ -16,6 +16,19 @@ object Url {
         const val Send = "${base}send"
     }
 
+
+    /**
+     * 验证码相关接口
+     */
+    object Fqa {
+
+        private const val base = "fqa/"
+
+        const val Get = "${base}get"
+
+        const val List = "${base}list"
+    }
+
     /**
      * 海外留学相关接口
      */

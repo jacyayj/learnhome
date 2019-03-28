@@ -7,7 +7,9 @@ class UserInfo {
     var totalFans = 0
     var totalPublish = 0
     var city = ""
+    var teachername = ""
     var realname = ""
+    var teacherImg = ""
     var userImg = ""
     var sessionKey = ""
     var imToken = ""

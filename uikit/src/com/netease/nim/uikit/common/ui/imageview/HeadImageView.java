@@ -3,6 +3,7 @@ package com.netease.nim.uikit.common.ui.imageview;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -89,7 +90,8 @@ public class HeadImageView extends CircleImageView {
          * 若使用网易云信云存储，这里可以设置下载图片的压缩尺寸，生成下载URL
          * 如果图片来源是非网易云信云存储，请不要使用NosThumbImageUtil
          */
-        final String thumbUrl = makeAvatarThumbNosUrl(url, thumbSize);
+        Log.v("learn_home", "header :" + url);
+        final String thumbUrl = makeAvatarThumbNosUrl("http://118.24.80.29:8080/learn-home-server" + url, thumbSize);
         RequestOptions requestOptions = new RequestOptions()
                 .centerCrop()
                 .placeholder(defaultResId)

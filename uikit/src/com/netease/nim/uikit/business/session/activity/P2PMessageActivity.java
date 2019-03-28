@@ -30,6 +30,8 @@ import com.netease.nimlib.sdk.msg.model.IMMessage;
 import java.util.List;
 import java.util.Set;
 
+import static android.provider.Contacts.PresenceColumns.IM_ACCOUNT;
+
 
 /**
  * 点对点聊天界面
@@ -199,7 +201,7 @@ public class P2PMessageActivity extends BaseMessageActivity {
     }
 
     public void toSetting(View view) {
-        startActivity(new Intent(this, NimUIKitImpl.getSettingClass()));
+        startActivityForResult(new Intent(this, NimUIKitImpl.getSettingClass()).putExtra(IM_ACCOUNT, sessionId), 0x01);
     }
 
     @Override

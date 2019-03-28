@@ -31,8 +31,7 @@
 
             <TextView
                 android:id="@+id/name"
-                style="@style/text_20_ff"
-                android:text="李娇娇" />
+                style="@style/text_20_ff" />
 
             <ImageView
                 android:id="@+id/to_vip"
@@ -105,8 +104,7 @@
             <TextView
                 android:id="@+id/fans_count"
                 style="@style/text_15_00"
-                android:layout_gravity="center_horizontal|bottom"
-                />
+                android:layout_gravity="center_horizontal|bottom" />
         </FrameLayout>
 
         <FrameLayout
@@ -124,8 +122,7 @@
             <TextView
                 android:id="@+id/release_count"
                 style="@style/text_15_00"
-                android:layout_gravity="center_horizontal|bottom"
-                />
+                android:layout_gravity="center_horizontal|bottom" />
         </FrameLayout>
 
         <FrameLayout
@@ -143,8 +140,7 @@
             <TextView
                 android:id="@+id/comment_count"
                 style="@style/text_15_00"
-                android:layout_gravity="center_horizontal|bottom"
-                />
+                android:layout_gravity="center_horizontal|bottom" />
         </FrameLayout>
     </LinearLayout>
 

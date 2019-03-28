@@ -24,4 +24,7 @@ object Constants {
     const val COLLEGE_ID = "college_id"
 
     const val VIDEO_URL = "video_url"
+
+    const val QUESTION_ID = "question_id"
+
 }

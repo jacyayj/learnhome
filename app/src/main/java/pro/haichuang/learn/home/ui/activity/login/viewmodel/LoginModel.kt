@@ -48,7 +48,7 @@ class LoginModel : BaseModel() {
         }
 
     @Params([Url.Sms.Send], "sendType")
-    private val sendType = "1"
+    private val sendType = "2"
 
     override fun checkSuccess(url: String): Boolean {
         return when (url) {

@@ -52,6 +52,13 @@ class NewsFragment : BaseFragment() {
         })
     }
 
+    override fun fetchPageData(loadMore: Boolean, showLoading: Boolean) {
+        if (::tabBeans.isInitialized)
+            super.fetchPageData(loadMore, showLoading)
+        else
+            post(Url.News.Channel)
+    }
+
     override fun setPageParams(pageParams: HttpParams) {
         pageParams.put("path", tabBeans[tab.selectedTabPosition].path)
     }

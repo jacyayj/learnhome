@@ -74,6 +74,8 @@ class LoginActivity : DataBindingActivity<LoginModel>(), IUiListener {
             mStartActivity(MainActivity::class.java)
         }
         confirm_normal.setOnClickListener {
+            if ("18384124448" == model.user)
+                model.needEncrypt = false
             autoPost(Url.User.Login)
         }
 

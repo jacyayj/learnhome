@@ -1,6 +1,5 @@
 package pro.haichuang.learn.home.ui.fragment
 
-import com.jacy.kit.adapter.CommonAdapter
 import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.mStartActivity
 import kotlinx.android.synthetic.main.fragment_message.*
@@ -11,8 +10,6 @@ import pro.haichuang.learn.home.ui.activity.message.MessageCenterActivity
 
 @ContentView(R.layout.fragment_message)
 class MessageFragment : BaseFragment() {
-
-    private val adapter by lazy { CommonAdapter(layoutInflater, R.layout.item_message, arrayListOf(1, 2, 3, 4, 5, 6)) }
 
     override fun initData() {
     }

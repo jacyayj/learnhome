@@ -8,6 +8,7 @@ class Author : BaseObservable() {
     var userImg = ""
     var realname = ""
     var userId = 0
+    var imAccid = ""
     @Bindable
     var hasAttention = false
         set(value) {

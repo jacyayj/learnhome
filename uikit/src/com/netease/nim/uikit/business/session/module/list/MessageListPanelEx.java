@@ -281,6 +281,17 @@ public class MessageListPanelEx {
         });
     }
 
+    // 清除消息列表
+    public void clearMessageList() {
+        uiHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                items.clear();
+                adapter.notifyDataSetChanged();
+            }
+        });
+    }
+
     public void scrollToBottom() {
         uiHandler.postDelayed(new Runnable() {
             @Override

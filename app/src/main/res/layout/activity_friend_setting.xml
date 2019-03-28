@@ -32,6 +32,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/remark"
             style="@style/text_14_66"
             android:layout_marginStart="15dp"
             android:background="@drawable/bg_f5_radius_10dp"
@@ -61,6 +62,7 @@
     </android.support.constraint.ConstraintLayout>
 
     <CheckBox
+        android:id="@+id/sticky"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="5dp"
@@ -79,6 +81,7 @@
         android:paddingStart="15dp">
 
         <CheckBox
+            android:id="@+id/black"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/colorWhite"

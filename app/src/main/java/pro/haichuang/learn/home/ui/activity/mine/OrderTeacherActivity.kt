@@ -17,16 +17,12 @@ import pro.haichuang.learn.home.utils.GsonUtil
 @ContentView(R.layout.activity_order_teacher)
 class OrderTeacherActivity : BaseActivity() {
     private val adapter by lazy {
-        CommonAdapter<OrderModel>(layoutInflater, R.layout.item_order_teacher) { v, t, i ->
+        CommonAdapter<OrderModel>(layoutInflater, R.layout.item_order_teacher) { v, t, _ ->
             v.operation.setOnClickListener {
                 when (t.orderStatus) {
                     1 -> {
                         if (t.orderType == 1)
-                            post(Url.Order.Accept, HttpParams().apply {
-                                put("orderId", t.id.toString())
-                            }) {
-                                t.orderStatus = 2
-                            }
+                            NimUIKit.startP2PSession(this, t.memberInfo?.imAccid)
                         else
                             post(Url.Order.Finish, HttpParams().apply {
                                 put("orderId", t.id.toString())

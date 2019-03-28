@@ -5,7 +5,7 @@
 
         <variable
             name="item"
-            type="Integer" />
+            type="pro.haichuang.learn.home.ui.activity.mine.itemmodel.FqaModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -22,13 +22,13 @@
             android:drawablePadding="10dp"
             android:gravity="center_vertical"
             android:paddingStart="15dp"
-            android:text="账号、登陆、注册问题"
+            android:text="@{item.typeName}"
             android:textStyle="bold" />
 
         <pro.haichuang.learn.home.ui.weight.AutoListView
             android:id="@+id/question_child"
-            android:divider="@drawable/divider_vertical_f0f7fa_pd_15"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:divider="@drawable/divider_vertical_f0f7fa_pd_15" />
     </LinearLayout>
 </layout>

@@ -3,21 +3,20 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/textViewTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/bubble_time_layout_margin_bottom"
         android:layout_marginTop="@dimen/bubble_time_layout_margin_top"
+        android:layout_marginBottom="@dimen/bubble_time_layout_margin_bottom"
         android:background="@drawable/nim_bg_message_tip"
         android:gravity="center"
-        android:paddingLeft="7dip"
-        android:paddingRight="7dip"
+        android:paddingHorizontal="3dp"
+        android:paddingVertical="1dp"
         android:textColor="#ffffff"
         android:textSize="12sp"
-        android:textStyle="bold"
         android:visibility="gone" />
 
 </LinearLayout>

@@ -10,6 +10,7 @@ import com.netease.nim.uikit.business.session.actions.BaseAction
 import com.netease.nimlib.sdk.NIMClient
 import com.netease.nimlib.sdk.SDKOptions
 import com.netease.nimlib.sdk.StatusBarNotificationConfig
+import com.netease.nimlib.sdk.media.record.RecordType
 import com.netease.nimlib.sdk.util.NIMUtil
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
@@ -18,9 +19,11 @@ import com.vondear.rxtool.RxTool
 import com.zhouyou.http.EasyHttp
 import com.zhouyou.http.cache.model.CacheMode
 import com.zhouyou.http.cookie.CookieManger
+import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.message.FriendSettingActivity
 import pro.haichuang.learn.home.ui.im.CollectAction
+import pro.haichuang.learn.home.ui.im.MsgViewHolderTip
 import pro.haichuang.learn.home.ui.im.location.NimDemoLocationProvider
 import pro.haichuang.learn.home.utils.SPUtils
 import retrofit2.converter.gson.GsonConverterFactory
@@ -49,10 +52,13 @@ class BaseApplication : Application() {
     private fun initUiKit() {
         if (NIMUtil.isMainProcess(this)) {
             NimUIKit.init(this, UIKitOptions().apply {
-
+                messageLeftBackground = R.drawable.icon_message_receive
+                messageRightBackground = R.drawable.icon_message_send
+                shouldHandleReceipt = false
             })
             NimUIKit.setSettingClass(FriendSettingActivity::class.java)
             NimUIKit.setLocationProvider(NimDemoLocationProvider())
+            NimUIKit.registerTipMsgViewHolder(MsgViewHolderTip::class.java)
             NimUIKit.setCommonP2PSessionCustomization(SessionCustomization().apply {
                 val action = ArrayList<BaseAction>()
                 action.add((CollectAction()))

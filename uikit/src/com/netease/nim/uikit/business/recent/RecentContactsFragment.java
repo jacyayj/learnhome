@@ -1,5 +1,9 @@
 package com.netease.nim.uikit.business.recent;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -8,8 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import com.netease.nim.uikit.common.ToastHelper;
 
 import com.netease.nim.uikit.R;
 import com.netease.nim.uikit.api.NimUIKit;
@@ -21,6 +23,7 @@ import com.netease.nim.uikit.api.model.user.UserInfoObserver;
 import com.netease.nim.uikit.business.recent.adapter.RecentContactAdapter;
 import com.netease.nim.uikit.business.uinfo.UserInfoHelper;
 import com.netease.nim.uikit.common.CommonUtil;
+import com.netease.nim.uikit.common.ToastHelper;
 import com.netease.nim.uikit.common.badger.Badger;
 import com.netease.nim.uikit.common.fragment.TFragment;
 import com.netease.nim.uikit.common.ui.dialog.CustomAlertDialog;
@@ -54,6 +57,7 @@ import java.util.Set;
 
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 
+import static android.provider.Contacts.PresenceColumns.IM_ACCOUNT;
 import static com.netease.nim.uikit.common.ui.dialog.CustomAlertDialog.onSeparateItemClickListener;
 
 /**
@@ -86,10 +90,12 @@ public class RecentContactsFragment extends TFragment {
 
     private UserInfoObserver userInfoObserver;
 
+    private UpdateReceiver updateReceiver;
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        updateReceiver = new UpdateReceiver();
         findViews();
         initMessageList();
         requestMessages(true);
@@ -107,7 +113,7 @@ public class RecentContactsFragment extends TFragment {
         adapter.notifyDataSetChanged();
         boolean empty = items.isEmpty() && msgLoaded;
         emptyBg.setVisibility(empty ? View.VISIBLE : View.GONE);
-        emptyHint.setHint("还没有会话，在通讯录中找个人聊聊吧！");
+        emptyHint.setHint("暂无会话");
     }
 
 
@@ -405,6 +411,10 @@ public class RecentContactsFragment extends TFragment {
      * ********************** 收消息，处理状态变化 ************************
      */
     private void registerObservers(boolean register) {
+        if (register)
+            getContext().registerReceiver(updateReceiver, new IntentFilter("refreshContact"));
+        else
+            getContext().unregisterReceiver(updateReceiver);
         MsgServiceObserve service = NIMClient.getService(MsgServiceObserve.class);
         service.observeReceiveMessage(messageReceiverObserver, register);
         service.observeRecentContact(messageObserver, register);
@@ -698,4 +708,23 @@ public class RecentContactsFragment extends TFragment {
         });
 
     }
+
+    class UpdateReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String account = intent.getStringExtra(IM_ACCOUNT);
+            boolean hasSticky = intent.getBooleanExtra("hasSticky", false);
+            for (RecentContact contact : items) {
+                if (contact.getContactId().equals(account)) {
+                    if (hasSticky)
+                        CommonUtil.addTag(contact, RECENT_TAG_STICKY);
+                    else
+                        CommonUtil.removeTag(contact, RECENT_TAG_STICKY);
+                    break;
+                }
+            }
+            refreshMessages(false);
+        }
+    }
+
 }

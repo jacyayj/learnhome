@@ -17,7 +17,6 @@ import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.index.itemmodel.ItemVrModel
 import pro.haichuang.learn.home.ui.dialog.GridMultiplePopup
 import pro.haichuang.learn.home.ui.dialog.MultipleChoosePopup
-import pro.haichuang.learn.home.utils.DataUtils
 import pro.haichuang.learn.home.utils.GsonUtil
 
 
@@ -31,7 +30,7 @@ class VRActivity : BaseActivity() {
         }
     }
     private val typePopup by lazy {
-        MultipleChoosePopup(tab, DataUtils.formatPiciData()) {
+        MultipleChoosePopup(tab) {
             queryBatchs = it
             refresh_layout.autoRefresh()
         }
@@ -51,8 +50,8 @@ class VRActivity : BaseActivity() {
     override fun initData() {
         listView.adapter = adapter
         initTab()
-        pageUrl = Url.VR.List
-       fetchPageData()
+        pageUrl = Url.College.VrList
+        fetchPageData()
     }
 
     override fun setPageParams(pageParams: HttpParams) {

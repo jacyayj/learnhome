@@ -38,6 +38,7 @@
                 android:src="@drawable/icon_friend_search" />
 
             <EditText
+                android:id="@+id/search_input"
                 style="@style/match_layout"
                 android:background="@null"
                 android:hint="985，211关键词搜索"
@@ -93,13 +94,19 @@
         app:tabMode="fixed"
         app:tabTextAppearance="@style/choose_menu" />
 
-    <ListView
-        android:id="@+id/listView"
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@id/refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="92dp"
-        android:background="@color/colorWhite"
-        android:divider="@null" />
+        android:background="@color/colorWhite">
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null" />
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
     <Button
         android:id="@+id/compare"

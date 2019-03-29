@@ -3,26 +3,31 @@
 
     <data>
 
+        <import type="pro.haichuang.learn.home.utils.ImageBinding" />
+
+        <import type="android.view.View" />
+
         <variable
             name="item"
-            type="pro.haichuang.learn.home.ui.activity.index.itemmodel.ItemCompareModel" />
+            type="pro.haichuang.learn.home.ui.activity.index.itemmodel.CollegeModel" />
     </data>
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="85dp">
 
-        <ImageView
-            android:layout_width="75dp"
+        <com.yhy.widget.core.img.round.CircleImageView
+            net_url="@{item.logo}"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:padding="10dp"
-            android:src="@mipmap/ic_launcher" />
+            android:layout_marginVertical="15dp"
+            android:layout_marginStart="10dp" />
 
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="75dp"
-            android:paddingEnd="15dp">
+            android:paddingEnd="30dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -32,14 +37,14 @@
                 <TextView
                     style="@style/text_16_33"
                     android:layout_marginEnd="3dp"
-                    android:text="浙江大学" />
+                    android:text="@{item.collegeName}" />
 
                 <TextView
                     style="@style/text_14_13C1FF"
                     android:background="@drawable/stroke_13aeff_radius_8dp"
                     android:paddingHorizontal="8dp"
                     android:paddingVertical="1dp"
-                    android:text="公立"
+                    android:text="@{item.collegeTypeStr}"
                     android:textSize="12sp" />
 
                 <View
@@ -50,14 +55,15 @@
                 <TextView
                     style="@style/text_14_939799"
                     android:layout_marginEnd="5dp"
-                    android:text="一本院校" />
+                    android:text="@{item.enrollBatchStr}" />
 
                 <TextView
                     style="@style/text_14_939799"
                     android:drawableStart="@drawable/icon_location"
                     android:drawablePadding="5dp"
-                    android:text="北京市" />
+                    android:text="@{item.provinceStr}" />
             </LinearLayout>
+
 
             <TableRow
                 android:layout_weight="1"
@@ -65,25 +71,38 @@
 
                 <ImageView
                     android:layout_marginEnd="10dp"
-                    android:src="@drawable/icon_school_shuang" />
+                    android:src="@drawable/icon_school_211"
+                    android:visibility="@{item.collegeLevel.contains(`1`) ? View.VISIBLE : View.GONE}" />
 
                 <ImageView
                     android:layout_marginEnd="10dp"
-                    android:src="@drawable/icon_school_211" />
+                    android:src="@drawable/icon_school_985"
+                    android:visibility="@{item.collegeLevel.contains(`2`) ? View.VISIBLE : View.GONE}" />
 
                 <ImageView
                     android:layout_marginEnd="10dp"
-                    android:src="@drawable/icon_school_985" />
+                    android:src="@drawable/icon_school_yi"
+                    android:visibility="@{item.collegeLevel.contains(`6`) ? View.VISIBLE : View.GONE}" />
 
                 <ImageView
                     android:layout_marginEnd="10dp"
-                    android:src="@drawable/icon_school_yi" />
+                    android:src="@drawable/icon_school_fa"
+                    android:visibility="@{item.collegeLevel.contains(`7`) ? View.VISIBLE : View.GONE}" />
 
                 <ImageView
                     android:layout_marginEnd="10dp"
-                    android:src="@drawable/icon_school_fa" />
+                    android:src="@drawable/icon_school_shuang"
+                    android:visibility="@{item.collegeLevel.contains(`8`) ? View.VISIBLE : View.GONE}" />
+
             </TableRow>
         </TableLayout>
+
+        <CheckedTextView
+            style="@style/text_14_33"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="15dp"
+            android:checked="@{item.checked}"
+            android:drawableEnd="@{item.compare ? @drawable/selector_multiple_choose : null }" />
 
         <View
             android:layout_width="match_parent"

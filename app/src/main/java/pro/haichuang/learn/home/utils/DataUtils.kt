@@ -1,12 +1,11 @@
 package pro.haichuang.learn.home.utils
 
-import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.vondear.rxtool.RxTool
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.bean.IconLabel
 import pro.haichuang.learn.home.bean.NameId
-import pro.haichuang.learn.home.ui.activity.mine.itemmodel.ItemFile
 import pro.haichuang.learn.home.ui.fragment.itemview.ItemMine
 
 object DataUtils {
@@ -50,96 +49,88 @@ object DataUtils {
         return data
     }
 
-    fun formatFileData(): ArrayList<ItemFile> {
-        val data = ArrayList<ItemFile>()
-        data.add(ItemFile("考生姓名", "张德文"))
-        data.add(ItemFile("毕业城市", "成都市", true))
-        data.add(ItemFile("毕业区县", "武侯区", true))
-        data.add(ItemFile("在读学校", "成都十二中"))
-        data.add(ItemFile("学  籍  号", "20180254"))
-        data.add(ItemFile("班        级", "12班", true))
-        data.add(ItemFile("联系电话", "14785462158"))
-        data.add(ItemFile("联 系 Q Q", "896658756"))
-        data.add(ItemFile("联系邮箱", "896658756@qq.com"))
+    val provinceData by lazy { formatProvinceData() }
+
+    val piCiData by lazy { formatPiCiData() }
+
+    val typeData by lazy { formatSchoolTypeData() }
+
+    val levelData by lazy { formatSchoolLevelData() }
+
+    val chuangBanData by lazy { formatChuangBanData() }
+
+    fun findProvinceById(id: String): String? {
+        return provinceData.find { it.id == id }?.name
+    }
+
+    fun findPiCiById(id: String): String? {
+        return piCiData.find { it.id == id }?.name
+    }
+
+    fun findLevelById(id: String): String? {
+        return levelData.find { it.id == id }?.name
+    }
+
+    fun findTypeById(id: String): String? {
+        return levelData.find { it.id == id }?.name
+    }
+
+    fun findChuangBanById(id: String): String? {
+        return chuangBanData.find { it.id == id }?.name
+    }
+
+    private fun formatProvinceData(): ArrayList<NameId> {
+        return Gson().fromJson<ArrayList<NameId>>(FileUtils.readProvince(RxTool.getContext()), object : TypeToken<ArrayList<NameId>>() {}.type)
+    }
+
+    private fun formatPiCiData(): ArrayList<NameId> {
+        val data = ArrayList<NameId>()
+        data.add(NameId("本科提前批次", "1"))
+        data.add(NameId("本科第一批次", "2"))
+        data.add(NameId("本科第二批次", "3"))
+        data.add(NameId("本科预科", "4"))
+        data.add(NameId("专科提前批次", "5"))
+        data.add(NameId("专科批次", "6"))
         return data
     }
 
-    private var province: String? = null
-
-    fun formatProvinceData(context: Context): ArrayList<NameId>? {
-        if (province == null)
-            province = FileUtils.readProvince(context)
-        return Gson().fromJson<ArrayList<NameId>>(province, object : TypeToken<ArrayList<NameId>>() {}.type)
-    }
-
-    fun formatSchoolRatingData(): ArrayList<String> {
-        val data = ArrayList<String>()
-        data.add("211")
-        data.add("985")
-        data.add("示范高职")
-        data.add("骨干高职")
-        data.add("卓越工程师")
-        data.add("卓越医生")
-        data.add("卓越法律")
-        data.add("双一流高校")
-        data.add("双一流学科")
+    private fun formatSchoolTypeData(): ArrayList<NameId> {
+        val data = ArrayList<NameId>()
+        data.add(NameId("综合类", "1"))
+        data.add(NameId("理工类", "2"))
+        data.add(NameId("师范类", "3"))
+        data.add(NameId("农林类", "4"))
+        data.add(NameId("政法类", "5"))
+        data.add(NameId("医药类", "6"))
+        data.add(NameId("财经类", "7"))
+        data.add(NameId("民族类", "8"))
+        data.add(NameId("语言类", "9"))
+        data.add(NameId("艺术类", "10"))
+        data.add(NameId("体育类", "11"))
+        data.add(NameId("军事类", "12"))
+        data.add(NameId("公安", "13"))
         return data
     }
 
-    fun formatPiciData(): ArrayList<String> {
-        val data = ArrayList<String>()
-        data.add("本科提前批次")
-        data.add("本科第一批次")
-        data.add("本科第二批次")
-        data.add("本科预科")
-        data.add("专科提前批次")
-        data.add("专科批次")
+    private fun formatSchoolLevelData(): ArrayList<NameId> {
+        val data = ArrayList<NameId>()
+        data.add(NameId("211", "1"))
+        data.add(NameId("985", "2"))
+        data.add(NameId("示范高职", "3"))
+        data.add(NameId("骨干高职", "4"))
+        data.add(NameId("卓越工程师", "5"))
+        data.add(NameId("卓越医生", "6"))
+        data.add(NameId("卓越法律", "7"))
+        data.add(NameId("双一流高校", "8"))
+        data.add(NameId("双一流学科", "9"))
         return data
     }
 
-    fun formatSchoolTypeData(): ArrayList<String> {
-        val data = ArrayList<String>()
-        data.add("综合类")
-        data.add("理工类")
-        data.add("师范类")
-        data.add("农林类")
-        data.add("政法类")
-        data.add("医药类")
-        data.add("财经类")
-        data.add("民族类")
-        data.add("语言类")
-        data.add("艺术类")
-        data.add("体育类")
-        data.add("军事类")
-        data.add("公安")
+    private fun formatChuangBanData(): ArrayList<NameId> {
+        val data = ArrayList<NameId>()
+        data.add(NameId("公办", "1"))
+        data.add(NameId("民办", "2"))
+        data.add(NameId("中外合资", "3"))
         return data
     }
-
-    fun formatZuanYeData(): ArrayList<String> {
-        val data = ArrayList<String>()
-        data.add("哲学")
-        data.add("经济学")
-        data.add("法学")
-        data.add("教育学")
-        data.add("文学")
-        data.add("历史学")
-        data.add("理学")
-        data.add("工学")
-        data.add("农学")
-        data.add("医学")
-        data.add("管理学")
-        data.add("其他")
-        data.add("军事类")
-        data.add("公安")
-        return data
-    }
-
-    fun formatLevelData(): ArrayList<String> {
-        val data = ArrayList<String>()
-        data.add("一本院校")
-        data.add("二本院校")
-        data.add("高职高专")
-        return data
-    }
-
 }

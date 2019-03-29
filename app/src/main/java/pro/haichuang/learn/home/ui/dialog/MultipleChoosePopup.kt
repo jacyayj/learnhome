@@ -7,8 +7,10 @@ import android.widget.PopupWindow
 import com.jacy.kit.adapter.CommonAdapter
 import kotlinx.android.synthetic.main.popup_multiple_choose.view.*
 import pro.haichuang.learn.home.R
+import pro.haichuang.learn.home.utils.DataUtils
 
-class MultipleChoosePopup(view: View, data: ArrayList<String>, result: (ids: String) -> Unit = {}) : PopupWindow(view, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT) {
+class MultipleChoosePopup(view: View, result: (ids: String) -> Unit = {}) : PopupWindow(view, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT) {
+    private val data by lazy { DataUtils.piCiData }
 
     init {
         val layoutInflater = LayoutInflater.from(view.context)
@@ -19,7 +21,7 @@ class MultipleChoosePopup(view: View, data: ArrayList<String>, result: (ids: Str
             var ids = ""
             for (i in 0..data.lastIndex) {
                 if (contentView.listView.isItemChecked(i))
-                    ids += "${i + 1},"
+                    ids += "${data[i].id},"
             }
             result(ids.removeSuffix(","))
             dismiss()

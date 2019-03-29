@@ -27,4 +27,8 @@ object Constants {
 
     const val QUESTION_ID = "question_id"
 
+    const val SCHOOL_ID = "school_id"
+
+    const val COMPARE_IDS = "compare_ids"
+
 }

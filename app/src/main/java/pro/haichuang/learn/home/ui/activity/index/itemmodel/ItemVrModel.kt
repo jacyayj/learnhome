@@ -1,7 +1,6 @@
 package pro.haichuang.learn.home.ui.activity.index.itemmodel
 
 import android.databinding.BaseObservable
-import com.vondear.rxtool.RxTool
 import pro.haichuang.learn.home.utils.DataUtils
 
 class ItemVrModel : BaseObservable() {
@@ -14,8 +13,8 @@ class ItemVrModel : BaseObservable() {
     var id = 0
 
     val batchStr
-        get() = DataUtils.formatPiciData()[enrollBatch-1]
+        get() = DataUtils.findPiCiById(enrollBatch.toString())
 
     val provinceStr
-        get() = DataUtils.formatProvinceData(RxTool.getContext())?.find { it.id == province }?.name
+        get() = DataUtils.findProvinceById(province)
 }

@@ -29,6 +29,18 @@ object Url {
         const val List = "${base}list"
     }
 
+
+    /**
+     * 验证码相关接口
+     */
+    object Major {
+
+        private const val base = "major/"
+
+        const val Category = "${base}category"
+
+    }
+
     /**
      * 海外留学相关接口
      */
@@ -185,10 +197,20 @@ object Url {
     /**
      * 院校相关接口
      */
-    object VR {
-        private const val base = "college/vr/"
+    object College {
+        private const val base = "college/"
+
+        const val VrList = "${base}vr/list"
 
         const val List = "${base}list"
+
+        const val Get = "${base}get"
+
+        const val Compare = "${base}compare"
+
+        const val EnrollList = "${base}enroll/college"
+
+        const val EnrollMajor = "${base}enroll/major"
     }
 
     /**

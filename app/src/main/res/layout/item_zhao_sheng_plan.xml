@@ -5,19 +5,19 @@
 
         <variable
             name="item"
-            type="pro.haichuang.learn.home.ui.activity.index.itemmodel.ItemCompareModel" />
+            type="pro.haichuang.learn.home.ui.activity.index.itemmodel.CollegeModel" />
     </data>
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="85dp"
-        android:onClick="@{item::toggleChecked}">
+        android:layout_height="85dp">
 
-        <ImageView
-            android:layout_width="75dp"
+        <com.yhy.widget.core.img.round.CircleImageView
+            net_url="@{item.logo}"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:padding="10dp"
-            android:src="@mipmap/ic_launcher" />
+            android:layout_marginVertical="15dp"
+            android:layout_marginStart="10dp" />
 
         <TableLayout
             android:layout_width="match_parent"
@@ -28,26 +28,25 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_marginTop="15dp"
-                android:gravity="center_vertical"
-                android:paddingEnd="20dp">
+                android:gravity="center_vertical">
 
                 <TextView
                     style="@style/text_14_13C1FF"
                     android:layout_marginEnd="3dp"
-                    android:text="0052"
+                    android:text="@{item.enrollCode}"
                     android:textSize="12sp" />
 
                 <TextView
                     style="@style/text_16_33"
                     android:layout_marginEnd="3dp"
-                    android:text="浙江大学" />
+                    android:text="@{item.collegeName}" />
 
                 <TextView
                     style="@style/text_14_13C1FF"
                     android:background="@drawable/stroke_13aeff_radius_8dp"
                     android:paddingHorizontal="8dp"
                     android:paddingVertical="1dp"
-                    android:text="文科"
+                    android:text="@{item.collegeTypeStr}"
                     android:textSize="12sp" />
 
                 <View
@@ -60,7 +59,7 @@
                     android:background="@color/colorF0F7FA"
                     android:paddingHorizontal="5dp"
                     android:paddingVertical="1dp"
-                    android:text="2017年"
+                    android:text="@{item.enrollYear+`年`}"
                     android:textColor="@color/colorABB0B3" />
             </LinearLayout>
 
@@ -71,22 +70,22 @@
                 <TextView
                     style="@style/text_14_99"
                     android:layout_weight="1"
-                    android:text="本科第一批录取院校"
+                    android:text="@{item.enrollBatchStr}"
                     android:textColor="@color/color939799" />
 
                 <CheckedTextView
                     style="@style/text_14_33"
                     android:checked="@{item.checked}"
                     android:drawableEnd="@{item.compare ? @drawable/selector_multiple_choose : null }"
-                    android:text="1378/1723人" />
+                    android:text="@{item.enrollNumber+`人`}" />
             </TableRow>
 
             <TextView
                 style="@style/text_14_99"
-                android:paddingBottom="5dp"
                 android:drawableStart="@drawable/icon_location"
                 android:drawablePadding="5dp"
-                android:text="四川"
+                android:paddingBottom="5dp"
+                android:text="@{item.provinceStr}"
                 android:textColor="@color/color939799" />
         </TableLayout>
 

@@ -2,6 +2,7 @@ package pro.haichuang.learn.home.ui.fragment
 
 import android.app.Activity
 import android.content.Intent
+import android.os.Bundle
 import com.jacy.kit.adapter.CommonAdapter
 import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.mStartActivity
@@ -30,10 +31,12 @@ import java.io.File
 class MineFragment : BaseFragment() {
 
     private lateinit var headerUrl: String
-
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        post(Url.User.Info, showLoading = false, needSession = true)
+        super.onActivityCreated(savedInstanceState)
+    }
     override fun initData() {
         listView.adapter = CommonAdapter(layoutInflater, R.layout.item_mine, DataUtils.formatMineListData())
-        post(Url.User.Info, showLoading = false, needSession = true)
     }
     override fun onSuccess(url: String, result: Any?) {
         when (url) {

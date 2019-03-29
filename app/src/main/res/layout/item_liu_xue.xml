@@ -28,7 +28,7 @@
             android:background="@drawable/bg_ff_radius_13dp"
             android:paddingHorizontal="10dp"
             android:paddingVertical="3dp"
-            android:text="@{item.country}"
+            android:text="@{item.countryStr}"
             android:textColor="@color/colorWhite" />
 
         <TextView

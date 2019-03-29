@@ -48,7 +48,6 @@
                 style="@style/text_14_99"
                 android:text="@{item.batchStr}"
                 android:textColor="@color/color939799" />
-
             <pro.haichuang.learn.home.ui.weight.HorizontalRecyclerView android:id="@+id/star" />
         </TableLayout>
 

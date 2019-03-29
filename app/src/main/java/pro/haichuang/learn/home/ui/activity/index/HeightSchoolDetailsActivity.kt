@@ -4,8 +4,10 @@ import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.support.design.widget.TabLayout
 import com.jacy.kit.adapter.CommonAdapter
+import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.gone
 import com.jacy.kit.config.show
+import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.activity_height_school_details.*
 import kotlinx.android.synthetic.main.layout_jianzhang.*
 import kotlinx.android.synthetic.main.layout_school_details_tabchildview_1.*
@@ -18,9 +20,10 @@ import kotlinx.android.synthetic.main.layout_school_details_tabview_2.*
 import kotlinx.android.synthetic.main.layout_school_details_tabview_3.*
 import pro.haichuang.learn.home.BR
 import pro.haichuang.learn.home.R
-import com.jacy.kit.config.ContentView
 import pro.haichuang.learn.home.bean.TabBean
 import pro.haichuang.learn.home.config.BaseActivity
+import pro.haichuang.learn.home.config.Constants
+import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.index.itemmodel.ItemZuanYeModel
 import pro.haichuang.learn.home.ui.dialog.LegendDialog
 
@@ -32,7 +35,7 @@ class HeightSchoolDetailsActivity : BaseActivity() {
     override fun initData() {
         titleModel.title = "高校详情"
         initTab()
-        zuanye_listview.adapter = CommonAdapter(layoutInflater,R.layout.item_height_school_details_3, arrayListOf(ItemZuanYeModel("社会工作"),
+        zuanye_listview.adapter = CommonAdapter(layoutInflater, R.layout.item_height_school_details_3, arrayListOf(ItemZuanYeModel("社会工作"),
                 ItemZuanYeModel("社会工作"),
                 ItemZuanYeModel("应用语言学"),
                 ItemZuanYeModel("阿拉伯语"),
@@ -43,6 +46,9 @@ class HeightSchoolDetailsActivity : BaseActivity() {
                 ItemZuanYeModel("蒙古语"),
                 ItemZuanYeModel("乌尔都语"),
                 ItemZuanYeModel("考古学")))
+        post(Url.College.Get, HttpParams().apply {
+            put("id", intent.getIntExtra(Constants.SCHOOL_ID,-1).toString())
+        })
     }
 
     override fun initListener() {
@@ -87,11 +93,11 @@ class HeightSchoolDetailsActivity : BaseActivity() {
         })
         child_tab.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
-                R.id.tab1 ->toggleChild(0)
-                R.id.tab2 ->toggleChild(1)
-                R.id.tab3 ->toggleChild(2)
-                R.id.tab4 ->toggleChild(3)
-                R.id.tab5 ->toggleChild(4)
+                R.id.tab1 -> toggleChild(0)
+                R.id.tab2 -> toggleChild(1)
+                R.id.tab3 -> toggleChild(2)
+                R.id.tab4 -> toggleChild(3)
+                R.id.tab5 -> toggleChild(4)
             }
         }
     }

@@ -4,25 +4,27 @@ import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.support.design.widget.TabLayout
 import com.jacy.kit.adapter.CommonAdapter
+import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.gone
 import com.jacy.kit.config.mStartActivity
 import com.jacy.kit.config.show
+import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.activity_zhuanye_search.*
 import kotlinx.android.synthetic.main.item_zuanye_pinggu.view.*
 import kotlinx.android.synthetic.main.layout_zuanye_tab_1.*
 import kotlinx.android.synthetic.main.layout_zuanye_tab_2.*
 import kotlinx.android.synthetic.main.layout_zuanye_tab_3.*
 import pro.haichuang.learn.home.BR
-import com.jacy.kit.config.ContentView
-import pro.haichuang.learn.home.config.BaseActivity
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.bean.TabBean
+import pro.haichuang.learn.home.config.BaseActivity
+import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.index.itemmodel.ItemPingGuModel
 import pro.haichuang.learn.home.ui.activity.index.itemmodel.ItemZuanYeModel
+import pro.haichuang.learn.home.ui.dialog.DoubleChoosePopup
 import pro.haichuang.learn.home.ui.dialog.GridMultiplePopup
 import pro.haichuang.learn.home.ui.dialog.InputPopup
 import pro.haichuang.learn.home.ui.dialog.LegendDialog
-import pro.haichuang.learn.home.ui.dialog.DoubleChoosePopup
 
 
 @ContentView(R.layout.activity_zhuanye_search)
@@ -60,6 +62,7 @@ class ZhuanYeSearchActivity : BaseActivity() {
                 mStartActivity(ZhuanYePingGuDetailsActivity::class.java)
             }
         }
+        post(Url.Major.Category, HttpParams("level","1"))
     }
 
     override fun initListener() {

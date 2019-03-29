@@ -79,7 +79,7 @@
 //import com.netease.nimlib.sdk.team.model.Team;
 //
 //import java.util.ArrayList;
-//import java.util.List;
+//import java.util.VrList;
 //
 ///**
 // * UIKit自定义消息界面用法展示类
@@ -98,7 +98,7 @@
 //    private static RecentCustomization recentCustomization;
 //
 //    private static NIMPopupMenu popupMenu;
-//    private static List<PopupMenuItem> menuItemList;
+//    private static VrList<PopupMenuItem> menuItemList;
 //
 //    public static final boolean USE_LOCAL_ANTISPAM = true;
 //
@@ -640,8 +640,8 @@
 //        }
 //    };
 //
-//    private static List<PopupMenuItem> getMoreMenuItems(Context context, String sessionId, SessionTypeEnum sessionTypeEnum) {
-//        List<PopupMenuItem> moreMenuItems = new ArrayList<PopupMenuItem>();
+//    private static VrList<PopupMenuItem> getMoreMenuItems(Context context, String sessionId, SessionTypeEnum sessionTypeEnum) {
+//        VrList<PopupMenuItem> moreMenuItems = new ArrayList<PopupMenuItem>();
 //        moreMenuItems.add(new PopupMenuItem(context, ACTION_HISTORY_QUERY, sessionId,
 //                sessionTypeEnum, DemoCache.getContext().getString(R.string.message_history_query)));
 //        moreMenuItems.add(new PopupMenuItem(context, ACTION_SEARCH_MESSAGE, sessionId,

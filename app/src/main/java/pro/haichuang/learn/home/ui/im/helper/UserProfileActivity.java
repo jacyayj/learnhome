@@ -47,7 +47,7 @@
 //import com.netease.nimlib.sdk.uinfo.constant.GenderEnum;
 //import com.netease.nimlib.sdk.uinfo.model.NimUserInfo;
 //
-//import java.util.List;
+//import java.util.VrList;
 //
 //import pro.haichuang.learn.home.R;
 //
@@ -146,22 +146,22 @@
 //
 //    ContactChangedObserver friendDataChangedObserver = new ContactChangedObserver() {
 //        @Override
-//        public void onAddedOrUpdatedFriends(List<String> account) {
+//        public void onAddedOrUpdatedFriends(VrList<String> account) {
 //            updateUserOperatorView();
 //        }
 //
 //        @Override
-//        public void onDeletedFriends(List<String> account) {
+//        public void onDeletedFriends(VrList<String> account) {
 //            updateUserOperatorView();
 //        }
 //
 //        @Override
-//        public void onAddUserToBlackList(List<String> account) {
+//        public void onAddUserToBlackList(VrList<String> account) {
 //            updateUserOperatorView();
 //        }
 //
 //        @Override
-//        public void onRemoveUserFromBlackList(List<String> account) {
+//        public void onRemoveUserFromBlackList(VrList<String> account) {
 //            updateUserOperatorView();
 //        }
 //    };

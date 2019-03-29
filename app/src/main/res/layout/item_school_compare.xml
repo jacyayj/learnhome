@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="item"
+            type="pro.haichuang.learn.home.ui.activity.index.itemmodel.CollegeModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@drawable/divider_vertical_d7dde0"
+        android:orientation="vertical"
+        android:showDividers="middle">
+
+        <TextView
+            style="@style/text_12_2E3133"
+            android:layout_gravity="center"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="15dp"
+            android:text="@{item.collegeName}"
+            android:textColor="@color/color002133" />
+
+        <TextView
+            style="@style/text_12_2E3133"
+            android:layout_gravity="center"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="15dp"
+            android:text="@{item.collegeTypeStr}"
+            android:textColor="@color/color002133" />
+
+        <TextView
+            style="@style/text_12_2E3133"
+            android:layout_gravity="center"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="15dp"
+            android:text="@{item.enrollBatchStr}"
+            android:textColor="@color/color002133" />
+
+        <TextView
+            style="@style/text_12_2E3133"
+            android:layout_gravity="center"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="15dp"
+            android:text="@{item.enrollNumber+``}"
+            android:textColor="@color/color002133" />
+
+        <TextView
+            style="@style/text_12_2E3133"
+            android:layout_gravity="center"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="15dp"
+            android:text="@{item.new+``}"
+            android:textColor="@color/color002133" />
+
+    </LinearLayout>
+</layout>

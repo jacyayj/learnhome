@@ -1,12 +1,12 @@
 package pro.haichuang.learn.home.ui.activity.message
 
-import android.app.Activity
 import android.content.Intent
 import android.provider.Contacts.PresenceColumns.IM_ACCOUNT
 import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.toast
 import com.netease.nim.uikit.business.recent.RecentContactsFragment.RECENT_TAG_STICKY
 import com.netease.nim.uikit.common.CommonUtil
+import com.netease.nim.uikit.common.ui.dialog.EasyEditDialog
 import com.netease.nimlib.sdk.NIMClient
 import com.netease.nimlib.sdk.RequestCallback
 import com.netease.nimlib.sdk.friend.FriendService
@@ -28,8 +28,6 @@ class FriendSettingActivity : BaseActivity() {
     private val contact by lazy { msgService.queryRecentContact(account, SessionTypeEnum.P2P) }
     private var isFromUser = true
 
-    private val resultIntent by lazy { Intent() }
-
     override fun initData() {
         titleModel.title = "设置"
         sticky.isChecked = CommonUtil.isTagSet(contact, RECENT_TAG_STICKY)
@@ -40,26 +38,40 @@ class FriendSettingActivity : BaseActivity() {
             NoticeDialog(this) {
                 msgService.clearChattingHistory(account, SessionTypeEnum.P2P)
                 sendBroadcast(Intent("refreshMessage"))
-                resultIntent.putExtra("refreshMessage", true)
                 toast("清除成功")
             }.show()
         }
         remark.setOnClickListener {
-            val filed = HashMap<FriendFieldEnum, String>()
-            filed[FriendFieldEnum.ALIAS] = ""
-            friendService.updateFriendFields(account, filed as Map<FriendFieldEnum, Any>?).setCallback(object : RequestCallback<Void> {
-                override fun onSuccess(p0: Void?) {
-                    toast("保存成功")
-                }
+            EasyEditDialog(this).apply {
+                setEditHint(remark.text.toString())
+                setEditTextSingleLine()
+                addPositiveButtonListener {
+                    if (editMessage.isNullOrEmpty()) {
+                        toast("请输入备注名")
+                        return@addPositiveButtonListener
+                    }
+                    val filed = HashMap<FriendFieldEnum, String>()
+                    filed[FriendFieldEnum.ALIAS] = editMessage
+                    friendService.updateFriendFields(account, filed as Map<FriendFieldEnum, Any>?).setCallback(object : RequestCallback<Void> {
+                        override fun onSuccess(p0: Void?) {
+                            toast("保存成功")
+                            remark.text = editMessage
+                        }
 
-                override fun onFailed(p0: Int) {
-                    toast("保存失败 $p0")
-                }
+                        override fun onFailed(p0: Int) {
+                            toast("保存失败 $p0")
+                        }
 
-                override fun onException(p0: Throwable?) {
-                    toast("保存出错 ${p0?.message}")
+                        override fun onException(p0: Throwable?) {
+                            toast("保存出错 ${p0?.message}")
+                        }
+                    })
                 }
-            })
+                addNegativeButtonListener {
+                    dismiss()
+                }
+            }
+
         }
         sticky.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked)
@@ -68,7 +80,6 @@ class FriendSettingActivity : BaseActivity() {
                 CommonUtil.removeTag(contact, RECENT_TAG_STICKY)
             msgService.updateRecent(contact)
             sendBroadcast(Intent("refreshContact").putExtra(IM_ACCOUNT, account).putExtra("hasSticky", isChecked))
-            resultIntent.putExtra("refreshContact", true)
         }
         black.setOnCheckedChangeListener { _, isChecked ->
             if (isFromUser)
@@ -111,10 +122,5 @@ class FriendSettingActivity : BaseActivity() {
             else
                 isFromUser = true
         }
-    }
-
-    override fun onDestroy() {
-        setResult(Activity.RESULT_OK, resultIntent)
-        super.onDestroy()
     }
 }

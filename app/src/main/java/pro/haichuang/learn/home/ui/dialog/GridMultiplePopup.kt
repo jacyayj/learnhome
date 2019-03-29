@@ -15,16 +15,16 @@ class GridMultiplePopup(val view: View, private val needId: Boolean = true, resu
     private var type = -1
 
     private val layoutInflater by lazy { LayoutInflater.from(view.context) }
-    private val adapter by lazy { CommonAdapter<String>(layoutInflater, R.layout.item_grid_multiple) }
+    private val adapter by lazy { CommonAdapter<NameId>(layoutInflater, R.layout.item_grid_multiple) }
 
-    private val provinceData by lazy { DataUtils.formatProvinceData(view.context) }
+    private var lastCheckedPosition = -1
+    private var checkedPosition = -1
 
     init {
         isOutsideTouchable = true
         contentView = layoutInflater.inflate(R.layout.popup_grid_multiple, null)
         contentView.grid.adapter = adapter
-        var lastCheckedPosition = -1
-        var checkedPosition = -1
+
         contentView.grid.setOnItemClickListener { _, _, position, _ ->
             contentView.all.isChecked = false
             checkedPosition = position
@@ -32,25 +32,51 @@ class GridMultiplePopup(val view: View, private val needId: Boolean = true, resu
         contentView.all.setOnClickListener {
             if (contentView.all.isChecked.not()) {
                 contentView.all.isChecked = true
-                contentView.grid.clearChoices()
+                contentView.grid.setItemChecked(checkedPosition, false)
                 checkedPosition = -1
             }
         }
         contentView.confirm.setOnClickListener {
-            when (type) {
-                2 -> {
-                    lastCheckedPosition = checkedPosition
-                    if (checkedPosition == -1)
-                        result("")
-                    else
-                        provinceData?.get(checkedPosition)?.let {
-                            result(if (needId) it.id else it.name.replace("省", ""))
-                        }
+            lastCheckedPosition = checkedPosition
+            if (checkedPosition == -1)
+                result("")
+            else
+                adapter.getItem(checkedPosition).let {
+                    result(if (needId) it.id else it.name.replace("省", ""))
                 }
-            }
             dismiss()
         }
-        setOnDismissListener {
+    }
+
+    /**
+     * @param type
+     *  0 : 学校级别选择
+     *  1 : 学校类型选择
+     *  2 : 省份选择
+     *  3 : 批次选择
+     */
+    fun show(type: Int) {
+        showAsDropDown(view)
+        if (this.type == -1)
+            when (type) {
+                0 -> {
+                    contentView.grid.numColumns = 4
+                    adapter.refresh(DataUtils.levelData)
+                }
+                1 -> {
+                    contentView.grid.numColumns = 5
+                    adapter.refresh(DataUtils.typeData)
+                }
+                2 -> {
+                    contentView.grid.numColumns = 5
+                    adapter.refresh(DataUtils.provinceData)
+                }
+                3 -> {
+                    contentView.grid.numColumns = 3
+                    adapter.refresh(DataUtils.piCiData)
+                }
+            }
+        else {
             if (lastCheckedPosition != checkedPosition) {
                 if (lastCheckedPosition == -1) {
                     contentView.all.isChecked = true
@@ -61,50 +87,6 @@ class GridMultiplePopup(val view: View, private val needId: Boolean = true, resu
                 }
             }
         }
-    }
-
-    /**
-     * @param type
-     *  0 : 学校排行选择
-     *  1 : 学校类型选择
-     *  2 : 省份选择
-     *  3 : 学校等级选择
-     *  4 : 专业选择
-     */
-    fun show(type: Int) {
         this.type = type
-        showAsDropDown(view)
-        when (type) {
-            0 -> {
-                contentView.grid.numColumns = 4
-                adapter.refresh(DataUtils.formatSchoolRatingData())
-            }
-            1 -> {
-                contentView.grid.numColumns = 5
-                adapter.refresh(DataUtils.formatSchoolTypeData())
-            }
-            2 -> {
-                contentView.grid.numColumns = 5
-                provinceData?.toStringData()?.let { adapter.refresh(it) }
-            }
-            3 -> {
-                contentView.grid.numColumns = 3
-                adapter.refresh(DataUtils.formatLevelData())
-            }
-            4 -> {
-                contentView.grid.numColumns = 5
-                adapter.refresh(DataUtils.formatZuanYeData())
-            }
-        }
-    }
-
-    private fun ArrayList<*>.toStringData(): ArrayList<String> {
-        val stringData = ArrayList<String>()
-        forEach {
-            if (it is NameId) {
-                stringData.add(it.name)
-            }
-        }
-        return stringData
     }
 }

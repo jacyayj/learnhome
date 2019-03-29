@@ -58,10 +58,9 @@ abstract class BaseActivity : RootActivity(), OnRefreshLoadMoreListener {
 
     /**
      *@param url 接口地址
-     *@param params jiek
-     *@param showLoading 接口地址
-     *@param needSession 接口地址
-     *@param success 接口地址
+     *@param showLoading 是否显示loading
+     *@param needSession 知否需要session
+     *@param success 成功回调
      */
     fun post(url: String, params: HttpParams = HttpParams(), showLoading: Boolean = true, needSession: Boolean = false, success: () -> Unit = {}) {
         if (needSession)

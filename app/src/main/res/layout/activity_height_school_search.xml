@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ui.activity.index.HeightSchoolSearchActivity">
 
+    tools:context=".ui.activity.index.HeightSchoolSearchActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_title"
@@ -37,6 +36,7 @@
                 android:src="@drawable/icon_friend_search" />
 
             <EditText
+                android:id="@+id/search_input"
                 style="@style/match_layout"
                 android:background="@null"
                 android:hint="搜索学校/专业名称"
@@ -52,22 +52,77 @@
             android:layout_marginEnd="10dp"
             android:src="@drawable/icon_search_blue" />
 
+        <LinearLayout
+            android:id="@+id/compare_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="end|center_vertical"
+            android:orientation="horizontal"
+            android:paddingEnd="15dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/confirm"
+                style="@style/text_16_ff"
+                android:layout_width="60dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="7dp"
+                android:background="@drawable/bg_7fceff_radius_4dp"
+                android:gravity="center"
+                android:text="确定" />
+
+            <TextView
+                android:id="@+id/cancel"
+                style="@style/text_16_70CAE0"
+                android:layout_width="60dp"
+                android:layout_height="25dp"
+                android:background="@drawable/stroke_7fd2ff_radius_5dp"
+                android:gravity="center"
+                android:text="取消" />
+        </LinearLayout>
     </LinearLayout>
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/tab"
-        android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:layout_marginTop="1dp"
-        android:background="@color/white"
-        app:tabIndicatorHeight="0dp"
-        app:tabMode="scrollable"
-        app:tabTextAppearance="@style/choose_menu" />
-
-    <ListView
-        android:id="@+id/listView"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorWhite"
-        android:divider="@null" />
-</LinearLayout>
+        android:layout_marginTop="44dp"
+        android:orientation="vertical">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tab"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginTop="1dp"
+            android:background="@color/white"
+            app:tabIndicatorHeight="0dp"
+            app:tabMode="fixed"
+            app:tabTextAppearance="@style/choose_menu" />
+
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@id/refresh_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite">
+
+            <ListView
+                android:id="@+id/listView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@null" />
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/compare"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="end|bottom"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="45dp"
+        android:background="@drawable/bg_float_btn"
+        android:elevation="5dp"
+        android:padding="0dp"
+        android:text="对比"
+        android:textColor="@color/colorWhite"
+        android:textSize="16sp" />
+</FrameLayout>

@@ -81,6 +81,21 @@
 
                 <ImageView
                     android:layout_marginEnd="10dp"
+                    android:src="@drawable/icon_school_shifan"
+                    android:visibility="@{item.collegeLevel.contains(`3`) ? View.VISIBLE : View.GONE}" />
+
+                <ImageView
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/icon_school_gugan"
+                    android:visibility="@{item.collegeLevel.contains(`4`) ? View.VISIBLE : View.GONE}" />
+
+                <ImageView
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/icon_school_985"
+                    android:visibility="@{item.collegeLevel.contains(`5`) ? View.VISIBLE : View.GONE}" />
+
+                <ImageView
+                    android:layout_marginEnd="10dp"
                     android:src="@drawable/icon_school_yi"
                     android:visibility="@{item.collegeLevel.contains(`6`) ? View.VISIBLE : View.GONE}" />
 
@@ -93,6 +108,11 @@
                     android:layout_marginEnd="10dp"
                     android:src="@drawable/icon_school_shuang"
                     android:visibility="@{item.collegeLevel.contains(`8`) ? View.VISIBLE : View.GONE}" />
+
+                <ImageView
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/icon_school_shuangyiliu"
+                    android:visibility="@{item.collegeLevel.contains(`9`) ? View.VISIBLE : View.GONE}" />
 
             </TableRow>
         </TableLayout>

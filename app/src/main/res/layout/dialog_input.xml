@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:orientation="vertical"
+    android:paddingHorizontal="15dp"
+    android:paddingTop="15dp"
+    android:paddingBottom="25dp">
+
+    <EditText
+        android:id="@+id/remark"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/stroke_e0e0e0"
+        android:hint="请输入备注"
+        android:paddingStart="10dp"
+        android:textColor="@color/color33"
+        android:textColorHint="@color/colorCC" />
+
+    <TextView
+        android:id="@+id/confirm"
+        android:layout_width="110dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/bg_e5f5ff_stroke_32c8fa_radius_15dp"
+        android:gravity="center"
+        android:text="确定"
+        android:textColor="@color/color32C8FA"
+        android:textSize="16sp" />
+</LinearLayout>

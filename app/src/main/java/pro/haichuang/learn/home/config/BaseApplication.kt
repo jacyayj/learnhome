@@ -10,6 +10,7 @@ import com.netease.nim.uikit.business.session.actions.BaseAction
 import com.netease.nimlib.sdk.NIMClient
 import com.netease.nimlib.sdk.SDKOptions
 import com.netease.nimlib.sdk.StatusBarNotificationConfig
+import com.netease.nimlib.sdk.friend.FriendService
 import com.netease.nimlib.sdk.util.NIMUtil
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
@@ -27,6 +28,8 @@ import pro.haichuang.learn.home.utils.SPUtils
 import retrofit2.converter.gson.GsonConverterFactory
 
 class BaseApplication : Application() {
+
+    private val friendService by lazy { NIMClient.getService(FriendService::class.java) }
 
     override fun onCreate() {
         super.onCreate()
@@ -62,6 +65,10 @@ class BaseApplication : Application() {
             })
         }
     }
+
+//    private fun isAllowSend(sessionId: String): Boolean {
+//
+//    }
 
     private fun initRefreshLayout() {
         SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, _ -> ClassicsHeader(context) }

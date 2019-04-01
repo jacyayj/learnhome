@@ -18,16 +18,16 @@
         android:padding="10dp">
 
         <com.yhy.widget.core.img.round.CircleImageView
+            android:id="@+id/header"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:src="@mipmap/ic_launcher_round" />
+            tools:ignore="MissingConstraints" />
 
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/alias_tv"
             style="@style/text_17_33"
             android:layout_marginStart="75dp"
             android:layout_marginTop="10dp"
-            android:text="钟丽君"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,8 +41,8 @@
             android:paddingHorizontal="4dp"
             android:paddingVertical="2dp"
             android:text="备注"
-            app:layout_constraintBaseline_toBaselineOf="@id/title"
-            app:layout_constraintStart_toEndOf="@id/title" />
+            app:layout_constraintBaseline_toBaselineOf="@id/alias_tv"
+            app:layout_constraintStart_toEndOf="@id/alias_tv" />
 
         <TextView
             style="@style/text_14_99"
@@ -53,10 +53,10 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/nickname"
             style="@style/text_14_99"
             android:layout_marginStart="75dp"
             android:layout_marginTop="55dp"
-            android:text="昵称：noaml"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>

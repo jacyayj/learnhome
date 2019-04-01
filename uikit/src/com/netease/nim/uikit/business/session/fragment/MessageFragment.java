@@ -1,5 +1,6 @@
 package com.netease.nim.uikit.business.session.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -26,11 +27,14 @@ import com.netease.nim.uikit.business.session.module.input.InputPanel;
 import com.netease.nim.uikit.business.session.module.list.MessageListPanelEx;
 import com.netease.nim.uikit.common.CommonUtil;
 import com.netease.nim.uikit.common.fragment.TFragment;
+import com.netease.nim.uikit.common.util.sys.TimeUtil;
 import com.netease.nim.uikit.impl.NimUIKitImpl;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.Observer;
 import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.nimlib.sdk.ResponseCode;
+import com.netease.nimlib.sdk.friend.FriendService;
+import com.netease.nimlib.sdk.friend.model.Friend;
 import com.netease.nimlib.sdk.msg.MessageBuilder;
 import com.netease.nimlib.sdk.msg.MsgService;
 import com.netease.nimlib.sdk.msg.MsgServiceObserve;
@@ -45,6 +49,8 @@ import com.netease.nimlib.sdk.robot.model.NimRobotInfo;
 import com.netease.nimlib.sdk.robot.model.RobotAttachment;
 import com.netease.nimlib.sdk.robot.model.RobotMsgType;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -72,7 +78,9 @@ public class MessageFragment extends TFragment implements ModuleProxy {
     protected MessageListPanelEx messageListPanel;
 
     protected AitManager aitManager;
+
     private UpdateReceiver updateReceiver;
+    private Friend friend;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -83,6 +91,7 @@ public class MessageFragment extends TFragment implements ModuleProxy {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.nim_message_fragment, container, false);
+
         return rootView;
     }
 
@@ -154,6 +163,7 @@ public class MessageFragment extends TFragment implements ModuleProxy {
 
         inputPanel.switchRobotMode(NimUIKitImpl.getRobotInfoProvider().getRobotByAccount(sessionId) != null);
         updateReceiver = new UpdateReceiver();
+        friend = NIMClient.getService(FriendService.class).getFriendByAccount(sessionId);
         registerObservers(true);
 
         if (customization != null) {
@@ -175,9 +185,35 @@ public class MessageFragment extends TFragment implements ModuleProxy {
      */
     // 是否允许发送消息
     protected boolean isAllowSendMessage(final IMMessage message) {
-        return customization.isAllowSendMessage(message);
+        if (friend != null) {
+            Map<String, Object> extension = friend.getExtension();
+            if (extension != null) {
+                int orderId = extension.get("orderId") == null ? -1 : (int) extension.get("orderId");
+                String orderTime = extension.get("orderTime") == null ? "" : (String) extension.get("orderTime");
+                if (orderId != -1) {
+                    if (orderTime != null && orderTime.isEmpty())
+                        getContext().sendBroadcast(new Intent("update_friend").putExtra("orderId", orderId).putExtra("account", sessionId));
+                    else
+                        return isTimeOut(orderTime);
+
+                }
+            }
+        }
+        return true;
     }
 
+    @SuppressLint("SimpleDateFormat")
+    private boolean isTimeOut(String time) {
+        long current = TimeUtil.currentTimeMillis();
+        long payTime = 0;
+        try {
+            payTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(time).getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        long interval = current - payTime;
+        return interval / 3600000L <= 23;
+    }
 
     private void registerObservers(boolean register) {
         if (register)
@@ -253,7 +289,7 @@ public class MessageFragment extends TFragment implements ModuleProxy {
         } else {
             // 替换成tip
             message = MessageBuilder.createTipMessage(message.getSessionId(), message.getSessionType());
-            message.setContent("该消息无法发送");
+            message.setContent("咨询时长已到期");
             message.setStatus(MsgStatusEnum.success);
             NIMClient.getService(MsgService.class).saveMessageToLocal(message, false);
         }

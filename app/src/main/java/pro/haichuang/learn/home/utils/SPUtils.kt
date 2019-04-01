@@ -40,7 +40,6 @@ object SPUtils {
         get() = sp.getBoolean("isTeacher", false)
         private set(value) = sp.edit().putBoolean("isTeacher", value).apply()
 
-
     fun clear() {
         sp.edit().clear().apply()
     }

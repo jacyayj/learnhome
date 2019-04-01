@@ -3,10 +3,12 @@ package pro.haichuang.learn.home.ui.activity.message
 import android.content.Intent
 import android.provider.Contacts.PresenceColumns.IM_ACCOUNT
 import com.jacy.kit.config.ContentView
+import com.jacy.kit.config.gone
 import com.jacy.kit.config.toast
+import com.netease.nim.uikit.api.NimUIKit
 import com.netease.nim.uikit.business.recent.RecentContactsFragment.RECENT_TAG_STICKY
+import com.netease.nim.uikit.business.session.helper.MessageListPanelHelper
 import com.netease.nim.uikit.common.CommonUtil
-import com.netease.nim.uikit.common.ui.dialog.EasyEditDialog
 import com.netease.nimlib.sdk.NIMClient
 import com.netease.nimlib.sdk.RequestCallback
 import com.netease.nimlib.sdk.friend.FriendService
@@ -16,7 +18,9 @@ import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum
 import kotlinx.android.synthetic.main.activity_friend_setting.*
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.config.BaseActivity
+import pro.haichuang.learn.home.ui.dialog.InputDialog
 import pro.haichuang.learn.home.ui.dialog.NoticeDialog
+import pro.haichuang.learn.home.utils.ImageBinding
 
 
 @ContentView(R.layout.activity_friend_setting)
@@ -30,48 +34,55 @@ class FriendSettingActivity : BaseActivity() {
 
     override fun initData() {
         titleModel.title = "设置"
-        sticky.isChecked = CommonUtil.isTagSet(contact, RECENT_TAG_STICKY)
+        contact.apply {
+            sticky.isChecked = CommonUtil.isTagSet(this, RECENT_TAG_STICKY)
+        }
+        black.isChecked = friendService.isInBlackList(account)
     }
 
     override fun initListener() {
+        NimUIKit.getUserInfoProvider().getUserInfo(account)?.let {
+            val alias = friendService.getFriendByAccount(account)?.alias
+            if (friendService.isMyFriend(account)) {
+                alias_tv.text = alias
+                nickname.text = "昵称：${it.name}"
+            } else {
+                nickname.gone()
+                remark.gone()
+                alias_tv.text = it.name
+            }
+            ImageBinding.displayNet(header, it.avatar)
+        }
         clear_history.setOnClickListener {
             NoticeDialog(this) {
                 msgService.clearChattingHistory(account, SessionTypeEnum.P2P)
-                sendBroadcast(Intent("refreshMessage"))
+                MessageListPanelHelper.getInstance().notifyClearMessages(account)
+//                sendBroadcast(Intent("refreshMessage"))
                 toast("清除成功")
             }.show()
         }
         remark.setOnClickListener {
-            EasyEditDialog(this).apply {
-                setEditHint(remark.text.toString())
-                setEditTextSingleLine()
-                addPositiveButtonListener {
-                    if (editMessage.isNullOrEmpty()) {
-                        toast("请输入备注名")
-                        return@addPositiveButtonListener
+            InputDialog(this) {
+                val filed = HashMap<FriendFieldEnum, String>()
+                filed[FriendFieldEnum.ALIAS] = it
+                friendService.updateFriendFields(account, filed as Map<FriendFieldEnum, Any>?).setCallback(object : RequestCallback<Void> {
+                    override fun onSuccess(p0: Void?) {
+                        toast("保存成功")
+                        remark.text = it
                     }
-                    val filed = HashMap<FriendFieldEnum, String>()
-                    filed[FriendFieldEnum.ALIAS] = editMessage
-                    friendService.updateFriendFields(account, filed as Map<FriendFieldEnum, Any>?).setCallback(object : RequestCallback<Void> {
-                        override fun onSuccess(p0: Void?) {
-                            toast("保存成功")
-                            remark.text = editMessage
-                        }
 
-                        override fun onFailed(p0: Int) {
+                    override fun onFailed(p0: Int) {
+                        if (p0 == 403)
+                            toast("设置识别，TA还不是你的好友")
+                        else
                             toast("保存失败 $p0")
-                        }
+                    }
 
-                        override fun onException(p0: Throwable?) {
-                            toast("保存出错 ${p0?.message}")
-                        }
-                    })
-                }
-                addNegativeButtonListener {
-                    dismiss()
-                }
-            }
-
+                    override fun onException(p0: Throwable?) {
+                        toast("保存出错 ${p0?.message}")
+                    }
+                })
+            }.show()
         }
         sticky.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked)

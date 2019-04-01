@@ -48,7 +48,7 @@
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:theme"
         tools:targetApi="n">
-        <activity android:name=".ui.activity.mine.OrderTeacherActivity"/>
+        <activity android:name=".ui.activity.mine.OrderTeacherActivity" />
         <activity android:name=".ui.activity.index.VRDetailsActivity" />
         <activity android:name=".ui.activity.index.VideoPlayActivity" />
         <activity android:name=".ui.activity.index.SearchActivity" />
@@ -103,8 +103,9 @@
             android:name=".ui.activity.mine.FileActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".ui.activity.index.HeightSchoolActivity" />
-        <activity android:name=".ui.activity.index.OnlineVideoActivity" android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".ui.activity.index.XinLiActivity" />
+        <activity
+            android:name=".ui.activity.index.OnlineVideoActivity"
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".ui.activity.index.TeacherDetailsActivity" />
         <activity
             android:name=".ui.activity.find.YuYueActivity"
@@ -143,6 +144,16 @@
         <activity android:name=".ui.activity.index.ZhuanTiDetailsActivity" />
         <activity android:name=".ui.activity.index.ZhuanTiSignupActivity" />
         <activity android:name=".ui.activity.mine.TiXianActivity" /> <!-- map -->
+
+        <receiver
+            android:name=".receiver.FriendReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="update_friend" />
+            </intent-filter>
+        </receiver>
+
         <activity
             android:name=".ui.im.location.activity.LocationAmapActivity"
             android:configChanges="keyboardHidden|orientation"
@@ -169,7 +180,7 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
-        </receiver> <!-- 云信进程间通信 Receiver -->
+        </receiver> <!-- 云信进程间通信 FriendReceiver -->
         <receiver android:name="com.netease.nimlib.service.ResponseReceiver" /> <!-- 云信进程间通信service -->
         <service android:name="com.netease.nimlib.service.ResponseService" /> <!-- 云信进程间通信provider -->
         <!-- android:authorities="{包名}.ipc.provider", 请将com.netease.nim.demo替换为自己的包名 -->

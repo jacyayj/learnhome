@@ -5,7 +5,7 @@ import android.databinding.Bindable
 import android.view.View
 import com.android.databinding.library.baseAdapters.BR
 import com.jacy.kit.config.mStartActivity
-import pro.haichuang.learn.home.ui.activity.index.SchoolDetailsActivity
+import pro.haichuang.learn.home.ui.activity.index.ZhaoShengSchoolDetailsActivity
 
 class ItemCompareModel : BaseModel() {
 
@@ -27,6 +27,6 @@ class ItemCompareModel : BaseModel() {
         if (compare)
             checked = checked.not()
         else
-            view.context?.mStartActivity(SchoolDetailsActivity::class.java)
+            view.context?.mStartActivity(ZhaoShengSchoolDetailsActivity::class.java)
     }
 }

@@ -126,7 +126,7 @@ class HeightSchoolSearchActivity : BaseActivity() {
                 item.checked = item.checked.not()
                 countChecked(item.checked, position)
             } else
-                mStartActivity(SchoolDetailsActivity::class.java, Pair(Constants.SCHOOL_ID, item.id))
+                mStartActivity(HeightSchoolDetailsActivity::class.java, Pair(Constants.SCHOOL_ID, item.id))
         }
         tab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(p0: TabLayout.Tab?) {

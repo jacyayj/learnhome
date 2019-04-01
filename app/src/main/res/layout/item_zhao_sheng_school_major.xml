@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="item"
+            type="pro.haichuang.learn.home.ui.activity.index.itemmodel.MajorModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@drawable/divider_horizontal_d7dde0"
+        android:orientation="horizontal"
+        android:showDividers="middle">
+
+        <TextView
+            style="@style/text_14_002133"
+            android:layout_width="0dp"
+            android:layout_weight="1.1"
+            android:gravity="center"
+            android:paddingVertical="10dp"
+            android:text="专业名称" />
+
+        <TextView
+            style="@style/text_14_002133"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingVertical="10dp"
+            android:text="@{item.code}" />
+
+        <TextView
+            style="@style/text_14_002133"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingVertical="10dp"
+            android:text="@{item.enrollCount+``}" />
+
+        <TextView
+            style="@style/text_14_002133"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingVertical="10dp"
+            android:text="@{item.educationYear+`年`}" />
+
+        <TextView
+            style="@style/text_14_002133"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingVertical="10dp"
+            android:text="@{item.tuition+``}" />
+    </LinearLayout>
+</layout>

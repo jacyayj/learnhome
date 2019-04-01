@@ -129,7 +129,7 @@
             android:windowSoftInputMode="adjustNothing|stateHidden" />
         <activity android:name=".ui.activity.index.ZhuanYeSearchActivity" />
         <activity android:name=".ui.activity.index.SchoolCompareActivity" />
-        <activity android:name=".ui.activity.index.SchoolDetailsActivity" />
+        <activity android:name=".ui.activity.index.ZhaoShengSchoolDetailsActivity" />
         <activity android:name=".ui.activity.index.HeightSchoolDetailsActivity" />
         <activity android:name=".ui.activity.index.ZhuanYeDetailsActivity" />
         <activity android:name=".ui.activity.index.ZhuanYePingGuDetailsActivity" />

@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="model"
+            type="pro.haichuang.learn.home.ui.activity.index.viewmodel.HeightSchoolDetailsModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        android:orientation="vertical"
+        tools:context=".ui.activity.index.ZhaoShengSchoolDetailsActivity">
+
+        <include layout="@layout/layout_title" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@color/colorWhite">
+
+            <com.yhy.widget.core.img.round.CircleImageView
+                net_url="@{model.logo}"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="10dp" />
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="75dp"
+                android:paddingVertical="15dp">
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/text_16_33"
+                        android:layout_marginEnd="5dp"
+                        android:text="@{model.collegeName}" />
+
+                    <TextView
+                        android:background="@drawable/bg_e5f5ff_stroke_32c8fa_radius_15dp"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="1dp"
+                        android:text="@{model.collegeNatureStr}"
+                        android:textColor="@color/color32C8FA"
+                        android:textSize="12sp" />
+                </TableRow>
+
+                <TextView
+                    style="@style/text_14_99"
+                    android:layout_marginTop="5dp"
+                    android:text="@{model.enrollBatchStr}"
+                    android:textColor="@color/color939799" />
+            </TableLayout>
+        </FrameLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@color/colorF0F7FA" />
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tab"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/colorWhite"
+            app:tabIndicatorColor="@color/color32C8FA"
+            app:tabIndicatorFullWidth="false"
+            app:tabIndicatorHeight="2dp"
+            app:tabMode="fixed"
+            app:tabTextAppearance="@style/find_menu">
+
+            <android.support.design.widget.TabItem
+                style="@style/match_layout"
+                android:layout_marginHorizontal="15dp"
+                android:text="高校计划" />
+
+            <android.support.design.widget.TabItem
+                style="@style/match_layout"
+                android:layout_marginHorizontal="15dp"
+                android:text="高校简介" />
+
+            <android.support.design.widget.TabItem
+                style="@style/match_layout"
+                android:layout_marginHorizontal="15dp"
+                android:text="招生简章" />
+        </android.support.design.widget.TabLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/layout_school_plan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/height_title"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/text_14_002133"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:paddingStart="15dp"
+                            android:text="@{`招生代码:`+model.enrollCode}" />
+
+                        <TextView
+                            style="@style/text_14_002133"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="@{`招生人数:`+model.enrollNumber}" />
+
+                        <TextView
+                            style="@style/text_14_002133"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="@{`年份:`+model.enrollYear}" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp"
+                        android:background="@color/colorF0F7FA" />
+
+                    <TextView
+                        style="@style/text_14_002133"
+                        android:layout_marginTop="5dp"
+                        android:paddingStart="15dp"
+                        android:paddingTop="15dp"
+                        android:paddingBottom="10dp"
+                        android:text="计划说明" />
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:background="@drawable/stroke_d7dee0"
+                        android:divider="@drawable/divider_vertical_d7dde0"
+                        android:showDividers="middle">
+
+                        <TableRow
+                            android:divider="@drawable/divider_horizontal_d7dde0"
+                            android:showDividers="middle">
+
+                            <TextView
+                                style="@style/text_14_002133"
+                                android:layout_width="0dp"
+                                android:layout_weight="1.1"
+                                android:gravity="center"
+                                android:paddingVertical="10dp"
+                                android:text="专业名称" />
+
+                            <TextView
+                                style="@style/text_14_002133"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:paddingVertical="10dp"
+                                android:text="专业代码" />
+
+                            <TextView
+                                style="@style/text_14_002133"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:paddingVertical="10dp"
+                                android:text="计划数" />
+
+                            <TextView
+                                style="@style/text_14_002133"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:paddingVertical="10dp"
+                                android:text="学制" />
+
+                            <TextView
+                                style="@style/text_14_002133"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:paddingVertical="10dp"
+                                android:text="学费" />
+                        </TableRow>
+
+                        <pro.haichuang.learn.home.ui.weight.AutoListView
+                            android:id="@+id/listView"
+                            android:divider="@drawable/divider_vertical_d7dde0"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </TableLayout>
+                </LinearLayout>
+
+                <include
+                    layout="@layout/layout_school_details_intro"
+                    tools:model="@{model}"
+                    tools:showIntro="@{true}" />
+
+                <include
+                    layout="@layout/layout_jianzhang"
+                    tools:guide="@{model.enrollGuide}" />
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</layout>

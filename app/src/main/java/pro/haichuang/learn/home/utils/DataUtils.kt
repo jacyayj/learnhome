@@ -72,7 +72,15 @@ object DataUtils {
     }
 
     fun findTypeById(id: String): String? {
-        return levelData.find { it.id == id }?.name
+        return typeData.find { it.id == id }?.name
+    }
+
+    fun findLevelByIds(ids: String): String? {
+        var names = ""
+        ids.split(",").forEach { id ->
+            names += "${levelData.find { it.id == id }?.name},"
+        }
+        return names.removeSuffix(",")
     }
 
     fun findChuangBanById(id: String): String? {

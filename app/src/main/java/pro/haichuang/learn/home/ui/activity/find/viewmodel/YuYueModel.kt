@@ -47,6 +47,8 @@ class YuYueModel : BaseModel() {
     @Params([Url.Teacher.Order], "appointTime")
     var appointTime = ""
 
+    var account = ""
+
     @Bindable
     var name = ""
         set(value) {

@@ -13,12 +13,14 @@ import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.toast
 import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureConfig
+import com.netease.nim.uikit.api.NimUIKit
 import com.tencent.mm.opensdk.modelpay.PayReq
 import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.activity_yu_yue.*
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.adapter.ReleaseImageAdapter
 import pro.haichuang.learn.home.config.Constants
+import pro.haichuang.learn.home.config.Constants.TEACHER_ACCOUNT
 import pro.haichuang.learn.home.config.Constants.TEACHER_HEADER
 import pro.haichuang.learn.home.config.Constants.TEACHER_ID
 import pro.haichuang.learn.home.config.Constants.TEACHER_NAME
@@ -28,12 +30,12 @@ import pro.haichuang.learn.home.config.Constants.TEACHER_TYPE
 import pro.haichuang.learn.home.config.DataBindingActivity
 import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.find.viewmodel.YuYueModel
+import pro.haichuang.learn.home.ui.dialog.NoticeDialog
 import pro.haichuang.learn.home.ui.dialog.PaymentDialog
 import pro.haichuang.learn.home.utils.GsonUtil
 import pro.haichuang.learn.home.utils.SPUtils
 import pro.haichuang.learn.home.utils.ShareUtils
 import java.io.File
-
 
 @ContentView(R.layout.activity_yu_yue)
 class YuYueActivity : DataBindingActivity<YuYueModel>() {
@@ -46,6 +48,16 @@ class YuYueActivity : DataBindingActivity<YuYueModel>() {
         }
     }
 
+    private val successDialog by lazy {
+        NoticeDialog(this) {
+            NimUIKit.startP2PSession(this, model.account)
+        }
+    }
+
+    private val failedDialog by lazy {
+        NoticeDialog(this)
+    }
+
     private val mHandler by lazy {
         @SuppressLint("HandlerLeak")
         object : Handler() {
@@ -53,10 +65,7 @@ class YuYueActivity : DataBindingActivity<YuYueModel>() {
                 when (msg?.what) {
                     Constants.ALIPAY -> {
                         when (GsonUtil.getString(msg.obj, "resultStatus")) {
-                            "9000" -> {
-                                toast("支付成功")
-                                finish()
-                            }
+                            "9000" -> successDialog.show("友情提示", "支付成功！点击“咨询”可咨询老师", "咨询")
                             "6001" -> toast("支付取消")
                         }
                     }
@@ -72,6 +81,7 @@ class YuYueActivity : DataBindingActivity<YuYueModel>() {
         model.name = intent.getStringExtra(TEACHER_NAME)
         model.skill = intent.getStringExtra(TEACHER_SKILL)
         model.header = intent.getStringExtra(TEACHER_HEADER)
+        model.account = intent.getStringExtra(TEACHER_ACCOUNT)
         model.type = intent.getIntExtra(TEACHER_TYPE, -1)
         model.subject = intent.getIntExtra(TEACHER_SUBJECT, -1)
         model.appointTime = time_1.text.toString()
@@ -142,11 +152,7 @@ class YuYueActivity : DataBindingActivity<YuYueModel>() {
     inner class PayResult : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             when (intent?.getIntExtra("payResult", -1)) {
-                0 -> {
-                    toast("支付成功")
-                    setResult(Activity.RESULT_OK)
-                    finish()
-                }
+                0 -> successDialog.show("友情提示", "支付成功！点击“咨询”可咨询老师", "咨询")
                 1 -> {
                     toast("支付取消")
                 }

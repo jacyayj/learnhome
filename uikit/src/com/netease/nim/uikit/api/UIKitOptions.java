@@ -144,6 +144,12 @@ public class UIKitOptions {
      */
     public boolean enableTeamManagerRevokeMsg = true;
 
+    /**
+     * 是否开是老师账号
+     * jacy add
+     */
+    public boolean isTeacher = false;
+
 
     /**
      * 返回默认的针对独立模式聊天室的 UIKitOptions

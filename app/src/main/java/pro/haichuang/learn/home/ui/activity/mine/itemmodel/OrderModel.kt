@@ -22,6 +22,7 @@ class OrderModel : BaseObservable() {
     var orderAmount = ""
     var orderNumber = ""
     var createTime = ""
+    var acceptTime = ""
     var teacherInfo: Teacher? = null
     var memberInfo: Author? = null
 

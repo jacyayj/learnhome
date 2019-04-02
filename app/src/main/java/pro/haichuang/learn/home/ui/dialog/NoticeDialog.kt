@@ -21,13 +21,15 @@ class NoticeDialog(context: Context, private val result: () -> Unit = {}) : Dial
         }
     }
 
-    fun show(title: String, content: String = "") {
+    fun show(title: String, content: String = "", confirmText: String = "") {
         super.show()
         msg_title.text = title
         if (content.isNotEmpty()) {
             msg_content.show()
             msg_content.text = content
         }
+        if (confirmText.isNotEmpty())
+            confirm.text = confirmText
     }
 
 }

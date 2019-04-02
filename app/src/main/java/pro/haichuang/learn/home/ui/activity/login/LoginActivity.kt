@@ -100,6 +100,7 @@ class LoginActivity : DataBindingActivity<LoginModel>(), IUiListener {
                     override fun onSuccess(p0: LoginInfo?) {
                         SPUtils.loginInfo = p0
                         SPUtils.phone = model.phone
+                        NimUIKit.getOptions().isTeacher = info.teacher
                         NimUIKit.loginSuccess(p0?.account)
                         toast("登录成功")
                         mStartActivity(MainActivity::class.java)

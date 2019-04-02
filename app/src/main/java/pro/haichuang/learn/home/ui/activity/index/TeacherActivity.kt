@@ -17,25 +17,25 @@ import pro.haichuang.learn.home.utils.GsonUtil
 @ContentView(R.layout.activity_online_teacher)
 class TeacherActivity : BaseActivity() {
 
-    private val isXinLi by lazy { intent.getBooleanExtra("isXinLi", false) }
+    private val online by lazy { intent.getBooleanExtra("online", false) }
 
     private val adapter by lazy {
         CommonAdapter<ItemTeacherModel>(layoutInflater, R.layout.item_teacher) { v, t, _ ->
             v.to_teacher.setOnClickListener {
-                mStartActivity(TeacherDetailsActivity::class.java, Pair("online", true), Pair(TEACHER_ID, t.id))
+                mStartActivity(TeacherDetailsActivity::class.java, Pair("online", online), Pair(TEACHER_ID, t.id))
             }
         }
     }
 
     override fun initData() {
-        titleModel.title = if (isXinLi) "心理舒压" else "名师在线"
+        titleModel.title = if (online) "名师在线" else "心理舒压"
         listView.adapter = adapter
         pageUrl = Url.Teacher.List
         fetchPageData()
     }
 
     override fun setPageParams(pageParams: HttpParams) {
-        pageParams.put("teacherType", if (isXinLi) "2" else "1")
+        pageParams.put("teacherType", if (online) "1" else "2")
     }
 
     override fun onSuccess(url: String, result: Any?) {

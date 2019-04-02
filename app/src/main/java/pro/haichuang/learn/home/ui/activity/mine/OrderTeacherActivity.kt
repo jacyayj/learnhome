@@ -26,68 +26,80 @@ class OrderTeacherActivity : BaseActivity() {
 
     private val friendSerivice by lazy { NIMClient.getService(FriendService::class.java) }
 
+    private var tempItem: OrderModel? = null
+
     private val adapter by lazy {
         CommonAdapter<OrderModel>(layoutInflater, R.layout.item_order_teacher) { v, t, _ ->
             v.operation.setOnClickListener {
-                when (t.orderStatus) {
-                    1 -> {
-                        if (t.orderType == 1) toChat(t) else
-                            post(Url.Order.Finish, HttpParams().apply {
-                                put("orderId", t.id.toString())
-                            }) {
-                                t.orderStatus = 3
-                            }
+                if (t.acceptTime.isEmpty()) {
+                    tempItem = t
+                    post(Url.Order.Get, HttpParams("orderId", t.id.toString()), needSession = true)
+                } else
+                    deal(t)
+            }
+        }
+    }
+
+    private fun deal(t: OrderModel) {
+        when (t.orderStatus) {
+            1 -> {
+                if (t.orderType == 1) toChat(t) else
+                    post(Url.Order.Finish, HttpParams().apply {
+                        put("orderId", t.id.toString())
+                    }) {
+                        t.orderStatus = 3
                     }
-                    2 -> {
-                        if (RxTimeTool.getIntervalByNow("", RxConstTool.TimeUnit.HOUR) >= 24) {
-                            post(Url.Order.Finish, HttpParams().apply {
-                                put("orderId", t.id.toString())
-                            }) {
-                                t.orderStatus = 3
-                            }
-                        } else toChat(t)
+            }
+            2 -> {
+                if (RxTimeTool.getIntervalByNow(t.acceptTime, RxConstTool.TimeUnit.HOUR) >= 24) {
+                    post(Url.Order.Finish, HttpParams("orderId", t.id.toString()), needSession = true) {
+                        t.orderStatus = 3
+                        toast("该咨询已过期")
                     }
-                }
+                } else toChat(t)
             }
         }
     }
 
     private fun toChat(orderModel: OrderModel) {
-
         orderModel.memberInfo?.let {
-            friendSerivice.deleteFriend(it.imAccid)
             if (friendSerivice.isMyFriend(it.imAccid))
-                if (RxTimeTool.getIntervalByNow("2019-03-30 00:00:00", RxConstTool.TimeUnit.HOUR) < 24)
-                    NimUIKit.startP2PSession(this, it.imAccid)
-                else toast("咨询已过期")
-            else
-                friendSerivice.addFriend(AddFriendData(it.imAccid, VerifyType.DIRECT_ADD)).setCallback(object : RequestCallback<Void> {
+                friendSerivice.updateFriendFields(it.imAccid, mapOf(Pair(FriendFieldEnum.EXTENSION, mapOf(Pair("orderTime", orderModel.acceptTime), Pair("orderId", orderModel.id))))).setCallback(object : RequestCallback<Void> {
                     override fun onSuccess(p0: Void?) {
-                        friendSerivice.updateFriendFields(it.imAccid, mapOf(Pair(FriendFieldEnum.EXTENSION, mapOf(Pair("orderTime", ""), Pair("orderId", orderModel.id))))).setCallback(object : RequestCallback<Void> {
-                            override fun onSuccess(p0: Void?) {
-                                runOnUiThread {
-                                    NimUIKit.startP2PSession(this@OrderTeacherActivity, it.imAccid)
-                                }
-                            }
-
-                            override fun onFailed(p0: Int) {
-                            }
-
-                            override fun onException(p0: Throwable?) {
-                            }
-                        })
-
+                        NimUIKit.startP2PSession(this@OrderTeacherActivity, it.imAccid)
                     }
 
                     override fun onFailed(p0: Int) {
-
                     }
 
                     override fun onException(p0: Throwable?) {
                     }
                 })
-        }
+            else friendSerivice.addFriend(AddFriendData(it.imAccid, VerifyType.DIRECT_ADD)).setCallback(object : RequestCallback<Void> {
+                override fun onSuccess(p0: Void?) {
+                    friendSerivice.updateFriendFields(it.imAccid, mapOf(Pair(FriendFieldEnum.EXTENSION, mapOf(Pair("orderTime", orderModel.acceptTime), Pair("orderId", orderModel.id))))).setCallback(object : RequestCallback<Void> {
+                        override fun onSuccess(p0: Void?) {
+                            NimUIKit.startP2PSession(this@OrderTeacherActivity, it.imAccid)
+                        }
 
+                        override fun onFailed(p0: Int) {
+                        }
+
+                        override fun onException(p0: Throwable?) {
+                        }
+                    })
+
+                }
+
+                override fun onFailed(p0: Int) {
+
+                }
+
+                override fun onException(p0: Throwable?) {
+                }
+            })
+
+        }
     }
 
     override fun initData() {
@@ -99,6 +111,12 @@ class OrderTeacherActivity : BaseActivity() {
 
     override fun onSuccess(url: String, result: Any?) {
         when (url) {
+            Url.Order.Get -> {
+                tempItem?.let {
+                    it.acceptTime = GsonUtil.getString(result, "acceptTime")
+                    deal(it)
+                }
+            }
             Url.Order.TeacherList -> {
                 GsonUtil.parseRows(result, OrderModel::class.java).list?.let {
                     dealRows(adapter, it)

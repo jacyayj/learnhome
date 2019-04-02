@@ -6,11 +6,13 @@ import android.support.multidex.MultiDex
 import com.netease.nim.uikit.api.NimUIKit
 import com.netease.nim.uikit.api.UIKitOptions
 import com.netease.nim.uikit.api.model.session.SessionCustomization
+import com.netease.nim.uikit.api.model.session.SessionEventListener
 import com.netease.nim.uikit.business.session.actions.BaseAction
 import com.netease.nimlib.sdk.NIMClient
 import com.netease.nimlib.sdk.SDKOptions
 import com.netease.nimlib.sdk.StatusBarNotificationConfig
 import com.netease.nimlib.sdk.friend.FriendService
+import com.netease.nimlib.sdk.msg.model.IMMessage
 import com.netease.nimlib.sdk.util.NIMUtil
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
@@ -24,6 +26,7 @@ import pro.haichuang.learn.home.ui.activity.message.FriendSettingActivity
 import pro.haichuang.learn.home.ui.im.CollectAction
 import pro.haichuang.learn.home.ui.im.MsgViewHolderTip
 import pro.haichuang.learn.home.ui.im.location.NimDemoLocationProvider
+import pro.haichuang.learn.home.utils.HttpUtils
 import pro.haichuang.learn.home.utils.SPUtils
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -52,8 +55,24 @@ class BaseApplication : Application() {
 
     private fun initUiKit() {
         if (NIMUtil.isMainProcess(this)) {
+            NIMClient.toggleNotification(true)
             NimUIKit.init(this, UIKitOptions().apply {
                 shouldHandleReceipt = false
+                isTeacher = SPUtils.isTeacher
+            })
+            NimUIKit.setSessionListener(object : SessionEventListener {
+                override fun onAcceptOrder(context: Context?, orderId: Int, account: String?) {
+                    account?.let { HttpUtils.acceptOrder(orderId, it) }
+                }
+
+                override fun onAvatarClicked(context: Context?, message: IMMessage?) {
+                }
+
+                override fun onAvatarLongClicked(context: Context?, message: IMMessage?) {
+                }
+
+                override fun onAckMsgClicked(context: Context?, message: IMMessage?) {
+                }
             })
             NimUIKit.setSettingClass(FriendSettingActivity::class.java)
             NimUIKit.setLocationProvider(NimDemoLocationProvider())
@@ -65,10 +84,6 @@ class BaseApplication : Application() {
             })
         }
     }
-
-//    private fun isAllowSend(sessionId: String): Boolean {
-//
-//    }
 
     private fun initRefreshLayout() {
         SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, _ -> ClassicsHeader(context) }

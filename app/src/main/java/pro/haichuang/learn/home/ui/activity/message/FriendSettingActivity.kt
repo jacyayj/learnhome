@@ -20,6 +20,7 @@ import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.config.BaseActivity
 import pro.haichuang.learn.home.ui.dialog.InputDialog
 import pro.haichuang.learn.home.ui.dialog.NoticeDialog
+import pro.haichuang.learn.home.ui.im.helper.ContactHelper
 import pro.haichuang.learn.home.utils.ImageBinding
 
 
@@ -57,7 +58,6 @@ class FriendSettingActivity : BaseActivity() {
             NoticeDialog(this) {
                 msgService.clearChattingHistory(account, SessionTypeEnum.P2P)
                 MessageListPanelHelper.getInstance().notifyClearMessages(account)
-//                sendBroadcast(Intent("refreshMessage"))
                 toast("清除成功")
             }.show()
         }
@@ -68,7 +68,7 @@ class FriendSettingActivity : BaseActivity() {
                 friendService.updateFriendFields(account, filed as Map<FriendFieldEnum, Any>?).setCallback(object : RequestCallback<Void> {
                     override fun onSuccess(p0: Void?) {
                         toast("保存成功")
-                        remark.text = it
+                        alias_tv.text = it
                     }
 
                     override fun onFailed(p0: Int) {
@@ -90,6 +90,7 @@ class FriendSettingActivity : BaseActivity() {
             else
                 CommonUtil.removeTag(contact, RECENT_TAG_STICKY)
             msgService.updateRecent(contact)
+            ContactHelper.init()
             sendBroadcast(Intent("refreshContact").putExtra(IM_ACCOUNT, account).putExtra("hasSticky", isChecked))
         }
         black.setOnCheckedChangeListener { _, isChecked ->

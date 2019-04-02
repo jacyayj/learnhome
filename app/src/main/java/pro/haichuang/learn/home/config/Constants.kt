@@ -8,6 +8,7 @@ object Constants {
     const val TEACHER_TYPE = "teacher_type"
     const val TEACHER_NAME = "teacher_name"
     const val TEACHER_SKILL = "teacher_skill"
+    const val TEACHER_ACCOUNT = "teacher_account"
 
     const val NEWS_ID = "news_id"
 

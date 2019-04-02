@@ -20,13 +20,13 @@ class IndexFragment : BaseFragment() {
         grid.setSwipeItemClickListener { _, position ->
             when (position) {
                 0 -> mStartActivity(ZhiYuanActivity::class.java)
-                1 -> mStartActivity(TeacherActivity::class.java)
+                1 -> mStartActivity(TeacherActivity::class.java, Pair("online",true))
                 2 -> mStartActivity(VRActivity::class.java)
                 3 -> mStartActivity(DataSearchActivity::class.java)
                 4 -> mStartActivity(LiuXueActivity::class.java)
                 5 -> mStartActivity(ZhaoShengActivity::class.java)
                 6 -> mStartActivity(NoteBookActivity::class.java)
-                7 -> mStartActivity(TeacherActivity::class.java, Pair("isXinLi",true))
+                7 -> mStartActivity(TeacherActivity::class.java)
                 8 -> mStartActivity(OnlineVideoActivity::class.java)
                 9 -> mStartActivity(HeightSchoolActivity::class.java)
             }

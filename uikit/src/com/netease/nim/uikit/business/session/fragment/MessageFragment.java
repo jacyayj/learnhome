@@ -1,10 +1,7 @@
 package com.netease.nim.uikit.business.session.fragment;
 
 import android.annotation.SuppressLint;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -13,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.netease.nim.uikit.R;
+import com.netease.nim.uikit.api.NimUIKit;
 import com.netease.nim.uikit.api.UIKitOptions;
 import com.netease.nim.uikit.api.model.main.CustomPushContentProvider;
 import com.netease.nim.uikit.api.model.session.SessionCustomization;
@@ -34,6 +32,7 @@ import com.netease.nimlib.sdk.Observer;
 import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.nimlib.sdk.ResponseCode;
 import com.netease.nimlib.sdk.friend.FriendService;
+import com.netease.nimlib.sdk.friend.constant.FriendFieldEnum;
 import com.netease.nimlib.sdk.friend.model.Friend;
 import com.netease.nimlib.sdk.msg.MessageBuilder;
 import com.netease.nimlib.sdk.msg.MsgService;
@@ -52,6 +51,7 @@ import com.netease.nimlib.sdk.robot.model.RobotMsgType;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -79,7 +79,6 @@ public class MessageFragment extends TFragment implements ModuleProxy {
 
     protected AitManager aitManager;
 
-    private UpdateReceiver updateReceiver;
     private Friend friend;
 
     @Override
@@ -162,7 +161,6 @@ public class MessageFragment extends TFragment implements ModuleProxy {
         initAitManager();
 
         inputPanel.switchRobotMode(NimUIKitImpl.getRobotInfoProvider().getRobotByAccount(sessionId) != null);
-        updateReceiver = new UpdateReceiver();
         friend = NIMClient.getService(FriendService.class).getFriendByAccount(sessionId);
         registerObservers(true);
 
@@ -192,7 +190,10 @@ public class MessageFragment extends TFragment implements ModuleProxy {
                 String orderTime = extension.get("orderTime") == null ? "" : (String) extension.get("orderTime");
                 if (orderId != -1) {
                     if (orderTime != null && orderTime.isEmpty())
-                        getContext().sendBroadcast(new Intent("update_friend").putExtra("orderId", orderId).putExtra("account", sessionId));
+                        if (NimUIKit.getOptions().isTeacher)
+                            NimUIKitImpl.getSessionListener().onAcceptOrder(getContext(), orderId, sessionId);
+                        else
+                            return true;
                     else
                         return isTimeOut(orderTime);
 
@@ -216,10 +217,6 @@ public class MessageFragment extends TFragment implements ModuleProxy {
     }
 
     private void registerObservers(boolean register) {
-        if (register)
-            getContext().registerReceiver(updateReceiver, new IntentFilter("refreshMessage"));
-        else
-            getContext().unregisterReceiver(updateReceiver);
         MsgServiceObserve service = NIMClient.getService(MsgServiceObserve.class);
         service.observeReceiveMessage(incomingMessageObserver, register);
         // 已读回执监听
@@ -241,6 +238,14 @@ public class MessageFragment extends TFragment implements ModuleProxy {
     private void onMessageIncoming(List<IMMessage> messages) {
         if (CommonUtil.isEmpty(messages)) {
             return;
+        }
+        for (IMMessage message : messages) {
+            if (message.getMsgType() == MsgTypeEnum.tip && message.getContent().equals("计费开始，本次咨询将在24小时候结束！")) {
+                Map<FriendFieldEnum, Object> extension = new HashMap<>();
+                extension.put(FriendFieldEnum.EXTENSION, message.getRemoteExtension());
+                NIMClient.getService(FriendService.class).updateFriendFields(sessionId, extension);
+                break;
+            }
         }
         messageListPanel.onIncomingMessage(messages);
         // 发送已读回执
@@ -431,12 +436,5 @@ public class MessageFragment extends TFragment implements ModuleProxy {
             actions.addAll(customization.actions);
         }
         return actions;
-    }
-
-    class UpdateReceiver extends BroadcastReceiver {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            messageListPanel.clearMessageList();
-        }
     }
 }

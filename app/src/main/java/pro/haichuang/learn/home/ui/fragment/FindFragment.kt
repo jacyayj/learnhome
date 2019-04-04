@@ -20,6 +20,7 @@ import pro.haichuang.learn.home.ui.activity.find.FindDetailsActivity
 import pro.haichuang.learn.home.ui.activity.find.FindReleaseActivity
 import pro.haichuang.learn.home.ui.fragment.itemview.ItemNews
 import pro.haichuang.learn.home.utils.GsonUtil
+import pro.haichuang.learn.home.utils.ImageBinding
 
 @ContentView(R.layout.fragment_find)
 class FindFragment : BaseFragment() {
@@ -75,7 +76,27 @@ class FindFragment : BaseFragment() {
             }
             Url.Publish.List -> {
                 val rows = GsonUtil.parseRows(result, ItemNews::class.java)
-                rows.list?.let { dealRows(if (tab.selectedTabPosition == 0) firstAdapter else otherAdapter, it) }
+                rows.list?.let {
+                    if (!isLoadMore) {
+                        val recommend = it.filter { it.recommend }
+                        when (it.size) {
+                            0 -> ad_view.gone()
+                            1 -> {
+                                ImageBinding.displayNet(recommend_img_1, recommend[0].picPath)
+                                recommend_txt_1.text = recommend[0].title
+                                recommend_2.gone()
+                            }
+                            2 -> {
+                                ImageBinding.displayNet(recommend_img_1, recommend[0].picPath)
+                                recommend_txt_1.text = recommend[0].title
+                                ImageBinding.displayNet(recommend_img_2, recommend[1].picPath)
+                                recommend_txt_2.text = recommend[1].title
+                            }
+                        }
+                        it.removeAll(recommend)
+                    }
+                    dealRows(if (tab.selectedTabPosition == 0) firstAdapter else otherAdapter, it)
+                }
             }
         }
     }

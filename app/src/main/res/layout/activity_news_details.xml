@@ -12,14 +12,14 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorF0F7FA"
         android:orientation="vertical"
+        android:background="@color/colorWhite"
         tools:context=".ui.activity.news.NewsDetailsActivity">
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_title"
-            android:background="@color/colorWhite">
+            >
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -46,9 +46,8 @@
             style="@style/text_20_00"
             android:layout_width="match_parent"
             android:layout_marginTop="1dp"
-            android:background="@color/colorWhite"
             android:padding="15dp"
-            android:text="@{model.typeName == `` ? `` : `【`+model.typeName+`】`+model.title}" />
+            android:text="@{(model.typeName == `` ? `` : `【`+model.typeName+`】`)+model.title}" />
 
         <TextView
             style="@style/text_12_99"
@@ -61,8 +60,9 @@
 
         <com.yhy.widget.core.web.HybridWebView
             android:id="@+id/content"
+            android:layout_marginHorizontal="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorWhite" />
+             />
     </LinearLayout>
 </layout>

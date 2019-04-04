@@ -3,6 +3,7 @@ package pro.haichuang.learn.home.config
 import android.app.Application
 import android.content.Context
 import android.support.multidex.MultiDex
+import com.github.promeg.pinyinhelper.Pinyin
 import com.netease.nim.uikit.api.NimUIKit
 import com.netease.nim.uikit.api.UIKitOptions
 import com.netease.nim.uikit.api.model.session.SessionCustomization
@@ -11,12 +12,13 @@ import com.netease.nim.uikit.business.session.actions.BaseAction
 import com.netease.nimlib.sdk.NIMClient
 import com.netease.nimlib.sdk.SDKOptions
 import com.netease.nimlib.sdk.StatusBarNotificationConfig
-import com.netease.nimlib.sdk.friend.FriendService
 import com.netease.nimlib.sdk.msg.model.IMMessage
 import com.netease.nimlib.sdk.util.NIMUtil
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
+import com.tencent.smtt.sdk.QbSdk
+import com.vondear.rxtool.RxFileTool
 import com.vondear.rxtool.RxTool
 import com.zhouyou.http.EasyHttp
 import com.zhouyou.http.cache.model.CacheMode
@@ -29,14 +31,20 @@ import pro.haichuang.learn.home.ui.im.location.NimDemoLocationProvider
 import pro.haichuang.learn.home.utils.HttpUtils
 import pro.haichuang.learn.home.utils.SPUtils
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.File
 
 class BaseApplication : Application() {
 
-    private val friendService by lazy { NIMClient.getService(FriendService::class.java) }
+
+    private val city_json by lazy { File(RxFileTool.getDiskCacheDir(this), "/city_list.json") }
 
     override fun onCreate() {
         super.onCreate()
+        if (!RxFileTool.isFileExists(city_json))
+            RxFileTool.copyFile(resources.assets.open("_city.json"), city_json)
         RxTool.init(this)
+        QbSdk.initX5Environment(this, null)
+        Pinyin.init(Pinyin.newConfig())
         EasyHttp.init(this)
         EasyHttp.getInstance()
                 .addConverterFactory(GsonConverterFactory.create())
@@ -47,6 +55,7 @@ class BaseApplication : Application() {
                 .setWriteTimeOut(10 * 1000)
                 .setConnectTimeout(10 * 1000)
                 .setCookieStore(CookieManger(this))
+                .setCertificates()
                 .setBaseUrl(Url.base_url)
         NIMClient.init(this, SPUtils.loginInfo, options())
         initUiKit()

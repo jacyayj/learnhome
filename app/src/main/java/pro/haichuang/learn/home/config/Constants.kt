@@ -32,4 +32,10 @@ object Constants {
 
     const val COMPARE_IDS = "compare_ids"
 
+    const val NOTE_ID = "note_id"
+
+    const val NOTE_TYPE = "note_type"
+
+    const val NOTE_SUBJECT = "note_subject"
+
 }

@@ -32,7 +32,7 @@ android {
 
         ndk {
             //设置支持的SO库架构
-            abiFilters "armeabi-v7a", "x86", "arm64-v8a", "x86_64"
+            abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
         }
     }
     dataBinding {
@@ -71,9 +71,11 @@ dependencies {
     implementation project(':uikit')
     implementation files('libs/open_sdk_r6019_lite.jar')
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:5.3.1'
-
     implementation 'com.amap.api:location:4.5.0'
     implementation 'com.amap.api:search:6.5.0.1'
     implementation 'com.amap.api:map2d:5.2.0'
     implementation(name: 'alipaySdk-15.6.0-20190226104104-noUtdid', ext: 'aar')
+    implementation files('libs/tbs_sdk_thirdapp_v3.2.0.1104_43200_sharewithdownload_withfilereader_withoutGame_obfs_20170609_115346.jar')
+
+    implementation 'com.github.promeg:tinypinyin:2.0.3' // TinyPinyin核心包，约80KB
 }

@@ -13,6 +13,7 @@ import com.netease.nimlib.sdk.auth.LoginInfo
 import com.tencent.tauth.IUiListener
 import com.tencent.tauth.Tencent
 import com.tencent.tauth.UiError
+import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.activity_login.*
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.bean.UserInfo
@@ -71,7 +72,12 @@ class LoginActivity : DataBindingActivity<LoginModel>(), IUiListener {
             mStartActivity(ModifyPwdActivity::class.java)
         }
         confirm_fast.setOnClickListener {
-            mStartActivity(MainActivity::class.java)
+            if (model.checkSuccess(Url.User.Login)) {
+                post(Url.User.Login, HttpParams("username", model.phone).apply {
+                    put("smsCode", model.code)
+                }, jessionid = model.JSESSIONID)
+            }
+
         }
         confirm_normal.setOnClickListener {
             model.needEncrypt = "18384124448" != model.user
@@ -90,7 +96,6 @@ class LoginActivity : DataBindingActivity<LoginModel>(), IUiListener {
         when (url) {
             Url.Sms.Send -> {
                 fetch_sms.notifyCount()
-                model.code = result.toString()
                 toast("发送成功")
             }
             Url.User.Login -> {

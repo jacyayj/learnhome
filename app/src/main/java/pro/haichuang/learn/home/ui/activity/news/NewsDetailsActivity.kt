@@ -22,6 +22,7 @@ class NewsDetailsActivity : DataBindingActivity<NewsDetailsModel>() {
             intent.getBooleanExtra("isZhaoSheng", false) -> Url.ZhaoSheng.Get
             else -> Url.News.Get
         }
+        content.settings.textZoom = 200
         post(url, params, needSession = true)
     }
 

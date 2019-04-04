@@ -32,7 +32,7 @@ class LoginModel : BaseModel() {
             notifyPropertyChanged(BR.pwd)
         }
 
-    @Params([Url.Sms.Send, Url.User.Login], "mobile")
+    @Params([Url.Sms.Send], "mobile")
     @Bindable
     var phone = ""
         set(value) {
@@ -59,10 +59,10 @@ class LoginModel : BaseModel() {
                         false
                     }
                     fastLogin && phone.isEmpty() -> {
-                        toast("请输入正确的手机号")
+                        toast("请输入手机号")
                         false
                     }
-                    pwd.isEmpty() -> {
+                    !fastLogin && pwd.isEmpty() -> {
                         toast("请输入密码")
                         false
                     }
@@ -72,6 +72,10 @@ class LoginModel : BaseModel() {
                     }
                     fastLogin && !RxRegTool.isMobileSimple(phone) -> {
                         toast("请输入正确的手机号")
+                        false
+                    }
+                    fastLogin && code.isEmpty() -> {
+                        toast("请输入验证码")
                         false
                     }
                     else -> true

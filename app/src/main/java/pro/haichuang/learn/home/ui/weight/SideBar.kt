@@ -88,7 +88,6 @@ class SideBar : View {
                     listener?.onTouchingLetterChanged(A_Z[c])
                         mTextDialog?.text = A_Z[c]
                         mTextDialog?.show()
-
                     choose = c
                     invalidate()
                 }

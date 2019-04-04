@@ -10,6 +10,7 @@ class ItemNews : BaseObservable() {
     var releaseDate = ""
     var title = ""
     var typeName = ""
+    var recommend = false
     var picArr: ArrayList<ImageBean>? = null
     val picPath
         get() = if (picArr.isNullOrEmpty()) "" else picArr?.get(0)?.picPaths ?: ""

@@ -25,8 +25,7 @@
             android:id="@+id/to_choose_city"
             style="@style/text_14_736E73"
             android:drawableEnd="@drawable/icon_arrow_down"
-            android:drawablePadding="5dp"
-            android:text="成都" />
+            android:drawablePadding="5dp" />
 
         <LinearLayout
             android:id="@+id/to_search"
@@ -60,103 +59,110 @@
             android:src="@drawable/icon_add" />
     </LinearLayout>
 
-    <ScrollView
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@id/refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            style="@style/match_layout"
-            android:orientation="vertical">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:background="#ff0"
-                android:padding="20dp">
+            <LinearLayout
+                style="@style/match_layout"
+                android:orientation="vertical">
 
-                <ImageView
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@mipmap/ic_launcher"
-                    android:gravity="center" />
-            </FrameLayout>
+                    android:layout_height="150dp"
+                    android:background="#ff0"
+                    android:padding="20dp">
 
-            <pro.haichuang.learn.home.ui.weight.GridRecyclerView
-                android:id="@+id/grid"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="10dp"
-                android:background="@color/colorWhite"
-                android:paddingBottom="5dp" />
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@mipmap/ic_launcher"
+                        android:gravity="center" />
+                </FrameLayout>
 
-            <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorWhite"
-                android:padding="10dp">
+                <pro.haichuang.learn.home.ui.weight.GridRecyclerView
+                    android:id="@+id/grid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="10dp"
+                    android:background="@color/colorWhite"
+                    android:paddingBottom="5dp" />
 
-                <com.yhy.widget.core.img.round.RoundImageView
-                    android:id="@+id/to_zhuanti"
-                    android:layout_width="0dp"
-                    android:layout_height="100dp"
-                    android:layout_weight="1"
-                    android:src="#ff0"
-                    app:riv_radius="5dp" />
-
-                <TableRow android:layout_marginTop="5dp">
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:padding="10dp">
 
                     <com.yhy.widget.core.img.round.RoundImageView
+                        android:id="@+id/to_zhuanti"
                         android:layout_width="0dp"
                         android:layout_height="100dp"
-                        android:layout_marginEnd="2.5dp"
                         android:layout_weight="1"
-                        android:src="#f00"
+                        android:src="#ff0"
                         app:riv_radius="5dp" />
 
-                    <com.yhy.widget.core.img.round.RoundImageView
-                        android:layout_width="0dp"
-                        android:layout_height="100dp"
-                        android:layout_marginStart="2.5dp"
-                        android:layout_weight="1"
-                        android:src="#f90"
-                        app:riv_radius="5dp" />
-                </TableRow>
-            </TableLayout>
+                    <TableRow android:layout_marginTop="5dp">
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="5dp"
-                android:background="@color/colorWhite">
+                        <com.yhy.widget.core.img.round.RoundImageView
+                            android:layout_width="0dp"
+                            android:layout_height="100dp"
+                            android:layout_marginEnd="2.5dp"
+                            android:layout_weight="1"
+                            android:src="#f00"
+                            app:riv_radius="5dp" />
+
+                        <com.yhy.widget.core.img.round.RoundImageView
+                            android:layout_width="0dp"
+                            android:layout_height="100dp"
+                            android:layout_marginStart="2.5dp"
+                            android:layout_weight="1"
+                            android:src="#f90"
+                            app:riv_radius="5dp" />
+                    </TableRow>
+                </TableLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/colorWhite">
+
+                    <View
+                        android:layout_width="100dp"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center"
+                        android:background="@color/color8A9499" />
+
+                    <TextView
+                        style="@style/text_13_8A9499"
+                        android:layout_gravity="center"
+                        android:layout_marginVertical="5dp"
+                        android:background="@color/colorWhite"
+                        android:paddingHorizontal="5dp"
+                        android:text="热门推荐" />
+                </FrameLayout>
 
                 <View
-                    android:layout_width="100dp"
-                    android:layout_height="1dp"
-                    android:layout_gravity="center"
-                    android:background="@color/color8A9499" />
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/colorE0E0E0" />
 
-                <TextView
-                    style="@style/text_13_8A9499"
-                    android:layout_gravity="center"
-                    android:layout_marginVertical="5dp"
+                <pro.haichuang.learn.home.ui.weight.AutoListView
+                    android:id="@+id/listView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:background="@color/colorWhite"
-                    android:paddingHorizontal="5dp"
-                    android:text="热门推荐" />
-            </FrameLayout>
+                    android:divider="@color/colorF0F7FA"
+                    android:dividerHeight="5dp" />
+            </LinearLayout>
+        </ScrollView>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/colorE0E0E0" />
-
-            <pro.haichuang.learn.home.ui.weight.AutoListView
-                android:id="@+id/listView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorWhite"
-                android:divider="@color/colorF0F7FA"
-                android:dividerHeight="5dp" />
-        </LinearLayout>
-    </ScrollView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </LinearLayout>

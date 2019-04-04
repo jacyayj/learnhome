@@ -62,14 +62,17 @@ abstract class BaseActivity : RootActivity(), OnRefreshLoadMoreListener {
      *@param needSession 知否需要session
      *@param success 成功回调
      */
-    fun post(url: String, params: HttpParams = HttpParams(), showLoading: Boolean = true, needSession: Boolean = false, success: () -> Unit = {}) {
+    fun post(url: String, params: HttpParams = HttpParams(), showLoading: Boolean = true, needSession: Boolean = false, jessionid: String = "", success: () -> Unit = {}) {
         if (needSession)
             SPUtils.session?.let {
                 params.put("sessionKey", it)
             }
-        EasyHttp.post(url)
+        val request = EasyHttp.post(url)
                 .params(sign(params))
-                .execute(MyCallBack(url, this, showLoading, success))
+        if (jessionid.isNotEmpty())
+        //需要附带验证码的接口，将JSESSIONID附加在cookie上传给服务器
+            request.addCookie("JSESSIONID", jessionid)
+        request.execute(MyCallBack(url, this, showLoading, success))
     }
 
     protected fun sign(params: HttpParams): HttpParams {

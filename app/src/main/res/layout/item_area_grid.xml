@@ -20,7 +20,7 @@
             android:drawablePadding="5dp"
             android:layout_gravity="center"
             android:orientation="vertical"
-            android:text="@{item.name}"
+            android:text="@{item.city_name}"
             android:onClick="@{item::click}"
             android:textColor="@color/color33"
             android:textSize="16sp" />

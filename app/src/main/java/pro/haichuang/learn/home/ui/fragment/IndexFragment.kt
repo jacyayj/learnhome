@@ -1,14 +1,21 @@
 package pro.haichuang.learn.home.ui.fragment
 
+import android.annotation.SuppressLint
+import android.app.Activity.RESULT_OK
+import android.content.Intent
+import com.amap.api.location.AMapLocation
 import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
+import com.amap.api.location.AMapLocationListener
+import com.amap.api.services.weather.LocalWeatherForecastResult
+import com.amap.api.services.weather.LocalWeatherLiveResult
+import com.amap.api.services.weather.WeatherSearch
+import com.amap.api.services.weather.WeatherSearchQuery
 import com.jacy.kit.adapter.CommonAdapter
 import com.jacy.kit.adapter.CommonRecyclerAdapter
 import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.mStartActivity
-import com.zhouyou.http.EasyHttp
-import com.zhouyou.http.callback.SimpleCallBack
-import com.zhouyou.http.exception.ApiException
+import com.jacy.kit.config.mStartActivityForResult
 import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.fragment_index.*
 import pro.haichuang.learn.home.R
@@ -21,11 +28,9 @@ import pro.haichuang.learn.home.ui.dialog.IndexOperationPopup
 import pro.haichuang.learn.home.ui.fragment.itemview.ItemNews
 import pro.haichuang.learn.home.utils.DataUtils
 import pro.haichuang.learn.home.utils.GsonUtil
-import pro.haichuang.learn.home.utils.mlog
 
 @ContentView(R.layout.fragment_index)
-class IndexFragment : BaseFragment() {
-
+class IndexFragment : BaseFragment(), WeatherSearch.OnWeatherSearchListener, AMapLocationListener {
     private val adapter by lazy { CommonAdapter<ItemNews>(layoutInflater, R.layout.item_index_list) }
 
     private val locationOption by lazy {
@@ -38,24 +43,13 @@ class IndexFragment : BaseFragment() {
     private val locationClient by lazy {
         AMapLocationClient(context).apply {
             setLocationOption(locationOption)
-            setLocationListener {
-                mlog.v(it.city)
-                to_choose_city.text = it.city.replace("市", "")
-                EasyHttp.get("weatherInfo?")
-                        .baseUrl("https://restapi.amap.com/v3/weather/")
-                        .params("city", it.adCode)
-                        .params("key", "dc2c5299ff2a28b71482f2831b05f888")
-                        .params("extensions", "base")
-                        .execute(object : SimpleCallBack<String>() {
-                            override fun onSuccess(t: String?) {
-                                mlog.v("天气：$t")
-                            }
+            setLocationListener(this@IndexFragment)
+        }
+    }
 
-                            override fun onError(e: ApiException?) {
-
-                            }
-                        })
-            }
+    private val weatherSearch by lazy {
+        WeatherSearch(context).apply {
+            setOnWeatherSearchListener(this@IndexFragment)
         }
     }
 
@@ -75,7 +69,6 @@ class IndexFragment : BaseFragment() {
                 9 -> mStartActivity(HeightSchoolActivity::class.java)
             }
         }
-        to_choose_city.setOnClickListener { mStartActivity(CityListActivity::class.java) }
         grid.adapter = CommonRecyclerAdapter(layoutInflater, R.layout.item_index_grid, DataUtils.formatIndexGridData())
         listView.adapter = adapter
         pageUrl = Url.Publish.List
@@ -83,8 +76,9 @@ class IndexFragment : BaseFragment() {
     }
 
     override fun setPageParams(pageParams: HttpParams) {
-        pageParams.put("path","jtjy")
+        pageParams.put("path", "jtjy")
     }
+
     override fun onSuccess(url: String, result: Any?) {
         when (url) {
             Url.Publish.List -> {
@@ -95,6 +89,26 @@ class IndexFragment : BaseFragment() {
         }
     }
 
+    override fun onLocationChanged(p0: AMapLocation?) {
+        p0?.let {
+            to_choose_city.text = it.city.replace("市", "")
+            weatherSearch.query = WeatherSearchQuery(it.city, WeatherSearchQuery.WEATHER_TYPE_LIVE)
+            weatherSearch.searchWeatherAsyn()
+            locationClient.stopLocation()
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    override fun onWeatherLiveSearched(p0: LocalWeatherLiveResult?, p1: Int) {
+        p0?.liveResult?.let {
+            weather.text = it.weather + "\n" + it.temperature + "°"
+        }
+    }
+
+    override fun onWeatherForecastSearched(p0: LocalWeatherForecastResult?, p1: Int) {
+    }
+
+
     override fun initListener() {
         listView.setOnItemClickListener { _, _, position, _ ->
             mStartActivity(FindDetailsActivity::class.java)
@@ -102,7 +116,22 @@ class IndexFragment : BaseFragment() {
         show_operation.setOnClickListener {
             IndexOperationPopup(it).show()
         }
+        to_choose_city.setOnClickListener { mStartActivityForResult(CityListActivity::class.java,0x01) }
         to_zhuanti.setOnClickListener { mStartActivity(ZhuanTiActivity::class.java) }
         to_search.setOnClickListener { mStartActivity(SearchActivity::class.java) }
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == RESULT_OK && requestCode == 0x01) {
+            data?.let {
+                val city = it.getStringExtra("city")
+                to_choose_city.text = city.replace("市", "")
+                weatherSearch.query = WeatherSearchQuery(city, WeatherSearchQuery.WEATHER_TYPE_LIVE)
+                weatherSearch.searchWeatherAsyn()
+                locationClient.stopLocation()
+            }
+        }
+    }
+
 }

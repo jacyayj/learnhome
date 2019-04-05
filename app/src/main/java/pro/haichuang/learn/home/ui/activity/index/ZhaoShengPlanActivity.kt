@@ -58,7 +58,7 @@ class ZhaoShengPlanActivity : BaseActivity() {
     private var isNew = false
     private var province = ""
     private var batches = ""
-    private var queryCollegeName = ""
+    private var queryName = ""
 
     private var chooseCount = 0
 
@@ -117,7 +117,7 @@ class ZhaoShengPlanActivity : BaseActivity() {
             search_view.gone()
         }
         search_btn.setOnClickListener {
-            queryCollegeName = search_input.text.toString()
+            queryName = search_input.text.toString()
             fetchPageData()
         }
         listView.setOnItemClickListener { _, _, position, _ ->
@@ -153,7 +153,7 @@ class ZhaoShengPlanActivity : BaseActivity() {
     }
 
     override fun onRefresh(refreshLayout: RefreshLayout) {
-        queryCollegeName = ""
+        queryName = ""
         search_input.setText("")
         super.onRefresh(refreshLayout)
     }
@@ -173,10 +173,10 @@ class ZhaoShengPlanActivity : BaseActivity() {
             pageParams.put("province", province)
         else
             pageParams.remove("province")
-        if (queryCollegeName.isNotEmpty())
-            pageParams.put("queryCollegeName", queryCollegeName)
+        if (queryName.isNotEmpty())
+            pageParams.put("queryName", queryName)
         else
-            pageParams.remove("queryCollegeName")
+            pageParams.remove("queryName")
         if (isNew)
             pageParams.put("isNew", "true")
     }

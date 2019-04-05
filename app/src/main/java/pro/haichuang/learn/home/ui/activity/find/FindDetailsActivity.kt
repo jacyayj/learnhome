@@ -67,7 +67,7 @@ class FindDetailsActivity : DataBindingActivity<FindDetailsModel>() {
             mStartActivity(PersonalIndexActivity::class.java)
         }
         share.setOnClickListener {
-            ShareDialog(this).show()
+            ShareDialog(this,model.title,model.shareUrl,model.txt).show()
         }
         collect.setOnClickListener {
             params.put("operate", if (model.hasCollect) "0" else "1")

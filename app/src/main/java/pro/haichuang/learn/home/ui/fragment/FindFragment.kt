@@ -79,7 +79,7 @@ class FindFragment : BaseFragment() {
                 rows.list?.let {
                     if (!isLoadMore) {
                         val recommend = it.filter { it.recommend }
-                        when (it.size) {
+                        when (recommend.size) {
                             0 -> ad_view.gone()
                             1 -> {
                                 ImageBinding.displayNet(recommend_img_1, recommend[0].picPath)

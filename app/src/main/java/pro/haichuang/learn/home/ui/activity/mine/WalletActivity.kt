@@ -27,7 +27,7 @@ class WalletActivity : BaseActivity() {
     }
 
     override fun onSuccess(url: String, result: Any?) {
-        credit_tv.text = GsonUtil.getString(result, "credit")
+        credit_tv.text = result?.let { GsonUtil.getString(result, "credit") } ?: "0"
     }
 
     override fun initListener() {

@@ -15,17 +15,19 @@
         android:paddingStart="15dp">
 
         <TextView
+            android:id="@+id/weather"
             style="@style/text_10_726E72"
             android:layout_marginEnd="15dp"
-            android:drawableTop="@drawable/icon_sun"
-            android:gravity="center"
-            android:text="28°" />
+            android:gravity="center" />
 
         <TextView
             android:id="@+id/to_choose_city"
             style="@style/text_14_736E73"
             android:drawableEnd="@drawable/icon_arrow_down"
-            android:drawablePadding="5dp" />
+            android:drawablePadding="5dp"
+            android:ellipsize="end"
+            android:maxLength="3"
+            android:singleLine="true" />
 
         <LinearLayout
             android:id="@+id/to_search"

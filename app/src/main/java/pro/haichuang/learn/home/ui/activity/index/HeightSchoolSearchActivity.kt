@@ -69,7 +69,7 @@ class HeightSchoolSearchActivity : BaseActivity() {
     private var type = ""
     private var province = ""
     private var batch = ""
-    private var queryMajorName = ""
+    private var queryName = ""
 
     private var chooseCount = 0
 
@@ -152,13 +152,13 @@ class HeightSchoolSearchActivity : BaseActivity() {
             }
         })
         search_btn.setOnClickListener {
-            queryMajorName = search_input.text.toString()
+            queryName = search_input.text.toString()
             fetchPageData()
         }
     }
 
     override fun onRefresh(refreshLayout: RefreshLayout) {
-        queryMajorName = ""
+        queryName = ""
         search_input.setText("")
         super.onRefresh(refreshLayout)
     }
@@ -180,10 +180,10 @@ class HeightSchoolSearchActivity : BaseActivity() {
             pageParams.put("batch", batch)
         else
             pageParams.remove("batch")
-        if (queryMajorName.isNotEmpty())
-            pageParams.put("queryMajorName", queryMajorName)
+        if (queryName.isNotEmpty())
+            pageParams.put("queryName", queryName)
         else
-            pageParams.remove("queryMajorName")
+            pageParams.remove("queryName")
     }
 
     private fun countChecked(checked: Boolean, position: Int) {

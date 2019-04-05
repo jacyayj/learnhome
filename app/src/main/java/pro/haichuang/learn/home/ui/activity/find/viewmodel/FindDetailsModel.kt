@@ -15,6 +15,7 @@ class FindDetailsModel : BaseModel() {
     var commentsCount = 0
     var title = ""
     var txt = ""
+    var shareUrl = ""
     var releaseDate = ""
     var picArr: ArrayList<ImageBean>? = null
     var author: Author? = null

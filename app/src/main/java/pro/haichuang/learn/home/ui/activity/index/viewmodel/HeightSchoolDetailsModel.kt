@@ -11,11 +11,11 @@ class HeightSchoolDetailsModel : BaseModel() {
     var enrollBatch = 0
     var enrollNumber = 0
     var priority = 0
+    var country = ""
     var collegeName = ""
     var collegeLevel = ""
-    var country = ""
     var englishName = ""
-    var province = ""
+    var province = 0L
     var contact = ""
     var enrollCode = ""
     var enrollGuide = ""
@@ -32,17 +32,17 @@ class HeightSchoolDetailsModel : BaseModel() {
         get() = DataUtils.findProvinceById(province)
 
     val countryStr
-        get() = DataUtils.findProvinceById(country)
+        get() = DataUtils.findCountryByCode(country)
 
     val enrollBatchStr
-        get() = DataUtils.findPiCiById(enrollBatch.toString())
+        get() = DataUtils.findPiCiById(enrollBatch)
 
     val collegeTypeStr
-        get() = DataUtils.findTypeById(collegeType.toString())
+        get() = DataUtils.findTypeById(collegeType)
 
     val collegeTypeStrs
         get() = DataUtils.findLevelByIds(collegeLevel)
 
     val collegeNatureStr
-        get() = DataUtils.findChuangBanById(collegeNature.toString())
+        get() = DataUtils.findChuangBanById(collegeNature)
 }

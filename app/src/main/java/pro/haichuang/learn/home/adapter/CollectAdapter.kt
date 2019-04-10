@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import pro.haichuang.learn.home.BR
 import pro.haichuang.learn.home.R
-import pro.haichuang.learn.home.ui.activity.index.itemmodel.ItemCompareModel
+import pro.haichuang.learn.home.ui.activity.index.itemmodel.CollegeModel
 
 class CollectAdapter(private var context: Activity) : BaseAdapter() {
 
@@ -25,7 +25,7 @@ class CollectAdapter(private var context: Activity) : BaseAdapter() {
             DataBindingUtil.getBinding(convertView)
         when (getItemViewType(position)) {
             0 -> binding?.setVariable(BR.item, 0)
-            1 -> binding?.setVariable(BR.item, ItemCompareModel())
+            1 -> binding?.setVariable(BR.item, CollegeModel())
             else -> binding?.setVariable(BR.item, 0)
         }
         binding?.executePendingBindings()

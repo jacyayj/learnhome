@@ -26,6 +26,7 @@ class ZhaoShengSchoolDetailsActivity : DataBindingActivity<HeightSchoolDetailsMo
         model.id = intent.getIntExtra(Constants.SCHOOL_ID, -1)
         post(Url.College.Get, HttpParams("id", model.id.toString()))
         post(Url.College.EnrollMajor, HttpParams("collegeId", model.id.toString()))
+        jianzhang_view.settings.textZoom = 250
     }
 
     override fun initListener() {
@@ -63,6 +64,5 @@ class ZhaoShengSchoolDetailsActivity : DataBindingActivity<HeightSchoolDetailsMo
             Url.College.Get -> notifyModel(GsonUtil.parseObject(result, HeightSchoolDetailsModel::class.java))
             Url.College.EnrollMajor -> listView.adapter = CommonAdapter(layoutInflater, R.layout.item_zhao_sheng_school_major, GsonUtil.parseArray(result, MajorModel::class.java))
         }
-
     }
 }

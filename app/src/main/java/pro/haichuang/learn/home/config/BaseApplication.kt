@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.support.multidex.MultiDex
 import com.github.promeg.pinyinhelper.Pinyin
+import com.google.gson.Gson
 import com.netease.nim.uikit.api.NimUIKit
 import com.netease.nim.uikit.api.UIKitOptions
 import com.netease.nim.uikit.api.model.session.SessionCustomization
@@ -12,6 +13,7 @@ import com.netease.nim.uikit.business.session.actions.BaseAction
 import com.netease.nimlib.sdk.NIMClient
 import com.netease.nimlib.sdk.SDKOptions
 import com.netease.nimlib.sdk.StatusBarNotificationConfig
+import com.netease.nimlib.sdk.msg.MsgService
 import com.netease.nimlib.sdk.msg.model.IMMessage
 import com.netease.nimlib.sdk.util.NIMUtil
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
@@ -23,6 +25,8 @@ import com.vondear.rxtool.RxTool
 import com.zhouyou.http.EasyHttp
 import com.zhouyou.http.cache.model.CacheMode
 import com.zhouyou.http.cookie.CookieManger
+import pro.haichuang.learn.home.adapter.CollectViewHolder
+import pro.haichuang.learn.home.im.CollectAttachment
 import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.message.FriendSettingActivity
 import pro.haichuang.learn.home.ui.im.CollectAction
@@ -65,6 +69,10 @@ class BaseApplication : Application() {
     private fun initUiKit() {
         if (NIMUtil.isMainProcess(this)) {
             NIMClient.toggleNotification(true)
+            NIMClient.getService(MsgService::class.java).registerCustomAttachmentParser {
+                Gson().fromJson(it, CollectAttachment::class.java)
+            }
+            NimUIKit.registerMsgItemViewHolder(CollectAttachment::class.java, CollectViewHolder::class.java)
             NimUIKit.init(this, UIKitOptions().apply {
                 shouldHandleReceipt = false
                 isTeacher = SPUtils.isTeacher

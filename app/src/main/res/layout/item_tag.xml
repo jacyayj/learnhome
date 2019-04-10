@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/text_16_00"
+    android:layout_marginEnd="10dp"
+    android:background="@drawable/bg_ff_stroke_d2_radius_3"
+    android:paddingHorizontal="10dp"
+    android:paddingVertical="5dp" />

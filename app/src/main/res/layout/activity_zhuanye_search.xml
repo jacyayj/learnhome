@@ -17,11 +17,14 @@
         android:background="@color/white"
         app:tabIndicatorColor="@color/color00A6FF"
         app:tabIndicatorHeight="2dp"
-        app:tabMode="scrollable" />
+        app:tabMode="fixed" />
 
-    <include layout="@layout/layout_zuanye_tab_1" />
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
-    <include layout="@layout/layout_zuanye_tab_2" />
+    <include layout="@layout/fragment_pin_gu" />
 
-    <include layout="@layout/layout_zuanye_tab_3" />
+    <include layout="@layout/fragment_rank" />
 </LinearLayout>

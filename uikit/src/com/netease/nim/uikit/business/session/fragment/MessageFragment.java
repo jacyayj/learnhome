@@ -192,11 +192,8 @@ public class MessageFragment extends TFragment implements ModuleProxy {
                     if (orderTime != null && orderTime.isEmpty())
                         if (NimUIKit.getOptions().isTeacher)
                             NimUIKitImpl.getSessionListener().onAcceptOrder(getContext(), orderId, sessionId);
-                        else
-                            return true;
                     else
                         return isTimeOut(orderTime);
-
                 }
             }
         }
@@ -240,7 +237,7 @@ public class MessageFragment extends TFragment implements ModuleProxy {
             return;
         }
         for (IMMessage message : messages) {
-            if (message.getMsgType() == MsgTypeEnum.tip && message.getContent().equals("计费开始，本次咨询将在24小时候结束！")) {
+            if (message.getMsgType() == MsgTypeEnum.tip && message.getContent().equals("计费开始，本次咨询将在24小时后结束！")) {
                 Map<FriendFieldEnum, Object> extension = new HashMap<>();
                 extension.put(FriendFieldEnum.EXTENSION, message.getRemoteExtension());
                 NIMClient.getService(FriendService.class).updateFriendFields(sessionId, extension);

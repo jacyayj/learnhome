@@ -7,13 +7,13 @@ class ItemVrModel : BaseObservable() {
 
     var collegeName = ""
     var logo = ""
-    var province = ""
+    var province = 0L
     var viewUrl = ""
     var enrollBatch = 0
     var id = 0
 
     val batchStr
-        get() = DataUtils.findPiCiById(enrollBatch.toString())
+        get() = DataUtils.findPiCiById(enrollBatch)
 
     val provinceStr
         get() = DataUtils.findProvinceById(province)

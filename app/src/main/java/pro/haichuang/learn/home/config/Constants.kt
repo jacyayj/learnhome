@@ -38,4 +38,6 @@ object Constants {
 
     const val NOTE_SUBJECT = "note_subject"
 
+    const val ZHUAN_YE_ID = "zhuan_ye_id"
+
 }

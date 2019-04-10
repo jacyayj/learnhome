@@ -3,9 +3,11 @@
     android:id="@+id/zhuanye_details_tab2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/stroke_e0e0e0"
     android:layout_marginTop="5dp"
+    android:background="@drawable/stroke_e0e0e0"
+    android:divider="@drawable/divider_vertical_e0"
     android:orientation="vertical"
+    android:showDividers="middle|end"
     android:visibility="gone">
 
     <LinearLayout
@@ -39,14 +41,10 @@
 
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@drawable/divider_vertical_e0" />
-
     <pro.haichuang.learn.home.ui.weight.AutoListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@drawable/divider_vertical_e0" />
+
 </LinearLayout>

@@ -15,7 +15,7 @@ import com.jacy.kit.config.show
 import pro.haichuang.learn.home.R
 
 class SideBar : View {
-    private val A_Z by lazy { arrayOf("定位", "热门", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z") }
+    private val A_Z by lazy { arrayOf("定位", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z") }
     // 触摸事件
     private var onTouchingLetterChangedListener: OnTouchingLetterChangedListener? = null
     private var choose = -1// 选中
@@ -86,8 +86,8 @@ class SideBar : View {
             else -> if (oldChoose != c) {  //判断选中字母是否发生改变
                 if (c >= 0 && c < A_Z.size) {
                     listener?.onTouchingLetterChanged(A_Z[c])
-                        mTextDialog?.text = A_Z[c]
-                        mTextDialog?.show()
+                    mTextDialog?.text = A_Z[c]
+                    mTextDialog?.show()
                     choose = c
                     invalidate()
                 }

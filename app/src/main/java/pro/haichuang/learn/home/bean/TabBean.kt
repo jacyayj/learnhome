@@ -47,8 +47,13 @@ class TabBean : BaseObservable {
             notifyPropertyChanged(BR.notice)
         }
 
+    @Bindable
     @SerializedName("name")
     var text = ""
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.text)
+        }
 
     var path = ""
 }

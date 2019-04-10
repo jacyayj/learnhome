@@ -17,7 +17,10 @@ class SingleChoosePopup(view: View, data: ArrayList<NameId>, result: (id: String
         contentView = layoutInflater.inflate(R.layout.popup_single_choose, null)
         contentView.listView.adapter = CommonAdapter(layoutInflater, R.layout.item_popup_single_choose, data)
         contentView.listView.setOnItemClickListener { _, _, position, _ ->
-            result(data[position].id)
+            if (data[position].id <= 0)
+                result(data[position].code)
+            else
+                result(data[position].id.toString())
             dismiss()
         }
     }

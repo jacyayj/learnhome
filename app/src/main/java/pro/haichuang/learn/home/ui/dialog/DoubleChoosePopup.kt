@@ -19,8 +19,8 @@ class DoubleChoosePopup(private val view: View, result: (isNew: Boolean) -> Unit
 
         isOutsideTouchable = true
         contentView = layoutInflater.inflate(R.layout.popup_double_choose, null)
-        contentView.listView.adapter = CommonAdapter(layoutInflater, R.layout.item_popup_multiple_choose, arrayListOf(NameId("提前批录取院校", "")))
-        contentView.listView2.adapter = CommonAdapter(layoutInflater, R.layout.item_popup_multiple_choose, arrayListOf(NameId("只搜新招", ""), NameId("全部搜索", "")))
+        contentView.listView.adapter = CommonAdapter(layoutInflater, R.layout.item_popup_multiple_choose, arrayListOf(NameId("提前批录取院校", -1)))
+        contentView.listView2.adapter = CommonAdapter(layoutInflater, R.layout.item_popup_multiple_choose, arrayListOf(NameId("只搜新招", -1), NameId("全部搜索", "")))
         contentView.confirm.setOnClickListener {
             when (type) {
                 0 -> {
@@ -40,10 +40,10 @@ class DoubleChoosePopup(private val view: View, result: (isNew: Boolean) -> Unit
                     contentView.listView.gone()
                     contentView.choose_label2.text = "是否招新"
                     contentView.listView2.choiceMode = AbsListView.CHOICE_MODE_SINGLE
-                    contentView.listView2.adapter = CommonAdapter(layoutInflater, R.layout.item_popup_multiple_choose, arrayListOf(NameId("只搜新招", ""), NameId("全部搜索", "")))
+                    contentView.listView2.adapter = CommonAdapter(layoutInflater, R.layout.item_popup_multiple_choose, arrayListOf(NameId("只搜新招", -1), NameId("全部搜索", -1)))
                 }
                 1 -> {
-                    contentView.listView.adapter = CommonAdapter(layoutInflater, R.layout.item_popup_multiple_choose, arrayListOf(NameId("专业大类排位查询", ""), NameId("专业排位查询", "")))
+                    contentView.listView.adapter = CommonAdapter(layoutInflater, R.layout.item_popup_multiple_choose, arrayListOf(NameId("专业大类排位查询", -1), NameId("专业排位查询", -1)))
                     contentView.choose_label1.text = "选择查询类型"
                     contentView.choose_view2.gone()
                 }

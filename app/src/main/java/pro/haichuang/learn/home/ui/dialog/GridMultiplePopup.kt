@@ -10,7 +10,7 @@ import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.bean.NameId
 import pro.haichuang.learn.home.utils.DataUtils
 
-class GridMultiplePopup(val view: View, private val needId: Boolean = true, result: (code: String) -> Unit = {}) : PopupWindow(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT) {
+class GridMultiplePopup(private val view: View, private val needId: Boolean = true, result: (code: String) -> Unit = {}) : PopupWindow(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT) {
 
     private var type = -1
 
@@ -37,13 +37,15 @@ class GridMultiplePopup(val view: View, private val needId: Boolean = true, resu
             }
         }
         contentView.confirm.setOnClickListener {
-            lastCheckedPosition = checkedPosition
-            if (checkedPosition == -1)
-                result("")
-            else
-                adapter.getItem(checkedPosition).let {
-                    result(if (needId) it.id else it.name.replace("省", ""))
-                }
+            if (lastCheckedPosition != checkedPosition) {
+                lastCheckedPosition = checkedPosition
+                if (checkedPosition == -1)
+                    result("")
+                else
+                    adapter.getItem(checkedPosition).let {
+                        result(if (needId) it.id.toString() else it.name.replace("省", ""))
+                    }
+            }
             dismiss()
         }
     }
@@ -88,5 +90,23 @@ class GridMultiplePopup(val view: View, private val needId: Boolean = true, resu
             }
         }
         this.type = type
+    }
+
+    fun show(data: ArrayList<NameId>) {
+        showAsDropDown(view)
+        if (type == -1)
+            adapter.refresh(data)
+        else {
+            if (lastCheckedPosition != checkedPosition) {
+                if (lastCheckedPosition == -1) {
+                    contentView.all.isChecked = true
+                    contentView.grid.clearChoices()
+                } else {
+                    contentView.all.isChecked = false
+                    contentView.grid.setItemChecked(lastCheckedPosition, true)
+                }
+            }
+        }
+        this.type = 5
     }
 }

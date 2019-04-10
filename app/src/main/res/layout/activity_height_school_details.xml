@@ -96,6 +96,21 @@
 
                         <ImageView
                             android:layout_marginEnd="10dp"
+                            android:src="@drawable/icon_school_shifan"
+                            android:visibility="@{model.collegeLevel.contains(`3`) ? View.VISIBLE : View.GONE}" />
+
+                        <ImageView
+                            android:layout_marginEnd="10dp"
+                            android:src="@drawable/icon_school_gugan"
+                            android:visibility="@{model.collegeLevel.contains(`4`) ? View.VISIBLE : View.GONE}" />
+
+                        <ImageView
+                            android:layout_marginEnd="10dp"
+                            android:src="@drawable/icon_school_985"
+                            android:visibility="@{model.collegeLevel.contains(`5`) ? View.VISIBLE : View.GONE}" />
+
+                        <ImageView
+                            android:layout_marginEnd="10dp"
                             android:src="@drawable/icon_school_yi"
                             android:visibility="@{model.collegeLevel.contains(`6`) ? View.VISIBLE : View.GONE}" />
 
@@ -109,6 +124,23 @@
                             android:src="@drawable/icon_school_shuang"
                             android:visibility="@{model.collegeLevel.contains(`8`) ? View.VISIBLE : View.GONE}" />
 
+                        <ImageView
+                            android:layout_marginEnd="10dp"
+                            android:src="@drawable/icon_school_shuangyiliu"
+                            android:visibility="@{model.collegeLevel.contains(`9`) ? View.VISIBLE : View.GONE}" />
+
+                        <FrameLayout android:layout_weight="1">
+
+                            <TextView
+                                android:layout_width="60dp"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center_vertical|end"
+                                android:background="@drawable/stroke_7fd2ff_radius_5dp"
+                                android:gravity="center"
+                                android:text="收藏"
+                                android:textColor="@color/color7FD2FF"
+                                android:textSize="16sp" />
+                        </FrameLayout>
                     </TableRow>
                 </TableLayout>
 
@@ -130,7 +162,7 @@
                 app:tabIndicatorFullWidth="false"
                 app:tabIndicatorHeight="2dp"
                 app:tabInlineLabel="true"
-                app:tabMode="scrollable" />
+                app:tabMode="fixed" />
 
             <ScrollView
                 android:layout_width="match_parent"

@@ -5,7 +5,7 @@
 
         <variable
             name="item"
-            type="Integer" />
+            type="pro.haichuang.learn.home.ui.activity.index.itemmodel.ItemZuanYeModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -21,20 +21,20 @@
             android:layout_width="0dp"
             android:layout_weight="2"
             android:gravity="center"
-            android:text="历史学" />
+            android:text="@{item.majorName}" />
 
         <TextView
             style="@style/text_14_33"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="B" />
+            android:text="@{item.jobStr}" />
 
         <TextView
             style="@style/text_14_33"
             android:layout_width="0dp"
             android:layout_weight="4"
             android:gravity="center"
-            android:text="江苏师范大学" />
+            android:text="@{item.collegeName}" />
     </LinearLayout>
 </layout>

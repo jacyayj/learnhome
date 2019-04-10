@@ -21,7 +21,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@{item.name}" />
+            android:text="@{item.collegeName}" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -38,7 +38,7 @@
 
             <pro.haichuang.learn.home.ui.weight.UnderLineTextView
                 style="@style/text_12_F69656"
-                android:text="A+" />
+                android:text="@{item.jobStr}" />
 
             <pro.haichuang.learn.home.ui.weight.UnderLineTextView
                 style="@style/text_12_F38787"

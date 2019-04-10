@@ -49,6 +49,10 @@ object DataUtils {
         return data
     }
 
+    val countryData by lazy { formatCountryData() }
+
+    val languageData by lazy { formatLanguageData() }
+
     val provinceData by lazy { formatProvinceData() }
 
     val piCiData by lazy { formatPiCiData() }
@@ -59,32 +63,62 @@ object DataUtils {
 
     val chuangBanData by lazy { formatChuangBanData() }
 
-    fun findProvinceById(id: String): String? {
+    fun findCountryByCode(code: String): String? {
+        return countryData.find { it.code == code }?.name
+    }
+
+    fun findLanguageById(id: Int): String? {
+        return languageData.find { it.id == id.toLong() }?.name
+    }
+
+    fun findProvinceById(id: Long): String? {
         return provinceData.find { it.id == id }?.name
     }
 
-    fun findPiCiById(id: String): String? {
-        return piCiData.find { it.id == id }?.name
+    fun findPiCiById(id: Int): String? {
+        return piCiData.find { it.id == id.toLong() }?.name
     }
 
-    fun findLevelById(id: String): String? {
-        return levelData.find { it.id == id }?.name
+    fun findLevelById(id: Int): String? {
+        return levelData.find { it.id == id.toLong() }?.name
     }
 
-    fun findTypeById(id: String): String? {
-        return typeData.find { it.id == id }?.name
+    fun findTypeById(id: Int): String? {
+        return typeData.find { it.id == id.toLong() }?.name
     }
 
-    fun findLevelByIds(ids: String): String? {
+    fun findLevelByIds(ids: String): String {
+        if (ids.isEmpty())
+            return ""
         var names = ""
         ids.split(",").forEach { id ->
-            names += "${levelData.find { it.id == id }?.name},"
+            names += "${levelData.find { it.id == id.toLong() }?.name},"
         }
         return names.removeSuffix(",")
     }
 
-    fun findChuangBanById(id: String): String? {
-        return chuangBanData.find { it.id == id }?.name
+    fun findChuangBanById(id: Int): String? {
+        return chuangBanData.find { it.id == id.toLong() }?.name
+    }
+
+    private fun formatCountryData(): ArrayList<NameId> {
+        val data = ArrayList<NameId>()
+        data.add(NameId("加拿大", "CA"))
+        data.add(NameId("美国", "US"))
+        data.add(NameId("英国", "GB"))
+        data.add(NameId("马来西亚", "MY"))
+        data.add(NameId("澳大利亚", "AU"))
+        data.add(NameId("日本", "JP"))
+        return data
+    }
+
+    private fun formatLanguageData(): ArrayList<NameId> {
+        val data = ArrayList<NameId>()
+        data.add(NameId("英语", 1))
+        data.add(NameId("中英双语", 2))
+        data.add(NameId("日语", 3))
+        data.add(NameId("中日双语", 4))
+        return data
     }
 
     private fun formatProvinceData(): ArrayList<NameId> {
@@ -93,52 +127,52 @@ object DataUtils {
 
     private fun formatPiCiData(): ArrayList<NameId> {
         val data = ArrayList<NameId>()
-        data.add(NameId("本科提前批次", "1"))
-        data.add(NameId("本科第一批次", "2"))
-        data.add(NameId("本科第二批次", "3"))
-        data.add(NameId("本科预科", "4"))
-        data.add(NameId("专科提前批次", "5"))
-        data.add(NameId("专科批次", "6"))
+        data.add(NameId("本科提前批次", 1))
+        data.add(NameId("本科第一批次", 2))
+        data.add(NameId("本科第二批次", 3))
+        data.add(NameId("本科预科", 4))
+        data.add(NameId("专科提前批次", 5))
+        data.add(NameId("专科批次", 6))
         return data
     }
 
     private fun formatSchoolTypeData(): ArrayList<NameId> {
         val data = ArrayList<NameId>()
-        data.add(NameId("综合类", "1"))
-        data.add(NameId("理工类", "2"))
-        data.add(NameId("师范类", "3"))
-        data.add(NameId("农林类", "4"))
-        data.add(NameId("政法类", "5"))
-        data.add(NameId("医药类", "6"))
-        data.add(NameId("财经类", "7"))
-        data.add(NameId("民族类", "8"))
-        data.add(NameId("语言类", "9"))
-        data.add(NameId("艺术类", "10"))
-        data.add(NameId("体育类", "11"))
-        data.add(NameId("军事类", "12"))
-        data.add(NameId("公安", "13"))
+        data.add(NameId("综合类", 1))
+        data.add(NameId("理工类", 2))
+        data.add(NameId("师范类", 3))
+        data.add(NameId("农林类", 4))
+        data.add(NameId("政法类", 5))
+        data.add(NameId("医药类", 6))
+        data.add(NameId("财经类", 7))
+        data.add(NameId("民族类", 8))
+        data.add(NameId("语言类", 9))
+        data.add(NameId("艺术类", 10))
+        data.add(NameId("体育类", 11))
+        data.add(NameId("军事类", 12))
+        data.add(NameId("公安", 13))
         return data
     }
 
     private fun formatSchoolLevelData(): ArrayList<NameId> {
         val data = ArrayList<NameId>()
-        data.add(NameId("211", "1"))
-        data.add(NameId("985", "2"))
-        data.add(NameId("示范高职", "3"))
-        data.add(NameId("骨干高职", "4"))
-        data.add(NameId("卓越工程师", "5"))
-        data.add(NameId("卓越医生", "6"))
-        data.add(NameId("卓越法律", "7"))
-        data.add(NameId("双一流高校", "8"))
-        data.add(NameId("双一流学科", "9"))
+        data.add(NameId("211", 1))
+        data.add(NameId("985", 2))
+        data.add(NameId("示范高职", 3))
+        data.add(NameId("骨干高职", 4))
+        data.add(NameId("卓越工程师", 5))
+        data.add(NameId("卓越医生", 6))
+        data.add(NameId("卓越法律", 7))
+        data.add(NameId("双一流高校", 8))
+        data.add(NameId("双一流学科", 9))
         return data
     }
 
     private fun formatChuangBanData(): ArrayList<NameId> {
         val data = ArrayList<NameId>()
-        data.add(NameId("公办", "1"))
-        data.add(NameId("民办", "2"))
-        data.add(NameId("中外合资", "3"))
+        data.add(NameId("公办", 1))
+        data.add(NameId("民办", 2))
+        data.add(NameId("中外合资", 3))
         return data
     }
 }

@@ -1,44 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorF0F7FA"
-    android:orientation="vertical"
-    tools:context=".ui.activity.index.ZhuanYeDetailsActivity">
+<layout>
 
-    <include layout="@layout/layout_title" />
+    <data>
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/tab"
+        <variable
+            name="model"
+            type="pro.haichuang.learn.home.ui.activity.index.viewmodel.ZhuanYeDeailsModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@color/white"
-        app:tabIndicatorColor="@color/color00A6FF"
-        app:tabIndicatorHeight="2dp"
-        app:tabMode="fixed"
-        app:tabTextAppearance="@style/note_menu">
+        android:layout_height="match_parent"
+        android:background="@color/colorF0F7FA"
+        android:orientation="vertical"
+        tools:context=".ui.activity.index.ZhuanYeDetailsActivity">
 
-        <android.support.design.widget.TabItem
+        <include layout="@layout/layout_title" />
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tab"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="专业简介" />
+            android:layout_height="40dp"
+            android:background="@color/white"
+            app:tabIndicatorColor="@color/color00A6FF"
+            app:tabIndicatorHeight="2dp"
+            app:tabMode="fixed"
+            app:tabTextAppearance="@style/note_menu">
 
-        <android.support.design.widget.TabItem
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="开设院校" />
+            <android.support.design.widget.TabItem
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="专业简介" />
 
-        <android.support.design.widget.TabItem
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="专业资讯" />
-    </android.support.design.widget.TabLayout>
+            <android.support.design.widget.TabItem
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="开设院校" />
 
-    <include layout="@layout/layout_zhuanye_details_tab_1" />
+            <android.support.design.widget.TabItem
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="专业资讯" />
+        </android.support.design.widget.TabLayout>
 
-    <include layout="@layout/layout_zhuanye_details_tab_2" />
+        <include
+            layout="@layout/layout_zhuanye_details_tab_1"
+            tools:model="@{model}" />
 
-    <include layout="@layout/layout_zhuanye_details_tab_3" />
-</LinearLayout>
+        <include layout="@layout/layout_zhuanye_details_tab_2" />
+
+        <include layout="@layout/layout_zhuanye_details_tab_3" />
+    </LinearLayout>
+
+</layout>

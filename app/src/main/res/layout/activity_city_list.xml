@@ -40,26 +40,24 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/local"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_title"
         android:background="@color/colorWhite"
         android:gravity="center_vertical"
         android:paddingStart="15dp"
-        android:text="当前城市:成都"
         android:textColor="@color/color33"
         android:textSize="16sp" />
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <ListView
             android:id="@+id/listView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/colorWhite"
             android:divider="@drawable/divider_vertical_e0" />
-
         <pro.haichuang.learn.home.ui.weight.SideBar
             android:id="@+id/slide"
             android:layout_width="30dp"
@@ -68,7 +66,6 @@
             android:layout_marginVertical="30dp"
             android:layout_height="match_parent"
             android:layout_gravity="end" />
-
         <TextView
             android:id="@+id/text_dialog"
             android:layout_width="80dp"

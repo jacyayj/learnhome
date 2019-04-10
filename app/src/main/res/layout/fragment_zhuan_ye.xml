@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/zuanye_tab_view1"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorF0F7FA"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".ui.fragment.ZhuanYeFragment">
 
     <android.support.design.widget.TabLayout
-        android:id="@+id/zuanye_sub_tab"
+        android:id="@+id/tab"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@color/colorWhite"
@@ -37,7 +38,7 @@
             android:layout_width="0dp"
             android:layout_weight="1.7"
             android:gravity="center"
-            android:text="专业名称" />
+            android:text="专业门类" />
 
         <FrameLayout
             android:id="@+id/legend"
@@ -59,9 +60,16 @@
         android:layout_height="0.5dp"
         android:background="@color/colorE0E0E0" />
 
-    <ListView
-        android:id="@+id/zuanye_listview"
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorWhite" />
+        android:background="@color/colorWhite"
+        app:srlEnableLoadMore="false">
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </LinearLayout>

@@ -39,6 +39,14 @@ object Url {
 
         const val Category = "${base}category"
 
+        const val List = "${base}list"
+
+        const val Get = "${base}get"
+
+        const val College = "${base}college"
+
+        const val Sort = "${base}sort"
+
     }
 
     /**

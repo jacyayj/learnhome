@@ -35,7 +35,7 @@ object HttpUtils {
                             val extension = mapOf(Pair("orderTime", GsonUtil.getString(response.body, "acceptTime")), Pair("orderId", orderId))
                             NIMClient.getService(FriendService::class.java).updateFriendFields(account, mapOf(Pair(FriendFieldEnum.EXTENSION, extension)))
                             val msg = MessageBuilder.createTipMessage(account, SessionTypeEnum.P2P)
-                            msg.content = "计费开始，本次咨询将在24小时候结束！"
+                            msg.content = "计费开始，本次咨询将在24小时后结束！"
                             msg.remoteExtension = extension
                             NIMClient.getService(MsgService::class.java).sendMessage(msg, false)
                         }

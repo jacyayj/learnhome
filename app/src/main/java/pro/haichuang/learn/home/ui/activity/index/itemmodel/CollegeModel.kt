@@ -18,7 +18,7 @@ class CollegeModel : BaseObservable() {
     var collegeLevel = ""
     var country = ""
     var englishName = ""
-    var province = ""
+    var province = 0L
     var logo = ""
     var tuitionFee = ""
     var isNew = false
@@ -30,7 +30,7 @@ class CollegeModel : BaseObservable() {
         get() = DataUtils.findProvinceById(province)
 
     val countryStr
-        get() = DataUtils.findProvinceById(country)
+        get() = DataUtils.findCountryByCode(country)
 
     val collegeNatureStr
         get() = when (collegeNature) {

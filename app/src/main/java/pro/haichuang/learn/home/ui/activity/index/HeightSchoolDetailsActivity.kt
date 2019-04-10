@@ -10,12 +10,12 @@ import com.jacy.kit.config.show
 import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.activity_height_school_details.*
 import kotlinx.android.synthetic.main.layout_jianzhang.*
+import kotlinx.android.synthetic.main.layout_school_details_intro.*
 import kotlinx.android.synthetic.main.layout_school_details_tabchildview_1.*
 import kotlinx.android.synthetic.main.layout_school_details_tabchildview_2.*
 import kotlinx.android.synthetic.main.layout_school_details_tabchildview_3.*
 import kotlinx.android.synthetic.main.layout_school_details_tabchildview_4.*
 import kotlinx.android.synthetic.main.layout_school_details_tabchildview_5.*
-import kotlinx.android.synthetic.main.layout_school_details_intro.*
 import pro.haichuang.learn.home.BR
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.bean.TabBean
@@ -48,6 +48,7 @@ class HeightSchoolDetailsActivity : DataBindingActivity<HeightSchoolDetailsModel
         post(Url.College.Get, HttpParams().apply {
             put("id", intent.getIntExtra(Constants.SCHOOL_ID, -1).toString())
         })
+        jianzhang_view.settings.textZoom = 200
     }
 
     override fun initListener() {

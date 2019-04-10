@@ -41,7 +41,7 @@ class LiuXueActivity : BaseActivity() {
     }
     private lateinit var typePopup: SingleChoosePopup
     private val schoolPopup by lazy {
-        SingleChoosePopup(tab, arrayListOf(NameId("不限", ""), NameId("公立", "1"), NameId("私立", "2"))) {
+        SingleChoosePopup(tab, arrayListOf(NameId("不限", -1), NameId("公立", 1), NameId("私立", 2))) {
             collegeNature = it
             fetchPageData()
         }.apply {

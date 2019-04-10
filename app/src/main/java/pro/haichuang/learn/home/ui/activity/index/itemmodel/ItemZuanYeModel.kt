@@ -1,17 +1,22 @@
 package pro.haichuang.learn.home.ui.activity.index.itemmodel
 
 class ItemZuanYeModel {
-    constructor(name: String) {
-        this.name = name
+
+
+    var id = 0
+    var collegeId = 0
+    var jobGrade = 0
+    var graduateCount = 0
+    var majorCategory = ""
+    var majorName = ""
+    val jobStr
+    get() = when(jobGrade){
+        1->"B"
+        2->"B+"
+        3->"A"
+        else->"A+"
     }
 
-    constructor(name: String, type: String) {
-        this.name = name
-        this.type = type
-    }
-
-
-    var name = ""
-    var type = ""
+    var collegeName = ""
 
 }

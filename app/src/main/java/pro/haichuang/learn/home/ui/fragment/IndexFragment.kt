@@ -121,6 +121,10 @@ class IndexFragment : BaseFragment(), WeatherSearch.OnWeatherSearchListener, AMa
         to_search.setOnClickListener { mStartActivity(SearchActivity::class.java) }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        locationClient.onDestroy()
+    }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK && requestCode == 0x01) {

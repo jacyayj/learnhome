@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="item"
+            type="Integer" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="10dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp">
+
+            <com.yhy.widget.core.img.round.CircleImageView
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:src="@mipmap/ic_launcher_round" />
+
+            <TextView
+                style="@style/text_13_66"
+                android:layout_marginStart="40dp"
+                android:text="yikalu" />
+
+            <TextView
+                style="@style/text_10_99"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="40dp"
+                android:text="11.13 14:39" />
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="25dp"
+                android:textSize="14sp"
+                android:text="回复"
+                android:gravity="center"
+                android:background="@drawable/bg_f0f7f1_radius_939799"
+                android:layout_gravity="end|center_vertical"
+                android:textColor="@color/colorB3"/>
+        </FrameLayout>
+
+        <TextView
+            style="@style/text_17_33"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="15dp"
+            android:text="赞了我" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="match_parent"
+                android:src="@mipmap/ic_launcher" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="70dp"
+                android:background="@color/colorF5F5F5"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/text_17_33"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:paddingTop="10dp"
+                    android:singleLine="true"
+                    android:text="中央美系 教你画图" />
+
+                <TextView
+                    style="@style/text_14_99"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="10dp"
+                    android:ellipsize="end"
+                    android:paddingBottom="15dp"
+                    android:singleLine="true"
+                    android:text="孤傲奈儿村，魔芋爽并列，然后..."
+                    android:textColor="@color/color66" />
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
+</layout>

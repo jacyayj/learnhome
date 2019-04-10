@@ -16,12 +16,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:drawableStart="@{item.showIcon ? @drawable/icon_location_blue : null}"
             android:drawablePadding="5dp"
-            android:layout_gravity="center"
-            android:orientation="vertical"
-            android:text="@{item.city_name}"
+            android:ellipsize="middle"
             android:onClick="@{item::click}"
+            android:orientation="vertical"
+            android:singleLine="true"
+            android:text="@{item.city_name}"
             android:textColor="@color/color33"
             android:textSize="16sp" />
     </FrameLayout>

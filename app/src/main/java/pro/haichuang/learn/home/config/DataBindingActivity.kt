@@ -52,7 +52,7 @@ open class DataBindingActivity<T : BaseModel> : BaseActivity() {
                 }
             val request = EasyHttp.post(url)
                     .params(sign(params))
-            //发送验证码成功是，拦截到请求头取到JSESSIONID
+            //发送验证码成功时，拦截到请求头取到JSESSIONID
             if (url == Url.Sms.Send) {
                 request.addInterceptor {
                     val response = it.proceed(it.request())

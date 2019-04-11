@@ -76,14 +76,12 @@
 
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:background="#ff0"
-                    android:padding="20dp">
+                    android:layout_height="150dp">
 
                     <ImageView
+                        android:id="@+id/banner"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@mipmap/ic_launcher"
                         android:gravity="center" />
                 </FrameLayout>
 
@@ -112,6 +110,7 @@
                     <TableRow android:layout_marginTop="5dp">
 
                         <com.yhy.widget.core.img.round.RoundImageView
+                            android:id="@+id/to_kaoyan"
                             android:layout_width="0dp"
                             android:layout_height="100dp"
                             android:layout_marginEnd="2.5dp"
@@ -120,6 +119,7 @@
                             app:riv_radius="5dp" />
 
                         <com.yhy.widget.core.img.round.RoundImageView
+                            android:id="@+id/to_dingzhi"
                             android:layout_width="0dp"
                             android:layout_height="100dp"
                             android:layout_marginStart="2.5dp"

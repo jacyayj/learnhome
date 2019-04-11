@@ -5,6 +5,7 @@ import android.content.Context
 import android.support.multidex.MultiDex
 import com.github.promeg.pinyinhelper.Pinyin
 import com.google.gson.Gson
+import com.google.gson.JsonParser
 import com.netease.nim.uikit.api.NimUIKit
 import com.netease.nim.uikit.api.UIKitOptions
 import com.netease.nim.uikit.api.model.session.SessionCustomization
@@ -14,6 +15,7 @@ import com.netease.nimlib.sdk.NIMClient
 import com.netease.nimlib.sdk.SDKOptions
 import com.netease.nimlib.sdk.StatusBarNotificationConfig
 import com.netease.nimlib.sdk.msg.MsgService
+import com.netease.nimlib.sdk.msg.MsgServiceObserve
 import com.netease.nimlib.sdk.msg.model.IMMessage
 import com.netease.nimlib.sdk.util.NIMUtil
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
@@ -38,7 +40,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 
 class BaseApplication : Application() {
-
 
     private val city_json by lazy { File(RxFileTool.getDiskCacheDir(this), "/city_list.json") }
 
@@ -69,6 +70,10 @@ class BaseApplication : Application() {
     private fun initUiKit() {
         if (NIMUtil.isMainProcess(this)) {
             NIMClient.toggleNotification(true)
+            NIMClient.getService(MsgServiceObserve::class.java).observeCustomNotification({
+                val content = JsonParser().parse(it.content).asJsonObject
+                HttpUtils.updateOrderTime(this, it.sessionId, content.get("orderTime").asString, content.get("orderId").asInt)
+            }, true)
             NIMClient.getService(MsgService::class.java).registerCustomAttachmentParser {
                 Gson().fromJson(it, CollectAttachment::class.java)
             }
@@ -79,7 +84,7 @@ class BaseApplication : Application() {
             })
             NimUIKit.setSessionListener(object : SessionEventListener {
                 override fun onAcceptOrder(context: Context?, orderId: Int, account: String?) {
-                    account?.let { HttpUtils.acceptOrder(orderId, it) }
+                    account?.let { HttpUtils.acceptOrder(this@BaseApplication,orderId, it) }
                 }
 
                 override fun onAvatarClicked(context: Context?, message: IMMessage?) {

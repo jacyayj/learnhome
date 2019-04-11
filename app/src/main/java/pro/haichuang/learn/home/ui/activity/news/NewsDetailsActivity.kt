@@ -20,6 +20,7 @@ class NewsDetailsActivity : DataBindingActivity<NewsDetailsModel>() {
         val url = when {
             intent.getBooleanExtra("isHeightSchool", false) -> Url.HeightSchool.Get
             intent.getBooleanExtra("isZhaoSheng", false) -> Url.ZhaoSheng.Get
+            intent.getBooleanExtra("isContent", false) -> Url.Content.Get
             else -> Url.News.Get
         }
         content.settings.textZoom = 200

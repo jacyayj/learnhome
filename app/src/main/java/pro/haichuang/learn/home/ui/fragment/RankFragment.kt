@@ -81,12 +81,18 @@ class RankFragment : BaseFragment() {
             }
 
             override fun onTabUnselected(p0: TabLayout.Tab?) {
-                p0?.apply {
-                    tabBeans[position].checked = false
-                }
+                tabBeans[p0?.position ?: 0].checked = false
             }
 
             override fun onTabSelected(p0: TabLayout.Tab?) {
+                p0?.apply {
+                    tabBeans[position].checked = tabBeans[position].checked.not()
+                    if (tabBeans[position].checked)
+                        when (position) {
+                            0 -> zuanyePopup.show(1)
+                            1 -> inputPopup.show()
+                        }
+                }
             }
         })
     }
@@ -105,7 +111,7 @@ class RankFragment : BaseFragment() {
 
     private fun initTab() {
         for (bean in tabBeans) {
-            val binding = DataBindingUtil.inflate<ViewDataBinding>(layoutInflater, R.layout.item_tab_17, tab, false)
+            val binding = DataBindingUtil.inflate<ViewDataBinding>(layoutInflater, R.layout.item_tab_16, tab, false)
             binding.setVariable(BR.item, bean)
             binding.executePendingBindings()
             tab.addTab(tab.newTab().setCustomView(binding.root))

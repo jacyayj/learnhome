@@ -3,13 +3,6 @@ package pro.haichuang.learn.home.ui.activity.mine
 import com.jacy.kit.adapter.CommonAdapter
 import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.toast
-import com.netease.nim.uikit.api.NimUIKit
-import com.netease.nimlib.sdk.NIMClient
-import com.netease.nimlib.sdk.RequestCallback
-import com.netease.nimlib.sdk.friend.FriendService
-import com.netease.nimlib.sdk.friend.constant.FriendFieldEnum
-import com.netease.nimlib.sdk.friend.constant.VerifyType
-import com.netease.nimlib.sdk.friend.model.AddFriendData
 import com.vondear.rxtool.RxConstTool
 import com.vondear.rxtool.RxTimeTool
 import com.zhouyou.http.model.HttpParams
@@ -20,11 +13,10 @@ import pro.haichuang.learn.home.config.BaseActivity
 import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.mine.itemmodel.OrderModel
 import pro.haichuang.learn.home.utils.GsonUtil
+import pro.haichuang.learn.home.utils.HttpUtils
 
 @ContentView(R.layout.activity_order_teacher)
 class OrderTeacherActivity : BaseActivity() {
-
-    private val friendSerivice by lazy { NIMClient.getService(FriendService::class.java) }
 
     private var tempItem: OrderModel? = null
 
@@ -63,42 +55,7 @@ class OrderTeacherActivity : BaseActivity() {
 
     private fun toChat(orderModel: OrderModel) {
         orderModel.memberInfo?.let {
-            if (friendSerivice.isMyFriend(it.imAccid))
-                friendSerivice.updateFriendFields(it.imAccid, mapOf(Pair(FriendFieldEnum.EXTENSION, mapOf(Pair("orderTime", orderModel.acceptTime), Pair("orderId", orderModel.id))))).setCallback(object : RequestCallback<Void> {
-                    override fun onSuccess(p0: Void?) {
-                        NimUIKit.startP2PSession(this@OrderTeacherActivity, it.imAccid)
-                    }
-
-                    override fun onFailed(p0: Int) {
-                    }
-
-                    override fun onException(p0: Throwable?) {
-                    }
-                })
-            else friendSerivice.addFriend(AddFriendData(it.imAccid, VerifyType.DIRECT_ADD)).setCallback(object : RequestCallback<Void> {
-                override fun onSuccess(p0: Void?) {
-                    friendSerivice.updateFriendFields(it.imAccid, mapOf(Pair(FriendFieldEnum.EXTENSION, mapOf(Pair("orderTime", orderModel.acceptTime), Pair("orderId", orderModel.id))))).setCallback(object : RequestCallback<Void> {
-                        override fun onSuccess(p0: Void?) {
-                            NimUIKit.startP2PSession(this@OrderTeacherActivity, it.imAccid)
-                        }
-
-                        override fun onFailed(p0: Int) {
-                        }
-
-                        override fun onException(p0: Throwable?) {
-                        }
-                    })
-
-                }
-
-                override fun onFailed(p0: Int) {
-
-                }
-
-                override fun onException(p0: Throwable?) {
-                }
-            })
-
+            HttpUtils.updateOrderTime(this, it.imAccid, orderModel.acceptTime, orderModel.id, true)
         }
     }
 

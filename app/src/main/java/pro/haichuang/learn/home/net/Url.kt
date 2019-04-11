@@ -29,6 +29,16 @@ object Url {
         const val List = "${base}list"
     }
 
+    /**
+     * 广告相关接口
+     */
+    object Ad {
+
+        private const val base = "ad/"
+
+        const val List = "${base}list"
+    }
+
 
     /**
      * 验证码相关接口
@@ -187,6 +197,8 @@ object Url {
         const val Delete = "${base}delete"
 
         const val My = "${base}my"
+
+        const val Get = "${base}get"
     }
 
     /**

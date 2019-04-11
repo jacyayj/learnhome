@@ -70,7 +70,6 @@ abstract class BaseActivity : RootActivity(), OnRefreshLoadMoreListener {
         val request = EasyHttp.post(url)
                 .params(sign(params))
         if (jessionid.isNotEmpty())
-        //需要附带验证码的接口，将JSESSIONID附加在cookie上传给服务器
             request.addCookie("JSESSIONID", jessionid)
         request.execute(MyCallBack(url, this, showLoading, success))
     }

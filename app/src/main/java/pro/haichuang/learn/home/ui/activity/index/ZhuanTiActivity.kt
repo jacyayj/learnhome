@@ -21,12 +21,12 @@ class ZhuanTiActivity : BaseActivity() {
         titleModel.title = "线下讲座"
         listView.adapter = adapter
         pageUrl = Url.Lecture.List
-        refresh_layout.autoRefresh()
+        fetchPageData()
     }
 
     override fun initListener() {
         listView.setOnItemClickListener { _, _, position, _ ->
-            mStartActivity(ZhuanTiDetailsActivity::class.java, Pair(Constants.ZHUANTI_ID,adapter.getItem(position).id))
+            mStartActivity(ZhuanTiDetailsActivity::class.java, Pair(Constants.ZHUANTI_ID, adapter.getItem(position).id))
         }
     }
 

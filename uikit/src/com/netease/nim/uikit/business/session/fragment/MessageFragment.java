@@ -32,7 +32,6 @@ import com.netease.nimlib.sdk.Observer;
 import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.nimlib.sdk.ResponseCode;
 import com.netease.nimlib.sdk.friend.FriendService;
-import com.netease.nimlib.sdk.friend.constant.FriendFieldEnum;
 import com.netease.nimlib.sdk.friend.model.Friend;
 import com.netease.nimlib.sdk.msg.MessageBuilder;
 import com.netease.nimlib.sdk.msg.MsgService;
@@ -51,7 +50,6 @@ import com.netease.nimlib.sdk.robot.model.RobotMsgType;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -146,7 +144,7 @@ public class MessageFragment extends TFragment implements ModuleProxy {
         Container container = new Container(getActivity(), sessionId, sessionType, this);
 
         if (messageListPanel == null) {
-            messageListPanel = new MessageListPanelEx(container, rootView, anchor, false, false);
+            messageListPanel = new MessageListPanelEx(container, rootView, anchor, false, true);
         } else {
             messageListPanel.reload(container, anchor);
         }
@@ -235,14 +233,6 @@ public class MessageFragment extends TFragment implements ModuleProxy {
     private void onMessageIncoming(List<IMMessage> messages) {
         if (CommonUtil.isEmpty(messages)) {
             return;
-        }
-        for (IMMessage message : messages) {
-            if (message.getMsgType() == MsgTypeEnum.tip && message.getContent().equals("计费开始，本次咨询将在24小时后结束！")) {
-                Map<FriendFieldEnum, Object> extension = new HashMap<>();
-                extension.put(FriendFieldEnum.EXTENSION, message.getRemoteExtension());
-                NIMClient.getService(FriendService.class).updateFriendFields(sessionId, extension);
-                break;
-            }
         }
         messageListPanel.onIncomingMessage(messages);
         // 发送已读回执

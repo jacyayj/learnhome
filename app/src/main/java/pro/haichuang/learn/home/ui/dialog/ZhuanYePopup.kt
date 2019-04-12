@@ -5,6 +5,7 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.PopupWindow
 import com.jacy.kit.adapter.CommonAdapter
+import com.vondear.rxtool.RxDeviceTool
 import kotlinx.android.synthetic.main.popup_grid_multiple.view.*
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.bean.NameId
@@ -44,6 +45,14 @@ class ZhuanYePopup(private val view: View, private val result: (code: String, po
                 } else result("", -1, "全部")
             }
             dismiss()
+        }
+        contentView.post {
+            val sh = RxDeviceTool.getScreenHeight(view.context)
+            if (contentView.height >= sh*0.8) {
+                val params = contentView.layoutParams
+                params.height = (sh * 0.6).toInt()
+                contentView.layoutParams = params
+            }
         }
     }
 

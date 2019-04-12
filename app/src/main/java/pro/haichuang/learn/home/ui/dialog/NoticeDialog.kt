@@ -3,6 +3,7 @@ package pro.haichuang.learn.home.ui.dialog
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
+import com.jacy.kit.config.gone
 import com.jacy.kit.config.show
 import kotlinx.android.synthetic.main.dialog_notice.*
 import pro.haichuang.learn.home.R
@@ -21,7 +22,7 @@ class NoticeDialog(context: Context, private val result: () -> Unit = {}) : Dial
         }
     }
 
-    fun show(title: String, content: String = "", confirmText: String = "") {
+    fun show(title: String, content: String = "", confirmText: String = "", showCancel: Boolean = true) {
         super.show()
         msg_title.text = title
         if (content.isNotEmpty()) {
@@ -30,6 +31,8 @@ class NoticeDialog(context: Context, private val result: () -> Unit = {}) : Dial
         }
         if (confirmText.isNotEmpty())
             confirm.text = confirmText
+        if (!showCancel)
+            cancel.gone()
     }
 
 }

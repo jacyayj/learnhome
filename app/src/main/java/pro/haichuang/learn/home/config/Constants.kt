@@ -2,6 +2,10 @@ package pro.haichuang.learn.home.config
 
 object Constants {
 
+    const val ALIPAY = 0x3891238
+    const val RECHARGE = 0x4189080
+    const val RE_LOGIN = 0x3819018
+
     const val TEACHER_ID = "teacher_id"
     const val TEACHER_HEADER = "teacher_header"
     const val TEACHER_SUBJECT = "teacher_subject"
@@ -15,8 +19,6 @@ object Constants {
     const val ZHUANTI_ID = "zhuanti_id"
 
     const val CHANNEL_ID = "channel_id"
-
-    const val ALIPAY = 0x3891238
 
     const val PRICE = "price"
 

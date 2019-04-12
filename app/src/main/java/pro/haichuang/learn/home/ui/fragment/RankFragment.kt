@@ -13,6 +13,7 @@ import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.fragment_rank.*
 import pro.haichuang.learn.home.BR
 import pro.haichuang.learn.home.R
+import pro.haichuang.learn.home.bean.NameId
 import pro.haichuang.learn.home.bean.TabBean
 import pro.haichuang.learn.home.config.BaseFragment
 import pro.haichuang.learn.home.net.Url
@@ -20,20 +21,42 @@ import pro.haichuang.learn.home.ui.activity.index.ZhuanYeDetailsActivity
 import pro.haichuang.learn.home.ui.activity.index.itemmodel.ItemZuanYeModel
 import pro.haichuang.learn.home.ui.dialog.DoubleChoosePopup
 import pro.haichuang.learn.home.ui.dialog.InputPopup
+import pro.haichuang.learn.home.ui.dialog.ZhuanYePopup
 import pro.haichuang.learn.home.utils.GsonUtil
 
 @ContentView(R.layout.fragment_rank)
 class RankFragment : BaseFragment() {
 
-    private val zuanyePopup by lazy { DoubleChoosePopup(tab) }
-
-    private val tabBeans by lazy { arrayListOf(TabBean("选择查询项"), TabBean("输入关键字")) }
+    private val typePopup by lazy {
+        DoubleChoosePopup(tab) {
+            zuanyePopup.show(if (it) typesData1 else typesData2, true)
+        }.apply {
+            setOnDismissListener {
+                tabBeans[0].checked = false
+            }
+        }
+    }
+    private val zuanyePopup by lazy {
+        ZhuanYePopup(tab) { code, i, name ->
+            tabBeans[1].text = name
+            mainMajor = code
+            fetchPageData()
+        }.apply {
+            setOnDismissListener {
+                tabBeans[1].checked = false
+            }
+        }
+    }
+    private val tabBeans by lazy { arrayListOf(TabBean("选择查询项"), TabBean("选择分类"), TabBean("输入关键字")) }
     private val inputPopup by lazy {
         InputPopup(tab) {
             queryName = it
             fetchPageData()
         }
     }
+
+    private val typesData1 by lazy { ArrayList<NameId>() }
+    private val typesData2 by lazy { ArrayList<NameId>() }
 
     private var mainMajor = ""
     private var queryName = ""
@@ -44,12 +67,16 @@ class RankFragment : BaseFragment() {
         initTab()
         listView.adapter = adapter
         pageUrl = Url.Major.Sort
+        post(Url.Major.Category, HttpParams("level", "1"))
+        post(Url.Major.Category, HttpParams("level", "2"))
     }
+
     override fun onRefresh(refreshLayout: RefreshLayout) {
         queryName = ""
         inputPopup.clear()
         super.onRefresh(refreshLayout)
     }
+
     override fun setPageParams(pageParams: HttpParams) {
         if (mainMajor.isNotEmpty())
             pageParams.put("mainMajor", mainMajor)
@@ -74,7 +101,7 @@ class RankFragment : BaseFragment() {
                     tabBeans[position].checked = tabBeans[position].checked.not()
                     if (tabBeans[position].checked)
                         when (position) {
-                            0 -> zuanyePopup.show(1)
+                            0 -> typePopup.show(1)
                             1 -> inputPopup.show()
                         }
                 }
@@ -89,8 +116,8 @@ class RankFragment : BaseFragment() {
                     tabBeans[position].checked = tabBeans[position].checked.not()
                     if (tabBeans[position].checked)
                         when (position) {
-                            0 -> zuanyePopup.show(1)
-                            1 -> inputPopup.show()
+                            0 -> typePopup.show(1)
+                            2 -> inputPopup.show()
                         }
                 }
             }
@@ -99,6 +126,12 @@ class RankFragment : BaseFragment() {
 
     override fun onSuccess(url: String, result: Any?) {
         when (url) {
+            Url.Major.Category -> {
+                GsonUtil.parseArray(result, NameId::class.java).forEach {
+                    typesData1.add(it)
+                    it.child?.let { it1 -> typesData2.addAll(it1) }
+                }
+            }
             Url.Major.Sort -> {
                 GsonUtil.parseRows(result, ItemZuanYeModel::class.java).list?.let {
                     dealRows(adapter, it)

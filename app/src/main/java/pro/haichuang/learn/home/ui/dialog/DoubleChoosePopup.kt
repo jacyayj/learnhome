@@ -27,6 +27,10 @@ class DoubleChoosePopup(private val view: View, result: (isNew: Boolean) -> Unit
                     result(contentView.listView2.isItemChecked(0))
                     dismiss()
                 }
+                1 -> {
+                    result(contentView.listView.isItemChecked(0))
+                    dismiss()
+                }
             }
         }
     }
@@ -43,7 +47,8 @@ class DoubleChoosePopup(private val view: View, result: (isNew: Boolean) -> Unit
                     contentView.listView2.adapter = CommonAdapter(layoutInflater, R.layout.item_popup_multiple_choose, arrayListOf(NameId("只搜新招", -1), NameId("全部搜索", -1)))
                 }
                 1 -> {
-                    contentView.listView.adapter = CommonAdapter(layoutInflater, R.layout.item_popup_multiple_choose, arrayListOf(NameId("专业大类排位查询", -1), NameId("专业排位查询", -1)))
+                    contentView.listView.adapter = CommonAdapter(layoutInflater, R.layout.item_popup_multiple_choose, arrayListOf(NameId("专业大类排位查询", 1), NameId("专业排位查询", 2)))
+                    contentView.listView.choiceMode = AbsListView.CHOICE_MODE_SINGLE
                     contentView.choose_label1.text = "选择查询类型"
                     contentView.choose_view2.gone()
                 }

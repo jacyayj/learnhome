@@ -19,8 +19,10 @@ import pro.haichuang.learn.home.utils.SPUtils
 @ContentView(R.layout.activity_wallet)
 class WalletActivity : BaseActivity() {
 
+    private var amount = "0.01"
+    private val amountList by lazy { arrayListOf(10f, 50f, 100f, 500f) }
     override fun initData() {
-        grid.adapter = CommonAdapter(layoutInflater, R.layout.item_wallet, arrayListOf(10f, 50f, 100f, 500f))
+        grid.adapter = CommonAdapter(layoutInflater, R.layout.item_wallet, amountList)
         if (SPUtils.isTeacher)
             to_tixian.show()
         post(Url.User.Account, needSession = true)
@@ -31,16 +33,19 @@ class WalletActivity : BaseActivity() {
     }
 
     override fun initListener() {
-        to_payment.setOnClickListener { mStartActivityForResult(PaymentActivity::class.java, 0x01, Pair("isRecharge", true), Pair(PRICE, "0.01")) }
+        to_payment.setOnClickListener { mStartActivityForResult(PaymentActivity::class.java, 0x01, Pair("isRecharge", true), Pair(PRICE, amount)) }
         to_pay_details.setOnClickListener { mStartActivity(PayDetailsActivity::class.java) }
         to_tixian.setOnClickListener { mStartActivity(TiXianActivity::class.java) }
+        grid.setOnItemClickListener { _, _, position, _ ->
+            //            amount = amountList[position].toString()
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
-            setResult(Activity.RESULT_OK)
-            finish()
+            setResult(Activity.RESULT_OK, Intent().putExtra("amount", amount))
+            post(Url.User.Account, needSession = true)
         }
     }
 }

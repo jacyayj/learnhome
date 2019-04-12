@@ -29,6 +29,8 @@ import pro.haichuang.learn.home.utils.mlog
 @ContentView(R.layout.activity_login)
 class LoginActivity : DataBindingActivity<LoginModel>(), IUiListener {
 
+    private val re_login by lazy { intent.getBooleanExtra("re_login", false) }
+
     override fun initData() {
         SPUtils.session?.let {
             mStartActivity(MainActivity::class.java)
@@ -108,7 +110,8 @@ class LoginActivity : DataBindingActivity<LoginModel>(), IUiListener {
                         NimUIKit.getOptions().isTeacher = info.teacher
                         NimUIKit.loginSuccess(p0?.account)
                         toast("登录成功")
-                        mStartActivity(MainActivity::class.java)
+                        if (!re_login)
+                            mStartActivity(MainActivity::class.java)
                         finish()
                     }
 

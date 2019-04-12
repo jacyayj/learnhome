@@ -20,6 +20,7 @@ import kotlinx.android.synthetic.main.activity_yu_yue.*
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.adapter.ReleaseImageAdapter
 import pro.haichuang.learn.home.config.Constants
+import pro.haichuang.learn.home.config.Constants.RECHARGE
 import pro.haichuang.learn.home.config.Constants.TEACHER_ACCOUNT
 import pro.haichuang.learn.home.config.Constants.TEACHER_HEADER
 import pro.haichuang.learn.home.config.Constants.TEACHER_ID
@@ -65,13 +66,17 @@ class YuYueActivity : DataBindingActivity<YuYueModel>() {
                 when (msg?.what) {
                     Constants.ALIPAY -> {
                         when (GsonUtil.getString(msg.obj, "resultStatus")) {
-                            "9000" -> successDialog.show("友情提示", "支付成功！点击“咨询”可咨询老师", "咨询")
+                            "9000" -> showSuccess()
                             "6001" -> toast("支付取消")
                         }
                     }
                 }
             }
         }
+    }
+
+    fun showSuccess() {
+        successDialog.show("友情提示", "支付成功！请等待老师接单。", "确定")
     }
 
     override fun initData() {
@@ -98,14 +103,17 @@ class YuYueActivity : DataBindingActivity<YuYueModel>() {
 
     override fun onSuccess(url: String, result: Any?) {
         when (url) {
+            Url.User.Account -> {
+                payDialog.balance =  GsonUtil.getString(result, "credit")
+                payDialog.show()
+            }
             Url.Teacher.Fee -> {
-                payDialog.show(GsonUtil.getString(result, "teacherOnline"))
+                payDialog.price = GsonUtil.getString(result, "teacherOffline")
+                post(Url.User.Account,needSession = true)
             }
             Url.Teacher.Order -> {
                 when (model.payType) {
-                    1 -> {
-                        toast("钱包支付未完成")
-                    }
+                    1 -> showSuccess()
                     12 -> {
                         val mreq = GsonUtil.parseObject(result, JsonObject::class.java)
                         val req = PayReq()
@@ -145,6 +153,11 @@ class YuYueActivity : DataBindingActivity<YuYueModel>() {
                         post(Url.Upload.Upload, params)
                     }
                 }
+                RECHARGE->{
+                    data?.let {
+                        payDialog.refrshBalance(it.getStringExtra("amount"))
+                    }
+                }
             }
         }
     }
@@ -152,13 +165,9 @@ class YuYueActivity : DataBindingActivity<YuYueModel>() {
     inner class PayResult : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             when (intent?.getIntExtra("payResult", -1)) {
-                0 -> successDialog.show("友情提示", "支付成功！点击“咨询”可咨询老师", "咨询")
-                1 -> {
-                    toast("支付取消")
-                }
-                2 -> {
-                    toast("支付失败")
-                }
+                0 -> showSuccess()
+                1 -> toast("支付取消")
+                2 -> toast("支付失败")
             }
         }
     }

@@ -1,6 +1,7 @@
 package pro.haichuang.learn.home.ui.activity.index
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -12,13 +13,6 @@ import com.jacy.kit.adapter.CommonRecyclerAdapter
 import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.mStartActivity
 import com.jacy.kit.config.toast
-import com.netease.nim.uikit.api.NimUIKit
-import com.netease.nimlib.sdk.NIMClient
-import com.netease.nimlib.sdk.RequestCallback
-import com.netease.nimlib.sdk.friend.FriendService
-import com.netease.nimlib.sdk.friend.constant.FriendFieldEnum
-import com.netease.nimlib.sdk.friend.constant.VerifyType
-import com.netease.nimlib.sdk.friend.model.AddFriendData
 import com.tencent.mm.opensdk.modelpay.PayReq
 import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.activity_teacher_details.*
@@ -46,18 +40,12 @@ import pro.haichuang.learn.home.utils.ShareUtils
 
 @ContentView(R.layout.activity_teacher_details)
 class TeacherDetailsActivity : DataBindingActivity<TeacherDetailsModel>() {
-    private val friendSerivice by lazy { NIMClient.getService(FriendService::class.java) }
+
     private val id by lazy { intent.getIntExtra(TEACHER_ID, -1) }
 
     private var account: String = ""
 
     private val successDialog by lazy {
-        NoticeDialog(this) {
-//            toChat(-1)
-        }
-    }
-
-    private val failedDialog by lazy {
         NoticeDialog(this)
     }
 
@@ -75,7 +63,7 @@ class TeacherDetailsActivity : DataBindingActivity<TeacherDetailsModel>() {
                 when (msg?.what) {
                     Constants.ALIPAY -> {
                         when (GsonUtil.getString(msg.obj, "resultStatus")) {
-                            "9000" -> successDialog.show("友情提示", "支付成功！点击“咨询”可咨询老师", "咨询")
+                            "9000" -> showSuccess()
 
                             "6001" -> toast("支付取消")
                         }
@@ -104,14 +92,17 @@ class TeacherDetailsActivity : DataBindingActivity<TeacherDetailsModel>() {
 
     override fun onSuccess(url: String, result: Any?) {
         when (url) {
+            Url.User.Account -> {
+                payDialog.balance = GsonUtil.getString(result, "credit")
+                payDialog.show()
+            }
             Url.Teacher.Fee -> {
-                payDialog.show(GsonUtil.getString(result, "teacherOnline"))
+                payDialog.price = GsonUtil.getString(result, "teacherOffline")
+                post(Url.User.Account, needSession = true)
             }
             Url.Teacher.Order -> {
                 when (model.payType) {
-                    1 -> {
-                        toast("钱包支付未完成")
-                    }
+                    1 -> showSuccess()
                     12 -> {
                         val mreq = GsonUtil.parseObject(result, JsonObject::class.java)
                         val req = PayReq()
@@ -136,6 +127,10 @@ class TeacherDetailsActivity : DataBindingActivity<TeacherDetailsModel>() {
                 root.scrollTo(0, 0)
             }
         }
+    }
+
+    fun showSuccess() {
+        successDialog.show("友情提示", "支付成功！请等待老师接单", "确定")
     }
 
     override fun initListener() {
@@ -165,50 +160,19 @@ class TeacherDetailsActivity : DataBindingActivity<TeacherDetailsModel>() {
         }
     }
 
-    private fun toChat(id: Int) {
-        if (friendSerivice.isMyFriend(account))
-            friendSerivice.updateFriendFields(account, mapOf(Pair(FriendFieldEnum.EXTENSION, mapOf(Pair("orderId", id))))).setCallback(object : RequestCallback<Void> {
-                override fun onSuccess(p0: Void?) {
-                    NimUIKit.startP2PSession(this@TeacherDetailsActivity, account)
-                }
-
-                override fun onFailed(p0: Int) {
-                }
-
-                override fun onException(p0: Throwable?) {
-                }
-            })
-        else friendSerivice.addFriend(AddFriendData(account, VerifyType.DIRECT_ADD)).setCallback(object : RequestCallback<Void> {
-            override fun onSuccess(p0: Void?) {
-                friendSerivice.updateFriendFields(account, mapOf(Pair(FriendFieldEnum.EXTENSION, mapOf(Pair("orderId", id))))).setCallback(object : RequestCallback<Void> {
-                    override fun onSuccess(p0: Void?) {
-                        NimUIKit.startP2PSession(this@TeacherDetailsActivity, account)
-                    }
-
-                    override fun onFailed(p0: Int) {
-                    }
-
-                    override fun onException(p0: Throwable?) {
-                    }
-                })
-
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            data?.let {
+                payDialog.refrshBalance(it.getStringExtra("amount"))
             }
-
-            override fun onFailed(p0: Int) {
-
-            }
-
-            override fun onException(p0: Throwable?) {
-            }
-        })
+        }
     }
 
     inner class PayResult : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             when (intent?.getIntExtra("payResult", -1)) {
-                0 -> {
-                    successDialog.show("友情提示", "支付成功！点击“咨询”可咨询老师", "咨询")
-                }
+                0 -> showSuccess()
                 1 -> {
                     toast("支付取消")
                 }

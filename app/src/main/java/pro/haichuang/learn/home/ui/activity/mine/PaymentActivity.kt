@@ -36,6 +36,7 @@ class PaymentActivity : DataBindingActivity<PaymentModel>() {
                         when (GsonUtil.getString(msg.obj, "resultStatus")) {
                             "9000" -> {
                                 toast("支付成功")
+                                setResult(Activity.RESULT_OK)
                                 finish()
                             }
                             "6001" -> toast("支付取消")
@@ -63,7 +64,9 @@ class PaymentActivity : DataBindingActivity<PaymentModel>() {
             Url.Account.Activate, Url.Account.Recharge -> {
                 when (model.type) {
                     1 -> {
-                        toast("钱包支付未完成")
+                        toast("支付成功")
+                        setResult(Activity.RESULT_OK)
+                        finish()
                     }
                     12 -> {
                         val mreq = GsonUtil.parseObject(result, JsonObject::class.java)

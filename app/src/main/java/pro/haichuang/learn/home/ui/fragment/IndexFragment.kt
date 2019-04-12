@@ -82,7 +82,11 @@ class IndexFragment : BaseFragment(), WeatherSearch.OnWeatherSearchListener, AMa
         listView.adapter = adapter
         pageUrl = Url.Publish.List
         fetchPageData()
+    }
+
+    override fun fetchPageData(loadMore: Boolean, showLoading: Boolean) {
         post(Url.Ad.List, showLoading = false)
+        super.fetchPageData(loadMore, showLoading)
     }
 
     override fun setPageParams(pageParams: HttpParams) {
@@ -144,7 +148,7 @@ class IndexFragment : BaseFragment(), WeatherSearch.OnWeatherSearchListener, AMa
 
     override fun initListener() {
         listView.setOnItemClickListener { _, _, position, _ ->
-            mStartActivity(FindDetailsActivity::class.java)
+            mStartActivity(FindDetailsActivity::class.java, Pair(NEWS_ID, adapter.getItem(position).id))
         }
         show_operation.setOnClickListener {
             IndexOperationPopup(it).show()
@@ -180,7 +184,7 @@ class IndexFragment : BaseFragment(), WeatherSearch.OnWeatherSearchListener, AMa
             }
             "url" -> {
                 val intent = Intent("android.intent.action.VIEW")
-                intent.data =  Uri.parse(v.getTag(R.id.tag_2).toString())
+                intent.data = Uri.parse(v.getTag(R.id.tag_2).toString())
                 startActivity(intent)
             }
         }

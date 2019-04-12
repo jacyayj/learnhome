@@ -33,5 +33,6 @@ object GsonUtil {
         return array
     }
 
-    fun getString(result: Any?, key: String) = JsonParser().parse(result?.toJson()).asJsonObject.get(key).asString
+    fun getString(result: Any?, key: String) = JsonParser().parse(result?.toJson())?.asJsonObject?.get(key)?.asString
+            ?: ""
 }

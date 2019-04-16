@@ -26,6 +26,13 @@ class LegendDialog(context: Context) : Dialog(context, R.style.Dialog) {
                 title.text = "专业概率"
                 legend_3.show()
             }
+            4 -> {
+                title.text = "专业概率"
+                legend_3.show()
+                legend_3_1.text = "风险较小"
+                legend_3_2.text = "风险较大"
+                legend_3_3.text = "风险很大"
+            }
         }
     }
 

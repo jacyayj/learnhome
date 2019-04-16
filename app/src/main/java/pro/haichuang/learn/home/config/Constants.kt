@@ -42,4 +42,14 @@ object Constants {
 
     const val ZHUAN_YE_ID = "zhuan_ye_id"
 
+    const val JUDGE_SUBJECT = "judge_subject"
+
+    const val JUDGE_SCORE = "judge_score"
+
+    const val JUDGE_BATCH = "judge_batch"
+
+    const val JUDGE_BATCH_STR = "judge_batch_str"
+
+    const val JUDGE_IS_DIFFERENCE = "judge_difference"
+
 }

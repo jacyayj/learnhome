@@ -1,9 +1,9 @@
 package pro.haichuang.learn.home.ui.activity.index.itemmodel
 
-import pro.haichuang.learn.home.bean.BaseModel
 import android.databinding.Bindable
 import android.view.View
 import com.android.databinding.library.baseAdapters.BR
+import pro.haichuang.learn.home.bean.BaseModel
 import pro.haichuang.learn.home.ui.dialog.ZhiYuanPopup
 
 class ZhiYuanModel : BaseModel() {

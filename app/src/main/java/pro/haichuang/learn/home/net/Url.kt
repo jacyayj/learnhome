@@ -18,6 +18,19 @@ object Url {
 
 
     /**
+     * 判断相关接口
+     */
+    object Judge {
+
+        private const val base = "judge/"
+
+        const val Score = "${base}score"
+
+        const val College = "${base}college"
+    }
+
+
+    /**
      * 验证码相关接口
      */
     object Fqa {

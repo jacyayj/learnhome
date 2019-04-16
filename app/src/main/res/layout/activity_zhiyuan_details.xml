@@ -81,14 +81,35 @@
         android:layout_height="match_parent"
         android:layout_weight="1">
 
-        <ListView
-            android:id="@+id/listView"
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@id/refresh_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="5dp"
-            android:background="@color/colorWhite"
-            android:divider="@color/colorF0F7FA"
-            android:dividerHeight="5dp" />
+            android:background="@color/colorWhite">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ListView
+                    android:id="@+id/listView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:divider="@color/colorF0F7FA"
+                    android:dividerHeight="5dp" />
+
+                <ListView
+                    android:id="@+id/listView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:divider="@color/colorF0F7FA"
+                    android:dividerHeight="5dp"
+                    android:visibility="gone" />
+            </FrameLayout>
+
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
         <Button
             android:id="@+id/show_result"

@@ -21,7 +21,7 @@
             android:layout_weight="1.1"
             android:gravity="center"
             android:paddingVertical="10dp"
-            android:text="专业名称" />
+            android:text="@{item.majorName}" />
 
         <TextView
             style="@style/text_14_002133"

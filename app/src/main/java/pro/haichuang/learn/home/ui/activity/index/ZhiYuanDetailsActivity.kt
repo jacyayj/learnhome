@@ -4,48 +4,114 @@ import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.support.design.widget.TabLayout
 import com.jacy.kit.adapter.CommonAdapter
+import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.gone
 import com.jacy.kit.config.mStartActivity
 import com.jacy.kit.config.show
+import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.activity_zhiyuan_details.*
 import kotlinx.android.synthetic.main.item_zhiyuan_details.view.*
 import pro.haichuang.learn.home.BR
 import pro.haichuang.learn.home.R
-import com.jacy.kit.config.ContentView
 import pro.haichuang.learn.home.bean.TabBean
 import pro.haichuang.learn.home.config.BaseActivity
-import pro.haichuang.learn.home.ui.activity.index.itemmodel.ZhiYuanModel
+import pro.haichuang.learn.home.config.Constants
+import pro.haichuang.learn.home.config.Constants.COLLEGE_ID
+import pro.haichuang.learn.home.config.Constants.JUDGE_SUBJECT
+import pro.haichuang.learn.home.net.Url
+import pro.haichuang.learn.home.ui.activity.index.itemmodel.CollegeModel
+import pro.haichuang.learn.home.ui.activity.index.itemmodel.MajorModel
+import pro.haichuang.learn.home.ui.dialog.GridMultiplePopup
 import pro.haichuang.learn.home.ui.dialog.TitleNoticeDialog
 import pro.haichuang.learn.home.ui.dialog.ZhiYuanResultDialog
+import pro.haichuang.learn.home.utils.GsonUtil
 
 
 @ContentView(R.layout.activity_zhiyuan_details)
 class ZhiYuanDetailsActivity : BaseActivity() {
+
+    private val mScore by lazy { intent.getIntExtra(Constants.JUDGE_SCORE, -1) }
+    private val batch by lazy { intent.getIntExtra(Constants.JUDGE_BATCH, -1) }
+    private val batchStr by lazy { intent.getStringExtra(Constants.JUDGE_BATCH_STR) }
+    private val subject by lazy { intent.getIntExtra(Constants.JUDGE_SUBJECT, -1) }
+    private val isDifference by lazy { intent.getBooleanExtra(Constants.JUDGE_IS_DIFFERENCE, false) }
+
     private val tabBeans by lazy { arrayListOf(TabBean("四川省"), TabBean("院校类型")) }
-    private val data by lazy {
-        arrayListOf(ZhiYuanModel(), ZhiYuanModel(),
-                ZhiYuanModel(), ZhiYuanModel(), ZhiYuanModel(), ZhiYuanModel(), ZhiYuanModel(), ZhiYuanModel())
-    }
     private val zhiyuanDialog by lazy {
         ZhiYuanResultDialog(this) {
             mStartActivity(ZhiYuanResultActivity::class.java)
         }
     }
+    private val typePopup by lazy {
+        GridMultiplePopup(sub_tab) {
+            collegeType = it
+            fetchPageData()
+        }.apply {
+            setOnDismissListener {
+                tabBeans[1].checked = false
+            }
+        }
+    }
+    private val provincePopup by lazy {
+        GridMultiplePopup(sub_tab) {
+            province = it
+            fetchPageData()
+        }.apply {
+            setOnDismissListener {
+                tabBeans[0].checked = false
+            }
+        }
+    }
     private val adapter by lazy {
-        CommonAdapter(layoutInflater, R.layout.item_zhiyuan_details, data) { v, _, _ ->
+        CommonAdapter<CollegeModel>(layoutInflater, R.layout.item_zhiyuan_details) { v, t, _ ->
             v.to_choose_zhuanye.setOnClickListener {
-                mStartActivity(ZhiYuanZhuanYeActivity::class.java)
+                mStartActivity(ZhiYuanZhuanYeActivity::class.java, Pair(COLLEGE_ID, t.id), Pair(JUDGE_SUBJECT, subject))
             }
             v.to_details.setOnClickListener {
                 mStartActivity(ZhiYuanSchoolActivity::class.java)
             }
         }
     }
-    private val adapter2 by lazy { CommonAdapter(layoutInflater, R.layout.item_zhiyuan_details2, arrayListOf(1, 2, 3, 4, 5, 6)) }
+
+    private var collegeType = ""
+    private var province = ""
+
     override fun initData() {
-        titleModel.title = "成绩:610分 文科   线差:57   本一批"
+        if (isDifference)
+            titleModel.title = "${if (subject == 1) "文科" else "理科"}   线差:$mScore    $batchStr"
+        else
+            titleModel.title = "成绩:${mScore}分 ${if (subject == 1) "文科" else "理科"}   $batchStr"
         initTab()
+        pageUrl = Url.Judge.College
+        post(Url.Major.List, HttpParams().apply {
+            put("subject", batch.toString())
+            put("level", if (batch == 4) "2" else "1")
+        })
         listView.adapter = adapter
+        fetchPageData()
+    }
+
+    override fun setPageParams(pageParams: HttpParams) {
+        pageParams.clear()
+        pageParams.put("batch", batch.toString())
+        pageParams.put("score", mScore.toString())
+        pageParams.put("subject", subject.toString())
+        if (collegeType.isEmpty())
+            pageParams.remove("collegeType")
+        else
+            pageParams.put("collegeType", collegeType)
+    }
+
+    override fun onSuccess(url: String, result: Any?) {
+        when (url) {
+            Url.Major.List -> GsonUtil.parseArray(result, MajorModel::class.java).let {
+                it.forEach { it.subject = subject }
+                listView2.adapter = CommonAdapter(layoutInflater, R.layout.item_zhiyuan_details2, it)
+            }
+            Url.Judge.College -> GsonUtil.parseRows(result, CollegeModel::class.java).list?.let {
+                dealRows(adapter, it)
+            }
+        }
     }
 
     override fun initListener() {
@@ -55,6 +121,17 @@ class ZhiYuanDetailsActivity : BaseActivity() {
         show_result.setOnClickListener {
             zhiyuanDialog.show()
         }
+        sub_tab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabReselected(p0: TabLayout.Tab?) {
+                if (p0?.position == 0) provincePopup.show(2) else typePopup.show(1)
+            }
+
+            override fun onTabUnselected(p0: TabLayout.Tab?) {
+            }
+
+            override fun onTabSelected(p0: TabLayout.Tab?) {
+            }
+        })
         tab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(p0: TabLayout.Tab?) {
             }
@@ -65,25 +142,22 @@ class ZhiYuanDetailsActivity : BaseActivity() {
             override fun onTabSelected(p0: TabLayout.Tab?) {
                 when (p0?.position) {
                     0 -> {
-                        listView.adapter = adapter
+                        listView2.gone()
+                        listView.show()
                         search_view.gone()
                         sub_tab.show()
-                        data.forEach {
-                            it.zizhu = false
-                        }
                     }
                     1 -> {
-                        listView.adapter = adapter2
+                        listView2.show()
+                        listView.gone()
                         search_view.show()
                         sub_tab.gone()
                     }
                     2 -> {
-                        listView.adapter = adapter
+                        listView2.gone()
+                        listView.show()
                         search_view.gone()
                         sub_tab.show()
-                        data.forEach {
-                            it.zizhu = true
-                        }
                     }
                 }
             }

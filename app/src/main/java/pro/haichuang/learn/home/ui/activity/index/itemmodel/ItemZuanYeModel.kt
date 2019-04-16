@@ -10,12 +10,12 @@ class ItemZuanYeModel {
     var majorCategory = ""
     var majorName = ""
     val jobStr
-    get() = when(jobGrade){
-        1->"B"
-        2->"B+"
-        3->"A"
-        else->"A+"
-    }
+        get() = when (jobGrade) {
+            1 -> "B"
+            2 -> "B+"
+            3 -> "A"
+            else -> "A+"
+        }
 
     var collegeName = ""
 

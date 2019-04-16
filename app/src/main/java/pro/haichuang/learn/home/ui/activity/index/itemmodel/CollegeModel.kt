@@ -2,7 +2,9 @@ package pro.haichuang.learn.home.ui.activity.index.itemmodel
 
 import android.databinding.BaseObservable
 import android.databinding.Bindable
+import android.view.View
 import com.android.databinding.library.baseAdapters.BR
+import pro.haichuang.learn.home.ui.dialog.ZhiYuanPopup
 import pro.haichuang.learn.home.utils.DataUtils
 
 class CollegeModel : BaseObservable() {
@@ -12,6 +14,9 @@ class CollegeModel : BaseObservable() {
     var collegeType = 0
     var enrollBatch = 0
     var enrollNumber = 0
+    var score = 0
+    var middleScore = 0
+    var subject = 0
     var enrollCode = ""
     var enrollYear = ""
     var collegeName = ""
@@ -22,12 +27,16 @@ class CollegeModel : BaseObservable() {
     var logo = ""
     var tuitionFee = ""
     var isNew = false
+    var self = false
     var picArr: Array<String>? = null
     val pic
         get() = if (picArr.isNullOrEmpty()) "" else picArr?.get(0)
 
     val provinceStr
         get() = DataUtils.findProvinceById(province)
+
+    val levelStr
+        get() = DataUtils.findLevelByIds(collegeLevel)
 
     val countryStr
         get() = DataUtils.findCountryByCode(country)
@@ -79,4 +88,32 @@ class CollegeModel : BaseObservable() {
             field = value
             notifyPropertyChanged(BR.checked)
         }
+
+    private var popup: ZhiYuanPopup? = null
+    @Bindable
+    var zhiyuan = "填报为"
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.zhiyuan)
+        }
+    @Bindable
+    var choosed = false
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.choosed)
+        }
+
+
+
+    fun choose(view: View) {
+        choosed = true
+        popup ?: let {
+            popup = ZhiYuanPopup(view) {
+                choosed = false
+                zhiyuan = it
+                checked = true
+            }
+        }
+        popup?.show()
+    }
 }

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="item"
+            type="pro.haichuang.learn.home.ui.activity.index.itemmodel.PiCiModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@drawable/divider_horizontal_e0"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:showDividers="middle">
+
+
+        <TextView
+            style="@style/text_14_33"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@{item.enrollBatchStr}" />
+
+        <TextView
+            style="@style/text_14_33"
+            android:layout_width="0dp"
+            android:layout_weight="1.4"
+            android:gravity="center"
+            android:text="@{`文科`+item.score1+`.理科`+item.score2}" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/to_details_1"
+                style="@style/text_14_fa"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/selector_00ccff_e0"
+                android:enabled="@{item.fit}"
+                android:onClick="toDetails"
+                android:paddingHorizontal="7dp"
+                android:paddingVertical="3dp"
+                android:tag="@{item}"
+                android:text="开始"
+                android:textColor="@color/color_fa_99" />
+        </FrameLayout>
+    </LinearLayout>
+</layout>

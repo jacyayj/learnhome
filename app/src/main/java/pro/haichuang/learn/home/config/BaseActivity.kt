@@ -138,5 +138,6 @@ abstract class BaseActivity : RootActivity(), OnRefreshLoadMoreListener {
 
     override fun onError(msg: String) {
         toast(msg)
+        page--
     }
 }

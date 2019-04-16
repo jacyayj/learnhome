@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="pro.haichuang.learn.home.ui.activity.index.itemmodel.ZhiYuanModel" />
+            type="pro.haichuang.learn.home.ui.activity.index.itemmodel.CollegeModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -41,7 +41,7 @@
                         style="@style/text_16_33"
                         android:drawableStart="@drawable/icon_point_green"
                         android:drawablePadding="15dp"
-                        android:text="天津大学"
+                        android:text="@{item.collegeName}"
                         android:textColor="#ff2f2f33"
                         android:textSize="16sp" />
 
@@ -51,7 +51,7 @@
                         android:background="@drawable/stroke_f39369_radius_4dp"
                         android:paddingHorizontal="5dp"
                         android:paddingVertical="2dp"
-                        android:text="综合 理工"
+                        android:text="@{item.collegeTypeStr}"
                         android:textColor="@color/colorF69656" />
 
                     <TextView
@@ -77,14 +77,14 @@
                     style="@style/text_14_8E8E99"
                     android:layout_marginTop="3dp"
                     android:paddingStart="35dp"
-                    android:text="特色:211 985 双一流 国重 艺术" />
+                    android:text="@{`特色:`+item.levelStr}" />
 
                 <TextView
                     style="@style/text_14_8E8E99"
                     android:layout_marginTop="3dp"
                     android:paddingStart="35dp"
                     android:paddingBottom="10dp"
-                    android:text="性质:公立" />
+                    android:text="@{`性质:`+item.collegeNatureStr}" />
 
                 <TextView
                     style="@style/text_14_99"
@@ -92,7 +92,7 @@
                     android:paddingBottom="10dp"
                     android:text="金融学（管理类）"
                     android:textColor="@color/colorF39369"
-                    android:visibility="@{item.zizhu ? View.VISIBLE : View.GONE}" />
+                    android:visibility="@{item.self ? View.VISIBLE : View.GONE}" />
             </LinearLayout>
 
             <CheckedTextView

@@ -27,6 +27,12 @@ object Url {
         const val Score = "${base}score"
 
         const val College = "${base}college"
+
+        const val Save = "${base}volunteer/save"
+
+        const val Get = "${base}volunteer/get"
+
+        const val Priority = "${base}volunteer/priority"
     }
 
 

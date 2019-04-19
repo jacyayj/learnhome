@@ -3,9 +3,11 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="item"
-            type="Integer" />
+            type="pro.haichuang.learn.home.ui.activity.index.itemmodel.CollegeModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -24,13 +26,15 @@
             <TextView
                 style="@style/text_17_FF"
                 android:layout_weight="1"
-                android:text="A志愿" />
+                android:text="@{item.zhiyuanStr}" />
 
             <CheckedTextView
                 android:id="@+id/choose_zhiyuan"
                 style="@style/text_17_FF"
+                android:layout_height="wrap_content"
                 android:drawableEnd="@drawable/selector_sj_white"
-                android:text="调整顺序" />
+                android:text="调整顺序"
+                android:visibility="@{item.onShot ? View.GONE : View.VISIBLE}" />
         </LinearLayout>
 
         <TableLayout
@@ -47,20 +51,20 @@
                     android:background="@drawable/bg_e0_radius_5dp"
                     android:paddingHorizontal="5dp"
                     android:paddingVertical="2dp"
-                    android:text="0302" />
+                    android:text="@{item.enrollCode}" />
 
                 <TextView
                     style="@style/text_16_33"
                     android:drawableEnd="@drawable/icon_point_green"
                     android:drawablePadding="10dp"
-                    android:text="北京理工大学" />
+                    android:text="@{item.collegeName}" />
             </LinearLayout>
 
             <TextView
                 style="@style/text_16_99"
                 android:layout_marginTop="5dp"
                 android:paddingStart="57dp"
-                android:text="2018计划:3人" />
+                android:text="@{`2019计划:`+item.enrollNumber+`人`}" />
 
             <TableRow
                 android:layout_marginTop="10dp"
@@ -80,23 +84,27 @@
                         android:id="@+id/agree"
                         style="@style/wrap_layout"
                         android:layout_marginEnd="10dp"
-                        android:background="@drawable/selector_stroke_ff3333_99"
+                        android:background="@{item.onShot ? null : @drawable/selector_stroke_ff3333_99}"
                         android:button="@null"
+                        android:checked="@={!item.checked}"
                         android:paddingHorizontal="5dp"
                         android:text="服从"
                         android:textColor="@color/color_ff3333_99"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        android:visibility="@{item.onShot ? (!item.checked ? View.VISIBLE : View.GONE):View.VISIBLE }" />
 
                     <RadioButton
                         android:id="@+id/disagree"
                         style="@style/wrap_layout"
                         android:layout_marginEnd="10dp"
-                        android:background="@drawable/selector_stroke_ff3333_99"
+                        android:background="@{item.onShot ? null : @drawable/selector_stroke_ff3333_99}"
                         android:button="@null"
+                        android:checked="@={item.checked}"
                         android:paddingHorizontal="5dp"
                         android:text="不服从"
                         android:textColor="@color/color_ff3333_99"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        android:visibility="@{item.onShot ? (item.checked ? View.VISIBLE : View.GONE):View.VISIBLE }" />
                 </RadioGroup>
 
                 <ImageView android:src="@drawable/icon_notice_grey" />
@@ -106,104 +114,57 @@
                 style="@style/text_16_99"
                 android:layout_marginTop="10dp"
                 android:paddingStart="57dp"
-                android:text="2017最低位次:1028" />
-
-            <TextView
-                style="@style/text_16_99"
-                android:layout_marginTop="10dp"
-                android:paddingStart="57dp"
-                android:paddingBottom="15sp"
-                android:text="2017最低分:605" />
+                android:paddingBottom="15dp"
+                android:text="2018最低位次:1028" />
 
         </TableLayout>
 
-        <TableLayout
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/stroke_e0e0e0"
             android:divider="@drawable/divider_vertical_e0"
             android:showDividers="middle">
 
-            <TableRow
-                android:divider="@drawable/divider_horizontal_e0"
-                android:showDividers="middle">
+            <TextView
+                style="@style/text_14_33"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/height_title"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="专业代码" />
 
-                <TextView
-                    style="@style/text_14_33"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/height_title"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="专业代码" />
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorE0E0E0" />
 
-                <TextView
-                    style="@style/text_14_33"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/height_title"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="专业概率" />
+            <TextView
+                style="@style/text_14_33"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/height_title"
+                android:layout_weight="3"
+                android:gravity="center_vertical"
+                android:paddingStart="10dp"
+                android:text="开设专业" />
+        </LinearLayout>
 
-                <TextView
-                    style="@style/text_14_33"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/height_title"
-                    android:layout_weight="3"
-                    android:gravity="center_vertical"
-                    android:paddingStart="10dp"
-                    android:text="开设专业" />
-            </TableRow>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/colorE0E0E0" />
 
-            <TableRow
-                android:divider="@drawable/divider_horizontal_e0"
-                android:showDividers="middle">
+        <pro.haichuang.learn.home.ui.weight.AutoListView
+            android:id="@+id/child_listView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@color/colorE0E0E0"
+            android:dividerHeight="0.5dp" />
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:paddingTop="15sp">
-
-                    <TextView
-                        style="@style/text_14_ff"
-                        android:layout_width="40dp"
-                        android:layout_height="20dp"
-                        android:layout_marginEnd="5dp"
-                        android:background="@drawable/bg_e0_radius_5dp"
-                        android:gravity="center"
-                        android:text="9" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:paddingTop="20dp">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/icon_point_green" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="3"
-                    android:orientation="vertical"
-                    android:paddingHorizontal="15sp">
-
-                    <TextView
-                        style="@style/text_10_99"
-                        android:paddingTop="15dp"
-                        android:text="社会科学实验班(精品文科班，包含专业：经济学、社会工作、法学、英语、德语、日语、西班牙语、七中，英语。日语、德语专业方向学费为6000元/年)"
-                        android:textColor="@color/color282828" />
-
-                    <TextView
-                        style="@style/text_10_99"
-                        android:paddingVertical="10dp"
-                        android:text="计划数:3人  学制:4年  学费:5000元" />
-                </LinearLayout>
-            </TableRow>
-        </TableLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/colorE0E0E0" />
     </LinearLayout>
 </layout>

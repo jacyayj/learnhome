@@ -1,6 +1,7 @@
 package pro.haichuang.learn.home.utils;
 
 import android.databinding.BindingAdapter;
+import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -12,6 +13,14 @@ import pro.haichuang.learn.home.net.Url;
 
 public class ImageBinding {
 
+
+    @BindingAdapter({"color"})
+    public static void displayColor(ImageView view, int color) {
+        if (color == -1)
+            view.setVisibility(View.GONE);
+        else
+            view.setImageDrawable(new ColorDrawable(color));
+    }
 
     @BindingAdapter({"drawable"})
     public static void displayDrawable(ImageView view, int drawable) {

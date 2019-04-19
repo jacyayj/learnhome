@@ -1,7 +1,6 @@
 package pro.haichuang.learn.home.ui.activity.index.itemmodel
 
 import android.databinding.Bindable
-import android.view.View
 import com.android.databinding.library.baseAdapters.BR
 import pro.haichuang.learn.home.bean.BaseModel
 import pro.haichuang.learn.home.ui.dialog.ZhiYuanPopup
@@ -37,16 +36,5 @@ class ZhiYuanModel : BaseModel() {
             notifyPropertyChanged(BR.zizhu)
         }
 
-    fun choose(view: View) {
-        choosed = true
-        popup ?: let {
-            popup = ZhiYuanPopup(view) {
-                choosed = false
-                zhiyuan = it
-                checked = true
-            }
-        }
-        popup?.show()
-    }
 
 }

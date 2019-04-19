@@ -20,13 +20,6 @@
         <TextView
             style="@style/text_14_ff"
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="专业\n概率" />
-
-        <TextView
-            style="@style/text_14_ff"
-            android:layout_width="0dp"
             android:layout_weight="3"
             android:gravity="center"
             android:text="招生专业" />

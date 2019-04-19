@@ -2,9 +2,8 @@ package pro.haichuang.learn.home.ui.activity.index.itemmodel
 
 import android.databinding.BaseObservable
 import android.databinding.Bindable
-import android.view.View
+import android.graphics.Color
 import com.android.databinding.library.baseAdapters.BR
-import pro.haichuang.learn.home.ui.dialog.ZhiYuanPopup
 import pro.haichuang.learn.home.utils.DataUtils
 
 class CollegeModel : BaseObservable() {
@@ -15,6 +14,7 @@ class CollegeModel : BaseObservable() {
     var enrollBatch = 0
     var enrollNumber = 0
     var score = 0
+    var mScore = 0
     var middleScore = 0
     var subject = 0
     var enrollCode = ""
@@ -26,9 +26,18 @@ class CollegeModel : BaseObservable() {
     var province = 0L
     var logo = ""
     var tuitionFee = ""
+    var majorIds = ""
     var isNew = false
     var self = false
+    var obey = false
+    @Bindable
+    var onShot = false
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.onShot)
+        }
     var picArr: Array<String>? = null
+    var majors: ArrayList<MajorModel>? = null
     val pic
         get() = if (picArr.isNullOrEmpty()) "" else picArr?.get(0)
 
@@ -75,6 +84,24 @@ class CollegeModel : BaseObservable() {
             else -> "公安"
         }
 
+    var priority = 0
+        get() = when (zhiyuan.subSequence(0, 1)) {
+            "A" -> 1
+            "B" -> 2
+            "C" -> 3
+            "D" -> 4
+            "E" -> 5
+            "F" -> 6
+            else -> field
+        }
+
+    val color
+        get() = when (mScore) {
+            in 0..score -> Color.parseColor("#FF6F6F")
+            in score..middleScore -> Color.parseColor("#FFE450")
+            else -> Color.parseColor("#8BDE84")
+        }
+
     @Bindable
     var compare = false
         set(value) {
@@ -89,31 +116,28 @@ class CollegeModel : BaseObservable() {
             notifyPropertyChanged(BR.checked)
         }
 
-    private var popup: ZhiYuanPopup? = null
+
     @Bindable
     var zhiyuan = "填报为"
         set(value) {
             field = value
             notifyPropertyChanged(BR.zhiyuan)
         }
+
+    val zhiyuanStr
+        get() = when (priority) {
+            1 -> "志愿A"
+            2 -> "志愿B"
+            3 -> "志愿C"
+            4 -> "志愿D"
+            5 -> "志愿E"
+            else -> "志愿F"
+        }
+
     @Bindable
     var choosed = false
         set(value) {
             field = value
             notifyPropertyChanged(BR.choosed)
         }
-
-
-
-    fun choose(view: View) {
-        choosed = true
-        popup ?: let {
-            popup = ZhiYuanPopup(view) {
-                choosed = false
-                zhiyuan = it
-                checked = true
-            }
-        }
-        popup?.show()
-    }
 }

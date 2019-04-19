@@ -1,13 +1,15 @@
 package pro.haichuang.learn.home.ui.activity.index
 
+import android.app.Activity
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.support.design.widget.TabLayout
+import android.view.View
+import com.google.gson.JsonArray
+import com.google.gson.JsonObject
 import com.jacy.kit.adapter.CommonAdapter
-import com.jacy.kit.config.ContentView
-import com.jacy.kit.config.gone
-import com.jacy.kit.config.mStartActivity
-import com.jacy.kit.config.show
+import com.jacy.kit.config.*
 import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.activity_zhiyuan_details.*
 import kotlinx.android.synthetic.main.item_zhiyuan_details.view.*
@@ -17,13 +19,12 @@ import pro.haichuang.learn.home.bean.TabBean
 import pro.haichuang.learn.home.config.BaseActivity
 import pro.haichuang.learn.home.config.Constants
 import pro.haichuang.learn.home.config.Constants.COLLEGE_ID
+import pro.haichuang.learn.home.config.Constants.JUDGE_BATCH_STR
 import pro.haichuang.learn.home.config.Constants.JUDGE_SUBJECT
 import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.index.itemmodel.CollegeModel
 import pro.haichuang.learn.home.ui.activity.index.itemmodel.MajorModel
-import pro.haichuang.learn.home.ui.dialog.GridMultiplePopup
-import pro.haichuang.learn.home.ui.dialog.TitleNoticeDialog
-import pro.haichuang.learn.home.ui.dialog.ZhiYuanResultDialog
+import pro.haichuang.learn.home.ui.dialog.*
 import pro.haichuang.learn.home.utils.GsonUtil
 
 
@@ -42,6 +43,24 @@ class ZhiYuanDetailsActivity : BaseActivity() {
             mStartActivity(ZhiYuanResultActivity::class.java)
         }
     }
+    private var temp: CollegeModel? = null
+    private val popup by lazy {
+        ZhiYuanPopup(layoutInflater) { zhiyuan ->
+            adapter.data.find { it.zhiyuan == zhiyuan }?.let {
+                NoticeDialog(this) {
+                    temp?.zhiyuan = zhiyuan
+                    temp?.checked = true
+                    it.zhiyuan = "填报为"
+                    it.checked = false
+                }.show("提示", "${zhiyuan}当前选择的是${it.collegeName},是否替换？")
+            } ?: let {
+                temp?.zhiyuan = zhiyuan
+                temp?.checked = true
+            }
+            temp?.choosed = false
+        }
+    }
+
     private val typePopup by lazy {
         GridMultiplePopup(sub_tab) {
             collegeType = it
@@ -65,7 +84,8 @@ class ZhiYuanDetailsActivity : BaseActivity() {
     private val adapter by lazy {
         CommonAdapter<CollegeModel>(layoutInflater, R.layout.item_zhiyuan_details) { v, t, _ ->
             v.to_choose_zhuanye.setOnClickListener {
-                mStartActivity(ZhiYuanZhuanYeActivity::class.java, Pair(COLLEGE_ID, t.id), Pair(JUDGE_SUBJECT, subject))
+                temp = t
+                mStartActivityForResult(ZhiYuanZhuanYeActivity::class.java, 0x01, Pair(COLLEGE_ID, t.id), Pair(JUDGE_SUBJECT, subject))
             }
             v.to_details.setOnClickListener {
                 mStartActivity(ZhiYuanSchoolActivity::class.java)
@@ -92,7 +112,6 @@ class ZhiYuanDetailsActivity : BaseActivity() {
     }
 
     override fun setPageParams(pageParams: HttpParams) {
-        pageParams.clear()
         pageParams.put("batch", batch.toString())
         pageParams.put("score", mScore.toString())
         pageParams.put("subject", subject.toString())
@@ -104,11 +123,16 @@ class ZhiYuanDetailsActivity : BaseActivity() {
 
     override fun onSuccess(url: String, result: Any?) {
         when (url) {
+            Url.Judge.Save -> {
+                toast("志愿生成成功！")
+                mStartActivity(ZhiYuanResultActivity::class.java, Pair(JUDGE_SUBJECT, if (subject == 1) "本科" else "专科"), Pair(JUDGE_BATCH_STR, batchStr))
+            }
             Url.Major.List -> GsonUtil.parseArray(result, MajorModel::class.java).let {
                 it.forEach { it.subject = subject }
                 listView2.adapter = CommonAdapter(layoutInflater, R.layout.item_zhiyuan_details2, it)
             }
             Url.Judge.College -> GsonUtil.parseRows(result, CollegeModel::class.java).list?.let {
+                it.forEach { it.mScore = mScore }
                 dealRows(adapter, it)
             }
         }
@@ -116,7 +140,29 @@ class ZhiYuanDetailsActivity : BaseActivity() {
 
     override fun initListener() {
         create_zhiyuan.setOnClickListener {
-            TitleNoticeDialog(this).show()
+            val chooseData = adapter.data.filter { it.zhiyuan != "填报为" }
+            if (chooseData.isEmpty()) {
+                TitleNoticeDialog(this).show()
+            } else {
+                val array = JsonArray()
+                chooseData.forEach {
+                    val json = JsonObject()
+                    if (it.majorIds.isEmpty()) {
+                        toast("请选择院校专业")
+                        return@setOnClickListener
+                    }
+                    json.addProperty("collegeId", it.id)
+                    json.addProperty("priority", it.priority)
+                    json.addProperty("isObey", it.obey)
+                    json.addProperty("majorIds", it.majorIds)
+                    array.add(json)
+                }
+                post(Url.Judge.Save, HttpParams("batch", batch.toString()).apply {
+                    put("score", mScore.toString())
+                    put("subject", subject.toString())
+                    put("volunteerText", array.toString())
+                }, needSession = true)
+            }
         }
         show_result.setOnClickListener {
             zhiyuanDialog.show()
@@ -164,12 +210,30 @@ class ZhiYuanDetailsActivity : BaseActivity() {
         })
     }
 
+    fun choose(view: View) {
+        val temp = view.tag
+        if (temp is CollegeModel) {
+            temp.choosed = true
+            this.temp = temp
+            popup.show(view, temp.zhiyuan)
+        }
+    }
+
     private fun initTab() {
         for (bean in tabBeans) {
             val binding = DataBindingUtil.inflate<ViewDataBinding>(layoutInflater, R.layout.item_tab_17, sub_tab, false)
             binding.setVariable(BR.item, bean)
             binding.executePendingBindings()
             sub_tab.addTab(sub_tab.newTab().setCustomView(binding.root))
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            data?.let {
+                temp?.majorIds = it.getStringExtra("majorIds")
+            }
         }
     }
 }

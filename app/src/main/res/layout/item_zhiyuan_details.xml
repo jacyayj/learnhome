@@ -5,6 +5,8 @@
 
         <import type="android.view.View" />
 
+        <import type="pro.haichuang.learn.home.utils.ImageBinding" />
+
         <variable
             name="item"
             type="pro.haichuang.learn.home.ui.activity.index.itemmodel.CollegeModel" />
@@ -37,10 +39,14 @@
                     android:orientation="horizontal"
                     android:paddingStart="10dp">
 
+                    <com.yhy.widget.core.img.round.CircleImageView
+                        color="@{item.color}"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_marginEnd="15dp" />
+
                     <TextView
                         style="@style/text_16_33"
-                        android:drawableStart="@drawable/icon_point_green"
-                        android:drawablePadding="15dp"
                         android:text="@{item.collegeName}"
                         android:textColor="#ff2f2f33"
                         android:textSize="16sp" />
@@ -98,18 +104,19 @@
             <CheckedTextView
                 android:id="@+id/choose_zhiyuan"
                 style="@style/text_14_99"
-                android:layout_width="70dp"
+                android:layout_width="75dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/selector_ff3333_e0"
                 android:checked="@{item.checked}"
-                android:drawableEnd="@{item.choosed ? @drawable/icon_arrow_up_white : @drawable/selector_arrow_down}"
+                android:drawableEnd="@{item.choosed ? @drawable/icon_arrow_up_grey : @drawable/selector_arrow_down}"
                 android:drawablePadding="5dp"
                 android:gravity="center"
-                android:onClick="@{item::choose}"
+                android:onClick="choose"
                 android:paddingHorizontal="7dp"
                 android:paddingVertical="4dp"
+                android:tag="@{item}"
                 android:text="@{item.zhiyuan}"
                 android:textColor="@color/color_99_ff" />
         </LinearLayout>

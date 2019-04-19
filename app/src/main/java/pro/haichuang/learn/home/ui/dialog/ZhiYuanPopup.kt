@@ -4,18 +4,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
 import android.widget.PopupWindow
-import android.widget.TextView
 import com.jacy.kit.adapter.CommonAdapter
 import com.scwang.smartrefresh.layout.util.DensityUtil
-import kotlinx.android.synthetic.main.popup_choose_pici.view.*
 import kotlinx.android.synthetic.main.popup_zhiyuan.view.*
-import org.w3c.dom.Text
 import pro.haichuang.learn.home.R
 
-class ZhiYuanPopup(private val view: View, result: (res: String) -> Unit = {}) : PopupWindow(DensityUtil.dp2px(70f), WindowManager.LayoutParams.WRAP_CONTENT) {
+class ZhiYuanPopup(private val layoutInflater: LayoutInflater, result: (res: String) -> Unit = {}) : PopupWindow(DensityUtil.dp2px(75f), WindowManager.LayoutParams.WRAP_CONTENT) {
 
-    private val layoutInflater by lazy { LayoutInflater.from(view.context) }
-    private val data by lazy { arrayListOf("A", "B", "C", "D", "E", "F", "G", "H", "I") }
+    private val data by lazy { arrayListOf("A", "B", "C", "D", "E", "F") }
 
     init {
         isOutsideTouchable = true
@@ -25,10 +21,15 @@ class ZhiYuanPopup(private val view: View, result: (res: String) -> Unit = {}) :
             result(data[position] + "志愿")
             dismiss()
         }
-
     }
 
-    fun show() {
+    fun show(view: View, name: String) {
         showAsDropDown(view)
+        val index = data.indexOf(name.substring(0, 1))
+        if (index != -1)
+            contentView.listView.setItemChecked(index, true)
+        else
+            contentView.listView.clearChoices()
     }
+
 }

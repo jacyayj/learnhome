@@ -7,8 +7,11 @@ class ItemNews : BaseObservable() {
 
     var id = 0
     var views = 0
+    var commentsCount = 0
+    var ups = 0
     var releaseDate = ""
     var title = ""
+    var description = ""
     var typeName = ""
     var recommend = false
     var picArr: ArrayList<ImageBean>? = null

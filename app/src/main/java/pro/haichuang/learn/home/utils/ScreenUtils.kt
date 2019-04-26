@@ -14,7 +14,7 @@ object ScreenUtils {
      */
     fun shotScrollView(scrollView: ScrollView): Bitmap? {
         var h = 0
-        var bitmap: Bitmap? = null
+        var bitmap: Bitmap?
         for (i in 0 until scrollView.childCount) {
             h += scrollView.getChildAt(i).height
             scrollView.getChildAt(i).setBackgroundColor(Color.parseColor("#ffffff"))

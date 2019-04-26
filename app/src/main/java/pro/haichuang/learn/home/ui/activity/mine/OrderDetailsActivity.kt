@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.activity_order_details.*
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.config.Constants
 import pro.haichuang.learn.home.config.Constants.ORDER_ID
+import pro.haichuang.learn.home.config.Constants.TEACHER_ID
 import pro.haichuang.learn.home.config.DataBindingActivity
 import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.mine.viewmodel.OrderDetailsModel
@@ -67,7 +68,7 @@ class OrderDetailsActivity : DataBindingActivity<OrderDetailsModel>() {
             autoPost(Url.Order.Cancel, needSession = true)
         }
         comment.setOnClickListener {
-            mStartActivity(OrderCommentActivity::class.java, Pair(ORDER_ID, model.id))
+            mStartActivity(OrderCommentActivity::class.java, Pair(TEACHER_ID, model.teacherInfo?.id))
         }
     }
 

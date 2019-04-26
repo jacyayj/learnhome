@@ -85,9 +85,8 @@ class TeacherDetailsActivity : DataBindingActivity<TeacherDetailsModel>() {
                     arrayListOf(CommentModel(), CommentModel(), CommentModel(), CommentModel()))
         }
 
-        val params = HttpParams()
-        params.put("id", id.toString())
-        post(Url.Teacher.Get, params)
+        post(Url.Teacher.Get, HttpParams("id", id.toString()))
+        post(Url.Teacher.CommentList, HttpParams("teacherId", id.toString()))
     }
 
     override fun onSuccess(url: String, result: Any?) {
@@ -124,6 +123,12 @@ class TeacherDetailsActivity : DataBindingActivity<TeacherDetailsModel>() {
                 val model = GsonUtil.parseObject(result, TeacherDetailsModel::class.java)
                 model.online = this.model.online
                 notifyModel(model)
+            }
+
+            Url.Teacher.CommentList -> {
+                val model = GsonUtil.parseObject(result, TeacherDetailsModel::class.java)
+                model.online = this.model.online
+                notifyModel(model)
                 root.scrollTo(0, 0)
             }
         }
@@ -153,6 +158,14 @@ class TeacherDetailsActivity : DataBindingActivity<TeacherDetailsModel>() {
                     Pair(TEACHER_NAME, model.teachername),
                     Pair(TEACHER_ACCOUNT, account),
                     Pair(TEACHER_SKILL, model.skill))
+        }
+        follow.setOnClickListener {
+            post(Url.Teacher.Collect, HttpParams("teacherId ", model.id.toString()).apply {
+                put("operate ", if (model.hasCollect) "1" else "0")
+            }, needSession = true) {
+                toast(if (model.hasCollect) "取消关注成功" else "关注成功")
+                model.hasCollect = model.hasCollect.not()
+            }
         }
         online.setOnClickListener {
             model.orderType = 1

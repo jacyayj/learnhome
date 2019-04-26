@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.item_order.view.*
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.config.BaseActivity
 import pro.haichuang.learn.home.config.Constants.ORDER_ID
+import pro.haichuang.learn.home.config.Constants.TEACHER_ID
 import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.mine.itemmodel.OrderModel
 import pro.haichuang.learn.home.ui.dialog.NoticeDialog
@@ -43,7 +44,7 @@ class OrderActivity : BaseActivity() {
                             toast("退款申请成功")
                         }
                     }.show("确定退款此订单？", "款项将在1-7个工作日按照支付路径原路返回至用户的支付账户")
-                    2, 3 -> mStartActivity(OrderCommentActivity::class.java, Pair(ORDER_ID, t.id))
+                    2, 3 -> mStartActivity(OrderCommentActivity::class.java, Pair(TEACHER_ID, t.teacherInfo?.id.toString()))
                 }
             }
         }

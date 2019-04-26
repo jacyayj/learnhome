@@ -19,7 +19,6 @@ import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.mStartActivity
 import com.jacy.kit.config.mStartActivityForResult
 import com.jacy.kit.utils.toDownInt
-import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.fragment_index.*
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.bean.AdBean
@@ -80,17 +79,13 @@ class IndexFragment : BaseFragment(), WeatherSearch.OnWeatherSearchListener, AMa
         }
         grid.adapter = CommonRecyclerAdapter(layoutInflater, R.layout.item_index_grid, DataUtils.formatIndexGridData())
         listView.adapter = adapter
-        pageUrl = Url.Publish.List
+        pageUrl = Url.Content.Recommend
         fetchPageData()
     }
 
     override fun fetchPageData(loadMore: Boolean, showLoading: Boolean) {
         post(Url.Ad.List, showLoading = false)
         super.fetchPageData(loadMore, showLoading)
-    }
-
-    override fun setPageParams(pageParams: HttpParams) {
-        pageParams.put("path", "jtjy")
     }
 
     override fun onSuccess(url: String, result: Any?) {
@@ -119,7 +114,7 @@ class IndexFragment : BaseFragment(), WeatherSearch.OnWeatherSearchListener, AMa
                     }
                 }
             }
-            Url.Publish.List -> {
+            Url.Content.Recommend -> {
                 GsonUtil.parseRows(result, ItemNews::class.java).list?.let {
                     dealRows(adapter, it)
                 }

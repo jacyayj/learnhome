@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorF0F7FA"
-    android:orientation="vertical"
     android:divider="@drawable/divider_vertical_e0"
+    android:orientation="vertical"
     android:showDividers="middle"
     tools:context=".ui.activity.mine.CollectActivity">
 
@@ -147,11 +147,17 @@
         </TableRow>
     </TableLayout>
 
-    <ListView
-        android:id="@+id/listView"
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@id/refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorWhite"
-        android:divider="@color/colorF0F7FA"
-        android:dividerHeight="5dp"/>
+        android:background="@color/colorWhite">
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/colorF0F7FA"
+            android:dividerHeight="5dp" />
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </LinearLayout>

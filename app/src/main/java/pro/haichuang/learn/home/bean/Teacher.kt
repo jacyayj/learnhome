@@ -8,6 +8,7 @@ class Teacher : BaseObservable() {
     var teachername = ""
     var skill = ""
     var subject = 1
+    var id = 1
     var type = ""
 
     val subjectStr

@@ -158,6 +158,12 @@ object Url {
         const val FileSave = "${base}file/save"
 
         const val FileGet = "${base}file/get"
+
+        const val Collections = "${base}collections"
+
+        const val ThirdLogin = "${base}thirdLogin"
+
+        const val ThirdBind = "${base}thirdBind"
     }
 
     /**
@@ -188,6 +194,12 @@ object Url {
         const val Fee = "${base}fee"
 
         const val Order = "${base}order"
+
+        const val Collect = "${base}collect"
+
+        const val CommentSave = "${base}comment/save"
+
+        const val CommentList = "${base}comment/list"
     }
 
     /**
@@ -218,6 +230,8 @@ object Url {
         const val My = "${base}my"
 
         const val Get = "${base}get"
+
+        const val Recommend = "${base}recommend"
     }
 
     /**
@@ -231,6 +245,8 @@ object Url {
         const val List = "${base}list"
 
         const val Get = "${base}get"
+
+        const val Collect = "${base}collect"
     }
 
     /**
@@ -244,6 +260,8 @@ object Url {
         const val List = "${base}list"
 
         const val Get = "${base}get"
+
+        const val Collect = "${base}collect"
 
         const val Compare = "${base}compare"
 
@@ -327,5 +345,6 @@ object Url {
 
         const val TeacherList = "${base}list/teacher"
 
+        const val Collect = "${base}collect"
     }
 }

@@ -33,7 +33,8 @@ class ZhuanTiDetailsActivity : DataBindingActivity<ZhuanTiDetailsModel>() {
         confirm.setOnClickListener { mStartActivity(ZhuanTiSignupActivity::class.java, Pair(Constants.ZHUANTI_ID, id)) }
         collect.setOnClickListener {
             params.put("operate", if (model.hasCollect) "0" else "1")
-            post(Url.Content.Collect, params, needSession = true)
+            params.put("lectureId", id.toString())
+            post(Url.Lecture.Collect, params, needSession = true)
         }
     }
 

@@ -7,6 +7,7 @@ import com.google.gson.GsonBuilder
 import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.gone
 import com.jacy.kit.config.show
+import com.jacy.kit.config.toast
 import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.activity_height_school_details.*
 import kotlinx.android.synthetic.main.layout_jianzhang.*
@@ -47,7 +48,7 @@ class HeightSchoolDetailsActivity : DataBindingActivity<HeightSchoolDetailsModel
 //                ItemZuanYeModel("考古学")))
         post(Url.College.Get, HttpParams().apply {
             put("id", intent.getIntExtra(Constants.SCHOOL_ID, -1).toString())
-        })
+        }, needSession = true)
         jianzhang_view.settings.textZoom = 200
     }
 
@@ -55,6 +56,14 @@ class HeightSchoolDetailsActivity : DataBindingActivity<HeightSchoolDetailsModel
 //        legend.setOnClickListener {
 //            LegendDialog(this).show(0)
 //        }
+        collect.setOnClickListener {
+            post(Url.College.Collect, HttpParams("collegeId ", model.id.toString()).apply {
+                put("operate ", if (model.hasCollect) "1" else "0")
+            }, needSession = true) {
+                toast(if (model.hasCollect) "取消收藏成功" else "收藏成功")
+                model.hasCollect = model.hasCollect.not()
+            }
+        }
         tab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(p0: TabLayout.Tab?) {
             }

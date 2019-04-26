@@ -14,6 +14,13 @@ class TeacherDetailsModel : BaseModel() {
             field = value
             notifyPropertyChanged(BR.online)
         }
+
+    @Bindable
+    var hasCollect = false
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.hasCollect)
+        }
     @Params([Url.Teacher.Order], "payType")
     var payType = 0
     @Params([Url.Teacher.Order], "orderType")

@@ -1,5 +1,7 @@
 package pro.haichuang.learn.home.ui.activity.index.viewmodel
 
+import android.databinding.Bindable
+import com.android.databinding.library.baseAdapters.BR
 import pro.haichuang.learn.home.bean.BaseModel
 import pro.haichuang.learn.home.utils.DataUtils
 
@@ -27,6 +29,12 @@ class HeightSchoolDetailsModel : BaseModel() {
     var intro = ""
     var address = ""
     var isNew = false
+    @Bindable
+    var hasCollect = false
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.hasCollect)
+        }
 
     val provinceStr
         get() = DataUtils.findProvinceById(province)

@@ -89,7 +89,7 @@
                             android:layout_height="25dp"
                             android:background="@drawable/bg_f0f7fa_radius_5dp"
                             android:gravity="center"
-                            android:text="关注"
+                            android:text="@{model.hasCollect ? `已关注` : `关注`}"
                             android:textColor="@color/color32C8FA"
                             android:textSize="15sp" />
                     </TableRow>

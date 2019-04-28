@@ -1,56 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorF0F7FA"
+    android:orientation="vertical"
+    tools:context=".ui.activity.message.FriendSearchActivity">
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorF0F7FA"
-        android:orientation="vertical"
-        tools:context=".ui.activity.message.FriendSearchActivity">
+        android:layout_height="@dimen/height_title"
+        android:background="@color/colorWhite"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:onClick="back"
+            android:paddingHorizontal="15dp"
+            android:src="@drawable/icon_back"
+            tools:ignore="OnClick" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/height_title"
-            android:background="@color/colorWhite"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_height="30dp"
+            android:layout_marginEnd="35dp"
+            android:background="@drawable/bg_ebf2f5_radius_13dp"
+            android:gravity="center_vertical">
 
             <ImageView
+                style="@style/wrap_layout"
+                android:layout_marginHorizontal="10dp"
+                android:src="@drawable/icon_friend_search" />
+
+            <EditText
+                android:id="@+id/search_input"
+                style="@style/match_layout"
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="搜索用户"
+                android:textColor="@color/color33"
+                android:textColorHint="@color/colorCCC4CC"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:id="@+id/clear"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:onClick="back"
-                android:paddingHorizontal="15dp"
-                android:src="@drawable/icon_back"
-                tools:ignore="OnClick" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginEnd="35dp"
-                android:background="@drawable/bg_ebf2f5_radius_13dp"
-                android:gravity="center_vertical">
-
-                <ImageView
-                    style="@style/wrap_layout"
-                    android:layout_marginHorizontal="10dp"
-                    android:src="@drawable/icon_friend_search" />
-
-                <EditText
-                    style="@style/match_layout"
-                    android:background="@null"
-                    android:hint="搜索用户"
-                    android:textColor="@color/color33"
-                    android:textColorHint="@color/colorCCC4CC"
-                    android:textSize="15sp" />
-            </LinearLayout>
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="10dp"
+                android:src="@drawable/icon_login_clear" />
         </LinearLayout>
+    </LinearLayout>
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite">
 
         <ListView
             android:id="@+id/listView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="1dp"
-            android:background="@color/colorWhite"
             android:divider="@null"
             android:dividerHeight="0.5dp" />
-    </LinearLayout>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+</LinearLayout>

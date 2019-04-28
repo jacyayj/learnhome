@@ -25,6 +25,9 @@ class MyCallBack(private val url: String, private val callBack: HttpCallBack, pr
                 toast("登录已失效，请重新登录")
                 RxActivityTool.currentActivity().mStartActivityForResult(LoginActivity::class.java, Constants.RE_LOGIN, Pair("re_login", true))
             }
+            response.code == 303 || response.code == 301 -> {
+                callBack.onSuccess(url, 303)
+            }
             else -> toast(response.message + "   " + response.code)
         }
     }

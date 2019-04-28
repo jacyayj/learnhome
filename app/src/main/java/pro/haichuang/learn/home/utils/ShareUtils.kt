@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Message
 import com.alipay.sdk.app.PayTask
+import com.jacy.kit.config.toJson
+import com.tencent.connect.UserInfo
 import com.tencent.connect.share.QQShare
 import com.tencent.mm.opensdk.modelmsg.SendAuth
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX
@@ -16,6 +18,7 @@ import com.tencent.mm.opensdk.modelpay.PayReq
 import com.tencent.mm.opensdk.openapi.WXAPIFactory
 import com.tencent.tauth.IUiListener
 import com.tencent.tauth.Tencent
+import com.tencent.tauth.UiError
 import com.vondear.rxtool.RxImageTool
 import com.vondear.rxtool.RxTool
 import pro.haichuang.learn.home.R
@@ -29,7 +32,8 @@ object ShareUtils {
         }
     }
 
-    val qqApi by lazy { Tencent.createInstance("1108180837", RxTool.getContext()) }
+    private val qqApi by lazy { Tencent.createInstance("1108180837", RxTool.getContext()) }
+
 
     fun shareToQQ(context: Activity, title: String, url: String, content: String) {
         val bundle = Bundle()
@@ -48,7 +52,6 @@ object ShareUtils {
     }
 
     fun shareToWx(context: Activity, title: String, url: String, content: String) {
-
         //初始化一个WXWebpageObject，填写url
         val webpage = WXWebpageObject()
         webpage.webpageUrl = url
@@ -102,6 +105,26 @@ object ShareUtils {
         req.scope = "snsapi_userinfo"
         req.state = "wechat_sdk_demo_test"
         wxApi.sendReq(req)
+    }
+
+    fun setOpenId(openid: String, token: String, expires: String) {
+        qqApi.openId = openid
+        qqApi.setAccessToken(token, expires)
+    }
+
+    fun fetchQQInfo(context: Activity, response: (info: String) -> Unit) {
+        val usetInfo = UserInfo(context, qqApi.qqToken)
+        usetInfo.getUserInfo(object : IUiListener {
+            override fun onComplete(p0: Any?) {
+                response(p0?.toString() ?: "")
+            }
+
+            override fun onCancel() {
+            }
+
+            override fun onError(p0: UiError?) {
+            }
+        })
     }
 
     /**

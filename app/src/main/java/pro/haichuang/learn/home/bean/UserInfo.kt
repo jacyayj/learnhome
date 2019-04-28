@@ -16,4 +16,5 @@ class UserInfo {
     var imAccid = ""
     var vip = false
     var teacher = false
+    var hasPayPassword = false
 }

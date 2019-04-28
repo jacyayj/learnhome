@@ -21,6 +21,7 @@ import com.zhouyou.http.EasyHttp
 import com.zhouyou.http.callback.SimpleCallBack
 import com.zhouyou.http.exception.ApiException
 import com.zhouyou.http.model.HttpParams
+import org.json.JSONObject
 import pro.haichuang.learn.home.bean.Response
 import pro.haichuang.learn.home.net.Url
 
@@ -86,6 +87,30 @@ object HttpUtils {
             }
     }
 
+    fun fetWxUserInfo(code: String, result: (openId: String, userInfo: String) -> Unit) {
+        EasyHttp.get("https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx9287620517c416a8&secret=c36d02fbd4d014f7f606afdb11df5ea1&code=$code&grant_type=authorization_code")
+                .execute<String>(object : SimpleCallBack<String>() {
+                    override fun onSuccess(obj: String?) {
+                        val t = JSONObject(obj)
+                        val openId = t.getString("openid")
+                        mlog.v("token :$t")
+                        EasyHttp.get("https://api.weixin.qq.com/sns/userinfo?access_token=${t.getString("access_token")}&openid=$openId")
+                                .execute<String>(object : SimpleCallBack<String>() {
+                                    override fun onSuccess(t: String?) {
+                                        mlog.v("user :$t")
+                                        result(openId, t.toString())
+                                    }
+
+                                    override fun onError(e: ApiException?) {
+                                    }
+                                })
+                    }
+
+                    override fun onError(e: ApiException?) {
+
+                    }
+                })
+    }
 
     private fun addFriend(accid: String, result: () -> Unit) {
         friendService.addFriend(AddFriendData(accid, VerifyType.DIRECT_ADD)).setCallback(object : RequestCallback<Void> {

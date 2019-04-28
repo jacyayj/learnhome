@@ -71,13 +71,15 @@
                     style="@style/text_14_8E8E99"
                     android:layout_marginTop="3dp"
                     android:paddingStart="35dp"
-                    android:text="建议F志愿" />
+                    android:text="建议F志愿"
+                    android:visibility="gone" />
 
                 <TextView
                     style="@style/text_14_8E8E99"
                     android:layout_marginTop="3dp"
                     android:paddingStart="35dp"
-                    android:text="排名:13" />
+                    android:text="排名:13"
+                    android:visibility="gone" />
 
                 <TextView
                     style="@style/text_14_8E8E99"
@@ -96,9 +98,9 @@
                     style="@style/text_14_99"
                     android:paddingStart="35dp"
                     android:paddingBottom="10dp"
-                    android:text="金融学（管理类）"
+                    android:text="@{item.majorName}"
                     android:textColor="@color/colorF39369"
-                    android:visibility="@{item.self ? View.VISIBLE : View.GONE}" />
+                    android:visibility="@{item.showMajor ? View.VISIBLE : View.GONE}" />
             </LinearLayout>
 
             <CheckedTextView

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="pro.haichuang.learn.home.utils.ImageBinding" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="item"
+            type="pro.haichuang.learn.home.ui.activity.index.itemmodel.CollegeModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="20dp">
+
+            <ImageView
+                color="@{item.zhiyuanColor}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@{item.priorityLetter}"
+                android:textColor="@color/colorWhite"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </FrameLayout>
+
+        <LinearLayout
+            style="@style/match_layout"
+            android:layout_weight="1"
+            android:background="@drawable/stroke_e0e0e0"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="10dp">
+
+            <TextView
+                style="@style/text_16_00"
+                android:singleLine="true"
+                android:text="@{item.collegeName}" />
+
+            <FrameLayout
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="10dp"
+                android:visibility="@{item.majorSize == 0 ? View.VISIBLE : View.GONE}">
+
+                <ImageView
+                    color="@{item.zhiyuanColor}"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <Button
+                    style="@style/text_16_ff"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@{item.majorSize+``}" />
+            </FrameLayout>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_zhiyuan_delete" />
+        </LinearLayout>
+    </LinearLayout>
+</layout>

@@ -1,6 +1,9 @@
 package pro.haichuang.learn.home.ui.activity.login
 
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.support.design.widget.TabLayout
 import android.view.View
 import com.jacy.kit.config.ContentView
@@ -15,21 +18,23 @@ import com.tencent.tauth.Tencent
 import com.tencent.tauth.UiError
 import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.activity_login.*
+import org.json.JSONObject
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.bean.UserInfo
 import pro.haichuang.learn.home.config.DataBindingActivity
 import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.MainActivity
 import pro.haichuang.learn.home.ui.activity.login.viewmodel.LoginModel
-import pro.haichuang.learn.home.utils.GsonUtil
-import pro.haichuang.learn.home.utils.SPUtils
-import pro.haichuang.learn.home.utils.ShareUtils
-import pro.haichuang.learn.home.utils.mlog
+import pro.haichuang.learn.home.utils.*
 
 @ContentView(R.layout.activity_login)
 class LoginActivity : DataBindingActivity<LoginModel>(), IUiListener {
 
     private val re_login by lazy { intent.getBooleanExtra("re_login", false) }
+
+    private var openId = ""
+
+    private val receiver = WxResponse()
 
     override fun initData() {
         SPUtils.session?.let {
@@ -40,6 +45,7 @@ class LoginActivity : DataBindingActivity<LoginModel>(), IUiListener {
         titleModel.showRight = true
         titleModel.showBottomeLine = false
         titleModel.titleRightText = "注册"
+        registerReceiver(receiver, IntentFilter("wx_login_response"))
     }
 
     override fun initListener() {
@@ -60,15 +66,10 @@ class LoginActivity : DataBindingActivity<LoginModel>(), IUiListener {
             mStartActivity(RegisterActivity::class.java)
         }
         to_qq.setOnClickListener {
-            //            ShareUtils.shareToQQ(this)
             ShareUtils.loginToQQ(this, this)
-//            mStartActivity(CompleteInfoActivity::class.java)
         }
         to_wechat.setOnClickListener {
-            //            ShareUtils.shareToWx(this)
-//            ShareUtils.shareToCircle(this)
             ShareUtils.loginToWx()
-//            mStartActivity(CompleteInfoActivity::class.java)
         }
         to_forget.setOnClickListener {
             mStartActivity(ModifyPwdActivity::class.java)
@@ -100,28 +101,32 @@ class LoginActivity : DataBindingActivity<LoginModel>(), IUiListener {
                 fetch_sms.notifyCount()
                 toast("发送成功")
             }
-            Url.User.Login -> {
-                val info = GsonUtil.parseObject(result, UserInfo::class.java)
-                SPUtils.userInfo = info
-                NimUIKit.login(LoginInfo(info.imAccid, info.imToken), object : RequestCallback<LoginInfo> {
-                    override fun onSuccess(p0: LoginInfo?) {
-                        SPUtils.loginInfo = p0
-                        SPUtils.phone = model.phone
-                        NimUIKit.getOptions().isTeacher = info.teacher
-                        NimUIKit.loginSuccess(p0?.account)
-                        toast("登录成功")
-                        if (!re_login)
-                            mStartActivity(MainActivity::class.java)
-                        finish()
-                    }
+            Url.User.Login, Url.User.ThirdLogin -> {
+                if (openId.isNotEmpty() && result is Int && result == 303) {
+                    mStartActivity(CompleteInfoActivity::class.java, Pair("thirdKey", openId))
+                } else {
+                    val info = GsonUtil.parseObject(result, UserInfo::class.java)
+                    SPUtils.userInfo = info
+                    NimUIKit.login(LoginInfo(info.imAccid, info.imToken), object : RequestCallback<LoginInfo> {
+                        override fun onSuccess(p0: LoginInfo?) {
+                            SPUtils.loginInfo = p0
+                            SPUtils.phone = model.phone
+                            NimUIKit.getOptions().isTeacher = info.teacher
+                            NimUIKit.loginSuccess(p0?.account)
+                            toast("登录成功")
+                            if (!re_login)
+                                mStartActivity(MainActivity::class.java)
+                            finish()
+                        }
 
-                    override fun onFailed(p0: Int) {
-                        toast("登录失败   $p0")
-                    }
+                        override fun onFailed(p0: Int) {
+                            toast("登录失败   $p0")
+                        }
 
-                    override fun onException(p0: Throwable?) {
-                    }
-                })
+                        override fun onException(p0: Throwable?) {
+                        }
+                    })
+                }
             }
         }
     }
@@ -130,9 +135,22 @@ class LoginActivity : DataBindingActivity<LoginModel>(), IUiListener {
         mStartActivity(MainActivity::class.java)
     }
 
-    override fun onComplete(p0: Any?) {
-        toast("登录成功")
-        mlog.v("onComplete : ${p0?.toJson()}")
+    override fun onComplete(result: Any?) {
+        result?.let {
+            if (result is JSONObject) {
+                openId = result.getString("openid")
+                val token = result.getString("access_token")
+                val expires = result.getString("expires_in")
+                ShareUtils.setOpenId(openId, token, expires)
+                ShareUtils.fetchQQInfo(this) {
+                    mlog.v("userInfo : $it")
+                    post(Url.User.ThirdLogin, HttpParams("source", "QQ").apply {
+                        put("thirdKey", openId)
+                        put("accountInfo", it)
+                    })
+                }
+            }
+        }
     }
 
     override fun onCancel() {
@@ -145,5 +163,22 @@ class LoginActivity : DataBindingActivity<LoginModel>(), IUiListener {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         Tencent.handleResultData(data, this)
+    }
+
+    inner class WxResponse : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            intent?.let {
+                openId = it.getStringExtra("openId")
+                post(Url.User.ThirdLogin, HttpParams("source", "QQ").apply {
+                    put("thirdKey", openId)
+                    put("accountInfo", it.getStringExtra("userInfo"))
+                })
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        unregisterReceiver(receiver)
+        super.onDestroy()
     }
 }

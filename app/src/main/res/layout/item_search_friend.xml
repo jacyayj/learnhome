@@ -2,10 +2,10 @@
 <layout>
 
     <data>
-
+        <import type="pro.haichuang.learn.home.utils.ImageBinding"/>
         <variable
             name="item"
-            type="Integer" />
+            type="pro.haichuang.learn.home.ui.activity.message.itemmodel.FriendModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -20,14 +20,14 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginEnd="20dp"
-            android:src="@mipmap/ic_launcher"
+            net_url="@{item.userImg}"
             app:riv_radius="3dp" />
 
         <TextView
             style="@style/text_18_33"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            android:text="好好先生" />
+            android:text="@{item.realname}" />
 
         <TextView
             android:layout_width="60dp"

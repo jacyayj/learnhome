@@ -66,7 +66,7 @@ open class DataBindingActivity<T : BaseModel> : BaseActivity() {
                 }
             }
             //需要附带验证码的接口，将JSESSIONID附加在cookie上传给服务器
-            if (url == Url.User.Register)
+            if (url == Url.User.Register|| url == Url.User.ForgetPassword)
                 request.addCookie("JSESSIONID", model.JSESSIONID)
             request.execute(MyCallBack(url, this, showLoading))
         }

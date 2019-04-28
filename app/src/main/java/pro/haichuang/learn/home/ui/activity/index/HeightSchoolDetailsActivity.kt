@@ -57,8 +57,8 @@ class HeightSchoolDetailsActivity : DataBindingActivity<HeightSchoolDetailsModel
 //            LegendDialog(this).show(0)
 //        }
         collect.setOnClickListener {
-            post(Url.College.Collect, HttpParams("collegeId ", model.id.toString()).apply {
-                put("operate ", if (model.hasCollect) "1" else "0")
+            post(Url.College.Collect, HttpParams("collegeId", model.id.toString()).apply {
+                put("operate", if (model.hasCollect) "1" else "0")
             }, needSession = true) {
                 toast(if (model.hasCollect) "取消收藏成功" else "收藏成功")
                 model.hasCollect = model.hasCollect.not()
@@ -130,7 +130,8 @@ class HeightSchoolDetailsActivity : DataBindingActivity<HeightSchoolDetailsModel
     }
 
     override fun onSuccess(url: String, result: Any?) {
-        notifyModel(GsonUtil.parseObject(result, HeightSchoolDetailsModel::class.java))
-        mlog.v(GsonBuilder().setPrettyPrinting().create().toJson(result))
+        when (url) {
+            Url.College.Get -> notifyModel(GsonUtil.parseObject(result, HeightSchoolDetailsModel::class.java))
+        }
     }
 }

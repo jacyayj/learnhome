@@ -15,6 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:background="@color/white"
         tools:context=".ui.activity.login.CompleteInfoActivity">
 
         <include layout="@layout/layout_title" />
@@ -59,6 +60,7 @@
                     android:textSize="16sp" />
 
                 <ImageView
+                    android:id="@+id/clear_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:src="@drawable/icon_login_clear" />
@@ -88,7 +90,8 @@
                     android:textColorHint="@color/colorCCDCE0"
                     android:textSize="16sp" />
 
-                <TextView
+                <pro.haichuang.learn.home.ui.weight.VerificationCodeTextView
+                    android:id="@+id/fetch_sms"
                     style="@style/text_14_64E1FA"
                     android:background="@drawable/stroke_64e1fa_radius_13dp"
                     android:paddingHorizontal="10dp"

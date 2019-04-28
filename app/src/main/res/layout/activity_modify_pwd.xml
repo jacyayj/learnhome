@@ -12,6 +12,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         android:orientation="vertical"
         tools:context=".ui.activity.login.ModifyPwdActivity">
 
@@ -26,9 +27,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:divider="@drawable/divider_vertical_e0"
             android:orientation="vertical"
-            android:layout_marginTop="15dp"
             android:paddingHorizontal="60dp"
             android:showDividers="middle">
 
@@ -56,6 +57,7 @@
                     android:textSize="16sp" />
 
                 <ImageView
+                    android:id="@+id/clear_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:src="@drawable/icon_login_clear" />
@@ -84,7 +86,8 @@
                     android:textColorHint="@color/colorCCDCE0"
                     android:textSize="16sp" />
 
-                <TextView
+                <pro.haichuang.learn.home.ui.weight.VerificationCodeTextView
+                    android:id="@+id/fetch_sms"
                     style="@style/text_14_64E1FA"
                     android:background="@drawable/stroke_64e1fa_radius_13dp"
                     android:paddingHorizontal="10dp"
@@ -103,19 +106,22 @@
                     android:src="@drawable/icon_login_pwd" />
 
                 <EditText
+                    android:id="@+id/pwd"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:background="@null"
                     android:hint="设置密码"
+                    android:inputType="textPassword"
                     android:singleLine="true"
                     android:text="@={model.pwd}"
                     android:textColor="@color/color33"
                     android:textColorHint="@color/colorCCDCE0"
                     android:textSize="16sp" />
 
-                <CheckBox
+                <pro.haichuang.learn.home.ui.weight.PasswordToggle
+                    android:id="@+id/pwd_toggle"
                     style="@style/wrap_layout"
                     android:button="@drawable/selector_eye" />
             </LinearLayout>
@@ -131,25 +137,28 @@
                     android:src="@drawable/icon_login_pwd" />
 
                 <EditText
+                    android:id="@+id/confirm_pwd"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:background="@null"
                     android:hint="确认密码"
+                    android:inputType="textPassword"
                     android:singleLine="true"
                     android:text="@={model.confirmPwd}"
                     android:textColor="@color/color33"
                     android:textColorHint="@color/colorCCDCE0"
                     android:textSize="16sp" />
 
-                <CheckBox
+                <pro.haichuang.learn.home.ui.weight.PasswordToggle
+                    android:id="@+id/confirm_pwd_toggle"
                     style="@style/wrap_layout"
                     android:button="@drawable/selector_eye" />
             </LinearLayout>
 
             <Button
-
+                android:id="@+id/confirm"
                 style="@style/button_confirm"
                 android:layout_marginTop="30dp"
                 android:text="注册" />

@@ -77,7 +77,7 @@
                 style="@style/text_13_99"
                 android:drawableStart="@drawable/icon_follow"
                 android:drawablePadding="4dp"
-                android:text="1096" />
+                android:text="@{item.collections+``}" />
         </LinearLayout>
     </android.support.constraint.ConstraintLayout>
 </layout>

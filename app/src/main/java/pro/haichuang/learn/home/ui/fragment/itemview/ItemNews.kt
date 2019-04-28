@@ -9,6 +9,7 @@ class ItemNews : BaseObservable() {
     var views = 0
     var commentsCount = 0
     var ups = 0
+    var collections = 0
     var releaseDate = ""
     var title = ""
     var description = ""

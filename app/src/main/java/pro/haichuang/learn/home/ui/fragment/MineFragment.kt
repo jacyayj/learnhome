@@ -31,9 +31,9 @@ import java.io.File
 class MineFragment : BaseFragment() {
 
     private lateinit var headerUrl: String
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
+    override fun onResume() {
         post(Url.User.Info, showLoading = false, needSession = true)
-        super.onActivityCreated(savedInstanceState)
+        super.onResume()
     }
     override fun initData() {
         listView.adapter = CommonAdapter(layoutInflater, R.layout.item_mine, DataUtils.formatMineListData())
@@ -46,6 +46,7 @@ class MineFragment : BaseFragment() {
                 fans_count.text = user.totalFans.toString()
                 release_count.text = user.totalPublish.toString()
                 comment_count.text = user.totalComment.toString()
+                SPUtils.hasPayPassword = user.hasPayPassword
                 if (SPUtils.isTeacher) {
                     name.text = user.teachername
                     ImageBinding.displayNet(header, user.teacherImg)

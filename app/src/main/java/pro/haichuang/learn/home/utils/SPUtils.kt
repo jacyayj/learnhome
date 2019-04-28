@@ -40,6 +40,10 @@ object SPUtils {
         get() = sp.getBoolean("isTeacher", false)
         private set(value) = sp.edit().putBoolean("isTeacher", value).apply()
 
+    var hasPayPassword: Boolean
+        get() = sp.getBoolean("hasPayPassword", false)
+        set(value) = sp.edit().putBoolean("hasPayPassword", value).apply()
+
     fun clear() {
         sp.edit().clear().apply()
     }

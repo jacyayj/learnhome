@@ -16,11 +16,12 @@ open class BaseModel : BaseObservable() {
                 if (present.url.contains(url)) {
                     field.isAccessible = true
                     val value = field.get(this).toString()
-                    when {
-                        needEncrypt && "password" == present.name -> params.put(present.name, RxEncryptTool.encryptMD5ToString(value).toLowerCase())
-                        url == Url.User.Login && "mobile" == present.name -> params.put("username", value)
-                        else -> params.put(present.name, value)
-                    }
+                        when {
+                            needEncrypt && "password" == present.name -> params.put(present.name, RxEncryptTool.encryptMD5ToString(value).toLowerCase())
+                            needEncrypt && "newPassword" == present.name -> params.put(present.name, RxEncryptTool.encryptMD5ToString(value).toLowerCase())
+                            url == Url.User.Login && "mobile" == present.name -> params.put("username", value)
+                            else -> params.put(present.name, value)
+                        }
                 }
             }
         }

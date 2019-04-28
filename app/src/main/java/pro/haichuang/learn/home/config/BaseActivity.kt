@@ -15,8 +15,10 @@ import com.zhouyou.http.EasyHttp
 import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.layout_title.*
 import pro.haichuang.learn.home.R
+import pro.haichuang.learn.home.adapter.CollectAdapter
 import pro.haichuang.learn.home.net.MyCallBack
 import pro.haichuang.learn.home.net.Url
+import pro.haichuang.learn.home.ui.activity.mine.itemmodel.CollectModel
 import pro.haichuang.learn.home.utils.SPUtils
 
 /**
@@ -108,6 +110,11 @@ abstract class BaseActivity : RootActivity(), OnRefreshLoadMoreListener {
                     (adapter as CommonRecyclerAdapter<T>).insertData(data)
                 else
                     (adapter as CommonRecyclerAdapter<T>).refresh(data)
+            is CollectAdapter ->
+                if (isLoadMore)
+                    adapter.insertData(data as ArrayList<CollectModel>)
+                else
+                    adapter.refresh(data as ArrayList<CollectModel>)
         }
     }
 

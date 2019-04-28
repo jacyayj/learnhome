@@ -23,12 +23,18 @@ class CollegeModel : BaseObservable() {
     var collegeLevel = ""
     var country = ""
     var englishName = ""
+    var majorName = ""
     var province = 0L
     var logo = ""
     var tuitionFee = ""
     var majorIds = ""
     var isNew = false
-    var self = false
+    @Bindable
+    var showMajor = false
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.showMajor)
+        }
     var obey = false
     @Bindable
     var onShot = false
@@ -92,14 +98,36 @@ class CollegeModel : BaseObservable() {
             "D" -> 4
             "E" -> 5
             "F" -> 6
+            "G" -> 7
+            "H" -> 8
+            "I" -> 9
             else -> field
         }
+
+    val priorityLetter
+        get() = zhiyuan.subSequence(0, 1)
+
+    val majorSize
+        get() = majorIds.split(",").size
 
     val color
         get() = when (mScore) {
             in 0..score -> Color.parseColor("#FF6F6F")
             in score..middleScore -> Color.parseColor("#FFE450")
             else -> Color.parseColor("#8BDE84")
+        }
+    val zhiyuanColor
+        get() = when (zhiyuan.subSequence(0, 1)) {
+            "A" -> Color.parseColor("#FFAA3B")
+            "B" -> Color.parseColor("#FFCA3B")
+            "C" -> Color.parseColor("#8FCF61")
+            "D" -> Color.parseColor("#83DCE4")
+            "E" -> Color.parseColor("#7CBCF8")
+            "F" -> Color.parseColor("#C68CEA")
+            "G" -> Color.parseColor("#EA8CCE")
+            "H" -> Color.parseColor("#8C91EA")
+            "I" -> Color.parseColor("#95D13F")
+            else -> -1
         }
 
     @Bindable

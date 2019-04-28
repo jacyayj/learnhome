@@ -39,8 +39,11 @@ class ZhiYuanDetailsActivity : BaseActivity() {
 
     private val tabBeans by lazy { arrayListOf(TabBean("四川省"), TabBean("院校类型")) }
     private val zhiyuanDialog by lazy {
-        ZhiYuanResultDialog(this) {
-            mStartActivity(ZhiYuanResultActivity::class.java)
+        ZhiYuanResultDialog(this,{ mStartActivity(ZhiYuanResultActivity::class.java) }) {id->
+            adapter.data.find { it.id == id}?.let {
+                it.checked = false
+                it.zhiyuan = "填报为"
+            }
         }
     }
     private var temp: CollegeModel? = null
@@ -95,6 +98,7 @@ class ZhiYuanDetailsActivity : BaseActivity() {
 
     private var collegeType = ""
     private var province = ""
+    private var majorName = ""
 
     override fun initData() {
         if (isDifference)
@@ -119,6 +123,10 @@ class ZhiYuanDetailsActivity : BaseActivity() {
             pageParams.remove("collegeType")
         else
             pageParams.put("collegeType", collegeType)
+        if (majorName.isEmpty())
+            pageParams.remove("majorName")
+        else
+            pageParams.put("majorName", majorName)
     }
 
     override fun onSuccess(url: String, result: Any?) {
@@ -129,10 +137,23 @@ class ZhiYuanDetailsActivity : BaseActivity() {
             }
             Url.Major.List -> GsonUtil.parseArray(result, MajorModel::class.java).let {
                 it.forEach { it.subject = subject }
-                listView2.adapter = CommonAdapter(layoutInflater, R.layout.item_zhiyuan_details2, it)
+                listView2.adapter = CommonAdapter(layoutInflater, R.layout.item_zhiyuan_details2, it) { v, t, _ ->
+                    v.setOnClickListener {
+                        majorName = t.majorName
+                        listView2.gone()
+                        listView.show()
+                        search_view.gone()
+                        sub_tab.show()
+                        fetchPageData()
+                    }
+                }
             }
             Url.Judge.College -> GsonUtil.parseRows(result, CollegeModel::class.java).list?.let {
-                it.forEach { it.mScore = mScore }
+                it.forEach {
+                    it.mScore = mScore
+                    it.showMajor = majorName.isNotEmpty()
+                    it.majorName = majorName
+                }
                 dealRows(adapter, it)
             }
         }
@@ -141,10 +162,11 @@ class ZhiYuanDetailsActivity : BaseActivity() {
     override fun initListener() {
         create_zhiyuan.setOnClickListener {
             val chooseData = adapter.data.filter { it.zhiyuan != "填报为" }
-            if (chooseData.isEmpty()) {
+            if (chooseData.size < 3) {
                 TitleNoticeDialog(this).show()
             } else {
                 val array = JsonArray()
+                val prioritys = ArrayList<Int>()
                 chooseData.forEach {
                     val json = JsonObject()
                     if (it.majorIds.isEmpty()) {
@@ -157,6 +179,11 @@ class ZhiYuanDetailsActivity : BaseActivity() {
                     json.addProperty("majorIds", it.majorIds)
                     array.add(json)
                 }
+                prioritys.sort()
+                if (!isOrderNumebr(prioritys)) {
+                    toast("选择无效，请选择连续的志愿")
+                    return@setOnClickListener
+                }
                 post(Url.Judge.Save, HttpParams("batch", batch.toString()).apply {
                     put("score", mScore.toString())
                     put("subject", subject.toString())
@@ -165,7 +192,11 @@ class ZhiYuanDetailsActivity : BaseActivity() {
             }
         }
         show_result.setOnClickListener {
-            zhiyuanDialog.show()
+            val chooseData = adapter.data.filter { it.zhiyuan != "填报为" }
+            if (chooseData.isEmpty())
+                toast("请先选择志愿")
+            else
+                zhiyuanDialog.show(chooseData as ArrayList<CollegeModel>)
         }
         sub_tab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(p0: TabLayout.Tab?) {
@@ -192,22 +223,39 @@ class ZhiYuanDetailsActivity : BaseActivity() {
                         listView.show()
                         search_view.gone()
                         sub_tab.show()
+                        adapter.data.forEach { it.showMajor = false }
                     }
                     1 -> {
                         listView2.show()
                         listView.gone()
                         search_view.show()
                         sub_tab.gone()
+                        adapter.data.forEach { it.showMajor = true }
                     }
                     2 -> {
                         listView2.gone()
                         listView.show()
                         search_view.gone()
                         sub_tab.show()
+                        adapter.data.forEach { it.showMajor = false }
                     }
                 }
             }
         })
+    }
+
+    /**
+     * 是否是连续数字
+     *
+     * @param numOrStr
+     * @return
+     */
+    private fun isOrderNumebr(arr: ArrayList<Int>): Boolean {
+        for (i in 0..arr.lastIndex) {
+            if (i != arr.lastIndex && arr[i] + 1 != arr[i + 1])
+                return false
+        }
+        return true
     }
 
     fun choose(view: View) {

@@ -151,6 +151,10 @@ object Url {
 
         const val Register = "${base}register"
 
+        const val ForgetPassword = "${base}forgetPassword"
+
+        const val PayPassword = "${base}payPassword"
+
         const val Info = "${base}info"
 
         const val UpdateInfo = "${base}info/update"
@@ -179,6 +183,8 @@ object Url {
         const val MyFans = "${base}fans/my"
 
         const val Recommend = "${base}recommend"
+
+        const val Search = "${base}search"
     }
 
     /**
@@ -318,6 +324,8 @@ object Url {
         const val Fee = "${base}fee"
 
         const val Recharge = "${base}recharge"
+
+        const val Detail = "${base}detail"
 
         const val Activate = "${base}vip/activate"
     }

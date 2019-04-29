@@ -4,11 +4,24 @@ import android.databinding.BaseObservable
 import android.databinding.Bindable
 import com.android.databinding.library.baseAdapters.BR
 
-class MessageCenterModel : BaseObservable {
-    constructor(status: Int) : super() {
-        this.status = status
-    }
+class MessageCenterModel : BaseObservable() {
 
+    var id = 0L
+
+    var account = ""
+
+    @Bindable
+    var header = ""
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.header)
+        }
+    @Bindable
+    var name = ""
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.name)
+        }
     @Bindable
     var status = 0
         set(value) {

@@ -7,6 +7,7 @@ import kotlinx.android.synthetic.main.fragment_message.*
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.config.BaseFragment
 import pro.haichuang.learn.home.ui.activity.message.FriendSearchActivity
+import pro.haichuang.learn.home.ui.activity.message.MessageCenterActivity
 import pro.haichuang.learn.home.ui.activity.message.MyUpActivity
 import pro.haichuang.learn.home.ui.activity.mine.MyCommentActivity
 
@@ -24,8 +25,7 @@ class MessageFragment : BaseFragment() {
             mStartActivity(MyUpActivity::class.java)
         }
         to_message_center.setOnClickListener {
-            NimUIKit.startP2PSession(context, "im_test007")
-//            mStartActivity(MessageCenterActivity::class.java)
+            mStartActivity(MessageCenterActivity::class.java)
         }
         to_search_message.setOnClickListener {
             mStartActivity(FriendSearchActivity::class.java)

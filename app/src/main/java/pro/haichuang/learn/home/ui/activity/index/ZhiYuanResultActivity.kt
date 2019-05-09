@@ -61,6 +61,7 @@ class ZhiYuanResultActivity : BaseActivity() {
                     label_2.text = "您的成绩:${it.score}  $subject:线差${it.difference}  您的位次:${it.rank}"
                     it.volunteers?.let {
                         data = it
+                        zhiyuanList.clear()
                         it.forEach {
                             zhiyuanList.add(it.zhiyuanStr)
                         }

@@ -167,7 +167,6 @@ class IndexFragment : BaseFragment(), WeatherSearch.OnWeatherSearchListener, AMa
                     "foreign-college" -> mStartActivity(LiuXueActivity::class.java)
                     "zzzs" -> mStartActivity(ZhaoShengActivity::class.java)
                     "note" -> mStartActivity(NoteBookActivity::class.java)
-                    "note" -> mStartActivity(TeacherActivity::class.java)
                     "video" -> mStartActivity(OnlineVideoActivity::class.java)
                     "gxdz" -> mStartActivity(HeightSchoolActivity::class.java)
                     "lecture" -> mStartActivity(ZhuanTiActivity::class.java)

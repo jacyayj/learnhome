@@ -22,9 +22,11 @@ import pro.haichuang.learn.home.utils.GsonUtil
 @ContentView(R.layout.activity_height_school_search)
 class HeightSchoolSearchActivity : BaseActivity() {
     private val tabBeans by lazy { arrayListOf(TabBean("院校级别"), TabBean("院校类型"), TabBean("所在地"), TabBean("选择层次")) }
+
     private val levelPopup by lazy {
-        GridMultiplePopup(tab) {
+        GridMultiplePopup(tab) { it, name ->
             level = it
+            tabBeans[0].text = name
             fetchPageData()
         }.apply {
             setOnDismissListener {
@@ -33,8 +35,9 @@ class HeightSchoolSearchActivity : BaseActivity() {
         }
     }
     private val typePopup by lazy {
-        GridMultiplePopup(tab) {
+        GridMultiplePopup(tab) { it, name ->
             type = it
+            tabBeans[1].text = name
             fetchPageData()
         }.apply {
             setOnDismissListener {
@@ -43,8 +46,9 @@ class HeightSchoolSearchActivity : BaseActivity() {
         }
     }
     private val provincePopup by lazy {
-        GridMultiplePopup(tab) {
+        GridMultiplePopup(tab) { it, name ->
             province = it
+            tabBeans[2].text = name
             fetchPageData()
         }.apply {
             setOnDismissListener {
@@ -53,8 +57,9 @@ class HeightSchoolSearchActivity : BaseActivity() {
         }
     }
     private val piCiPopup by lazy {
-        GridMultiplePopup(tab) {
+        GridMultiplePopup(tab) { it, name ->
             batch = it
+            tabBeans[3].text = name
             fetchPageData()
         }.apply {
             setOnDismissListener {

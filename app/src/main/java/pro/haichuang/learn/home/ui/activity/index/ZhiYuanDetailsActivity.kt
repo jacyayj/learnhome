@@ -33,14 +33,14 @@ class ZhiYuanDetailsActivity : BaseActivity() {
 
     private val mScore by lazy { intent.getIntExtra(Constants.JUDGE_SCORE, -1) }
     private val batch by lazy { intent.getIntExtra(Constants.JUDGE_BATCH, -1) }
-    private val batchStr by lazy { intent.getStringExtra(Constants.JUDGE_BATCH_STR) }
-    private val subject by lazy { intent.getIntExtra(Constants.JUDGE_SUBJECT, -1) }
+    private val batchStr by lazy { intent.getStringExtra(JUDGE_BATCH_STR) }
+    private val subject by lazy { intent.getIntExtra(JUDGE_SUBJECT, -1) }
     private val isDifference by lazy { intent.getBooleanExtra(Constants.JUDGE_IS_DIFFERENCE, false) }
 
-    private val tabBeans by lazy { arrayListOf(TabBean("四川省"), TabBean("院校类型")) }
+    private val tabBeans by lazy { arrayListOf(TabBean("全部"), TabBean("院校类型")) }
     private val zhiyuanDialog by lazy {
-        ZhiYuanResultDialog(this,{ mStartActivity(ZhiYuanResultActivity::class.java) }) {id->
-            adapter.data.find { it.id == id}?.let {
+        ZhiYuanResultDialog(this, { createResult() }) { id ->
+            adapter.data.find { it.id == id }?.let {
                 it.checked = false
                 it.zhiyuan = "填报为"
             }
@@ -65,7 +65,7 @@ class ZhiYuanDetailsActivity : BaseActivity() {
     }
 
     private val typePopup by lazy {
-        GridMultiplePopup(sub_tab) {
+        GridMultiplePopup(sub_tab) { it, _ ->
             collegeType = it
             fetchPageData()
         }.apply {
@@ -75,8 +75,9 @@ class ZhiYuanDetailsActivity : BaseActivity() {
         }
     }
     private val provincePopup by lazy {
-        GridMultiplePopup(sub_tab) {
-            province = it
+        GridMultiplePopup(sub_tab) { id, name ->
+            province = id
+            tabBeans[0].text = name
             fetchPageData()
         }.apply {
             setOnDismissListener {
@@ -127,6 +128,10 @@ class ZhiYuanDetailsActivity : BaseActivity() {
             pageParams.remove("majorName")
         else
             pageParams.put("majorName", majorName)
+        if (province.isEmpty())
+            pageParams.remove("province")
+        else
+            pageParams.put("province", province)
     }
 
     override fun onSuccess(url: String, result: Any?) {
@@ -161,35 +166,7 @@ class ZhiYuanDetailsActivity : BaseActivity() {
 
     override fun initListener() {
         create_zhiyuan.setOnClickListener {
-            val chooseData = adapter.data.filter { it.zhiyuan != "填报为" }
-            if (chooseData.size < 3) {
-                TitleNoticeDialog(this).show()
-            } else {
-                val array = JsonArray()
-                val prioritys = ArrayList<Int>()
-                chooseData.forEach {
-                    val json = JsonObject()
-                    if (it.majorIds.isEmpty()) {
-                        toast("请选择院校专业")
-                        return@setOnClickListener
-                    }
-                    json.addProperty("collegeId", it.id)
-                    json.addProperty("priority", it.priority)
-                    json.addProperty("isObey", it.obey)
-                    json.addProperty("majorIds", it.majorIds)
-                    array.add(json)
-                }
-                prioritys.sort()
-                if (!isOrderNumebr(prioritys)) {
-                    toast("选择无效，请选择连续的志愿")
-                    return@setOnClickListener
-                }
-                post(Url.Judge.Save, HttpParams("batch", batch.toString()).apply {
-                    put("score", mScore.toString())
-                    put("subject", subject.toString())
-                    put("volunteerText", array.toString())
-                }, needSession = true)
-            }
+            createResult()
         }
         show_result.setOnClickListener {
             val chooseData = adapter.data.filter { it.zhiyuan != "填报为" }
@@ -244,13 +221,45 @@ class ZhiYuanDetailsActivity : BaseActivity() {
         })
     }
 
+    private fun createResult() {
+        val chooseData = adapter.data.filter { it.zhiyuan != "填报为" }
+        if (chooseData.size < 3) {
+            TitleNoticeDialog(this).show()
+        } else {
+            val array = JsonArray()
+            val prioritys = ArrayList<Int>()
+            chooseData.forEach {
+                val json = JsonObject()
+                if (it.majorIds.isEmpty()) {
+                    toast("请选择院校专业")
+                    return
+                }
+                json.addProperty("collegeId", it.id)
+                json.addProperty("priority", it.priority)
+                json.addProperty("isObey", it.obey)
+                json.addProperty("majorIds", it.majorIds)
+                array.add(json)
+            }
+            prioritys.sort()
+            if (!isOrderNumber(prioritys)) {
+                toast("选择无效，请选择连续的志愿")
+                return
+            }
+            post(Url.Judge.Save, HttpParams("batch", batch.toString()).apply {
+                put("score", mScore.toString())
+                put("subject", subject.toString())
+                put("volunteerText", array.toString())
+            }, needSession = true)
+        }
+    }
+
     /**
      * 是否是连续数字
      *
      * @param numOrStr
      * @return
      */
-    private fun isOrderNumebr(arr: ArrayList<Int>): Boolean {
+    private fun isOrderNumber(arr: ArrayList<Int>): Boolean {
         for (i in 0..arr.lastIndex) {
             if (i != arr.lastIndex && arr[i] + 1 != arr[i + 1])
                 return false

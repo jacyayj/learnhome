@@ -2,6 +2,7 @@ package pro.haichuang.learn.home.ui.activity.index
 
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
+import android.view.View
 import com.jacy.kit.adapter.CommonAdapter
 import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.gone
@@ -10,6 +11,7 @@ import com.jacy.kit.config.toast
 import com.vondear.rxtool.RxFileTool
 import com.vondear.rxtool.RxImageTool
 import com.vondear.rxtool.RxTimeTool
+import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.activity_zhiyuan_result.*
 import kotlinx.android.synthetic.main.item_zhiyuan_result.view.*
 import pro.haichuang.learn.home.R
@@ -23,6 +25,7 @@ import pro.haichuang.learn.home.ui.dialog.ChooseZhiYuanPopup
 import pro.haichuang.learn.home.ui.dialog.ShareDialog
 import pro.haichuang.learn.home.utils.GsonUtil
 import pro.haichuang.learn.home.utils.ScreenUtils
+import pro.haichuang.learn.home.utils.mlog
 
 
 @ContentView(R.layout.activity_zhiyuan_result)
@@ -31,8 +34,22 @@ class ZhiYuanResultActivity : BaseActivity() {
     private val subject by lazy { intent.getStringExtra(JUDGE_SUBJECT) }
     private val batch by lazy { intent.getStringExtra(JUDGE_BATCH_STR) }
     private lateinit var data: ArrayList<CollegeModel>
+    private val zhiyuanList by lazy { ArrayList<String>() }
+    private val adapter by lazy {
+        CommonAdapter<CollegeModel>(layoutInflater, R.layout.item_zhiyuan_result) { v, t, _ ->
+            mlog.v("priority : ${t.priority}")
+            t.majors?.let {
+                v.child_listView.adapter = CommonAdapter(layoutInflater, R.layout.item_zhiyuan_result_major, it)
+            }
+            v.choose_zhiyuan.setOnClickListener {
+                showSortDialog(it, t)
+            }
+        }
+    }
+
     override fun initData() {
         post(Url.Judge.Get, needSession = true)
+        listView.adapter = adapter
     }
 
     @SuppressLint("SetTextI18n")
@@ -44,18 +61,26 @@ class ZhiYuanResultActivity : BaseActivity() {
                     label_2.text = "您的成绩:${it.score}  $subject:线差${it.difference}  您的位次:${it.rank}"
                     it.volunteers?.let {
                         data = it
-                        listView.adapter = CommonAdapter(layoutInflater, R.layout.item_zhiyuan_result, it) { v, t, _ ->
-                            t.majors?.let {
-                                v.child_listView.adapter = CommonAdapter(layoutInflater, R.layout.item_zhiyuan_result_major, it)
-                            }
-                            v.choose_zhiyuan.setOnClickListener {
-                                ChooseZhiYuanPopup(it).show()
-                            }
+                        it.forEach {
+                            zhiyuanList.add(it.zhiyuanStr)
                         }
+                        adapter.refresh(data)
                     }
                 }
             }
         }
+    }
+
+    private fun showSortDialog(view: View, item: CollegeModel) {
+        ChooseZhiYuanPopup(view, zhiyuanList) { priority ->
+            if (item.priority != priority) {
+                post(Url.Judge.Priority, HttpParams("oldPriority", item.priority.toString()).apply {
+                    put("newPriority", priority.toString())
+                }, needSession = true) {
+                    post(Url.Judge.Get, needSession = true)
+                }
+            }
+        }.show()
     }
 
     override fun initListener() {

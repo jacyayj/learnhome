@@ -48,6 +48,8 @@ object Constants {
 
     const val JUDGE_BATCH = "judge_batch"
 
+    const val JUDGE_PROVINCE = "judge_province"
+
     const val JUDGE_BATCH_STR = "judge_batch_str"
 
     const val JUDGE_IS_DIFFERENCE = "judge_difference"

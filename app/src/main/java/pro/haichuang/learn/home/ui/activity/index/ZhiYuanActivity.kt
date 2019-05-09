@@ -11,6 +11,7 @@ import pro.haichuang.learn.home.bean.TabBean
 import pro.haichuang.learn.home.config.BaseActivity
 import pro.haichuang.learn.home.config.Constants.JUDGE_BATCH
 import pro.haichuang.learn.home.config.Constants.JUDGE_IS_DIFFERENCE
+import pro.haichuang.learn.home.config.Constants.JUDGE_PROVINCE
 import pro.haichuang.learn.home.config.Constants.JUDGE_SCORE
 import pro.haichuang.learn.home.config.Constants.JUDGE_SUBJECT
 import pro.haichuang.learn.home.ui.dialog.ChoosePiCiPopup
@@ -22,11 +23,18 @@ import pro.haichuang.learn.home.ui.dialog.NoticePopup
 class ZhiYuanActivity : BaseActivity() {
 
     private val tabBeans by lazy { arrayListOf(TabBean("预估总分"), TabBean("线差", true)) }
-    private val provincePopup by lazy { GridMultiplePopup(choose_province).apply { setOnDismissListener { choose_province.isChecked = false } } }
+    private val provincePopup by lazy {
+        GridMultiplePopup(choose_province) { it, name ->
+            province = it
+            choose_province.text = name
+        }.apply { setOnDismissListener { choose_province.isChecked = false } }
+    }
 
     private var batch = 1
 
     private var subject = 1
+
+    private var province = ""
 
     override fun initData() {
         initTab()
@@ -43,6 +51,7 @@ class ZhiYuanActivity : BaseActivity() {
                 mStartActivity(ZhiYuanPiCiActivity::class.java,
                         Pair(JUDGE_SCORE, input.text.toString().toInt()),
                         Pair(JUDGE_BATCH, batch),
+                        Pair(JUDGE_PROVINCE, province),
                         Pair(JUDGE_IS_DIFFERENCE, tab.selectedTabPosition == 1),
                         Pair(JUDGE_SUBJECT, subject))
         }

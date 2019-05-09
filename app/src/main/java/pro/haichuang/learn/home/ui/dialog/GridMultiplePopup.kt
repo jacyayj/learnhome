@@ -10,7 +10,7 @@ import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.bean.NameId
 import pro.haichuang.learn.home.utils.DataUtils
 
-class GridMultiplePopup(private val view: View, private val needId: Boolean = true, result: (code: String) -> Unit = {}) : PopupWindow(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT) {
+class GridMultiplePopup(private val view: View, private val needId: Boolean = true, result: (code: String,name:String) -> Unit) : PopupWindow(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT) {
 
     private var type = -1
 
@@ -40,10 +40,10 @@ class GridMultiplePopup(private val view: View, private val needId: Boolean = tr
             if (lastCheckedPosition != checkedPosition) {
                 lastCheckedPosition = checkedPosition
                 if (checkedPosition == -1)
-                    result("")
+                    result("","全部")
                 else
                     adapter.getItem(checkedPosition).let {
-                        result(if (needId) it.id.toString() else it.name.replace("省", ""))
+                        result(if (needId) it.id.toString() else it.name.replace("省", ""),it.name)
                     }
             }
             dismiss()

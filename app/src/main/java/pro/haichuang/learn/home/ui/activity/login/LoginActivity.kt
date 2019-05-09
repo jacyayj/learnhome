@@ -1,14 +1,15 @@
 package pro.haichuang.learn.home.ui.activity.login
 
+import android.Manifest
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.pm.PackageManager
 import android.support.design.widget.TabLayout
 import android.view.View
 import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.mStartActivity
-import com.jacy.kit.config.toJson
 import com.jacy.kit.config.toast
 import com.netease.nim.uikit.api.NimUIKit
 import com.netease.nimlib.sdk.RequestCallback
@@ -16,6 +17,7 @@ import com.netease.nimlib.sdk.auth.LoginInfo
 import com.tencent.tauth.IUiListener
 import com.tencent.tauth.Tencent
 import com.tencent.tauth.UiError
+import com.vondear.rxtool.RxPermissionsTool
 import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.activity_login.*
 import org.json.JSONObject
@@ -25,7 +27,10 @@ import pro.haichuang.learn.home.config.DataBindingActivity
 import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.MainActivity
 import pro.haichuang.learn.home.ui.activity.login.viewmodel.LoginModel
-import pro.haichuang.learn.home.utils.*
+import pro.haichuang.learn.home.utils.GsonUtil
+import pro.haichuang.learn.home.utils.SPUtils
+import pro.haichuang.learn.home.utils.ShareUtils
+import pro.haichuang.learn.home.utils.mlog
 
 @ContentView(R.layout.activity_login)
 class LoginActivity : DataBindingActivity<LoginModel>(), IUiListener {
@@ -37,15 +42,23 @@ class LoginActivity : DataBindingActivity<LoginModel>(), IUiListener {
     private val receiver = WxResponse()
 
     override fun initData() {
-        SPUtils.session?.let {
-            mStartActivity(MainActivity::class.java)
-            finish()
-        }
+        val permission = RxPermissionsTool.with(this)
+                .addPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
+                .addPermission(Manifest.permission.READ_PHONE_STATE)
+                .addPermission(Manifest.permission.CAMERA)
+                .addPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .initPermission()
         titleModel.showLeft = false
         titleModel.showRight = true
         titleModel.showBottomeLine = false
         titleModel.titleRightText = "注册"
         registerReceiver(receiver, IntentFilter("wx_login_response"))
+
+        if (permission.isEmpty())
+            SPUtils.session?.let {
+                mStartActivity(MainActivity::class.java)
+                finish()
+            }
     }
 
     override fun initListener() {
@@ -158,6 +171,19 @@ class LoginActivity : DataBindingActivity<LoginModel>(), IUiListener {
 
     override fun onError(p0: UiError?) {
         mlog.v("onError : ${p0?.errorCode}")
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        grantResults.forEach {
+            if (it == PackageManager.PERMISSION_DENIED) {
+                return
+            }
+        }
+        SPUtils.session?.let {
+            mStartActivity(MainActivity::class.java)
+            finish()
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

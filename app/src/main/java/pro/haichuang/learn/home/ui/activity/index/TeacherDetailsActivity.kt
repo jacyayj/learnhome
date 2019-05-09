@@ -9,14 +9,12 @@ import android.os.Handler
 import android.os.Message
 import com.google.gson.JsonObject
 import com.jacy.kit.adapter.CommonAdapter
-import com.jacy.kit.adapter.CommonRecyclerAdapter
 import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.mStartActivity
 import com.jacy.kit.config.toast
 import com.tencent.mm.opensdk.modelpay.PayReq
 import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.activity_teacher_details.*
-import kotlinx.android.synthetic.main.item_find_details_comment.view.*
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.config.Constants
 import pro.haichuang.learn.home.config.Constants.TEACHER_ACCOUNT
@@ -28,7 +26,6 @@ import pro.haichuang.learn.home.config.Constants.TEACHER_SUBJECT
 import pro.haichuang.learn.home.config.Constants.TEACHER_TYPE
 import pro.haichuang.learn.home.config.DataBindingActivity
 import pro.haichuang.learn.home.net.Url
-import pro.haichuang.learn.home.ui.activity.find.PersonalIndexActivity
 import pro.haichuang.learn.home.ui.activity.find.YuYueActivity
 import pro.haichuang.learn.home.ui.activity.find.itemmodel.CommentModel
 import pro.haichuang.learn.home.ui.activity.index.viewmodel.TeacherDetailsModel
@@ -44,7 +41,11 @@ class TeacherDetailsActivity : DataBindingActivity<TeacherDetailsModel>() {
     private val id by lazy { intent.getIntExtra(TEACHER_ID, -1) }
 
     private var account: String = ""
-
+    private val adapter by lazy {
+        CommonAdapter<CommentModel>(layoutInflater, R.layout.item_find_details_comment) { v, t, _ ->
+            t.teacher = true
+        }
+    }
     private val successDialog by lazy {
         NoticeDialog(this)
     }
@@ -76,15 +77,7 @@ class TeacherDetailsActivity : DataBindingActivity<TeacherDetailsModel>() {
     override fun initData() {
         model.online = intent.getBooleanExtra("online", false)
         titleModel.title = if (model.online) "名师在线" else "老师详情"
-        comment.adapter = CommonAdapter(layoutInflater, R.layout.item_find_details_comment, arrayListOf(CommentModel(), CommentModel(), CommentModel(), CommentModel(), CommentModel(), CommentModel(), CommentModel())) { v, _, _ ->
-            v.to_index.setOnClickListener {
-                mStartActivity(PersonalIndexActivity::class.java)
-            }
-            v.comment_child.adapter = CommonRecyclerAdapter(layoutInflater,
-                    R.layout.item_find_details_comment_child,
-                    arrayListOf(CommentModel(), CommentModel(), CommentModel(), CommentModel()))
-        }
-
+        comment.adapter = adapter
         post(Url.Teacher.Get, HttpParams("id", id.toString()))
         post(Url.Teacher.CommentList, HttpParams("teacherId", id.toString()))
     }
@@ -126,10 +119,9 @@ class TeacherDetailsActivity : DataBindingActivity<TeacherDetailsModel>() {
             }
 
             Url.Teacher.CommentList -> {
-                val model = GsonUtil.parseObject(result, TeacherDetailsModel::class.java)
-                model.online = this.model.online
-                notifyModel(model)
-                root.scrollTo(0, 0)
+                GsonUtil.parseRows(result, CommentModel::class.java).list?.let {
+                    dealRows(adapter, it)
+                }
             }
         }
     }

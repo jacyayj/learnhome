@@ -21,8 +21,9 @@ class ZhaoShengActivity : BaseActivity() {
 
     private val adapter by lazy { CommonAdapter<ItemNews>(layoutInflater, R.layout.item_find_other) }
     private val province by lazy {
-        GridMultiplePopup(choose_city, false) {
+        GridMultiplePopup(choose_city, false) { it, name ->
             area = it
+            choose_city.text = name
             fetchPageData()
         }
     }

@@ -64,7 +64,7 @@
                         style="@style/text_16_8E8E99"
                         android:drawableStart="@drawable/icon_location"
                         android:drawablePadding="5dp"
-                        android:text="成都" />
+                        android:text="@{item.provinceStr}" />
                 </LinearLayout>
 
                 <TextView

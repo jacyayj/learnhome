@@ -18,6 +18,8 @@ class CommentModel : BaseModel() {
         field = value
         notifyPropertyChanged(BR.ups)
     }
+    var teacher = false
+
     var text = ""
     var child: ArrayList<CommentModel>? = null
 }

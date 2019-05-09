@@ -24,15 +24,16 @@ import pro.haichuang.learn.home.utils.GsonUtil
 class VRActivity : BaseActivity() {
     private val tabBeans by lazy { arrayListOf(TabBean("选择批次"), TabBean("所在地")) }
     private val provincePopup by lazy {
-        GridMultiplePopup(tab) {
+        GridMultiplePopup(tab) {it,name->
             queryProvince = it
-            refresh_layout.autoRefresh()
+            tabBeans[1].text = name
+            fetchPageData()
         }
     }
     private val typePopup by lazy {
         MultipleChoosePopup(tab) {
             queryBatchs = it
-            refresh_layout.autoRefresh()
+            fetchPageData()
         }
     }
     private val adapter by lazy {
@@ -55,9 +56,18 @@ class VRActivity : BaseActivity() {
     }
 
     override fun setPageParams(pageParams: HttpParams) {
-        pageParams.put("queryBatchs", queryBatchs)
-        pageParams.put("queryCollegeName", queryCollegeName)
-        pageParams.put("queryProvince", queryProvince)
+        if (queryBatchs.isNotEmpty())
+            pageParams.put("queryBatchs", queryBatchs)
+        else
+            pageParams.remove("queryBatchs")
+        if (queryCollegeName.isNotEmpty())
+            pageParams.put("queryCollegeName", queryCollegeName)
+        else
+            pageParams.remove("queryCollegeName")
+        if (queryProvince.isNotEmpty())
+            pageParams.put("queryProvince", queryProvince)
+        else
+            pageParams.remove("queryProvince")
     }
 
     override fun initListener() {

@@ -25,8 +25,9 @@ import pro.haichuang.learn.home.utils.GsonUtil
 class ZhaoShengPlanActivity : BaseActivity() {
     private val tabBeans by lazy { arrayListOf(TabBean("选择层次"), TabBean("所在地"), TabBean("高级查询")) }
     private val provincePopup by lazy {
-        GridMultiplePopup(tab) {
+        GridMultiplePopup(tab) {it,name->
             province = it
+            tabBeans[1].text = name
             fetchPageData()
         }.apply {
             setOnDismissListener {

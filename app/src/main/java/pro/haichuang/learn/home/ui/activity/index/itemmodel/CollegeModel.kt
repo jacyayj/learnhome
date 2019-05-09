@@ -4,6 +4,7 @@ import android.databinding.BaseObservable
 import android.databinding.Bindable
 import android.graphics.Color
 import com.android.databinding.library.baseAdapters.BR
+import pro.haichuang.learn.home.bean.ImageBean
 import pro.haichuang.learn.home.utils.DataUtils
 
 class CollegeModel : BaseObservable() {
@@ -35,17 +36,17 @@ class CollegeModel : BaseObservable() {
             field = value
             notifyPropertyChanged(BR.showMajor)
         }
-    var obey = false
+    var obey = true
     @Bindable
     var onShot = false
         set(value) {
             field = value
             notifyPropertyChanged(BR.onShot)
         }
-    var picArr: Array<String>? = null
+    var picArr: Array<ImageBean>? = null
     var majors: ArrayList<MajorModel>? = null
     val pic
-        get() = if (picArr.isNullOrEmpty()) "" else picArr?.get(0)
+        get() = if (picArr.isNullOrEmpty()) "" else picArr?.get(0)?.picPaths ?: ""
 
     val provinceStr
         get() = DataUtils.findProvinceById(province)
@@ -90,20 +91,6 @@ class CollegeModel : BaseObservable() {
             else -> "公安"
         }
 
-    var priority = 0
-        get() = when (zhiyuan.subSequence(0, 1)) {
-            "A" -> 1
-            "B" -> 2
-            "C" -> 3
-            "D" -> 4
-            "E" -> 5
-            "F" -> 6
-            "G" -> 7
-            "H" -> 8
-            "I" -> 9
-            else -> field
-        }
-
     val priorityLetter
         get() = zhiyuan.subSequence(0, 1)
 
@@ -115,19 +102,6 @@ class CollegeModel : BaseObservable() {
             in 0..score -> Color.parseColor("#FF6F6F")
             in score..middleScore -> Color.parseColor("#FFE450")
             else -> Color.parseColor("#8BDE84")
-        }
-    val zhiyuanColor
-        get() = when (zhiyuan.subSequence(0, 1)) {
-            "A" -> Color.parseColor("#FFAA3B")
-            "B" -> Color.parseColor("#FFCA3B")
-            "C" -> Color.parseColor("#8FCF61")
-            "D" -> Color.parseColor("#83DCE4")
-            "E" -> Color.parseColor("#7CBCF8")
-            "F" -> Color.parseColor("#C68CEA")
-            "G" -> Color.parseColor("#EA8CCE")
-            "H" -> Color.parseColor("#8C91EA")
-            "I" -> Color.parseColor("#95D13F")
-            else -> -1
         }
 
     @Bindable
@@ -152,14 +126,50 @@ class CollegeModel : BaseObservable() {
             notifyPropertyChanged(BR.zhiyuan)
         }
 
-    val zhiyuanStr
+    var priority = 0
+        get() = when (zhiyuan.subSequence(0, 1)) {
+            "A" -> 1
+            "B" -> 2
+            "C" -> 3
+            "D" -> 4
+            "E" -> 5
+            "F" -> 6
+            "G" -> 7
+            "H" -> 8
+            "I" -> 9
+            else -> field
+        }
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.zhiyuanStr)
+        }
+
+    val zhiyuanColor
+        get() = when (zhiyuan.subSequence(0, 1)) {
+            "A" -> Color.parseColor("#FFAA3B")
+            "B" -> Color.parseColor("#FFCA3B")
+            "C" -> Color.parseColor("#8FCF61")
+            "D" -> Color.parseColor("#83DCE4")
+            "E" -> Color.parseColor("#7CBCF8")
+            "F" -> Color.parseColor("#C68CEA")
+            "G" -> Color.parseColor("#EA8CCE")
+            "H" -> Color.parseColor("#8C91EA")
+            "I" -> Color.parseColor("#95D13F")
+            else -> -1
+        }
+
+    @Bindable
+    var zhiyuanStr = ""
         get() = when (priority) {
             1 -> "志愿A"
             2 -> "志愿B"
             3 -> "志愿C"
             4 -> "志愿D"
             5 -> "志愿E"
-            else -> "志愿F"
+            6 -> "志愿F"
+            7 -> "志愿G"
+            8 -> "志愿H"
+            else -> "志愿I"
         }
 
     @Bindable

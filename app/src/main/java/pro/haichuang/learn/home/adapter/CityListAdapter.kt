@@ -16,12 +16,13 @@ import pro.haichuang.learn.home.bean.LetterBean
 import java.io.File
 
 class CityListAdapter(private var context: Activity) : BaseAdapter() {
-    val letters by lazy { arrayListOf("定位", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z") }
+    private val letters by lazy { arrayListOf("定位", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z") }
     private val citys by lazy {
         JSON.parseArray(RxFileTool.readFile2String(File(RxFileTool.getDiskCacheDir(context), "/city_list.json"), "UTF-8"), AreaBean::class.java)
     }
     private val data by lazy {
         val temp = ArrayList<LetterBean>()
+        val emptyTemp = ArrayList<String>()
         letters.forEachIndexed { i, letter ->
             val letterBean = LetterBean()
             letterBean.letter = letter
@@ -36,8 +37,9 @@ class CityListAdapter(private var context: Activity) : BaseAdapter() {
             if (letterBean.areas.isNotEmpty())
                 temp.add(letterBean)
             else
-                letters.remove(letter)
+                emptyTemp.add(letter)
         }
+        letters.removeAll(emptyTemp)
         temp
     }
     var result: (city: String) -> Unit = {}

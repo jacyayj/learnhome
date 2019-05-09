@@ -32,13 +32,16 @@ public class ImageBinding {
 
     @BindingAdapter({"local_url"})
     public static void displayLocal(ImageView view, String url) {
-        Glide.with(view).applyDefaultRequestOptions(RequestOptions.errorOf(R.mipmap.ic_launcher_round).placeholder(R.mipmap.ic_launcher_round)).load(url).into(view);
+        Glide.with(view).applyDefaultRequestOptions(RequestOptions.centerCropTransform().
+                error(R.mipmap.ic_launcher_round).
+                placeholder(R.mipmap.ic_launcher_round)).
+                load(url).into(view);
     }
 
     @BindingAdapter({"net_url"})
     public static void displayNet(ImageView view, String url) {
         Glide.with(view)
-                .applyDefaultRequestOptions(RequestOptions.errorOf(R.mipmap.ic_launcher_round).placeholder(R.mipmap.ic_launcher_round))
+                .applyDefaultRequestOptions(RequestOptions.centerCropTransform())
                 .load(Url.image_base_url + url)
                 .into(view);
     }
@@ -46,7 +49,7 @@ public class ImageBinding {
     @BindingAdapter({"match_net_url"})
     public static void displayMatchNet(ImageView view, String url) {
         Glide.with(view)
-                .applyDefaultRequestOptions(RequestOptions.centerCropTransform().placeholder(R.mipmap.ic_launcher_round).error(R.mipmap.ic_launcher_round))
+                .applyDefaultRequestOptions(RequestOptions.noTransformation())
                 .load(Url.image_base_url + url)
                 .into(view);
     }

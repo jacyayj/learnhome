@@ -8,35 +8,10 @@
     android:padding="15dp"
     android:showDividers="middle">
 
-    <TextView
-        android:id="@+id/zhiyuan_1"
-        style="@style/text_17_33"
+    <ListView
+        android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="A志愿" />
+        android:layout_height="wrap_content"
+        android:divider="@drawable/divider_vertical_e0" />
 
-    <TextView
-        android:id="@+id/zhiyuan_2"
-        style="@style/text_17_33"
-        android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="B志愿" />
-
-    <TextView
-        android:id="@+id/zhiyuan_3"
-        style="@style/text_17_33"
-        android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="C志愿" />
-
-    <TextView
-        android:id="@+id/zhiyuan_4"
-        style="@style/text_17_33"
-        android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="D志愿" />
 </LinearLayout>

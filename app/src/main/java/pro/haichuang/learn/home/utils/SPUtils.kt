@@ -32,6 +32,10 @@ object SPUtils {
             sp.edit().putString("userInfo", value?.toJson()).apply()
         }
 
+    var userName: String
+        get() = sp.getString("userName", "")?:""
+        set(value) = sp.edit().putString("userName", value).apply()
+
     var isVip: Boolean
         get() = sp.getBoolean("isVip", false)
         set(value) = sp.edit().putBoolean("isVip", value).apply()

@@ -20,19 +20,19 @@
         <com.yhy.widget.core.img.round.RoundImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@mipmap/ic_launcher"
+            net_url="@{item.header}"
             app:riv_radius="2dp" />
 
         <TextView
             style="@style/text_17_00"
             android:layout_marginStart="65dp"
-            android:text="欣柏通讯" />
+            android:text="@{item.name}" />
 
         <TextView
             style="@style/text_15_99"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="65dp"
-            android:text="我是付辛博" />
+            android:text="@{`我是`+item.name}" />
 
         <TextView
             android:id="@+id/agree"

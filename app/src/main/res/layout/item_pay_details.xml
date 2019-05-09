@@ -16,7 +16,7 @@
 
         <TextView
             style="@style/text_17_00"
-            android:text="在线购买vip"
+            android:text="@{item.orderTypeStr}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

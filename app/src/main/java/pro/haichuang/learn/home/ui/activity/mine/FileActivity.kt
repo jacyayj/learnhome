@@ -5,8 +5,10 @@ import android.content.Intent
 import android.widget.RadioGroup
 import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.mStartActivityForResult
+import com.jacy.kit.config.toast
 import kotlinx.android.synthetic.main.activity_file.*
 import pro.haichuang.learn.home.R
+import pro.haichuang.learn.home.bean.AreaBean
 import pro.haichuang.learn.home.config.DataBindingActivity
 import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.CityListActivity
@@ -52,7 +54,12 @@ class FileActivity : DataBindingActivity<FileModel>(), RadioGroup.OnCheckedChang
         vip_group.setOnCheckedChangeListener(this)
         subject_group.setOnCheckedChangeListener(this)
         choose_city.setOnClickListener { mStartActivityForResult(CityListActivity::class.java, 0x01) }
-        choose_qx.setOnClickListener { addressDialog.show() }
+        choose_qx.setOnClickListener {
+            if (model.city.isEmpty())
+                toast("请先选择毕业城市")
+            else
+                addressDialog.show(model.districtData)
+        }
         choose_class.setOnClickListener { classDialog.show() }
         save.setOnClickListener { autoPost(Url.User.FileSave) }
     }
@@ -72,7 +79,11 @@ class FileActivity : DataBindingActivity<FileModel>(), RadioGroup.OnCheckedChang
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == 0x01) {
-            model.city = data?.getStringExtra("city") ?: ""
+            (data?.getSerializableExtra("area") as AreaBean).let {
+                model.city = it.city_name
+                model.district = ""
+                model.districtData = it.child
+            }
         }
     }
 }

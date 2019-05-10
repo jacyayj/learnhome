@@ -4,88 +4,93 @@ import android.databinding.Bindable
 import com.android.databinding.library.baseAdapters.BR
 import com.jacy.kit.config.toast
 import com.jacy.kit.net.Params
+import pro.haichuang.learn.home.bean.AreaBean
 import pro.haichuang.learn.home.bean.BaseModel
 import pro.haichuang.learn.home.net.Url
 
 class FileModel : BaseModel() {
-    @Params([Url.User.FileSave],"studentName")
+    @Params([Url.User.FileSave], "studentName")
     @Bindable
     var studentName = ""
         set(value) {
             field = value
             notifyPropertyChanged(BR.studentName)
         }
-    @Params([Url.User.FileSave],"studentCode")
+    @Params([Url.User.FileSave], "studentCode")
     @Bindable
     var studentCode = ""
         set(value) {
             field = value
             notifyPropertyChanged(BR.studentCode)
         }
-    @Params([Url.User.FileSave],"studentClass")
+    @Params([Url.User.FileSave], "studentClass")
     @Bindable
     var studentClass = ""
         set(value) {
             field = value
             notifyPropertyChanged(BR.studentClass)
         }
-    @Params([Url.User.FileSave],"school")
+    @Params([Url.User.FileSave], "school")
     @Bindable
     var school = ""
         set(value) {
             field = value
             notifyPropertyChanged(BR.school)
         }
-    @Params([Url.User.FileSave],"qq")
+    @Params([Url.User.FileSave], "qq")
     @Bindable
     var qq = ""
         set(value) {
             field = value
             notifyPropertyChanged(BR.qq)
         }
-    @Params([Url.User.FileSave],"phone")
+    @Params([Url.User.FileSave], "phone")
     @Bindable
     var phone = ""
         set(value) {
             field = value
             notifyPropertyChanged(BR.phone)
         }
-    @Params([Url.User.FileSave],"email")
+    @Params([Url.User.FileSave], "email")
     @Bindable
     var email = ""
         set(value) {
             field = value
             notifyPropertyChanged(BR.email)
         }
-    @Params([Url.User.FileSave],"city")
+    @Params([Url.User.FileSave], "city")
     @Bindable
     var city = ""
         set(value) {
             field = value
             notifyPropertyChanged(BR.city)
         }
-    @Params([Url.User.FileSave],"district")
+
+    @Params([Url.User.FileSave], "district")
     @Bindable
     var district = ""
         set(value) {
             field = value
             notifyPropertyChanged(BR.district)
         }
-    @Params([Url.User.FileSave],"type")
+
+    var districtData: ArrayList<AreaBean>? = null
+
+    @Params([Url.User.FileSave], "type")
     @Bindable
     var type = 0
         set(value) {
             field = value
             notifyPropertyChanged(BR.type)
         }
-    @Params([Url.User.FileSave],"subject")
+    @Params([Url.User.FileSave], "subject")
     @Bindable
     var subject = 0
         set(value) {
             field = value
             notifyPropertyChanged(BR.subject)
         }
-    @Params([Url.User.FileSave],"graduate")
+    @Params([Url.User.FileSave], "graduate")
     @Bindable
     var graduate = 0
         set(value) {

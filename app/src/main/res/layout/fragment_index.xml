@@ -17,23 +17,25 @@
         <TextView
             android:id="@+id/weather"
             style="@style/text_10_726E72"
-            android:layout_marginEnd="15dp"
             android:gravity="center" />
 
         <TextView
             android:id="@+id/to_choose_city"
             style="@style/text_14_736E73"
+            android:layout_height="match_parent"
             android:drawableEnd="@drawable/icon_arrow_down"
             android:drawablePadding="5dp"
             android:ellipsize="end"
+            android:gravity="center"
             android:maxLength="3"
+            android:paddingStart="15dp"
+            android:paddingEnd="10dp"
             android:singleLine="true" />
 
         <LinearLayout
             android:id="@+id/to_search"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:layout_marginStart="10dp"
             android:layout_weight="1"
             android:background="@drawable/bg_ebf2f5_radius_13dp"
             android:paddingStart="5dp">

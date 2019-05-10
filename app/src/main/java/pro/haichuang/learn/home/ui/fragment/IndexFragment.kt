@@ -22,6 +22,7 @@ import com.jacy.kit.utils.toDownInt
 import kotlinx.android.synthetic.main.fragment_index.*
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.bean.AdBean
+import pro.haichuang.learn.home.bean.AreaBean
 import pro.haichuang.learn.home.config.BaseFragment
 import pro.haichuang.learn.home.config.Constants.NEWS_ID
 import pro.haichuang.learn.home.net.Url
@@ -193,9 +194,9 @@ class IndexFragment : BaseFragment(), WeatherSearch.OnWeatherSearchListener, AMa
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK && requestCode == 0x01) {
             data?.let {
-                val city = it.getStringExtra("city")
-                to_choose_city.text = city.replace("市", "")
+                val city = (it.getSerializableExtra("area") as AreaBean).city_name
                 weatherSearch.query = WeatherSearchQuery(city, WeatherSearchQuery.WEATHER_TYPE_LIVE)
+                to_choose_city.text = city.replace("市", "")
                 weatherSearch.searchWeatherAsyn()
                 locationClient.stopLocation()
             }

@@ -16,11 +16,11 @@ import pro.haichuang.learn.home.bean.LetterBean
 import java.io.File
 
 class CityListAdapter(private var context: Activity) : BaseAdapter() {
-    private val letters by lazy { arrayListOf("定位", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z") }
+    private val letters by lazy { arrayListOf("定位", "A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "W", "X", "Y", "Z") }
     private val citys by lazy {
         JSON.parseArray(RxFileTool.readFile2String(File(RxFileTool.getDiskCacheDir(context), "/city_list.json"), "UTF-8"), AreaBean::class.java)
     }
-    private val data by lazy {
+    val data by lazy {
         val temp = ArrayList<LetterBean>()
         val emptyTemp = ArrayList<String>()
         letters.forEachIndexed { i, letter ->
@@ -39,16 +39,12 @@ class CityListAdapter(private var context: Activity) : BaseAdapter() {
             else
                 emptyTemp.add(letter)
         }
-        letters.removeAll(emptyTemp)
         temp
     }
-    var result: (city: String) -> Unit = {}
 
     fun setLocal(city: String) {
         data[0].areas[0].city_name = city
     }
-
-    fun getChoosePosition(letter: String) = data.indexOf(data.find { it.letter == letter })
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
         val binding: ViewDataBinding? = if (convertView == null)
@@ -56,9 +52,6 @@ class CityListAdapter(private var context: Activity) : BaseAdapter() {
         else
             DataBindingUtil.getBinding(convertView)
         val item = data[position]
-        item.areas.forEach {
-            it.result = result
-        }
         if (position == 0)
             item.grid = true
         binding?.setVariable(BR.item, item)

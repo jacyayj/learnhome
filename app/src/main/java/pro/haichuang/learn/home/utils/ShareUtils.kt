@@ -1,13 +1,15 @@
 package pro.haichuang.learn.home.utils
 
 import android.app.Activity
+import android.content.ComponentName
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
 import com.alipay.sdk.app.PayTask
-import com.jacy.kit.config.toJson
+import com.jacy.kit.config.toast
 import com.tencent.connect.UserInfo
 import com.tencent.connect.share.QQShare
 import com.tencent.mm.opensdk.modelmsg.SendAuth
@@ -19,10 +21,13 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory
 import com.tencent.tauth.IUiListener
 import com.tencent.tauth.Tencent
 import com.tencent.tauth.UiError
+import com.vondear.rxtool.RxAppTool
+import com.vondear.rxtool.RxFileTool
 import com.vondear.rxtool.RxImageTool
 import com.vondear.rxtool.RxTool
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.config.Constants
+import java.io.File
 
 
 object ShareUtils {
@@ -32,8 +37,86 @@ object ShareUtils {
         }
     }
 
+
+    private const val PACKAGE_WECHAT = "com.tencent.mm"//微信
+    private const val PACKAGE_MOBILE_QQ = "com.tencent.mobileqq"//qq
+
     private val qqApi by lazy { Tencent.createInstance("1108180837", RxTool.getContext()) }
 
+    /**
+     * 分享单张图片到微信好友
+     *
+     * @param context context
+     * @param picFile 要分享的图片文件
+     */
+    fun sharePictureToWechatFriend(context: Activity?, picFile: File?) {
+        if (RxAppTool.isInstallApp(context, PACKAGE_WECHAT)) {
+            val intent = Intent()
+            val cop = ComponentName(PACKAGE_WECHAT, "com.tencent.mm.ui.tools.ShareImgUI")
+            intent.component = cop
+            intent.action = Intent.ACTION_SEND
+            intent.type = "image/*"
+            if (picFile != null) {
+                if (picFile.isFile && picFile.exists()) {
+                    val uri = RxFileTool.getImageContentUri(context, picFile)
+                    intent.putExtra(Intent.EXTRA_STREAM, uri)
+                }
+            }
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            context?.startActivityForResult(Intent.createChooser(intent, "sharePictureToWechatFriend"), 0x01)
+        } else {
+            toast("请先安装微信客户端")
+        }
+    }
+
+    /**
+     * 分享单张图片到微信朋友圈
+     *
+     * @param context context
+     * @param picFile 要分享的图片文件
+     */
+    fun sharePictureToWechatMomments(context: Activity?, picFile: File?) {
+        if (RxAppTool.isInstallApp(context, PACKAGE_WECHAT)) {
+            val intent = Intent()
+            val cop = ComponentName(PACKAGE_WECHAT, "com.tencent.mm.ui.tools.ShareToTimeLineUI")
+            intent.component = cop
+            intent.action = Intent.ACTION_SEND
+            intent.type = "image/*"
+            if (picFile != null) {
+                if (picFile.isFile && picFile.exists()) {
+                    val uri = RxFileTool.getImageContentUri(context, picFile)
+                    intent.putExtra(Intent.EXTRA_STREAM, uri)
+                }
+            }
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            context?.startActivityForResult(Intent.createChooser(intent, "sharePictureToWechatMomments"),0x01)
+        } else {
+            toast("请先安装微信客户端")
+        }
+    }
+
+    /**
+     * 分享单张图片到QQ好友
+     *
+     * @param context conrtext
+     * @param picFile 要分享的图片文件
+     */
+    fun sharePictureToQQFriend(context: Activity?, picFile: File) {
+        if (RxAppTool.isInstallApp(context, PACKAGE_MOBILE_QQ)) {
+            val shareIntent = Intent()
+            val componentName = ComponentName(PACKAGE_MOBILE_QQ, "com.tencent.mobileqq.activity.JumpActivity")
+            shareIntent.component = componentName
+            shareIntent.action = Intent.ACTION_SEND
+            shareIntent.type = "image/*"
+            val uri = RxFileTool.getImageContentUri(context, picFile)
+            shareIntent.putExtra(Intent.EXTRA_STREAM, uri)
+            shareIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            // 遍历所有支持发送图片的应用。找到需要的应用
+            context?.startActivityForResult(Intent.createChooser(shareIntent, "shareImageToQQFriend"),0x01)
+        } else {
+            toast("请先安装QQ客户端")
+        }
+    }
 
     fun shareToQQ(context: Activity, title: String, url: String, content: String) {
         val bundle = Bundle()
@@ -73,16 +156,16 @@ object ShareUtils {
         wxApi.sendReq(req)
     }
 
-    fun shareToCircle(context: Activity) {
+    fun shareToMomments(context: Activity, title: String, url: String, content: String) {
 
         //初始化一个WXWebpageObject，填写url
         val webpage = WXWebpageObject()
-        webpage.webpageUrl = "www.baidu.com"
+        webpage.webpageUrl = url
 
         //用 WXWebpageObject 对象初始化一个 WXMediaMessage 对象
         val msg = WXMediaMessage(webpage)
-        msg.title = "网页标题 "
-        msg.description = "网页描述"
+        msg.title = title
+        msg.description = content
         val thumbBmp = BitmapFactory.decodeResource(context.resources, R.drawable.cuow)
         msg.thumbData = RxImageTool.bitmap2Bytes(thumbBmp, Bitmap.CompressFormat.PNG)
 

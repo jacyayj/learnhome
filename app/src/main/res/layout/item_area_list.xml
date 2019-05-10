@@ -12,10 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:gravity="center_vertical"
+        android:onClick="onCityClick"
         android:orientation="vertical"
         android:paddingStart="15dp"
+        android:tag="@{item}"
         android:text="@{item.city_name}"
-        android:onClick="@{item::click}"
         android:textColor="@color/color33"
         android:textSize="16sp" />
 </layout>

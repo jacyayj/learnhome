@@ -89,7 +89,10 @@ class ZhiYuanDetailsActivity : BaseActivity() {
         CommonAdapter<CollegeModel>(layoutInflater, R.layout.item_zhiyuan_details) { v, t, _ ->
             v.to_choose_zhuanye.setOnClickListener {
                 temp = t
-                mStartActivityForResult(ZhiYuanZhuanYeActivity::class.java, 0x01, Pair(COLLEGE_ID, t.id), Pair(JUDGE_SUBJECT, subject))
+                mStartActivityForResult(ZhiYuanZhuanYeActivity::class.java, 0x01,
+                        Pair(COLLEGE_ID, t.id),
+                        Pair("majorIds", t.majorIds),
+                        Pair(JUDGE_SUBJECT, subject))
             }
             v.to_details.setOnClickListener {
                 mStartActivity(ZhiYuanSchoolActivity::class.java)

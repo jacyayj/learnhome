@@ -42,7 +42,7 @@ class TeacherDetailsActivity : DataBindingActivity<TeacherDetailsModel>() {
 
     private var account: String = ""
     private val adapter by lazy {
-        CommonAdapter<CommentModel>(layoutInflater, R.layout.item_find_details_comment) { v, t, _ ->
+        CommonAdapter<CommentModel>(layoutInflater, R.layout.item_find_details_comment) { _, t, _ ->
             t.teacher = true
         }
     }
@@ -152,8 +152,8 @@ class TeacherDetailsActivity : DataBindingActivity<TeacherDetailsModel>() {
                     Pair(TEACHER_SKILL, model.skill))
         }
         follow.setOnClickListener {
-            post(Url.Teacher.Collect, HttpParams("teacherId ", model.id.toString()).apply {
-                put("operate ", if (model.hasCollect) "1" else "0")
+            post(Url.Teacher.Collect, HttpParams("teacherId", model.id.toString()).apply {
+                put("operate", if (model.hasCollect) "1" else "0")
             }, needSession = true) {
                 toast(if (model.hasCollect) "取消关注成功" else "关注成功")
                 model.hasCollect = model.hasCollect.not()

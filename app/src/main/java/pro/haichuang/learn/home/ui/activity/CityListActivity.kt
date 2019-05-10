@@ -2,6 +2,7 @@ package pro.haichuang.learn.home.ui.activity
 
 import android.app.Activity
 import android.content.Intent
+import android.view.View
 import com.amap.api.location.AMapLocation
 import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
@@ -10,6 +11,7 @@ import com.jacy.kit.config.ContentView
 import kotlinx.android.synthetic.main.activity_city_list.*
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.adapter.CityListAdapter
+import pro.haichuang.learn.home.bean.AreaBean
 import pro.haichuang.learn.home.config.BaseActivity
 import pro.haichuang.learn.home.ui.weight.SideBar
 
@@ -42,12 +44,13 @@ class CityListActivity : BaseActivity(), AMapLocationListener {
 
     override fun initData() {
         listView.adapter = adapter
-        adapter.result = {
-            setResult(Activity.RESULT_OK, Intent().putExtra("city", it))
-            finish()
-        }
-//        slide.letters = adapter.letters
+        slide.setTextView(text_dialog)
         locationClient.startLocation()
+    }
+
+    fun onCityClick(view: View) {
+        setResult(Activity.RESULT_OK, Intent().putExtra("area", view.tag as AreaBean))
+        finish()
     }
 
     override fun onDestroy() {
@@ -56,16 +59,9 @@ class CityListActivity : BaseActivity(), AMapLocationListener {
     }
 
     override fun initListener() {
-//        slide.setOnTouchLetterChangeListener {
-//            val position = adapter.getChoosePosition(it)
-//            if (position != -1)
-//                listView.setSelection(position)
-//        }
         slide.setOnTouchingLetterChangedListener(object : SideBar.OnTouchingLetterChangedListener {
-            override fun onTouchingLetterChanged(s: String) {
-                val position = adapter.getChoosePosition(s)
-                if (position != -1)
-                    listView.setSelection(position)
+            override fun onTouchingLetterChanged(s: String, position: Int) {
+                listView.setSelection(position)
             }
         })
     }

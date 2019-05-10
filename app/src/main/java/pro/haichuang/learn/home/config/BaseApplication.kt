@@ -3,7 +3,6 @@ package pro.haichuang.learn.home.config
 import android.app.Application
 import android.content.Context
 import android.support.multidex.MultiDex
-import com.github.promeg.pinyinhelper.Pinyin
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import com.netease.nim.uikit.api.NimUIKit
@@ -37,19 +36,18 @@ import pro.haichuang.learn.home.ui.im.location.NimDemoLocationProvider
 import pro.haichuang.learn.home.utils.HttpUtils
 import pro.haichuang.learn.home.utils.SPUtils
 import retrofit2.converter.gson.GsonConverterFactory
-import java.io.File
 
 class BaseApplication : Application() {
 
-    private val city_json by lazy { File(RxFileTool.getDiskCacheDir(this), "/city_list.json") }
+    private val path by lazy { RxFileTool.getDiskCacheDir(this) + "/city_list.json" }
 
     override fun onCreate() {
         super.onCreate()
-        if (!RxFileTool.isFileExists(city_json))
-            RxFileTool.copyFile(resources.assets.open("_city.json"), city_json)
+        if (!RxFileTool.isFileExists(path))
+            RxFileTool.saveFile(assets.open("city_list.json"), path)
+
         RxTool.init(this)
         QbSdk.initX5Environment(this, null)
-        Pinyin.init(Pinyin.newConfig())
         EasyHttp.init(this)
         EasyHttp.getInstance()
                 .addConverterFactory(GsonConverterFactory.create())
@@ -84,7 +82,7 @@ class BaseApplication : Application() {
             })
             NimUIKit.setSessionListener(object : SessionEventListener {
                 override fun onAcceptOrder(context: Context?, orderId: Int, account: String?) {
-                    account?.let { HttpUtils.acceptOrder(this@BaseApplication,orderId, it) }
+                    account?.let { HttpUtils.acceptOrder(this@BaseApplication, orderId, it) }
                 }
 
                 override fun onAvatarClicked(context: Context?, message: IMMessage?) {

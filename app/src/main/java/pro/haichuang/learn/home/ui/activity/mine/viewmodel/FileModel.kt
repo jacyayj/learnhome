@@ -23,13 +23,18 @@ class FileModel : BaseModel() {
             field = value
             notifyPropertyChanged(BR.studentCode)
         }
+
     @Params([Url.User.FileSave], "studentClass")
-    @Bindable
-    var studentClass = ""
+    var studentClass = 0
         set(value) {
             field = value
-            notifyPropertyChanged(BR.studentClass)
+            notifyPropertyChanged(BR.studentClassStr)
         }
+
+    @Bindable
+    var studentClassStr = ""
+        get() = "${studentClass}班"
+
     @Params([Url.User.FileSave], "school")
     @Bindable
     var school = ""
@@ -110,7 +115,7 @@ class FileModel : BaseModel() {
     }
 
     fun innerChecked(showToast: Boolean): Boolean {
-        val success = when {
+        return when {
             graduate == 0 -> {
                 if (showToast) toast("请选择毕业年份")
                 else done = false
@@ -137,32 +142,30 @@ class FileModel : BaseModel() {
                 false
             }
             school.isEmpty() -> {
-                if (showToast) toast("请选择毕业年份")
+                if (showToast) toast("请输入在读学校")
                 false
             }
             studentCode.isEmpty() -> {
-                if (showToast) toast("请选择毕业年份")
+                if (showToast) toast("请输入学籍号")
                 false
             }
-            studentClass.isEmpty() -> {
-                if (showToast) toast("请选择毕业年份")
+            studentClass == 0 -> {
+                if (showToast) toast("请选择班级")
                 false
             }
             phone.isEmpty() -> {
-                if (showToast) toast("请选择毕业年份")
+                if (showToast) toast("请输入联系电话")
                 false
             }
             qq.isEmpty() -> {
-                if (showToast) toast("请选择毕业年份")
+                if (showToast) toast("请输入QQ")
                 false
             }
             email.isEmpty() -> {
-                if (showToast) toast("请选择毕业年份")
+                if (showToast) toast("请输入邮箱")
                 false
             }
             else -> true
         }
-        done = success
-        return success
     }
 }

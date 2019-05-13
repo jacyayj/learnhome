@@ -11,7 +11,6 @@ import com.jacy.kit.config.ContentView
 import kotlinx.android.synthetic.main.activity_city_list.*
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.adapter.CityListAdapter
-import pro.haichuang.learn.home.bean.AreaBean
 import pro.haichuang.learn.home.config.BaseActivity
 import pro.haichuang.learn.home.ui.weight.SideBar
 
@@ -49,8 +48,11 @@ class CityListActivity : BaseActivity(), AMapLocationListener {
     }
 
     fun onCityClick(view: View) {
-        setResult(Activity.RESULT_OK, Intent().putExtra("area", view.tag as AreaBean))
-        finish()
+        adapter.findCity(view.tag.toString())?.let {
+            setResult(Activity.RESULT_OK, Intent().putExtra("area",it))
+            finish()
+        }
+
     }
 
     override fun onDestroy() {

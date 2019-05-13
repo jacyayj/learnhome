@@ -17,6 +17,9 @@ import pro.haichuang.learn.home.utils.GsonUtil
 
 class CollectAdapter(private var context: Activity, private var data: ArrayList<CollectModel> = ArrayList()) : BaseAdapter() {
 
+    private val chooseData by lazy { ArrayList<CollectModel>() }
+    private val originData by lazy { ArrayList<CollectModel>() }
+
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
         val item = data[position]
         val layoutId = when (item.contentType) {
@@ -42,11 +45,27 @@ class CollectAdapter(private var context: Activity, private var data: ArrayList<
 
     fun insertData(d: MutableList<CollectModel>) {
         data.addAll(d)
+        originData.addAll(d)
         notifyDataSetChanged()
     }
 
     fun refresh(data: MutableList<CollectModel>) {
         this.data = data as ArrayList<CollectModel>
+        originData.addAll(data)
+        notifyDataSetChanged()
+    }
+
+    fun doSearch(keyWord: String) {
+        data = if (keyWord.isEmpty())
+            originData
+        else {
+            chooseData.clear()
+            data.forEach {
+                if (it.content.toString().contains(keyWord))
+                    chooseData.add(it)
+            }
+            chooseData
+        }
         notifyDataSetChanged()
     }
 

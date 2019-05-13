@@ -44,7 +44,7 @@ class BaseApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         if (!RxFileTool.isFileExists(path))
-            RxFileTool.saveFile(assets.open("city_list.json"), path)
+            RxFileTool.saveFile(assets.open("city.json"), path)
 
         RxTool.init(this)
         QbSdk.initX5Environment(this, null)

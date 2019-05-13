@@ -46,6 +46,8 @@ class CityListAdapter(private var context: Activity) : BaseAdapter() {
         data[0].areas[0].city_name = city
     }
 
+    fun findCity(cityName: String) = citys.find { it.city_name == cityName }
+
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
         val binding: ViewDataBinding? = if (convertView == null)
             DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.item_letter_list, parent, false)

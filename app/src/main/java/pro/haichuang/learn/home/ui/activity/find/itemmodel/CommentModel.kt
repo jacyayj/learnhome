@@ -11,6 +11,7 @@ class CommentModel : BaseModel() {
     var commenter: Author? = null
 
     var createTime = ""
+    var contentId = 0
     var id = 0
     @Bindable
     var ups = 0

@@ -2,7 +2,10 @@ package pro.haichuang.learn.home.ui.fragment
 
 import android.app.Activity
 import android.content.Intent
-import android.os.Bundle
+import com.amap.api.location.AMapLocation
+import com.amap.api.location.AMapLocationClient
+import com.amap.api.location.AMapLocationClientOption
+import com.amap.api.location.AMapLocationListener
 import com.jacy.kit.adapter.CommonAdapter
 import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.mStartActivity
@@ -28,16 +31,37 @@ import pro.haichuang.learn.home.utils.SPUtils
 import java.io.File
 
 @ContentView(R.layout.fragment_mine)
-class MineFragment : BaseFragment() {
+class MineFragment : BaseFragment(), AMapLocationListener {
+    override fun onLocationChanged(p0: AMapLocation?) {
+        p0?.let {
+            city.text = "城市：${it.province} ${it.city}"
+        }
+    }
 
+    private val locationOption by lazy {
+        AMapLocationClientOption().apply {
+            locationMode = AMapLocationClientOption.AMapLocationMode.Hight_Accuracy
+            interval = 2000
+        }
+    }
+
+    private val locationClient by lazy {
+        AMapLocationClient(context).apply {
+            setLocationOption(locationOption)
+            setLocationListener(this@MineFragment)
+        }
+    }
     private lateinit var headerUrl: String
     override fun onResume() {
         post(Url.User.Info, showLoading = false, needSession = true)
         super.onResume()
     }
+
     override fun initData() {
         listView.adapter = CommonAdapter(layoutInflater, R.layout.item_mine, DataUtils.formatMineListData())
+        locationClient.startLocation()
     }
+
     override fun onSuccess(url: String, result: Any?) {
         when (url) {
             Url.User.Info -> {

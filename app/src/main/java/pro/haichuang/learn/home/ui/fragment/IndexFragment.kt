@@ -29,6 +29,7 @@ import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.CityListActivity
 import pro.haichuang.learn.home.ui.activity.find.FindDetailsActivity
 import pro.haichuang.learn.home.ui.activity.index.*
+import pro.haichuang.learn.home.ui.activity.mine.BindVipActivity
 import pro.haichuang.learn.home.ui.activity.news.NewsDetailsActivity
 import pro.haichuang.learn.home.ui.dialog.IndexOperationPopup
 import pro.haichuang.learn.home.ui.fragment.itemview.ItemNews
@@ -147,7 +148,9 @@ class IndexFragment : BaseFragment(), WeatherSearch.OnWeatherSearchListener, AMa
             mStartActivity(FindDetailsActivity::class.java, Pair(NEWS_ID, adapter.getItem(position).id))
         }
         show_operation.setOnClickListener {
-            IndexOperationPopup(it).show()
+            IndexOperationPopup(it) {
+                mStartActivity(BindVipActivity::class.java)
+            }.show()
         }
         to_choose_city.setOnClickListener { mStartActivityForResult(CityListActivity::class.java, 0x01) }
         banner.setOnClickListener(this)

@@ -37,7 +37,7 @@ class WalletActivity : BaseActivity() {
         to_pay_details.setOnClickListener { mStartActivity(PayDetailsActivity::class.java) }
         to_tixian.setOnClickListener { mStartActivity(TiXianActivity::class.java) }
         grid.setOnItemClickListener { _, _, position, _ ->
-            //            amount = amountList[position].toString()
+            amount = amountList[position].toString()
         }
     }
 

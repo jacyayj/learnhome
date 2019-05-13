@@ -38,6 +38,7 @@ class LoginActivity : DataBindingActivity<LoginModel>(), IUiListener {
     private val re_login by lazy { intent.getBooleanExtra("re_login", false) }
 
     private var openId = ""
+    private var source = ""
 
     private val receiver = WxResponse()
 
@@ -116,7 +117,7 @@ class LoginActivity : DataBindingActivity<LoginModel>(), IUiListener {
             }
             Url.User.Login, Url.User.ThirdLogin -> {
                 if (openId.isNotEmpty() && result is Int && result == 303) {
-                    mStartActivity(CompleteInfoActivity::class.java, Pair("thirdKey", openId))
+                    mStartActivity(CompleteInfoActivity::class.java, Pair("thirdKey", openId), Pair("source", source))
                 } else {
                     val info = GsonUtil.parseObject(result, UserInfo::class.java)
                     SPUtils.userInfo = info
@@ -152,6 +153,7 @@ class LoginActivity : DataBindingActivity<LoginModel>(), IUiListener {
         result?.let {
             if (result is JSONObject) {
                 openId = result.getString("openid")
+                source = "QQ"
                 val token = result.getString("access_token")
                 val expires = result.getString("expires_in")
                 ShareUtils.setOpenId(openId, token, expires)
@@ -195,7 +197,8 @@ class LoginActivity : DataBindingActivity<LoginModel>(), IUiListener {
         override fun onReceive(context: Context?, intent: Intent?) {
             intent?.let {
                 openId = it.getStringExtra("openId")
-                post(Url.User.ThirdLogin, HttpParams("source", "QQ").apply {
+                source = "WEIXIN"
+                post(Url.User.ThirdLogin, HttpParams("source", "WEIXIN").apply {
                     put("thirdKey", openId)
                     put("accountInfo", it.getStringExtra("userInfo"))
                 })

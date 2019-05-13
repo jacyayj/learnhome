@@ -2,10 +2,10 @@ package pro.haichuang.learn.home.ui.dialog
 
 import android.view.LayoutInflater
 import android.view.View
-import android.view.WindowManager
 import android.widget.PopupWindow
 import android.widget.TextView
 import com.scwang.smartrefresh.layout.util.DensityUtil
+import kotlinx.android.synthetic.main.popup_index_operation.view.*
 import pro.haichuang.learn.home.R
 
 class IndexOperationPopup(private val view: View, private val result: (res: String) -> Unit = {}) : PopupWindow(DensityUtil.dp2px(95f), DensityUtil.dp2px(50f)), View.OnClickListener {
@@ -19,6 +19,7 @@ class IndexOperationPopup(private val view: View, private val result: (res: Stri
     init {
         isOutsideTouchable = true
         contentView = layoutInflater.inflate(R.layout.popup_index_operation, null)
+        contentView.to_vip.setOnClickListener(this)
     }
 
     fun show() {

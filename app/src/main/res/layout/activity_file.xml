@@ -317,7 +317,7 @@
                             android:enabled="@{!model.done}"
                             android:gravity="end"
                             android:hint="请选择班级"
-                            android:text="@={model.studentClass}"
+                            android:text="@={model.studentClassStr}"
                             android:textColorHint="@color/color99" />
                     </LinearLayout>
 

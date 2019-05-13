@@ -3,19 +3,18 @@ package pro.haichuang.learn.home.ui.activity.message
 import android.text.Editable
 import android.text.TextWatcher
 import com.jacy.kit.adapter.CommonAdapter
-import com.jacy.kit.config.mStartActivity
-import kotlinx.android.synthetic.main.activity_friend_search.*
-import pro.haichuang.learn.home.R
 import com.jacy.kit.config.ContentView
+import com.jacy.kit.config.mStartActivity
 import com.jacy.kit.config.toast
 import com.netease.nimlib.sdk.NIMClient
 import com.netease.nimlib.sdk.RequestCallback
 import com.netease.nimlib.sdk.friend.FriendService
 import com.netease.nimlib.sdk.friend.constant.VerifyType
 import com.netease.nimlib.sdk.friend.model.AddFriendData
-import com.netease.nimlib.service.NimService
 import com.zhouyou.http.model.HttpParams
+import kotlinx.android.synthetic.main.activity_friend_search.*
 import kotlinx.android.synthetic.main.item_search_friend.view.*
+import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.config.BaseActivity
 import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.message.itemmodel.FriendModel
@@ -37,6 +36,11 @@ class FriendSearchActivity : BaseActivity() {
                     }
 
                     override fun onFailed(p0: Int) {
+                        when (p0) {
+                            404 -> toast("该用户不存在")
+                            else -> toast("$p0")
+                        }
+
                     }
 
                     override fun onException(p0: Throwable?) {

@@ -45,6 +45,8 @@ class FileActivity : DataBindingActivity<FileModel>(), RadioGroup.OnCheckedChang
                 model.innerChecked(false)
             }
             Url.User.FileSave -> {
+                model.done = true
+                toast("保存成功")
             }
         }
     }
@@ -61,7 +63,7 @@ class FileActivity : DataBindingActivity<FileModel>(), RadioGroup.OnCheckedChang
                 addressDialog.show(model.districtData)
         }
         choose_class.setOnClickListener { classDialog.show() }
-        save.setOnClickListener { autoPost(Url.User.FileSave) }
+        save.setOnClickListener { autoPost(Url.User.FileSave, needSession = true) }
     }
 
     override fun onCheckedChanged(group: RadioGroup?, checkedId: Int) {

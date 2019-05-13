@@ -1,14 +1,13 @@
 package pro.haichuang.learn.home.ui.activity.login
 
-import com.jacy.kit.config.mStartActivity
-import kotlinx.android.synthetic.main.activity_complete_info.*
-import pro.haichuang.learn.home.R
 import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.toast
 import com.netease.nim.uikit.api.NimUIKit
 import com.netease.nimlib.sdk.RequestCallback
 import com.netease.nimlib.sdk.auth.LoginInfo
 import com.vondear.rxtool.RxActivityTool
+import kotlinx.android.synthetic.main.activity_complete_info.*
+import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.bean.UserInfo
 import pro.haichuang.learn.home.config.DataBindingActivity
 import pro.haichuang.learn.home.net.Url
@@ -23,6 +22,7 @@ class CompleteInfoActivity : DataBindingActivity<CompleteInfoModel>() {
 
     override fun initData() {
         model.thirdKey = intent.getStringExtra("thirdKey")
+        model.source = intent.getStringExtra("source")
         titleModel.title = "绑定手机号"
         titleModel.titleLeftText = "返回"
         titleModel.showBottomeLine = false

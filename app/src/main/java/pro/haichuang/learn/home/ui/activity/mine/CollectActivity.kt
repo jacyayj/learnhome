@@ -2,9 +2,13 @@ package pro.haichuang.learn.home.ui.activity.mine
 
 import android.app.Activity
 import android.content.Intent
+import android.text.Editable
+import android.text.TextWatcher
 import com.jacy.kit.config.ContentView
+import com.jacy.kit.config.gone
 import com.jacy.kit.config.mStartActivity
-import kotlinx.android.synthetic.main.activity_vr.*
+import com.jacy.kit.config.show
+import kotlinx.android.synthetic.main.activity_collect.*
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.adapter.CollectAdapter
 import pro.haichuang.learn.home.config.BaseActivity
@@ -46,6 +50,23 @@ class CollectActivity : BaseActivity() {
     }
 
     override fun initListener() {
+        clear.setEdit(search_input)
+        search_input.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                if (s.isNullOrEmpty()) {
+                    clear.gone()
+                    adapter.doSearch("")
+                } else {
+                    clear.show()
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+        })
         listView.setOnItemClickListener { _, _, position, _ ->
             val item = adapter.getItem(position)
             when (item.contentType) {
@@ -63,23 +84,26 @@ class CollectActivity : BaseActivity() {
                     } else
                         mStartActivity(FindDetailsActivity::class.java, Pair(NEWS_ID, content.id))
                 }
-                2->{
+                2 -> {
                     val content = GsonUtil.parseObject(item.content, CollegeModel::class.java)
-                    if (isChat){
+                    if (isChat) {
 
-                    }else{
+                    } else {
                         mStartActivity(HeightSchoolDetailsActivity::class.java, Pair(Constants.SCHOOL_ID, content.id))
                     }
                 }
-                4->{
+                4 -> {
                     val content = GsonUtil.parseObject(item.content, ItemZhuanTiModel::class.java)
-                    if (isChat){
+                    if (isChat) {
 
-                    }else{
+                    } else {
                         mStartActivity(ZhuanTiDetailsActivity::class.java, Pair(Constants.ZHUANTI_ID, content.id))
                     }
                 }
             }
+        }
+        search_btn.setOnClickListener {
+            adapter.doSearch(search_input.text.toString())
         }
     }
 }

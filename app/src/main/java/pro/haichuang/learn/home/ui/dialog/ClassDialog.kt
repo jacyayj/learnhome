@@ -8,7 +8,7 @@ import kotlinx.android.synthetic.main.dialog_choose_class.*
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.utils.DialogUtils
 
-class ClassDialog(context: Context, private var result: (c: String) -> Unit) : Dialog(context, R.style.Dialog) {
+class ClassDialog(context: Context, private var result: (c: Int) -> Unit) : Dialog(context, R.style.Dialog) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,7 +18,7 @@ class ClassDialog(context: Context, private var result: (c: String) -> Unit) : D
         close.setOnClickListener { dismiss() }
         grid.adapter = CommonAdapter(layoutInflater, R.layout.item_class, arrayListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12))
         grid.setOnItemClickListener { _, _, position, _ ->
-            result("${position + 1}班")
+            result(position + 1)
             dismiss()
         }
     }

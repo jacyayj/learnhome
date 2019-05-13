@@ -7,6 +7,7 @@ import kotlinx.android.synthetic.main.activity_my_comment.*
 import kotlinx.android.synthetic.main.item_mine_comment.view.*
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.config.BaseActivity
+import pro.haichuang.learn.home.config.Constants.NEWS_ID
 import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.find.FindDetailsActivity
 import pro.haichuang.learn.home.ui.activity.find.itemmodel.CommentModel
@@ -17,9 +18,9 @@ import pro.haichuang.learn.home.utils.GsonUtil
 class MyCommentActivity : BaseActivity() {
 
     private val adapter by lazy {
-        CommonAdapter<CommentModel>(layoutInflater, R.layout.item_mine_comment) { v, _, _ ->
+        CommonAdapter<CommentModel>(layoutInflater, R.layout.item_mine_comment) { v, t, _ ->
             v.to_details.setOnClickListener {
-                mStartActivity(FindDetailsActivity::class.java)
+                mStartActivity(FindDetailsActivity::class.java, Pair(NEWS_ID, t.contentId))
             }
         }
     }

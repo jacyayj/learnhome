@@ -23,7 +23,7 @@
             android:onClick="onCityClick"
             android:orientation="vertical"
             android:singleLine="true"
-            android:tag="@{item}"
+            android:tag="@{item.city_name}"
             android:text="@{item.city_name}"
             android:textColor="@color/color33"
             android:textSize="16sp" />

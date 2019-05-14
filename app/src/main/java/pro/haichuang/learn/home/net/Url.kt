@@ -26,7 +26,6 @@ object Url {
         const val Save = "${base}save"
     }
 
-
     /**
      * 判断相关接口
      */
@@ -44,7 +43,6 @@ object Url {
 
         const val Priority = "${base}volunteer/priority"
     }
-
 
     /**
      * 验证码相关接口
@@ -67,7 +65,6 @@ object Url {
 
         const val List = "${base}list"
     }
-
 
     /**
      * 验证码相关接口
@@ -101,7 +98,6 @@ object Url {
 
         const val Get = "${base}get"
     }
-
 
     /**
      * 状元笔记相关接口
@@ -162,8 +158,6 @@ object Url {
         const val Register = "${base}register"
 
         const val ForgetPassword = "${base}forgetPassword"
-
-        const val PayPassword = "${base}payPassword"
 
         const val Info = "${base}info"
 
@@ -330,6 +324,10 @@ object Url {
      */
     object Account {
         private const val base = "account/"
+
+        const val PayPassword = "${base}payPassword"
+
+        const val Draw = "${base}draw"
 
         const val Fee = "${base}fee"
 

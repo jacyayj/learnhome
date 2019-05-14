@@ -10,6 +10,7 @@ import android.os.Message
 import android.widget.RadioButton
 import com.google.gson.JsonObject
 import com.jacy.kit.config.ContentView
+import com.jacy.kit.config.mStartActivity
 import com.jacy.kit.config.toast
 import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureConfig
@@ -31,7 +32,9 @@ import pro.haichuang.learn.home.config.Constants.TEACHER_TYPE
 import pro.haichuang.learn.home.config.DataBindingActivity
 import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.find.viewmodel.YuYueModel
+import pro.haichuang.learn.home.ui.activity.mine.SettPwdActivity
 import pro.haichuang.learn.home.ui.dialog.NoticeDialog
+import pro.haichuang.learn.home.ui.dialog.PasswordDialog
 import pro.haichuang.learn.home.ui.dialog.PaymentDialog
 import pro.haichuang.learn.home.utils.GsonUtil
 import pro.haichuang.learn.home.utils.SPUtils
@@ -45,7 +48,16 @@ class YuYueActivity : DataBindingActivity<YuYueModel>() {
     private val payDialog by lazy {
         PaymentDialog(this) {
             model.payType = it
-            autoPost(Url.Teacher.Order, needSession = true)
+            if (it == 1) {
+                if (SPUtils.hasPayPassword)
+                    PasswordDialog(this) {
+                        model.payPassword = it
+                        autoPost(Url.Teacher.Order, needSession = true)
+                    }.show()
+                else
+                    mStartActivity(SettPwdActivity::class.java)
+            } else
+                autoPost(Url.Teacher.Order, needSession = true)
         }
     }
 
@@ -104,12 +116,12 @@ class YuYueActivity : DataBindingActivity<YuYueModel>() {
     override fun onSuccess(url: String, result: Any?) {
         when (url) {
             Url.User.Account -> {
-                payDialog.balance =  GsonUtil.getString(result, "credit")
+                payDialog.balance = GsonUtil.getString(result, "credit")
                 payDialog.show()
             }
             Url.Teacher.Fee -> {
                 payDialog.price = GsonUtil.getString(result, "teacherOffline")
-                post(Url.User.Account,needSession = true)
+                post(Url.User.Account, needSession = true)
             }
             Url.Teacher.Order -> {
                 when (model.payType) {
@@ -153,7 +165,7 @@ class YuYueActivity : DataBindingActivity<YuYueModel>() {
                         post(Url.Upload.Upload, params)
                     }
                 }
-                RECHARGE->{
+                RECHARGE -> {
                     data?.let {
                         payDialog.refrshBalance(it.getStringExtra("amount"))
                     }

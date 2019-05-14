@@ -27,6 +27,8 @@ class TeacherDetailsModel : BaseModel() {
     var orderType = 0
     @Params([Url.Teacher.Order], "teacherId")
     var id = 0
+    @Params([Url.Teacher.Order], "payPassword")
+    var payPassword = ""
     var intro = ""
     var skill = ""
     var beginTime = ""

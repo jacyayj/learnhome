@@ -10,6 +10,7 @@ import android.os.Handler
 import android.os.Message
 import com.google.gson.JsonObject
 import com.jacy.kit.config.ContentView
+import com.jacy.kit.config.mStartActivity
 import com.jacy.kit.config.mStartActivityForResult
 import com.jacy.kit.config.toast
 import com.tencent.mm.opensdk.modelpay.PayReq
@@ -20,7 +21,9 @@ import pro.haichuang.learn.home.config.Constants.PRICE
 import pro.haichuang.learn.home.config.DataBindingActivity
 import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.mine.viewmodel.PaymentModel
+import pro.haichuang.learn.home.ui.dialog.PasswordDialog
 import pro.haichuang.learn.home.utils.GsonUtil
+import pro.haichuang.learn.home.utils.SPUtils
 import pro.haichuang.learn.home.utils.ShareUtils
 
 
@@ -95,8 +98,18 @@ class PaymentActivity : DataBindingActivity<PaymentModel>() {
         pay.setOnClickListener {
             if (model.recharge)
                 autoPost(Url.Account.Recharge, showLoading = true, needSession = true)
-            else
-                autoPost(Url.Account.Activate, showLoading = true, needSession = true)
+            else {
+                if (model.type == 1)
+                    if (SPUtils.hasPayPassword)
+                        PasswordDialog(this) {
+                            model.payPassword = it
+                            autoPost(Url.Account.Activate, showLoading = true, needSession = true)
+                        }.show()
+                    else
+                        mStartActivity(SettPwdActivity::class.java)
+                else
+                    autoPost(Url.Account.Activate, showLoading = true, needSession = true)
+            }
         }
     }
 

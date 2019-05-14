@@ -15,7 +15,9 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:paddingHorizontal="15sp"
-            android:src="@drawable/icon_back" />
+            android:onClick="back"
+            android:src="@drawable/icon_back"
+            tools:ignore="OnClick" />
 
         <TextView
             style="@style/text_18_33"

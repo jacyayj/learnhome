@@ -29,9 +29,12 @@ import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.find.YuYueActivity
 import pro.haichuang.learn.home.ui.activity.find.itemmodel.CommentModel
 import pro.haichuang.learn.home.ui.activity.index.viewmodel.TeacherDetailsModel
+import pro.haichuang.learn.home.ui.activity.mine.SettPwdActivity
 import pro.haichuang.learn.home.ui.dialog.NoticeDialog
+import pro.haichuang.learn.home.ui.dialog.PasswordDialog
 import pro.haichuang.learn.home.ui.dialog.PaymentDialog
 import pro.haichuang.learn.home.utils.GsonUtil
+import pro.haichuang.learn.home.utils.SPUtils
 import pro.haichuang.learn.home.utils.ShareUtils
 
 
@@ -53,7 +56,16 @@ class TeacherDetailsActivity : DataBindingActivity<TeacherDetailsModel>() {
     private val payDialog by lazy {
         PaymentDialog(this) {
             model.payType = it
-            autoPost(Url.Teacher.Order, needSession = true)
+            if (it == 1) {
+                if (SPUtils.hasPayPassword)
+                    PasswordDialog(this) {
+                        model.payPassword = it
+                        autoPost(Url.Teacher.Order, needSession = true)
+                    }.show()
+                else
+                    mStartActivity(SettPwdActivity::class.java)
+            } else
+                autoPost(Url.Teacher.Order, needSession = true)
         }
     }
 

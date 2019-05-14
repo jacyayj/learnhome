@@ -1,9 +1,9 @@
 package pro.haichuang.learn.home.ui.activity.mine
 
-import kotlinx.android.synthetic.main.activity_sett_pwd.*
-import pro.haichuang.learn.home.R
 import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.toast
+import kotlinx.android.synthetic.main.activity_sett_pwd.*
+import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.config.DataBindingActivity
 import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.mine.viewmodel.SettPwdModel
@@ -16,7 +16,7 @@ class SettPwdActivity : DataBindingActivity<SettPwdModel>() {
 
 
     override fun initData() {
-        titleModel.title = if (SPUtils.hasPayPassword)"修改支付密码" else "设置支付密码"
+        titleModel.title = if (SPUtils.hasPayPassword) "修改支付密码" else "设置支付密码"
         if (!SPUtils.hasPayPassword)
             model.step = 1
     }
@@ -33,21 +33,23 @@ class SettPwdActivity : DataBindingActivity<SettPwdModel>() {
                     1 -> {
                         model.newPwd = s
                         model.step++
-                        mlog.v("new:"+model.newPwd)
+                        mlog.v("new:" + model.newPwd)
                         pwd.setText("")
                     }
                     2 -> {
                         model.confirmPwd = s
-                        mlog.v("confirm:"+model.newPwd)
-                        model.needEncrypt = false
-                        autoPost(Url.User.PayPassword, needSession = true)
+                        mlog.v("confirm:" + model.newPwd)
+                        autoPost(Url.Account.PayPassword, needSession = true)
                     }
                 }
         }
     }
 
     override fun onSuccess(url: String, result: Any?) {
-        toast(if (SPUtils.hasPayPassword) "修改成功" else "设置成功")
+        if (SPUtils.hasPayPassword) toast("修改成功") else {
+            toast("设置成功")
+            SPUtils.hasPayPassword = true
+        }
         finish()
     }
 

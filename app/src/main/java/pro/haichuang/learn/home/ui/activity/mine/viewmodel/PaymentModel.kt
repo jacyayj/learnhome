@@ -17,6 +17,11 @@ class PaymentModel : BaseModel() {
             field = value
             notifyPropertyChanged(BR.type)
         }
+
+    @Params([Url.Account.Activate], "payPassword")
+    @Bindable
+    var payPassword = ""
+
     @Params([Url.Account.Recharge], "money")
     @Bindable
     var price = ""

@@ -16,6 +16,16 @@ object Url {
         const val Send = "${base}send"
     }
 
+    /**
+     * 验证码相关接口
+     */
+    object Consult {
+
+        private const val base = "consult/"
+
+        const val Save = "${base}save"
+    }
+
 
     /**
      * 判断相关接口

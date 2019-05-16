@@ -28,6 +28,7 @@ class CollegeModel : BaseObservable() {
     var province = 0L
     var logo = ""
     var tuitionFee = ""
+        get() = if (field.isEmpty()) "暂无数据" else field
     var majorIds = ""
     var isNew = false
     @Bindable

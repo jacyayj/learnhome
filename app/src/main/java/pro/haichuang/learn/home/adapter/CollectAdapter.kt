@@ -1,5 +1,6 @@
 package pro.haichuang.learn.home.adapter
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
@@ -20,6 +21,7 @@ class CollectAdapter(private var context: Activity, private var data: ArrayList<
     private val chooseData by lazy { ArrayList<CollectModel>() }
     private val originData by lazy { ArrayList<CollectModel>() }
 
+    @SuppressLint("ViewHolder")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
         val item = data[position]
         val layoutId = when (item.contentType) {
@@ -28,19 +30,16 @@ class CollectAdapter(private var context: Activity, private var data: ArrayList<
             4 -> R.layout.item_zhuanti
             else -> R.layout.item_collect_chat
         }
-        val binding: ViewDataBinding? = if (convertView == null)
-            DataBindingUtil.inflate(LayoutInflater.from(context), layoutId, parent, false)
-        else
-            DataBindingUtil.getBinding(convertView)
+        val binding: ViewDataBinding = DataBindingUtil.inflate(LayoutInflater.from(context), layoutId, parent, false)
 
         when (item.contentType) {
-            1 -> binding?.setVariable(BR.item, GsonUtil.parseObject(item.content, ItemNews::class.java))
-            2 -> binding?.setVariable(BR.item, GsonUtil.parseObject(item.content, CollegeModel::class.java))
-            4 -> binding?.setVariable(BR.item, GsonUtil.parseObject(item.content, ItemZhuanTiModel::class.java))
-            else -> binding?.setVariable(BR.item, 0)
+            1 -> binding.setVariable(BR.item, GsonUtil.parseObject(item.content, ItemNews::class.java))
+            2 -> binding.setVariable(BR.item, GsonUtil.parseObject(item.content, CollegeModel::class.java))
+            4 -> binding.setVariable(BR.item, GsonUtil.parseObject(item.content, ItemZhuanTiModel::class.java))
+            else -> binding.setVariable(BR.item, 0)
         }
-        binding?.executePendingBindings()
-        return binding?.root
+        binding.executePendingBindings()
+        return binding.root
     }
 
     fun insertData(d: MutableList<CollectModel>) {
@@ -50,13 +49,13 @@ class CollectAdapter(private var context: Activity, private var data: ArrayList<
     }
 
     fun refresh(data: MutableList<CollectModel>) {
-        this.data = data as ArrayList<CollectModel>
+        this.data = ArrayList(data)
         originData.addAll(data)
         notifyDataSetChanged()
     }
 
     fun doSearch(keyWord: String) {
-        data = if (keyWord.isEmpty())
+        data = ArrayList(if (keyWord.isEmpty())
             originData
         else {
             chooseData.clear()
@@ -65,7 +64,7 @@ class CollectAdapter(private var context: Activity, private var data: ArrayList<
                     chooseData.add(it)
             }
             chooseData
-        }
+        })
         notifyDataSetChanged()
     }
 

@@ -13,6 +13,7 @@ import pro.haichuang.learn.home.config.BaseActivity
 import pro.haichuang.learn.home.config.Constants.PRICE
 import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.utils.GsonUtil
+import pro.haichuang.learn.home.utils.SPUtils
 
 
 @ContentView(R.layout.activity_wallet)
@@ -24,8 +25,8 @@ class WalletActivity : BaseActivity() {
 
     override fun initData() {
         grid.adapter = CommonAdapter(layoutInflater, R.layout.item_wallet, amountList)
-//        if (SPUtils.isTeacher)
-        to_tixian.show()
+        if (SPUtils.isTeacher)
+            to_tixian.show()
         post(Url.User.Account, needSession = true)
     }
 

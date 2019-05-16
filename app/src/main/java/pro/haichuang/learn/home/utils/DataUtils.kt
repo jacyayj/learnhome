@@ -2,6 +2,7 @@ package pro.haichuang.learn.home.utils
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.jacy.kit.utils.DataCleanManager
 import com.vondear.rxtool.RxTool
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.bean.IconLabel
@@ -42,7 +43,7 @@ object DataUtils {
         data.add(ItemMine("用户名", "张明Mutual"))
         data.add(ItemMine("支付密码", "设置"))
         data.add(ItemMine("修改密码"))
-        data.add(ItemMine("清除缓存", "1.2M", canJump = false))
+        data.add(ItemMine("清除缓存", DataCleanManager.getTotalCacheSize(RxTool.getContext()), canJump = false))
         data.add(ItemMine("意见反馈", line = true))
         data.add(ItemMine("常见问题"))
         data.add(ItemMine("使用指南"))

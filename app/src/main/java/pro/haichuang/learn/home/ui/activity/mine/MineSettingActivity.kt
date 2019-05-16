@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import com.jacy.kit.adapter.CommonAdapter
 import com.jacy.kit.config.ContentView
+import com.jacy.kit.config.toast
+import com.jacy.kit.utils.DataCleanManager
 import com.vondear.rxtool.RxActivityTool
 import kotlinx.android.synthetic.main.activity_mine_setting.*
 import pro.haichuang.learn.home.R
@@ -30,7 +32,11 @@ class MineSettingActivity : BaseActivity() {
                 0 -> startActivityForResult(Intent(this, ModifyNameActivity::class.java).putExtra("name", data[position].subText), 0x01)
                 1 -> startActivity(Intent(this, SettPwdActivity::class.java))
                 2 -> startActivity(Intent(this, ModifyPwdActivity::class.java))
-                3 -> NoticeDialog(this).show("确定清除缓存？")
+                3 -> NoticeDialog(this){
+                    DataCleanManager.clearAllCache(this)
+                    data[position].subText = DataCleanManager.getTotalCacheSize(this)
+                    toast("清除成功")
+                }.show("确定清除缓存？")
                 4 -> startActivity(Intent(this, FeedbackActivity::class.java))
                 5 -> startActivity(Intent(this, QuestionActivity::class.java))
                 6 -> startActivity(Intent(this, AboutActivity::class.java))

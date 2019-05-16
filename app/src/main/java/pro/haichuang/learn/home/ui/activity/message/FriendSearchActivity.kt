@@ -1,10 +1,8 @@
 package pro.haichuang.learn.home.ui.activity.message
 
-import android.text.Editable
-import android.text.TextWatcher
+import android.view.inputmethod.EditorInfo
 import com.jacy.kit.adapter.CommonAdapter
 import com.jacy.kit.config.ContentView
-import com.jacy.kit.config.mStartActivity
 import com.jacy.kit.config.toast
 import com.netease.nimlib.sdk.NIMClient
 import com.netease.nimlib.sdk.RequestCallback
@@ -58,7 +56,10 @@ class FriendSearchActivity : BaseActivity() {
     }
 
     override fun setPageParams(pageParams: HttpParams) {
-        pageParams.put("queryName", queryName)
+        if (queryName.isEmpty())
+            pageParams.remove("queryName")
+        else
+            pageParams.put("queryName", queryName)
     }
 
     override fun onSuccess(url: String, result: Any?) {
@@ -74,22 +75,17 @@ class FriendSearchActivity : BaseActivity() {
     override fun initListener() {
         clear.setOnClickListener {
             search_input.setText("")
+            adapter.clear()
         }
-        listView.setOnItemClickListener { _, _, position, _ ->
-            mStartActivity(FriendSettingActivity::class.java)
-        }
-        search_input.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                queryName = s.toString()
+//        listView.setOnItemClickListener { _, _, position, _ ->
+//            mStartActivity(FriendSettingActivity::class.java)
+//        }
+        search_input.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                queryName = search_input.toString()
                 fetchPageData()
             }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            }
-        })
+            true
+        }
     }
 }

@@ -6,6 +6,7 @@ import android.support.design.widget.TabLayout
 import com.jacy.kit.adapter.CommonAdapter
 import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.mStartActivity
+import com.jacy.kit.config.toast
 import com.vondear.rxtool.RxConstTool
 import com.vondear.rxtool.RxTimeTool
 import com.zhouyou.http.model.HttpParams
@@ -19,12 +20,16 @@ import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.news.NewsDetailsActivity
 import pro.haichuang.learn.home.ui.fragment.itemview.ItemNews
 import pro.haichuang.learn.home.utils.GsonUtil
+import pro.haichuang.learn.home.utils.SPUtils
 
 @ContentView(R.layout.fragment_news)
 class NewsFragment : BaseFragment() {
 
     private lateinit var tabBeans: ArrayList<TabBean>
     private val adapter by lazy { CommonAdapter<ItemNews>(layoutInflater, R.layout.item_find_other) }
+
+    private var lastPosition = 0
+
     override fun initData() {
         listView.adapter = adapter
         post(Url.News.Channel)
@@ -46,7 +51,14 @@ class NewsFragment : BaseFragment() {
             override fun onTabUnselected(p0: TabLayout.Tab?) {
             }
 
-            override fun onTabSelected(p0: TabLayout.Tab?) {
+            override fun onTabSelected(p0: TabLayout.Tab) {
+                if (tabBeans[p0.position].vip)
+                    if (SPUtils.isVip.not()) {
+                        tab.setScrollPosition(lastPosition,0f,true)
+                        toast("该功能为VIP功能，请先购买VIP")
+                        return
+                    }
+                lastPosition = p0.position
                 fetchPageData()
             }
         })

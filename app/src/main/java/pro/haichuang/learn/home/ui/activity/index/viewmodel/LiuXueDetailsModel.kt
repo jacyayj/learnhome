@@ -22,6 +22,7 @@ class LiuXueDetailsModel : BaseModel() {
     var applyCondition = ""
         get() = if (field.isEmpty()) "暂无数据" else field
     var address = ""
+        get() = if (field.isEmpty()) "暂无数据" else field
     var accommodationFee = ""
         get() = if (field.isEmpty()) "暂无数据" else field
     var tuitionFee = ""

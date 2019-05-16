@@ -13,7 +13,10 @@ import com.vondear.rxtool.RxImageTool
 import com.vondear.rxtool.RxTimeTool
 import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.activity_zhiyuan_result.*
+import kotlinx.android.synthetic.main.item_zhiyuan_result.*
 import kotlinx.android.synthetic.main.item_zhiyuan_result.view.*
+import org.json.JSONArray
+import org.json.JSONObject
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.config.BaseActivity
 import pro.haichuang.learn.home.config.Constants.JUDGE_BATCH_STR
@@ -25,7 +28,6 @@ import pro.haichuang.learn.home.ui.dialog.ChooseZhiYuanPopup
 import pro.haichuang.learn.home.ui.dialog.ShareDialog
 import pro.haichuang.learn.home.utils.GsonUtil
 import pro.haichuang.learn.home.utils.ScreenUtils
-import pro.haichuang.learn.home.utils.mlog
 
 
 @ContentView(R.layout.activity_zhiyuan_result)
@@ -33,11 +35,12 @@ class ZhiYuanResultActivity : BaseActivity() {
 
     private val subject by lazy { intent.getStringExtra(JUDGE_SUBJECT) }
     private val batch by lazy { intent.getStringExtra(JUDGE_BATCH_STR) }
+    private val volunteerText by lazy { intent.getStringExtra("volunteerText") }
+    private val params by lazy { intent.getSerializableExtra("params") as HttpParams }
     private lateinit var data: ArrayList<CollegeModel>
     private val zhiyuanList by lazy { ArrayList<String>() }
     private val adapter by lazy {
         CommonAdapter<CollegeModel>(layoutInflater, R.layout.item_zhiyuan_result) { v, t, _ ->
-            mlog.v("priority : ${t.priority}")
             t.majors?.let {
                 v.child_listView.adapter = CommonAdapter(layoutInflater, R.layout.item_zhiyuan_result_major, it)
             }
@@ -55,6 +58,9 @@ class ZhiYuanResultActivity : BaseActivity() {
     @SuppressLint("SetTextI18n")
     override fun onSuccess(url: String, result: Any?) {
         when (url) {
+            Url.Judge.Save -> {
+                toast("修改成功")
+            }
             Url.Judge.Get -> {
                 GsonUtil.parseObject(result, ResultModel::class.java).let {
                     label_1.text = "四川 ${RxTimeTool.getCurrentDateTime("yyyy")}年 ${batch}【${it.sn} 志愿表】"
@@ -85,6 +91,25 @@ class ZhiYuanResultActivity : BaseActivity() {
     }
 
     override fun initListener() {
+        abey_group.setOnCheckedChangeListener { _, checkedId ->
+            val array = JSONArray(volunteerText)
+            for (i in 0 until array.length()) {
+                val obj = array[i]
+                if (obj is JSONObject) {
+                    if (checkedId == R.id.agree) {
+                        if (obj.getInt("id") == agree.tag) {
+                            obj.put("isObey", true)
+                        }
+                    } else {
+                        if (obj.getInt("id") == disagree.tag) {
+                            obj.put("isObey", false)
+                        }
+                    }
+                }
+            }
+            params.put("volunteerText", array.toString())
+            post(Url.Judge.Save, params, needSession = true)
+        }
         to_save.setOnClickListener {
             if (::data.isInitialized) {
                 data.forEach {

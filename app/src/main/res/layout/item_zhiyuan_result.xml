@@ -77,6 +77,7 @@
                     android:text="服从调剂:" />
 
                 <RadioGroup
+                    android:id="@+id/abey_group"
                     android:checkedButton="@id/agree"
                     android:orientation="horizontal">
 
@@ -88,6 +89,7 @@
                         android:button="@null"
                         android:checked="@={!item.checked}"
                         android:paddingHorizontal="5dp"
+                        android:tag="@{item.id}"
                         android:text="服从"
                         android:textColor="@color/color_ff3333_99"
                         android:textSize="15sp"
@@ -101,6 +103,7 @@
                         android:button="@null"
                         android:checked="@={item.checked}"
                         android:paddingHorizontal="5dp"
+                        android:tag="@{item.id}"
                         android:text="不服从"
                         android:textColor="@color/color_ff3333_99"
                         android:textSize="15sp"

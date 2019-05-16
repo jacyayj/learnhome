@@ -66,8 +66,7 @@
             android:background="@color/colorF6F6F6"
             android:divider="@null"
             android:dividerHeight="10dp"
-            android:paddingHorizontal="10dp"
-            android:paddingVertical="15dp"
+            android:padding="10dp"
             android:visibility="@{item.child.isEmpty() ? View.GONE : View.VISIBLE}" />
 
         <LinearLayout

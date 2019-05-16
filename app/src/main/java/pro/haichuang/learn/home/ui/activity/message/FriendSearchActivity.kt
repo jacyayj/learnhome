@@ -82,7 +82,7 @@ class FriendSearchActivity : BaseActivity() {
 //        }
         search_input.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                queryName = search_input.toString()
+                queryName = search_input.text.toString()
                 fetchPageData()
             }
             true

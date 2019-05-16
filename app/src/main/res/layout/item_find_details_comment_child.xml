@@ -8,13 +8,38 @@
             type="pro.haichuang.learn.home.ui.activity.find.itemmodel.CommentModel" />
     </data>
 
-    <pro.haichuang.learn.home.ui.weight.CommentTextView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/color66"
-        android:textSize="15sp"
-        app:content="@{item.text}"
-        app:name="@{item.commenter.realname}"
-        app:repeatName="@{item.parentName}" />
+        android:layout_marginBottom="@dimen/dp_10"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{item.commenter.realname}"
+            android:textColor="#295DA4"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="回复"
+            android:textColor="@color/color66"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{item.parentName}"
+            android:textColor="#295DA4"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{`:`+item.text}"
+            android:textColor="@color/color66"
+            android:textSize="15sp" />
+    </LinearLayout>
 </layout>

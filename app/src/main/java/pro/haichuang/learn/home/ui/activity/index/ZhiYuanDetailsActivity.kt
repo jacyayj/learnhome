@@ -103,6 +103,13 @@ class ZhiYuanDetailsActivity : BaseActivity() {
     private var collegeType = ""
     private var province = ""
     private var majorName = ""
+    private val volunteerText = JsonArray()
+    private val httpParams by lazy {
+        HttpParams("batch", batch.toString()).apply {
+            put("score", mScore.toString())
+            put("subject", subject.toString())
+        }
+    }
 
     override fun initData() {
         if (isDifference)
@@ -141,7 +148,11 @@ class ZhiYuanDetailsActivity : BaseActivity() {
         when (url) {
             Url.Judge.Save -> {
                 toast("志愿生成成功！")
-                mStartActivity(ZhiYuanResultActivity::class.java, Pair(JUDGE_SUBJECT, if (subject == 1) "本科" else "专科"), Pair(JUDGE_BATCH_STR, batchStr))
+                startActivity(Intent(this, ZhiYuanResultActivity::class.java)
+                        .putExtra(JUDGE_BATCH_STR, batchStr)
+                        .putExtra("params", httpParams)
+                        .putExtra("volunteerText", volunteerText.toString())
+                        .putExtra(JUDGE_SUBJECT, if (subject == 1) "本科" else "专科"))
             }
             Url.Major.List -> GsonUtil.parseArray(result, MajorModel::class.java).let {
                 it.forEach { it.subject = subject }
@@ -229,8 +240,8 @@ class ZhiYuanDetailsActivity : BaseActivity() {
         if (chooseData.size < 3) {
             TitleNoticeDialog(this).show()
         } else {
-            val array = JsonArray()
             val prioritys = ArrayList<Int>()
+
             chooseData.forEach {
                 val json = JsonObject()
                 if (it.majorIds.isEmpty()) {
@@ -241,20 +252,18 @@ class ZhiYuanDetailsActivity : BaseActivity() {
                 json.addProperty("priority", it.priority)
                 json.addProperty("isObey", it.obey)
                 json.addProperty("majorIds", it.majorIds)
-                array.add(json)
+                volunteerText.add(json)
             }
             prioritys.sort()
             if (!isOrderNumber(prioritys)) {
                 toast("选择无效，请选择连续的志愿")
                 return
             }
-            post(Url.Judge.Save, HttpParams("batch", batch.toString()).apply {
-                put("score", mScore.toString())
-                put("subject", subject.toString())
-                put("volunteerText", array.toString())
-            }, needSession = true)
+            httpParams.put("volunteerText", volunteerText.toString())
+            post(Url.Judge.Save, httpParams, needSession = true)
         }
     }
+
 
     /**
      * 是否是连续数字

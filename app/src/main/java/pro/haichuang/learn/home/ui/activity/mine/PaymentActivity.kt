@@ -23,7 +23,6 @@ import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.mine.viewmodel.PaymentModel
 import pro.haichuang.learn.home.ui.dialog.PasswordDialog
 import pro.haichuang.learn.home.utils.GsonUtil
-import pro.haichuang.learn.home.utils.SPUtils
 import pro.haichuang.learn.home.utils.ShareUtils
 
 
@@ -63,6 +62,7 @@ class PaymentActivity : DataBindingActivity<PaymentModel>() {
         when (url) {
             Url.User.Account -> {
                 balance.text = "（账户余额:￥${GsonUtil.getString(result, "credit")}"
+                model.hasPayPassword = GsonUtil.getBoolean(result, "hasPayPassword")
             }
             Url.Account.Activate, Url.Account.Recharge -> {
                 when (model.type) {
@@ -100,7 +100,7 @@ class PaymentActivity : DataBindingActivity<PaymentModel>() {
                 autoPost(Url.Account.Recharge, showLoading = true, needSession = true)
             else {
                 if (model.type == 1)
-                    if (SPUtils.hasPayPassword)
+                    if (model.hasPayPassword)
                         PasswordDialog(this) {
                             model.payPassword = it
                             autoPost(Url.Account.Activate, showLoading = true, needSession = true)

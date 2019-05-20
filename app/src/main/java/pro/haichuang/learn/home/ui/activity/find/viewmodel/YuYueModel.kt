@@ -22,6 +22,8 @@ class YuYueModel : BaseModel() {
     @Params([Url.Teacher.Order], "payPassword")
     var payPassword = ""
 
+    var hasPayPassword = false
+
     @Params([Url.Teacher.Order], "question")
     @Bindable
     var question = ""

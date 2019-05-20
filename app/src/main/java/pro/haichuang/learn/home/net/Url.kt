@@ -3,8 +3,10 @@ package pro.haichuang.learn.home.net
 object Url {
 
     const val app_key = "s3o8KTWUsN25JnuIE97T6zHcIo6BOdOw"
-    const val base_url = "http://118.24.80.29:8080/learn-home-server/api/app/"
-    const val image_base_url = "http://118.24.80.29:8080/learn-home-server"
+//    const val base_url = "http://118.24.80.29:8080/learn-home-server/api/app/"
+    const val base_url = "http://47.98.158.91:8080/learn-home-server/api/app/"
+//    const val image_base_url = "http://118.24.80.29:8080/learn-home-server"
+    const val image_base_url = "http://47.98.158.91:8080/learn-home-server"
 
     /**
      * 验证码相关接口
@@ -302,6 +304,15 @@ object Url {
         private const val base = "upload/"
 
         const val Upload = "${base}upload"
+    }
+
+    /**
+     * 意见反馈
+     */
+    object Guestbook {
+        private const val base = "guestbook/"
+
+        const val Save = "${base}save"
     }
 
     /**

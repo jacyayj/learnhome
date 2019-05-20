@@ -26,7 +26,7 @@ class TiXianActivity : BaseActivity() {
 
     override fun initListener() {
         draw.setOnClickListener {
-            post(Url.Account.Recharge, HttpParams("amount", amount.text.toString()), needSession = true)
+            post(Url.Account.Draw, HttpParams("amount", amount.text.toString()), needSession = true)
         }
         amount.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {

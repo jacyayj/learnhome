@@ -115,7 +115,6 @@
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="25dp"
             android:background="@drawable/icon_find_release"
-            android:elevation="5dp"
-            android:visibility="gone" />
+            android:elevation="5dp" />
     </FrameLayout>
 </LinearLayout>

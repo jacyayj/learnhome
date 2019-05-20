@@ -1,15 +1,12 @@
 package pro.haichuang.learn.home.ui.activity.index
 
 import android.annotation.SuppressLint
-import android.graphics.Bitmap
 import android.view.View
 import com.jacy.kit.adapter.CommonAdapter
 import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.gone
 import com.jacy.kit.config.show
 import com.jacy.kit.config.toast
-import com.vondear.rxtool.RxFileTool
-import com.vondear.rxtool.RxImageTool
 import com.vondear.rxtool.RxTimeTool
 import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.activity_zhiyuan_result.*
@@ -43,6 +40,25 @@ class ZhiYuanResultActivity : BaseActivity() {
         CommonAdapter<CollegeModel>(layoutInflater, R.layout.item_zhiyuan_result) { v, t, _ ->
             t.majors?.let {
                 v.child_listView.adapter = CommonAdapter(layoutInflater, R.layout.item_zhiyuan_result_major, it)
+            }
+            v.abey_group.setOnCheckedChangeListener { _, checkedId ->
+                val array = JSONArray(volunteerText)
+                for (i in 0 until array.length()) {
+                    val obj = array[i]
+                    if (obj is JSONObject) {
+                        if (checkedId == R.id.agree) {
+                            if (obj.getInt("collegeId") == agree.tag) {
+                                obj.put("isObey", true)
+                            }
+                        } else {
+                            if (obj.getInt("collegeId") == disagree.tag) {
+                                obj.put("isObey", false)
+                            }
+                        }
+                    }
+                }
+                params.put("volunteerText", array.toString())
+                post(Url.Judge.Save, params, needSession = true)
             }
             v.choose_zhiyuan.setOnClickListener {
                 showSortDialog(it, t)
@@ -91,25 +107,6 @@ class ZhiYuanResultActivity : BaseActivity() {
     }
 
     override fun initListener() {
-        abey_group.setOnCheckedChangeListener { _, checkedId ->
-            val array = JSONArray(volunteerText)
-            for (i in 0 until array.length()) {
-                val obj = array[i]
-                if (obj is JSONObject) {
-                    if (checkedId == R.id.agree) {
-                        if (obj.getInt("id") == agree.tag) {
-                            obj.put("isObey", true)
-                        }
-                    } else {
-                        if (obj.getInt("id") == disagree.tag) {
-                            obj.put("isObey", false)
-                        }
-                    }
-                }
-            }
-            params.put("volunteerText", array.toString())
-            post(Url.Judge.Save, params, needSession = true)
-        }
         to_save.setOnClickListener {
             if (::data.isInitialized) {
                 data.forEach {
@@ -117,7 +114,7 @@ class ZhiYuanResultActivity : BaseActivity() {
                 }
                 qr_code_view.show()
                 qr_code_view.postDelayed({
-                    RxImageTool.save(ScreenUtils.shotScrollView(root), RxFileTool.getSDCardPath() + "test.jpg", Bitmap.CompressFormat.JPEG)
+                    ScreenUtils.shotScrollView(root)
                 }, 100)
                 toast("保存成功")
                 root.postDelayed({
@@ -129,6 +126,7 @@ class ZhiYuanResultActivity : BaseActivity() {
             }
         }
         to_share.setOnClickListener {
+            ScreenUtils.shotScrollView(root)
             ShareDialog(this).show()
         }
     }

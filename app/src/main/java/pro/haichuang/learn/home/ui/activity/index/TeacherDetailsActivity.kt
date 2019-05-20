@@ -34,7 +34,6 @@ import pro.haichuang.learn.home.ui.dialog.NoticeDialog
 import pro.haichuang.learn.home.ui.dialog.PasswordDialog
 import pro.haichuang.learn.home.ui.dialog.PaymentDialog
 import pro.haichuang.learn.home.utils.GsonUtil
-import pro.haichuang.learn.home.utils.SPUtils
 import pro.haichuang.learn.home.utils.ShareUtils
 
 
@@ -57,7 +56,7 @@ class TeacherDetailsActivity : DataBindingActivity<TeacherDetailsModel>() {
         PaymentDialog(this) {
             model.payType = it
             if (it == 1) {
-                if (SPUtils.hasPayPassword)
+                if (model.hasPayPassword)
                     PasswordDialog(this) {
                         model.payPassword = it
                         autoPost(Url.Teacher.Order, needSession = true)
@@ -97,6 +96,7 @@ class TeacherDetailsActivity : DataBindingActivity<TeacherDetailsModel>() {
     override fun onSuccess(url: String, result: Any?) {
         when (url) {
             Url.User.Account -> {
+                model.hasPayPassword = GsonUtil.getBoolean(result, "hasPayPassword")
                 payDialog.balance = GsonUtil.getString(result, "credit")
                 payDialog.show()
             }

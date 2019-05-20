@@ -46,11 +46,9 @@ class FindFragment : BaseFragment() {
                 fetchPageData()
                 if (p0?.position == 0) {
                     ad_view.show()
-                    to_release.show()
                     listView.adapter = firstAdapter
                 } else {
                     ad_view.gone()
-                    to_release.gone()
                     listView.adapter = otherAdapter
                 }
             }

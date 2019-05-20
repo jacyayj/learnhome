@@ -49,7 +49,7 @@ class YuYueActivity : DataBindingActivity<YuYueModel>() {
         PaymentDialog(this) {
             model.payType = it
             if (it == 1) {
-                if (SPUtils.hasPayPassword)
+                if (model.hasPayPassword)
                     PasswordDialog(this) {
                         model.payPassword = it
                         autoPost(Url.Teacher.Order, needSession = true)
@@ -116,6 +116,7 @@ class YuYueActivity : DataBindingActivity<YuYueModel>() {
     override fun onSuccess(url: String, result: Any?) {
         when (url) {
             Url.User.Account -> {
+                model.hasPayPassword = GsonUtil.getBoolean(result, "hasPayPassword")
                 payDialog.balance = GsonUtil.getString(result, "credit")
                 payDialog.show()
             }

@@ -1,5 +1,6 @@
 package pro.haichuang.learn.home.ui.activity.index
 
+import android.annotation.SuppressLint
 import android.view.View
 import com.jacy.kit.adapter.CommonAdapter
 import com.jacy.kit.config.ContentView
@@ -33,24 +34,38 @@ class ZhiYuanPiCiActivity : BaseActivity() {
         post(Url.Judge.Score, HttpParams("province", province))
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onSuccess(url: String, result: Any?) {
-        GsonUtil.parseArray(result, PiCiModel::class.java).let {
+        GsonUtil.parseArray(result, PiCiModel::class.java).let { data ->
 
-            val score = if (isDifference) it.find { it.enrollBatch == batch }?.let { if (subject == 1) it.score1 - mScore else it.score2 - mScore }
+            val score = if (isDifference) data.find { it.enrollBatch == batch }?.let { if (subject == 1) it.score1 + mScore else it.score2 + mScore }
                     ?: 0
             else mScore
-
-            it.find {
+            data.forEachIndexed { i, it ->
                 when (subject) {
-                    1 -> score >= it.score1
-                    2 -> score >= it.score2
-                    else -> false
+                    1 -> {
+                        if (score >= it.score1) {
+                            it.fit = true
+                            pici.text = " ${it.enrollBatchStr}"
+                            if (i == 0)
+                                data[1].fit = true
+                            if (i == 0 || i == 1)
+                                data[2].fit = true
+                        }
+                    }
+                    2 -> {
+                        if (score >= it.score2) {
+                            it.fit = true
+                            pici.text = " ${it.enrollBatchStr}"
+                            if (i == 0)
+                                data[1].fit = true
+                            if (i == 0 || i == 1)
+                                data[2].fit = true
+                        }
+                    }
                 }
-            }?.let {
-                it.fit = true
-                pici.text = " ${it.enrollBatchStr}"
             }
-            listView.adapter = CommonAdapter(layoutInflater, R.layout.item_pici, it)
+            listView.adapter = CommonAdapter(layoutInflater, R.layout.item_pici, data)
         }
     }
 

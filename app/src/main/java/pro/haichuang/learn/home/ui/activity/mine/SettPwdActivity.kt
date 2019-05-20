@@ -7,18 +7,17 @@ import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.config.DataBindingActivity
 import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.mine.viewmodel.SettPwdModel
-import pro.haichuang.learn.home.utils.SPUtils
+import pro.haichuang.learn.home.utils.GsonUtil
 import pro.haichuang.learn.home.utils.mlog
 
 
 @ContentView(R.layout.activity_sett_pwd)
 class SettPwdActivity : DataBindingActivity<SettPwdModel>() {
 
+    private var hasPayPassword = false
 
     override fun initData() {
-        titleModel.title = if (SPUtils.hasPayPassword) "修改支付密码" else "设置支付密码"
-        if (!SPUtils.hasPayPassword)
-            model.step = 1
+        post(Url.User.Account, needSession = true)
     }
 
     override fun initListener() {
@@ -46,15 +45,23 @@ class SettPwdActivity : DataBindingActivity<SettPwdModel>() {
     }
 
     override fun onSuccess(url: String, result: Any?) {
-        if (SPUtils.hasPayPassword) toast("修改成功") else {
-            toast("设置成功")
-            SPUtils.hasPayPassword = true
+        when (url) {
+            Url.User.Account -> {
+                hasPayPassword = GsonUtil.getBoolean(result, "hasPayPassword")
+                titleModel.title = if (hasPayPassword) "修改支付密码" else "设置支付密码"
+                if (!hasPayPassword)
+                    model.step = 1
+            }
+            Url.Account.PayPassword -> {
+                if (hasPayPassword) toast("修改成功") else
+                    toast("设置成功")
+                finish()
+            }
         }
-        finish()
     }
 
     override fun onBackPressed() {
-        if (model.step == if (SPUtils.hasPayPassword) 0 else 1)
+        if (model.step == if (hasPayPassword) 0 else 1)
             super.onBackPressed()
         else {
             pwd.setText("")

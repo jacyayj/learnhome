@@ -14,7 +14,7 @@ class TeacherDetailsModel : BaseModel() {
             field = value
             notifyPropertyChanged(BR.online)
         }
-
+    var hasPayPassword = false
     @Bindable
     var hasCollect = false
         set(value) {

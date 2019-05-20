@@ -8,12 +8,12 @@ import pro.haichuang.learn.home.bean.BaseModel
 import pro.haichuang.learn.home.net.Url
 
 class SettPwdModel : BaseModel() {
-    @Params([Url.User.PayPassword], "oldPassword")
+    @Params([Url.Account.PayPassword], "oldPassword")
     var originPwd = ""
 
     var newPwd = ""
 
-    @Params([Url.User.PayPassword], "newPassword")
+    @Params([Url.Account.PayPassword], "newPassword")
     var confirmPwd = ""
 
     @Bindable

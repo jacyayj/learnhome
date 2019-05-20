@@ -22,6 +22,8 @@ class PaymentModel : BaseModel() {
     @Bindable
     var payPassword = ""
 
+    var hasPayPassword = false
+
     @Params([Url.Account.Recharge], "money")
     @Bindable
     var price = ""

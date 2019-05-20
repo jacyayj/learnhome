@@ -58,7 +58,10 @@ class MineFragment : BaseFragment(), AMapLocationListener {
     }
 
     override fun initData() {
-        listView.adapter = CommonAdapter(layoutInflater, R.layout.item_mine, DataUtils.formatMineListData())
+        listView.adapter = CommonAdapter(layoutInflater, R.layout.item_mine, DataUtils.formatMineListData().apply {
+            if (SPUtils.isTeacher)
+                removeAt(4)
+        })
         locationClient.startLocation()
     }
 
@@ -70,7 +73,6 @@ class MineFragment : BaseFragment(), AMapLocationListener {
                 fans_count.text = user.totalFans.toString()
                 release_count.text = user.totalPublish.toString()
                 comment_count.text = user.totalComment.toString()
-                SPUtils.hasPayPassword = user.hasPayPassword
                 if (SPUtils.isTeacher) {
                     name.text = user.teachername
                     ImageBinding.displayNet(header, user.teacherImg)
@@ -113,8 +115,8 @@ class MineFragment : BaseFragment(), AMapLocationListener {
                 1 -> mStartActivity(JoinGroupActivity::class.java)
                 2 -> mStartActivity(CollectActivity::class.java)
                 3 -> if (SPUtils.isTeacher) mStartActivity(OrderTeacherActivity::class.java) else mStartActivity(OrderActivity::class.java)
-                4 -> mStartActivity(FileActivity::class.java)
-                5 -> InvateDialog(context!!).show()
+                4 -> if (SPUtils.isTeacher) InvateDialog(activity!!).show() else mStartActivity(FileActivity::class.java)
+                5 -> InvateDialog(activity!!).show()
             }
         }
         header.setOnClickListener {

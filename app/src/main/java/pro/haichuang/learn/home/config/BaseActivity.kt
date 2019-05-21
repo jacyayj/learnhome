@@ -86,7 +86,7 @@ abstract class BaseActivity : RootActivity(), OnRefreshLoadMoreListener {
                 sign += "$it=${map[it]}&"
         }
         sign += "key=${Url.app_key}"
-        params.put("sign", RxEncryptTool.encryptMD5ToString(sign))
+        params.put("sign", RxEncryptTool.encryptMD5ToString(sign).toLowerCase())
         return params
     }
 

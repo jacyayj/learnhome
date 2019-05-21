@@ -6,7 +6,6 @@ import android.support.design.widget.TabLayout
 import com.jacy.kit.adapter.CommonAdapter
 import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.mStartActivity
-import com.jacy.kit.config.toast
 import com.vondear.rxtool.RxConstTool
 import com.vondear.rxtool.RxTimeTool
 import com.zhouyou.http.model.HttpParams
@@ -17,7 +16,9 @@ import pro.haichuang.learn.home.bean.TabBean
 import pro.haichuang.learn.home.config.BaseFragment
 import pro.haichuang.learn.home.config.Constants
 import pro.haichuang.learn.home.net.Url
+import pro.haichuang.learn.home.ui.activity.mine.BindVipActivity
 import pro.haichuang.learn.home.ui.activity.news.NewsDetailsActivity
+import pro.haichuang.learn.home.ui.dialog.NoticeDialog
 import pro.haichuang.learn.home.ui.fragment.itemview.ItemNews
 import pro.haichuang.learn.home.utils.GsonUtil
 import pro.haichuang.learn.home.utils.SPUtils
@@ -45,7 +46,7 @@ class NewsFragment : BaseFragment() {
             mStartActivity(NewsDetailsActivity::class.java, Pair(Constants.NEWS_ID, adapter.getItem(position).id))
         }
         tab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabReselected(p0: TabLayout.Tab?) {
+            override fun onTabReselected(p0: TabLayout.Tab) {
             }
 
             override fun onTabUnselected(p0: TabLayout.Tab?) {
@@ -54,8 +55,10 @@ class NewsFragment : BaseFragment() {
             override fun onTabSelected(p0: TabLayout.Tab) {
                 if (tabBeans[p0.position].vip)
                     if (SPUtils.isVip.not()) {
-                        tab.setScrollPosition(lastPosition,0f,true)
-                        toast("该功能为VIP功能，请先购买VIP")
+                        tab.getTabAt(lastPosition)?.select()
+                        NoticeDialog(context!!) {
+                            mStartActivity(BindVipActivity::class.java)
+                        }.show("提示", "该功能为VIP功能，请先购买VIP", "去购买")
                         return
                     }
                 lastPosition = p0.position

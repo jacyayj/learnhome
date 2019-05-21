@@ -27,7 +27,7 @@ object SPUtils {
         get() = Gson().fromJson(sp.getString("userInfo", null), UserInfo::class.java)
         set(value) {
             session = value?.sessionKey
-            isVip = value?.vip ?: false
+            isVip = value?.isVip ?: false
             isTeacher = value?.teacher ?: false
             sp.edit().putString("userInfo", value?.toJson()).apply()
         }

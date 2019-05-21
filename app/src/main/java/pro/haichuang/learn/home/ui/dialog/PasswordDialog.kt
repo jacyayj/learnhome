@@ -21,11 +21,10 @@ class PasswordDialog(context: Context, private val result: (pwd: String) -> Unit
         }
         pwd.setOnTextChangeListener { s, b ->
             if (b) {
-                result(RxEncryptTool.encryptMD5ToString(s))
+                result(RxEncryptTool.encryptMD5ToString(s).toLowerCase())
                 dismiss()
             }
         }
-
     }
 
     override fun show() {

@@ -80,7 +80,7 @@ class MineFragment : BaseFragment(), AMapLocationListener {
                     name.text = user.realname
                     ImageBinding.displayNet(header, user.userImg)
                 }
-                to_vip.setImageResource(if (user.vip) R.drawable.icon_vip else R.drawable.icon_vip_not)
+                to_vip.setImageResource(if (user.isVip) R.drawable.icon_vip else R.drawable.icon_vip_not)
             }
             Url.Upload.Upload -> {
                 val params = HttpParams()

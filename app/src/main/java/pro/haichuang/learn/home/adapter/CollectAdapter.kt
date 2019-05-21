@@ -11,6 +11,7 @@ import android.widget.BaseAdapter
 import pro.haichuang.learn.home.BR
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.ui.activity.index.itemmodel.CollegeModel
+import pro.haichuang.learn.home.ui.activity.index.itemmodel.ItemTeacherModel
 import pro.haichuang.learn.home.ui.activity.index.itemmodel.ItemZhuanTiModel
 import pro.haichuang.learn.home.ui.activity.mine.itemmodel.CollectModel
 import pro.haichuang.learn.home.ui.fragment.itemview.ItemNews
@@ -27,6 +28,7 @@ class CollectAdapter(private var context: Activity, private var data: ArrayList<
         val layoutId = when (item.contentType) {
             1 -> R.layout.item_personal_index
             2 -> R.layout.item_height_school_search
+            3 -> R.layout.item_teacher
             4 -> R.layout.item_zhuanti
             else -> R.layout.item_collect_chat
         }
@@ -35,6 +37,7 @@ class CollectAdapter(private var context: Activity, private var data: ArrayList<
         when (item.contentType) {
             1 -> binding.setVariable(BR.item, GsonUtil.parseObject(item.content, ItemNews::class.java))
             2 -> binding.setVariable(BR.item, GsonUtil.parseObject(item.content, CollegeModel::class.java))
+            3 -> binding.setVariable(BR.item, GsonUtil.parseObject(item.content, ItemTeacherModel::class.java))
             4 -> binding.setVariable(BR.item, GsonUtil.parseObject(item.content, ItemZhuanTiModel::class.java))
             else -> binding.setVariable(BR.item, 0)
         }

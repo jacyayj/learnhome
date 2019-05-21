@@ -1,5 +1,7 @@
 package pro.haichuang.learn.home.bean
 
+import com.google.gson.annotations.SerializedName
+
 class UserInfo {
     var id = 0
     var totalAttention = 0
@@ -14,7 +16,8 @@ class UserInfo {
     var sessionKey = ""
     var imToken = ""
     var imAccid = ""
-    var vip = false
+    @SerializedName("isVip",alternate = ["vip"])
+    var isVip = false
     var teacher = false
     var hasPayPassword = false
 }

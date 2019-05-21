@@ -14,6 +14,7 @@ class ItemNews : BaseObservable() {
     var title = ""
     var description = ""
     var typeName = ""
+    var channelPath = ""
     var recommend = false
     var picArr: ArrayList<ImageBean>? = null
     val picPath

@@ -3,7 +3,6 @@ package pro.haichuang.learn.home.ui.activity.index
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.support.design.widget.TabLayout
-import com.google.gson.GsonBuilder
 import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.gone
 import com.jacy.kit.config.show
@@ -25,7 +24,6 @@ import pro.haichuang.learn.home.config.DataBindingActivity
 import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.index.viewmodel.HeightSchoolDetailsModel
 import pro.haichuang.learn.home.utils.GsonUtil
-import pro.haichuang.learn.home.utils.mlog
 
 
 @ContentView(R.layout.activity_height_school_details)
@@ -58,7 +56,7 @@ class HeightSchoolDetailsActivity : DataBindingActivity<HeightSchoolDetailsModel
 //        }
         collect.setOnClickListener {
             post(Url.College.Collect, HttpParams("collegeId", model.id.toString()).apply {
-                put("operate", if (model.hasCollect) "1" else "0")
+                put("operate", if (model.hasCollect) "0" else "1")
             }, needSession = true) {
                 toast(if (model.hasCollect) "取消收藏成功" else "收藏成功")
                 model.hasCollect = model.hasCollect.not()

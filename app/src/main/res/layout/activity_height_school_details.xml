@@ -84,64 +84,79 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical">
 
-                        <ImageView
-                            android:layout_marginEnd="10dp"
-                            android:src="@drawable/icon_school_211"
-                            android:visibility="@{model.collegeLevel.contains(`1`) ? View.VISIBLE : View.GONE}" />
+                        <HorizontalScrollView android:layout_weight="1">
 
-                        <ImageView
-                            android:layout_marginEnd="10dp"
-                            android:src="@drawable/icon_school_985"
-                            android:visibility="@{model.collegeLevel.contains(`2`) ? View.VISIBLE : View.GONE}" />
+                            <LinearLayout
+                                style="@style/wrap_layout"
+                                android:orientation="horizontal">
 
-                        <ImageView
-                            android:layout_marginEnd="10dp"
-                            android:src="@drawable/icon_school_shifan"
-                            android:visibility="@{model.collegeLevel.contains(`3`) ? View.VISIBLE : View.GONE}" />
+                                <ImageView
+                                    style="@style/wrap_layout"
+                                    android:layout_marginEnd="10dp"
+                                    android:src="@drawable/icon_school_211"
+                                    android:visibility="@{model.collegeLevel.contains(`1`) ? View.VISIBLE : View.GONE}" />
 
-                        <ImageView
-                            android:layout_marginEnd="10dp"
-                            android:src="@drawable/icon_school_gugan"
-                            android:visibility="@{model.collegeLevel.contains(`4`) ? View.VISIBLE : View.GONE}" />
+                                <ImageView
+                                    style="@style/wrap_layout"
+                                    android:layout_marginEnd="10dp"
+                                    android:src="@drawable/icon_school_985"
+                                    android:visibility="@{model.collegeLevel.contains(`2`) ? View.VISIBLE : View.GONE}" />
 
-                        <ImageView
-                            android:layout_marginEnd="10dp"
-                            android:src="@drawable/icon_school_985"
-                            android:visibility="@{model.collegeLevel.contains(`5`) ? View.VISIBLE : View.GONE}" />
+                                <ImageView
+                                    style="@style/wrap_layout"
+                                    android:layout_marginEnd="10dp"
+                                    android:src="@drawable/icon_school_shifan"
+                                    android:visibility="@{model.collegeLevel.contains(`3`) ? View.VISIBLE : View.GONE}" />
 
-                        <ImageView
-                            android:layout_marginEnd="10dp"
-                            android:src="@drawable/icon_school_yi"
-                            android:visibility="@{model.collegeLevel.contains(`6`) ? View.VISIBLE : View.GONE}" />
+                                <ImageView
+                                    style="@style/wrap_layout"
+                                    android:layout_marginEnd="10dp"
+                                    android:src="@drawable/icon_school_gugan"
+                                    android:visibility="@{model.collegeLevel.contains(`4`) ? View.VISIBLE : View.GONE}" />
 
-                        <ImageView
-                            android:layout_marginEnd="10dp"
-                            android:src="@drawable/icon_school_fa"
-                            android:visibility="@{model.collegeLevel.contains(`7`) ? View.VISIBLE : View.GONE}" />
+                                <ImageView
+                                    style="@style/wrap_layout"
+                                    android:layout_marginEnd="10dp"
+                                    android:src="@drawable/icon_school_985"
+                                    android:visibility="@{model.collegeLevel.contains(`5`) ? View.VISIBLE : View.GONE}" />
 
-                        <ImageView
-                            android:layout_marginEnd="10dp"
-                            android:src="@drawable/icon_school_shuang"
-                            android:visibility="@{model.collegeLevel.contains(`8`) ? View.VISIBLE : View.GONE}" />
+                                <ImageView
+                                    style="@style/wrap_layout"
+                                    android:layout_marginEnd="10dp"
+                                    android:src="@drawable/icon_school_yi"
+                                    android:visibility="@{model.collegeLevel.contains(`6`) ? View.VISIBLE : View.GONE}" />
 
-                        <ImageView
-                            android:layout_marginEnd="10dp"
-                            android:src="@drawable/icon_school_shuangyiliu"
-                            android:visibility="@{model.collegeLevel.contains(`9`) ? View.VISIBLE : View.GONE}" />
+                                <ImageView
+                                    style="@style/wrap_layout"
+                                    android:layout_marginEnd="10dp"
+                                    android:src="@drawable/icon_school_fa"
+                                    android:visibility="@{model.collegeLevel.contains(`7`) ? View.VISIBLE : View.GONE}" />
 
-                        <FrameLayout android:layout_weight="1">
+                                <ImageView
+                                    style="@style/wrap_layout"
+                                    android:layout_marginEnd="10dp"
+                                    android:src="@drawable/icon_school_shuang"
+                                    android:visibility="@{model.collegeLevel.contains(`8`) ? View.VISIBLE : View.GONE}" />
 
-                            <TextView
-                                android:id="@+id/collect"
-                                android:layout_width="57dp"
-                                android:layout_height="match_parent"
-                                android:layout_gravity="center_vertical|end"
-                                android:background="@drawable/stroke_7fd2ff_radius_5dp"
-                                android:gravity="center"
-                                android:text="@{model.hasCollect?`已收藏`: `收藏`}"
-                                android:textColor="@color/color7FD2FF"
-                                android:textSize="16sp" />
-                        </FrameLayout>
+                                <ImageView
+                                    style="@style/wrap_layout"
+                                    android:layout_marginEnd="10dp"
+                                    android:src="@drawable/icon_school_shuangyiliu"
+                                    android:visibility="@{model.collegeLevel.contains(`9`) ? View.VISIBLE : View.GONE}" />
+                            </LinearLayout>
+                        </HorizontalScrollView>
+
+
+                        <TextView
+                            android:id="@+id/collect"
+                            android:layout_width="57dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical|end"
+                            android:background="@drawable/stroke_7fd2ff_radius_5dp"
+                            android:gravity="center"
+                            android:text="@{model.hasCollect?`已收藏`: `收藏`}"
+                            android:textColor="@color/color7FD2FF"
+                            android:textSize="16sp" />
                     </TableRow>
                 </TableLayout>
 

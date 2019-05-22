@@ -89,7 +89,7 @@ class TeacherDetailsActivity : DataBindingActivity<TeacherDetailsModel>() {
         model.online = intent.getBooleanExtra("online", false)
         titleModel.title = if (model.online) "名师在线" else "老师详情"
         comment.adapter = adapter
-        post(Url.Teacher.Get, HttpParams("id", id.toString()))
+        post(Url.Teacher.Get, HttpParams("id", id.toString()), needSession = true)
         post(Url.Teacher.CommentList, HttpParams("teacherId", id.toString()))
     }
 
@@ -165,7 +165,7 @@ class TeacherDetailsActivity : DataBindingActivity<TeacherDetailsModel>() {
         }
         follow.setOnClickListener {
             post(Url.Teacher.Collect, HttpParams("teacherId", model.id.toString()).apply {
-                put("operate", if (model.hasCollect) "1" else "0")
+                put("operate", if (model.hasCollect) "0" else "1")
             }, needSession = true) {
                 toast(if (model.hasCollect) "取消关注成功" else "关注成功")
                 model.hasCollect = model.hasCollect.not()

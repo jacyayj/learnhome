@@ -35,11 +35,13 @@ class TeacherDetailsModel : BaseModel() {
     var endTime = ""
     var teachername = ""
     var teacherImg = ""
+    var imAccid = ""
     var commentCount = 0
     var attentionCount = 0
     var questionCount = 0
     var subject = 0
     var type = 0
+    var orderId = 0
 
     val subjectStr
         get() = when (subject) {

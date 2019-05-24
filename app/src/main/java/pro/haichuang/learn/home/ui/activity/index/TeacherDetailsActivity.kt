@@ -5,13 +5,19 @@ import android.app.Activity
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Handler
 import android.os.Message
 import com.google.gson.JsonObject
 import com.jacy.kit.adapter.CommonAdapter
 import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.mStartActivity
+import com.jacy.kit.config.toJson
 import com.jacy.kit.config.toast
+import com.netease.nimlib.sdk.NIMClient
+import com.netease.nimlib.sdk.msg.MsgService
+import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum
+import com.netease.nimlib.sdk.msg.model.CustomNotification
 import com.tencent.mm.opensdk.modelpay.PayReq
 import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.activity_teacher_details.*
@@ -34,6 +40,7 @@ import pro.haichuang.learn.home.ui.dialog.NoticeDialog
 import pro.haichuang.learn.home.ui.dialog.PasswordDialog
 import pro.haichuang.learn.home.ui.dialog.PaymentDialog
 import pro.haichuang.learn.home.utils.GsonUtil
+import pro.haichuang.learn.home.utils.HttpUtils
 import pro.haichuang.learn.home.utils.ShareUtils
 
 
@@ -49,7 +56,18 @@ class TeacherDetailsActivity : DataBindingActivity<TeacherDetailsModel>() {
         }
     }
     private val successDialog by lazy {
-        NoticeDialog(this)
+        NoticeDialog(this) {
+            HttpUtils.updateOrderTime(this, model.imAccid, "", model.orderId, true)
+            val extension = HashMap<String, Any>()
+            extension["orderId"] = model.orderId
+            extension["orderTime"] = ""
+            val notification = CustomNotification()
+            notification.sessionId = account
+            notification.sessionType = SessionTypeEnum.P2P
+            notification.isSendToOnlineUserOnly = false
+            notification.content = extension.toJson()
+            NIMClient.getService(MsgService::class.java).sendCustomNotification(notification)
+        }
     }
 
     private val payDialog by lazy {
@@ -76,7 +94,6 @@ class TeacherDetailsActivity : DataBindingActivity<TeacherDetailsModel>() {
                     Constants.ALIPAY -> {
                         when (GsonUtil.getString(msg.obj, "resultStatus")) {
                             "9000" -> showSuccess()
-
                             "6001" -> toast("支付取消")
                         }
                     }
@@ -85,7 +102,10 @@ class TeacherDetailsActivity : DataBindingActivity<TeacherDetailsModel>() {
         }
     }
 
+    private val receiver by lazy { PayResult() }
+
     override fun initData() {
+        registerReceiver(receiver, IntentFilter("payResult"))
         model.online = intent.getBooleanExtra("online", false)
         titleModel.title = if (model.online) "名师在线" else "老师详情"
         comment.adapter = adapter
@@ -106,7 +126,10 @@ class TeacherDetailsActivity : DataBindingActivity<TeacherDetailsModel>() {
             }
             Url.Teacher.Order -> {
                 when (model.payType) {
-                    1 -> showSuccess()
+                    1 -> {
+                        showSuccess()
+                        model.orderId = GsonUtil.getInt(result, "orderId")
+                    }
                     12 -> {
                         val mreq = GsonUtil.parseObject(result, JsonObject::class.java)
                         val req = PayReq()
@@ -117,10 +140,12 @@ class TeacherDetailsActivity : DataBindingActivity<TeacherDetailsModel>() {
                         req.nonceStr = mreq.get("noncestr").asString
                         req.timeStamp = mreq.get("timestamp").asLong.toString()
                         req.sign = mreq.get("sign").asString
+                        model.orderId = mreq.get("orderId").asInt
                         ShareUtils.toWXPay(req)
                     }
                     13 -> {
                         ShareUtils.toAliPay(GsonUtil.getString(result, "orderString"), this, mHandler)
+                        model.orderId = GsonUtil.getInt(result, "orderId")
                     }
                 }
             }
@@ -129,7 +154,6 @@ class TeacherDetailsActivity : DataBindingActivity<TeacherDetailsModel>() {
                 model.online = this.model.online
                 notifyModel(model)
             }
-
             Url.Teacher.CommentList -> {
                 GsonUtil.parseRows(result, CommentModel::class.java).list?.let {
                     dealRows(adapter, it)
@@ -139,7 +163,7 @@ class TeacherDetailsActivity : DataBindingActivity<TeacherDetailsModel>() {
     }
 
     fun showSuccess() {
-        successDialog.show("友情提示", "支付成功！请等待老师接单", "确定")
+        successDialog.show("友情提示", "支付成功！点击咨询立即联系老师", "咨询")
     }
 
     override fun initListener() {
@@ -199,4 +223,10 @@ class TeacherDetailsActivity : DataBindingActivity<TeacherDetailsModel>() {
             }
         }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(receiver)
+    }
+
 }

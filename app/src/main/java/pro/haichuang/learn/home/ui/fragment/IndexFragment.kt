@@ -2,9 +2,11 @@ package pro.haichuang.learn.home.ui.fragment
 
 import android.annotation.SuppressLint
 import android.app.Activity.RESULT_OK
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.view.View
+import android.widget.ImageView
 import com.amap.api.location.AMapLocation
 import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
@@ -18,7 +20,7 @@ import com.jacy.kit.adapter.CommonRecyclerAdapter
 import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.mStartActivity
 import com.jacy.kit.config.mStartActivityForResult
-import com.jacy.kit.utils.toDownInt
+import com.youth.banner.loader.ImageLoader
 import kotlinx.android.synthetic.main.fragment_index.*
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.bean.AdBean
@@ -94,11 +96,22 @@ class IndexFragment : BaseFragment(), WeatherSearch.OnWeatherSearchListener, AMa
         when (url) {
             Url.Ad.List -> {
                 GsonUtil.parseArray(result, AdBean::class.java).apply {
-                    find { it.adspaceId == 1 }?.let {
-                        banner.setTag(R.id.tag_1, it.category)
-                        banner.setTag(R.id.tag_2, it.link)
-                        ImageBinding.displayMatchNet(banner, it.image)
+                    val urls = ArrayList<String>()
+                    val beans = filter { it.adspaceId == 1 }
+                    beans.forEach {
+                        urls.add(it.image)
                     }
+                    banner.setImageLoader(object : ImageLoader() {
+                        override fun displayImage(context: Context?, path: Any?, imageView: ImageView?) {
+                            ImageBinding.displayMatchNet(imageView, path.toString())
+                        }
+                    })
+
+                    banner.setOnBannerListener {
+                        dealImageClick(beans[it].category, beans[it].link)
+                    }
+                    banner.setImages(urls)
+                    banner.start()
                     find { it.adspaceId == 2 }?.let {
                         to_zhuanti.setTag(R.id.tag_1, it.category)
                         to_zhuanti.setTag(R.id.tag_2, it.link)
@@ -153,17 +166,16 @@ class IndexFragment : BaseFragment(), WeatherSearch.OnWeatherSearchListener, AMa
             }.show()
         }
         to_choose_city.setOnClickListener { mStartActivityForResult(CityListActivity::class.java, 0x01) }
-        banner.setOnClickListener(this)
         to_zhuanti.setOnClickListener(this)
         to_kaoyan.setOnClickListener(this)
         to_dingzhi.setOnClickListener(this)
         to_search.setOnClickListener { mStartActivity(SearchActivity::class.java) }
     }
 
-    override fun onClick(v: View?) {
-        when (v?.getTag(R.id.tag_1)?.toString()) {
+    private fun dealImageClick(category: String, link: String) {
+        when (category) {
             "channel" -> {
-                when (v.getTag(R.id.tag_2)?.toString()) {
+                when (link) {
                     "judge" -> mStartActivity(ZhiYuanActivity::class.java)
                     "online-teacher" -> mStartActivity(TeacherActivity::class.java, Pair("online", true))
                     "vr-college" -> mStartActivity(VRActivity::class.java)
@@ -178,14 +190,21 @@ class IndexFragment : BaseFragment(), WeatherSearch.OnWeatherSearchListener, AMa
                 }
             }
             "content" -> {
-                mStartActivity(NewsDetailsActivity::class.java, Pair("isContent", true), Pair(NEWS_ID, v.getTag(R.id.tag_1).toDownInt()))
+                mStartActivity(NewsDetailsActivity::class.java, Pair("isContent", true), Pair(NEWS_ID, link.toInt()))
             }
             "url" -> {
                 val intent = Intent("android.intent.action.VIEW")
-                intent.data = Uri.parse(v.getTag(R.id.tag_2).toString())
+                if (!link.startsWith("http"))
+                    intent.data = Uri.parse("http://$link")
+                else
+                    intent.data = Uri.parse(link)
                 startActivity(intent)
             }
         }
+    }
+
+    override fun onClick(v: View) {
+        dealImageClick(v.getTag(R.id.tag_1).toString(), v.getTag(R.id.tag_2).toString())
     }
 
     override fun onDestroy() {

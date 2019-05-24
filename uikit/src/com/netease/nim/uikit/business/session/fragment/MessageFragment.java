@@ -190,8 +190,8 @@ public class MessageFragment extends TFragment implements ModuleProxy {
                     if (orderTime != null && orderTime.isEmpty())
                         if (NimUIKit.getOptions().isTeacher)
                             NimUIKitImpl.getSessionListener().onAcceptOrder(getContext(), orderId, sessionId);
-                    else
-                        return isTimeOut(orderTime);
+                        else
+                            return isTimeOut(orderTime);
                 }
             }
         }
@@ -200,6 +200,8 @@ public class MessageFragment extends TFragment implements ModuleProxy {
 
     @SuppressLint("SimpleDateFormat")
     private boolean isTimeOut(String time) {
+        if (time.isEmpty())
+            return false;
         long current = TimeUtil.currentTimeMillis();
         long payTime = 0;
         try {

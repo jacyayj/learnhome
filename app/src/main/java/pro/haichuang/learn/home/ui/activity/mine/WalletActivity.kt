@@ -32,6 +32,7 @@ class WalletActivity : BaseActivity() {
 
     override fun onSuccess(url: String, result: Any?) {
         credit_tv.text = result?.let { GsonUtil.getString(result, "credit") } ?: "0"
+        grid.setItemChecked(0, true)
     }
 
     override fun initListener() {

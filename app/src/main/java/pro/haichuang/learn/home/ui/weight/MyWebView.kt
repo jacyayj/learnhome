@@ -17,4 +17,13 @@ class MyWebView : HybridWebView {
                 loadData(value)
             }
         }
+
+    var data: String? = null
+        set(value) {
+            field = value
+            value?.let {
+                settings.textZoom = 200
+                loadData(value)
+            }
+        }
 }

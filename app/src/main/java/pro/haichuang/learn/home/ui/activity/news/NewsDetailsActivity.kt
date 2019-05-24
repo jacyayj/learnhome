@@ -38,7 +38,7 @@ class NewsDetailsActivity : DataBindingActivity<NewsDetailsModel>() {
 
     override fun onSuccess(url: String, result: Any?) {
         when (url) {
-            Url.News.Get, Url.HeightSchool.Get, Url.ZhaoSheng.Get -> {
+            Url.News.Get, Url.HeightSchool.Get, Url.Content.Get -> {
                 notifyModel(GsonUtil.parseObject(result, NewsDetailsModel::class.java))
                 content.loadData(model.txt)
             }

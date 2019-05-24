@@ -36,6 +36,9 @@ object GsonUtil {
     fun getString(result: Any?, key: String) = JsonParser().parse(result?.toJson())?.asJsonObject?.get(key)?.asString
             ?: ""
 
+    fun getInt(result: Any?, key: String) = JsonParser().parse(result?.toJson())?.asJsonObject?.get(key)?.asInt
+            ?: -1
+
     fun getBoolean(result: Any?, key: String) = JsonParser().parse(result?.toJson())?.asJsonObject?.get(key)?.asBoolean
             ?: false
 }

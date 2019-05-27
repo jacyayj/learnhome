@@ -191,7 +191,7 @@ public class MessageFragment extends TFragment implements ModuleProxy {
                         if (NimUIKit.getOptions().isTeacher)
                             NimUIKitImpl.getSessionListener().onAcceptOrder(getContext(), orderId, sessionId);
                         else
-                            return isTimeOut(orderTime);
+                            return !isTimeOut(orderTime);
                 }
             }
         }

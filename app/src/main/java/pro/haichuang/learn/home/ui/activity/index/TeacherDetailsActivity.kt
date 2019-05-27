@@ -49,7 +49,6 @@ class TeacherDetailsActivity : DataBindingActivity<TeacherDetailsModel>() {
 
     private val id by lazy { intent.getIntExtra(TEACHER_ID, -1) }
 
-    private var account: String = ""
     private val adapter by lazy {
         CommonAdapter<CommentModel>(layoutInflater, R.layout.item_find_details_comment) { _, t, _ ->
             t.teacher = true
@@ -57,16 +56,18 @@ class TeacherDetailsActivity : DataBindingActivity<TeacherDetailsModel>() {
     }
     private val successDialog by lazy {
         NoticeDialog(this) {
-            HttpUtils.updateOrderTime(this, model.imAccid, "", model.orderId, true)
             val extension = HashMap<String, Any>()
             extension["orderId"] = model.orderId
             extension["orderTime"] = ""
+
             val notification = CustomNotification()
-            notification.sessionId = account
+            notification.sessionId = model.imAccid
             notification.sessionType = SessionTypeEnum.P2P
             notification.isSendToOnlineUserOnly = false
             notification.content = extension.toJson()
             NIMClient.getService(MsgService::class.java).sendCustomNotification(notification)
+
+            HttpUtils.updateOrderTime(this, model.imAccid, "", model.orderId, true)
         }
     }
 
@@ -174,7 +175,7 @@ class TeacherDetailsActivity : DataBindingActivity<TeacherDetailsModel>() {
                     Pair(TEACHER_SUBJECT, model.subject),
                     Pair(TEACHER_TYPE, model.type),
                     Pair(TEACHER_NAME, model.teachername),
-                    Pair(TEACHER_ACCOUNT, account),
+                    Pair(TEACHER_ACCOUNT, model.imAccid),
                     Pair(TEACHER_SKILL, model.skill))
         }
         off_online.setOnClickListener {
@@ -184,7 +185,7 @@ class TeacherDetailsActivity : DataBindingActivity<TeacherDetailsModel>() {
                     Pair(TEACHER_SUBJECT, model.subject),
                     Pair(TEACHER_TYPE, model.type),
                     Pair(TEACHER_NAME, model.teachername),
-                    Pair(TEACHER_ACCOUNT, account),
+                    Pair(TEACHER_ACCOUNT, model.imAccid),
                     Pair(TEACHER_SKILL, model.skill))
         }
         follow.setOnClickListener {

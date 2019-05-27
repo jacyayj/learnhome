@@ -8,6 +8,7 @@ import com.amap.api.location.AMapLocationClientOption
 import com.amap.api.location.AMapLocationListener
 import com.jacy.kit.adapter.CommonAdapter
 import com.jacy.kit.config.ContentView
+import com.jacy.kit.config.gone
 import com.jacy.kit.config.mStartActivity
 import com.jacy.kit.config.toast
 import com.luck.picture.lib.PictureSelector
@@ -76,11 +77,12 @@ class MineFragment : BaseFragment(), AMapLocationListener {
                 if (SPUtils.isTeacher) {
                     name.text = user.teachername
                     ImageBinding.displayNet(header, user.teacherImg)
+                    to_vip.gone()
                 } else {
                     name.text = user.realname
                     ImageBinding.displayNet(header, user.userImg)
+                    to_vip.setImageResource(if (user.isVip) R.drawable.icon_vip else R.drawable.icon_vip_not)
                 }
-                to_vip.setImageResource(if (user.isVip) R.drawable.icon_vip else R.drawable.icon_vip_not)
             }
             Url.Upload.Upload -> {
                 val params = HttpParams()

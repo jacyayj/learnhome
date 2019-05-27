@@ -25,7 +25,7 @@ class FileModel : BaseModel() {
         }
 
     @Params([Url.User.FileSave], "studentClass")
-    var studentClass = 0
+    var studentClass = 1
         set(value) {
             field = value
             notifyPropertyChanged(BR.studentClassStr)
@@ -83,21 +83,21 @@ class FileModel : BaseModel() {
 
     @Params([Url.User.FileSave], "type")
     @Bindable
-    var type = 0
+    var type = 1
         set(value) {
             field = value
             notifyPropertyChanged(BR.type)
         }
     @Params([Url.User.FileSave], "subject")
     @Bindable
-    var subject = 0
+    var subject = 1
         set(value) {
             field = value
             notifyPropertyChanged(BR.subject)
         }
     @Params([Url.User.FileSave], "graduate")
     @Bindable
-    var graduate = 0
+    var graduate = 1
         set(value) {
             field = value
             notifyPropertyChanged(BR.graduate)
@@ -123,46 +123,57 @@ class FileModel : BaseModel() {
             }
             type == 0 -> {
                 if (showToast) toast("请选择会员类型")
+                else done = false
                 false
             }
             subject == 0 -> {
                 if (showToast) toast("请选择科目")
+                else done = false
                 false
             }
             studentName.isEmpty() -> {
                 if (showToast) toast("请选输入学生姓名")
+                else done = false
                 false
             }
             city.isEmpty() -> {
                 if (showToast) toast("请选择毕业城市")
+                else done = false
                 false
             }
             district.isEmpty() -> {
                 if (showToast) toast("请选择毕业区县")
+                else done = false
                 false
             }
             school.isEmpty() -> {
                 if (showToast) toast("请输入在读学校")
+                else done = false
                 false
             }
             studentCode.isEmpty() -> {
                 if (showToast) toast("请输入学籍号")
+                else done = false
                 false
             }
             studentClass == 0 -> {
                 if (showToast) toast("请选择班级")
+                else done = false
                 false
             }
             phone.isEmpty() -> {
                 if (showToast) toast("请输入联系电话")
+                else done = false
                 false
             }
             qq.isEmpty() -> {
                 if (showToast) toast("请输入QQ")
+                else done = false
                 false
             }
             email.isEmpty() -> {
                 if (showToast) toast("请输入邮箱")
+                else done = false
                 false
             }
             else -> true

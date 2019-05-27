@@ -11,10 +11,14 @@ import android.widget.RadioButton
 import com.google.gson.JsonObject
 import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.mStartActivity
+import com.jacy.kit.config.toJson
 import com.jacy.kit.config.toast
 import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureConfig
-import com.netease.nim.uikit.api.NimUIKit
+import com.netease.nimlib.sdk.NIMClient
+import com.netease.nimlib.sdk.msg.MsgService
+import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum
+import com.netease.nimlib.sdk.msg.model.CustomNotification
 import com.tencent.mm.opensdk.modelpay.PayReq
 import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.activity_yu_yue.*
@@ -37,6 +41,7 @@ import pro.haichuang.learn.home.ui.dialog.NoticeDialog
 import pro.haichuang.learn.home.ui.dialog.PasswordDialog
 import pro.haichuang.learn.home.ui.dialog.PaymentDialog
 import pro.haichuang.learn.home.utils.GsonUtil
+import pro.haichuang.learn.home.utils.HttpUtils
 import pro.haichuang.learn.home.utils.SPUtils
 import pro.haichuang.learn.home.utils.ShareUtils
 import java.io.File
@@ -63,7 +68,18 @@ class YuYueActivity : DataBindingActivity<YuYueModel>() {
 
     private val successDialog by lazy {
         NoticeDialog(this) {
-            NimUIKit.startP2PSession(this, model.account)
+            val extension = HashMap<String, Any>()
+            extension["orderId"] = model.orderId
+            extension["orderTime"] = ""
+
+            val notification = CustomNotification()
+            notification.sessionId = model.account
+            notification.sessionType = SessionTypeEnum.P2P
+            notification.isSendToOnlineUserOnly = false
+            notification.content = extension.toJson()
+            NIMClient.getService(MsgService::class.java).sendCustomNotification(notification)
+
+            HttpUtils.updateOrderTime(this, model.account, "", model.orderId, true)
         }
     }
 
@@ -126,7 +142,10 @@ class YuYueActivity : DataBindingActivity<YuYueModel>() {
             }
             Url.Teacher.Order -> {
                 when (model.payType) {
-                    1 -> showSuccess()
+                    1 -> {
+                        showSuccess()
+                        model.orderId = GsonUtil.getInt(result, "orderId")
+                    }
                     12 -> {
                         val mreq = GsonUtil.parseObject(result, JsonObject::class.java)
                         val req = PayReq()
@@ -137,10 +156,12 @@ class YuYueActivity : DataBindingActivity<YuYueModel>() {
                         req.nonceStr = mreq.get("noncestr").asString
                         req.timeStamp = mreq.get("timestamp").asLong.toString()
                         req.sign = mreq.get("sign").asString
+                        model.orderId = mreq.get("orderId").asInt
                         ShareUtils.toWXPay(req)
                     }
                     13 -> {
                         ShareUtils.toAliPay(GsonUtil.getString(result, "orderString"), this, mHandler)
+                        model.orderId = GsonUtil.getInt(result, "orderId")
                     }
                 }
             }

@@ -13,6 +13,8 @@ class YuYueModel : BaseModel() {
     @Params([Url.Teacher.Order], "teacherId")
     var id = 0
 
+    var orderId = 0
+
     @Params([Url.Teacher.Order], "orderType")
     var orderType = 2
 

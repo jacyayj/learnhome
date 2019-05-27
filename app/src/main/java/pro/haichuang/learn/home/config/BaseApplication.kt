@@ -76,6 +76,7 @@ class BaseApplication : Application() {
                 Gson().fromJson(it, CollectAttachment::class.java)
             }
             NimUIKit.registerMsgItemViewHolder(CollectAttachment::class.java, CollectViewHolder::class.java)
+            NimUIKit.registerTipMsgViewHolder(MsgViewHolderTip::class.java)
             NimUIKit.init(this, UIKitOptions().apply {
                 shouldHandleReceipt = false
                 isTeacher = SPUtils.isTeacher
@@ -96,7 +97,6 @@ class BaseApplication : Application() {
             })
             NimUIKit.setSettingClass(FriendSettingActivity::class.java)
             NimUIKit.setLocationProvider(NimDemoLocationProvider())
-            NimUIKit.registerTipMsgViewHolder(MsgViewHolderTip::class.java)
             NimUIKit.setCommonP2PSessionCustomization(SessionCustomization().apply {
                 val action = ArrayList<BaseAction>()
                 action.add((CollectAction()))

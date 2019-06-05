@@ -50,6 +50,7 @@
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:theme"
         tools:targetApi="n">
+        <activity android:name=".ui.activity.WebActivity"/>
         <activity android:name=".ui.activity.message.MyUpActivity"/>
         <activity android:name=".ui.activity.index.NoteBookDetailsActivity" />
         <activity android:name=".ui.activity.index.NoteBookChildActivity" />

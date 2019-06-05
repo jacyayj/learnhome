@@ -213,6 +213,30 @@
 
                         <TextView
                             style="@style/text_17_66"
+                            android:text="考生性别" />
+
+                        <TextView
+                            android:id="@+id/choose_sex"
+                            style="@style/text_17_00"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:drawableEnd="@{model.done ? null : @drawable/icon_sj_down}"
+                            android:drawablePadding="5dp"
+                            android:enabled="@{!model.done}"
+                            android:gravity="end"
+                            android:hint="请选择考生性别"
+                            android:text="@={model.genderStr}"
+                            android:textColorHint="@color/color99" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/text_17_66"
                             android:text="毕业城市" />
 
                         <TextView

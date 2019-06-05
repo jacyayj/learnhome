@@ -47,6 +47,7 @@ object DataUtils {
         data.add(ItemMine("意见反馈", line = true))
         data.add(ItemMine("常见问题"))
         data.add(ItemMine("使用指南"))
+        data.add(ItemMine("关于我们"))
         return data
     }
 

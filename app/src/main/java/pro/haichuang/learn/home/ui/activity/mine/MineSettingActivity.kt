@@ -40,6 +40,7 @@ class MineSettingActivity : BaseActivity() {
                 4 -> startActivity(Intent(this, FeedbackActivity::class.java))
                 5 -> startActivity(Intent(this, QuestionActivity::class.java))
                 6 -> startActivity(Intent(this, AboutActivity::class.java))
+                7 -> startActivity(Intent(this, AboutActivity::class.java))
             }
         }
         login_out.setOnClickListener {

@@ -15,6 +15,7 @@ import pro.haichuang.learn.home.ui.activity.CityListActivity
 import pro.haichuang.learn.home.ui.activity.mine.viewmodel.FileModel
 import pro.haichuang.learn.home.ui.dialog.AddressDialog
 import pro.haichuang.learn.home.ui.dialog.ClassDialog
+import pro.haichuang.learn.home.ui.dialog.SexDialog
 import pro.haichuang.learn.home.utils.GsonUtil
 
 
@@ -30,6 +31,12 @@ class FileActivity : DataBindingActivity<FileModel>(), RadioGroup.OnCheckedChang
     private val classDialog by lazy {
         ClassDialog(this) {
             model.studentClass = it
+        }
+    }
+
+    private val sexDialog by lazy {
+        SexDialog(this) {
+            model.gender = it
         }
     }
 
@@ -63,6 +70,7 @@ class FileActivity : DataBindingActivity<FileModel>(), RadioGroup.OnCheckedChang
                 addressDialog.show(model.districtData)
         }
         choose_class.setOnClickListener { classDialog.show() }
+        choose_sex.setOnClickListener { sexDialog.show() }
         save.setOnClickListener { autoPost(Url.User.FileSave, needSession = true) }
     }
 

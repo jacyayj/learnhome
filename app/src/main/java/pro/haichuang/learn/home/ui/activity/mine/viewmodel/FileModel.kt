@@ -31,9 +31,20 @@ class FileModel : BaseModel() {
             notifyPropertyChanged(BR.studentClassStr)
         }
 
+    @Params([Url.User.FileSave], "gender")
+    var gender = 1
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.genderStr)
+        }
+
     @Bindable
     var studentClassStr = ""
         get() = "${studentClass}班"
+
+    @Bindable
+    var genderStr = ""
+        get() = if (gender == 1) "男" else "女"
 
     @Params([Url.User.FileSave], "school")
     @Bindable

@@ -31,6 +31,7 @@ import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.CityListActivity
 import pro.haichuang.learn.home.ui.activity.find.FindDetailsActivity
 import pro.haichuang.learn.home.ui.activity.index.*
+import pro.haichuang.learn.home.ui.activity.message.FriendSearchActivity
 import pro.haichuang.learn.home.ui.activity.mine.BindVipActivity
 import pro.haichuang.learn.home.ui.activity.news.NewsDetailsActivity
 import pro.haichuang.learn.home.ui.dialog.IndexOperationPopup
@@ -169,7 +170,7 @@ class IndexFragment : BaseFragment(), WeatherSearch.OnWeatherSearchListener, AMa
         to_zhuanti.setOnClickListener(this)
         to_kaoyan.setOnClickListener(this)
         to_dingzhi.setOnClickListener(this)
-        to_search.setOnClickListener { mStartActivity(SearchActivity::class.java) }
+        to_search.setOnClickListener { mStartActivity(FriendSearchActivity::class.java) }
     }
 
     private fun dealImageClick(category: String, link: String) {

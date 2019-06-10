@@ -167,9 +167,9 @@ class IndexFragment : BaseFragment(), WeatherSearch.OnWeatherSearchListener, AMa
             }.show()
         }
         to_choose_city.setOnClickListener { mStartActivityForResult(CityListActivity::class.java, 0x01) }
-        to_zhuanti.setOnClickListener(this)
-        to_kaoyan.setOnClickListener(this)
-        to_dingzhi.setOnClickListener(this)
+        to_zhuanti?.setOnClickListener(this)
+        to_kaoyan?.setOnClickListener(this)
+        to_dingzhi?.setOnClickListener(this)
         to_search.setOnClickListener { mStartActivity(FriendSearchActivity::class.java) }
     }
 
@@ -204,8 +204,8 @@ class IndexFragment : BaseFragment(), WeatherSearch.OnWeatherSearchListener, AMa
         }
     }
 
-    override fun onClick(v: View) {
-        dealImageClick(v.getTag(R.id.tag_1).toString(), v.getTag(R.id.tag_2).toString())
+    override fun onClick(v: View?) {
+        dealImageClick(v?.getTag(R.id.tag_1)?.toString()?:"", v?.getTag(R.id.tag_2)?.toString()?:"")
     }
 
     override fun onDestroy() {

@@ -25,10 +25,7 @@ import pro.haichuang.learn.home.config.BaseFragment
 import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.mine.*
 import pro.haichuang.learn.home.ui.dialog.InvateDialog
-import pro.haichuang.learn.home.utils.DataUtils
-import pro.haichuang.learn.home.utils.GsonUtil
-import pro.haichuang.learn.home.utils.ImageBinding
-import pro.haichuang.learn.home.utils.SPUtils
+import pro.haichuang.learn.home.utils.*
 import java.io.File
 
 @ContentView(R.layout.fragment_mine)
@@ -159,12 +156,21 @@ class MineFragment : BaseFragment(), AMapLocationListener {
             when (requestCode) {
                 PictureConfig.CHOOSE_REQUEST -> {
                     val url = PictureSelector.obtainMultipleResult(data)[0].compressPath
+                    mlog.v("url : $url")
+                    if (url.isNullOrEmpty()){
+                        toast("图片无效")
+                        return
+                    }
                     ImageBinding.displayLocal(header, url)
                     val params = HttpParams()
                     params.put("mobile", SPUtils.phone)
                     params.put("type", "image")
                     params.put("uploadFile", File(url), null)
-                    post(Url.Upload.Upload, params, showLoading = true)
+                    try {
+                        post(Url.Upload.Upload, params, showLoading = true)
+                    }catch (e:NullPointerException){
+                        toast("图片无效")
+                    }
                 }
                 else -> post(Url.User.Info, showLoading = false, needSession = true)
             }

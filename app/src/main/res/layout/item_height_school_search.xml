@@ -104,7 +104,7 @@
                     <ImageView
                         style="@style/wrap_layout"
                         android:layout_marginEnd="10dp"
-                        android:src="@drawable/icon_school_985"
+                        android:src="@drawable/icon_school_gong"
                         android:visibility="@{item.collegeLevel.contains(`5`) ? View.VISIBLE : View.GONE}" />
 
                     <ImageView

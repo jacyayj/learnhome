@@ -25,7 +25,10 @@ import pro.haichuang.learn.home.config.BaseFragment
 import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.mine.*
 import pro.haichuang.learn.home.ui.dialog.InvateDialog
-import pro.haichuang.learn.home.utils.*
+import pro.haichuang.learn.home.utils.DataUtils
+import pro.haichuang.learn.home.utils.GsonUtil
+import pro.haichuang.learn.home.utils.ImageBinding
+import pro.haichuang.learn.home.utils.SPUtils
 import java.io.File
 
 @ContentView(R.layout.fragment_mine)
@@ -156,7 +159,6 @@ class MineFragment : BaseFragment(), AMapLocationListener {
             when (requestCode) {
                 PictureConfig.CHOOSE_REQUEST -> {
                     val url = PictureSelector.obtainMultipleResult(data)[0].compressPath
-                    mlog.v("url : $url")
                     if (url.isNullOrEmpty()){
                         toast("图片无效")
                         return

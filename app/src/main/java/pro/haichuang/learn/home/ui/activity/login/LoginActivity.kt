@@ -47,6 +47,7 @@ class LoginActivity : DataBindingActivity<LoginModel>(), IUiListener {
                 .addPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
                 .addPermission(Manifest.permission.READ_PHONE_STATE)
                 .addPermission(Manifest.permission.CAMERA)
+                .addPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
                 .addPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .initPermission()
         titleModel.showLeft = false

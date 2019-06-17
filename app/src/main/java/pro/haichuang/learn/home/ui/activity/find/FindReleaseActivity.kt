@@ -75,13 +75,22 @@ class FindReleaseActivity : DataBindingActivity<FindReleaseModel>() {
             when (requestCode) {
                 PictureConfig.CHOOSE_REQUEST -> {
                     PictureSelector.obtainMultipleResult(data).forEach { m ->
-                        val file = File(m.compressPath)
-                        adapter.insert(m.compressPath, file.name)
+                        val url = m.compressPath
+                        if (url.isNullOrEmpty()){
+                            toast("图片无效")
+                            return
+                        }
+                        val file = File(url)
                         val params = HttpParams()
                         params.put("mobile", SPUtils.phone)
                         params.put("type", "image")
                         params.put("uploadFile", file, null)
-                        post(Url.Upload.Upload, params)
+                        try {
+                            post(Url.Upload.Upload, params)
+                        } catch (e: NullPointerException) {
+                            toast("图片无效")
+                        }
+                        adapter.insert(url, file.name)
                     }
                 }
             }

@@ -53,24 +53,25 @@
                         <TextView
                             style="@style/text_16_33"
                             android:layout_marginEnd="3dp"
+                            android:ellipsize="end"
+                            android:singleLine="true"
+                            android:layout_weight="1"
                             android:text="@{model.collegeName}" />
 
                         <TextView
                             style="@style/text_14_13C1FF"
+                            android:layout_marginEnd="5dp"
                             android:background="@drawable/stroke_13aeff_radius_8dp"
                             android:paddingHorizontal="8dp"
                             android:paddingVertical="1dp"
+                            android:singleLine="true"
                             android:text="@{model.collegeNatureStr}"
                             android:textSize="12sp" />
-
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1" />
 
                         <TextView
                             style="@style/text_14_939799"
                             android:layout_marginEnd="5dp"
+                            android:gravity="end"
                             android:text="@{model.collegeTypeStr}" />
 
                         <TextView
@@ -149,11 +150,11 @@
 
                         <TextView
                             android:id="@+id/collect"
-                            android:layout_width="57dp"
-                            android:layout_height="match_parent"
                             android:layout_gravity="center_vertical|end"
                             android:background="@drawable/stroke_7fd2ff_radius_5dp"
                             android:gravity="center"
+                            android:paddingHorizontal="15dp"
+                            android:paddingVertical="5dp"
                             android:text="@{model.hasCollect?`已收藏`: `收藏`}"
                             android:textColor="@color/color7FD2FF"
                             android:textSize="16sp" />

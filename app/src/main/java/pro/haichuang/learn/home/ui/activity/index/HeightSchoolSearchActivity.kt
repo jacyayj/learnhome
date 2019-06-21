@@ -3,7 +3,7 @@ package pro.haichuang.learn.home.ui.activity.index
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.support.design.widget.TabLayout
-import com.jacy.kit.adapter.CommonAdapter
+import com.jacy.kit.adapter.CommonRecyclerAdapter
 import com.jacy.kit.config.*
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.zhouyou.http.model.HttpParams
@@ -68,7 +68,7 @@ class HeightSchoolSearchActivity : BaseActivity() {
         }
     }
 
-    private val adapter by lazy { CommonAdapter<CollegeModel>(layoutInflater, R.layout.item_height_school_search) }
+    private val adapter by lazy { CommonRecyclerAdapter<CollegeModel>(layoutInflater, R.layout.item_height_school_search) }
 
     private var level = ""
     private var type = ""
@@ -80,6 +80,14 @@ class HeightSchoolSearchActivity : BaseActivity() {
 
     override fun initData() {
         initTab()
+        listView.setSwipeItemClickListener { _, position ->
+            val item = adapter.getItem(position)
+            if (item.compare) {
+                item.checked = item.checked.not()
+                countChecked(item.checked, position)
+            } else
+                mStartActivity(HeightSchoolDetailsActivity::class.java, Pair(Constants.SCHOOL_ID, item.id))
+        }
         listView.adapter = adapter
         pageUrl = Url.College.List
         fetchPageData()
@@ -124,14 +132,6 @@ class HeightSchoolSearchActivity : BaseActivity() {
             compare_view.show()
             search_btn.gone()
             search_view.gone()
-        }
-        listView.setOnItemClickListener { _, _, position, _ ->
-            val item = adapter.getItem(position)
-            if (item.compare) {
-                item.checked = item.checked.not()
-                countChecked(item.checked, position)
-            } else
-                mStartActivity(HeightSchoolDetailsActivity::class.java, Pair(Constants.SCHOOL_ID, item.id))
         }
         tab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(p0: TabLayout.Tab?) {

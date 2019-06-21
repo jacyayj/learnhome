@@ -29,7 +29,7 @@ import pro.haichuang.learn.home.utils.GsonUtil
 @ContentView(R.layout.activity_height_school_details)
 class HeightSchoolDetailsActivity : DataBindingActivity<HeightSchoolDetailsModel>() {
     private val childTabs by lazy { arrayListOf(child_tab_view1, child_tab_view2, child_tab_view3, child_tab_view4, child_tab_view5) }
-    private val tabBeans by lazy { arrayListOf(TabBean("高校简介")/*, TabBean(true, "求学价值"), TabBean(true, "主要专业")*/, TabBean("招生简章")) }
+    private val tabBeans by lazy { arrayListOf(TabBean("高校简介")/*, TabBean(true, "求学价值"), TabBean(true, "主要专业")*/, TabBean("招生章程")) }
     override fun initData() {
         titleModel.title = "高校详情"
         initTab()

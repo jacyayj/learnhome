@@ -1,12 +1,19 @@
 package pro.haichuang.learn.home.ui.activity.index
 
+import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
+import android.net.Uri
 import android.support.design.widget.TabLayout
 import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.gone
 import com.jacy.kit.config.show
 import com.jacy.kit.config.toast
+import com.luck.picture.lib.permissions.RxPermissions
+import com.vondear.rxtool.RxDeviceTool
+import com.vondear.rxtool.RxPermissionsTool
 import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.activity_height_school_details.*
 import kotlinx.android.synthetic.main.layout_jianzhang.*
@@ -54,6 +61,23 @@ class HeightSchoolDetailsActivity : DataBindingActivity<HeightSchoolDetailsModel
 //        legend.setOnClickListener {
 //            LegendDialog(this).show(0)
 //        }
+        website.setOnClickListener {
+            val intent = Intent("android.intent.action.VIEW")
+
+            if (!model.website.startsWith("http"))
+                intent.data = Uri.parse("http://${model.website}")
+            else
+                intent.data = Uri.parse(model.website)
+            startActivity(intent)
+        }
+
+        phone.setOnClickListener {
+            if (RxPermissions(this).isGranted(Manifest.permission.CALL_PHONE)) {
+                RxDeviceTool.callPhone(this, model.contact)
+            } else {
+                RxPermissionsTool.with(this).addPermission(Manifest.permission.CALL_PHONE).initPermission()
+            }
+        }
         collect.setOnClickListener {
             post(Url.College.Collect, HttpParams("collegeId", model.id.toString()).apply {
                 put("operate", if (model.hasCollect) "0" else "1")
@@ -107,6 +131,12 @@ class HeightSchoolDetailsActivity : DataBindingActivity<HeightSchoolDetailsModel
 //                R.id.tab5 -> toggleChild(4)
 //            }
 //        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
+            RxDeviceTool.callPhone(this, model.contact)
     }
 
     private fun toggleChild(position: Int) {

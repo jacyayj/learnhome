@@ -206,16 +206,15 @@
 
                         <pro.haichuang.learn.home.ui.weight.AutoListView
                             android:id="@+id/listView"
-                            android:divider="@drawable/divider_vertical_d7dde0"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:divider="@drawable/divider_vertical_d7dde0" />
                     </TableLayout>
                 </LinearLayout>
 
                 <include
                     layout="@layout/layout_school_details_intro"
-                    tools:model="@{model}"
-                    tools:showIntro="@{true}" />
+                    tools:model="@{model}" />
 
                 <include
                     layout="@layout/layout_jianzhang"

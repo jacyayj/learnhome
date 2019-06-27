@@ -6,10 +6,6 @@
         <import type="android.view.View" />
 
         <variable
-            name="showIntro"
-            type="Boolean" />
-
-        <variable
             name="model"
             type="pro.haichuang.learn.home.ui.activity.index.viewmodel.HeightSchoolDetailsModel" />
     </data>
@@ -19,8 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingHorizontal="15dp"
-        android:visibility="@{showIntro ? View.GONE : View.VISIBLE}">
+        android:paddingHorizontal="15dp">
 
         <TextView
             style="@style/text_14_002133"
@@ -53,11 +48,13 @@
             android:text="@{`地址：`+model.address}" />
 
         <TextView
+            android:id="@+id/phone"
             style="@style/text_14_002133"
             android:paddingTop="15dp"
             android:text="@{`联系电话：`+model.contact}" />
 
         <TextView
+            android:id="@+id/website"
             style="@style/text_14_002133"
             android:paddingTop="15dp"
             android:text="@{`网址：`+model.website}" />
@@ -66,13 +63,11 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginVertical="15dp"
-            android:background="@color/colorF0F7FA"
-            android:visibility="@{showIntro ?  View.VISIBLE : View.GONE}" />
+            android:background="@color/colorF0F7FA" />
 
         <TextView
             style="@style/text_14_002133"
             android:lineSpacingExtra="10dp"
-            android:text="@{model.intro}"
-            android:visibility="@{showIntro ?  View.VISIBLE : View.GONE}" />
+            android:text="@{model.intro}" />
     </LinearLayout>
 </layout>

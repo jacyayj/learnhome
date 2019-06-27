@@ -75,6 +75,7 @@
                             android:text="@{model.collegeTypeStr}" />
 
                         <TextView
+
                             style="@style/text_14_939799"
                             android:drawableStart="@drawable/icon_location"
                             android:drawablePadding="5dp"

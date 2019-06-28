@@ -18,40 +18,50 @@
         <TextView
             style="@style/text_12_2E3133"
             android:layout_gravity="center"
+            android:ellipsize="end"
             android:paddingHorizontal="10dp"
             android:paddingVertical="15dp"
+            android:singleLine="true"
             android:text="@{item.collegeName}"
             android:textColor="@color/color002133" />
 
         <TextView
             style="@style/text_12_2E3133"
             android:layout_gravity="center"
+            android:ellipsize="end"
             android:paddingHorizontal="10dp"
             android:paddingVertical="15dp"
+            android:singleLine="true"
             android:text="@{item.collegeTypeStr}"
             android:textColor="@color/color002133" />
 
         <TextView
             style="@style/text_12_2E3133"
             android:layout_gravity="center"
+            android:ellipsize="end"
             android:paddingHorizontal="10dp"
             android:paddingVertical="15dp"
+            android:singleLine="true"
             android:text="@{item.enrollBatchStr}"
             android:textColor="@color/color002133" />
 
         <TextView
             style="@style/text_12_2E3133"
             android:layout_gravity="center"
+            android:ellipsize="end"
             android:paddingHorizontal="10dp"
             android:paddingVertical="15dp"
+            android:singleLine="true"
             android:text="@{item.enrollNumber+``}"
             android:textColor="@color/color002133" />
 
         <TextView
             style="@style/text_12_2E3133"
             android:layout_gravity="center"
+            android:ellipsize="end"
             android:paddingHorizontal="10dp"
             android:paddingVertical="15dp"
+            android:singleLine="true"
             android:text="@{item.new+``}"
             android:textColor="@color/color002133" />
 

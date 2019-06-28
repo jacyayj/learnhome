@@ -74,7 +74,8 @@
                 android:paddingEnd="15dp"
                 android:text="系统消息"
                 android:textColor="@color/color33"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/to_comment"

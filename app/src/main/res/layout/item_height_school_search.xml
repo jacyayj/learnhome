@@ -16,130 +16,141 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.yhy.widget.core.img.round.CircleImageView
-            net_url="@{item.logo}"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="10dp" />
 
-        <TableLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="60dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:padding="15dp">
 
-            <LinearLayout>
-
-                <TextView
-                    style="@style/text_16_33"
-                    android:layout_weight="1"
-                    android:singleLine="true"
-                    android:ellipsize="end"
-                    android:text="@{item.collegeName}" />
-
-                <TextView
-                    style="@style/text_14_13C1FF"
-                    android:background="@drawable/stroke_13aeff_radius_8dp"
-                    android:paddingHorizontal="8dp"
-                    android:paddingVertical="1dp"
-                    android:text="@{item.collegeTypeStr}"
-                    android:textSize="12sp" />
-
-            </LinearLayout>
+            <com.yhy.widget.core.img.round.CircleImageView
+                net_url="@{item.logo}"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="5dp" />
 
             <LinearLayout
-                android:layout_marginTop="10dp"
-                android:gravity="center_vertical">
-
-                <TextView
-                    style="@style/text_14_939799"
-                    android:layout_weight="1"
-                    android:text="@{item.enrollBatchStr}" />
-
-                <TextView
-                    style="@style/text_14_939799"
-                    android:drawableStart="@drawable/icon_location"
-                    android:drawablePadding="5dp"
-                    android:text="@{item.provinceStr}" />
-            </LinearLayout>
-
-            <HorizontalScrollView
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:visibility="@{item.collegeLevel.isEmpty() ? View.GONE : View.VISIBLE}"
-                android:layout_marginTop="10dp"
-                android:scrollbars="none">
+                android:layout_marginEnd="5dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
+                    <TextView
+                        style="@style/text_16_33"
+                        android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:text="@{item.collegeName}" />
 
-                    <ImageView
-                        style="@style/wrap_layout"
-                        android:layout_marginEnd="10dp"
-                        android:src="@drawable/icon_school_211"
-                        android:visibility="@{item.collegeLevel.contains(`1`) ? View.VISIBLE : View.GONE}" />
+                    <TextView
+                        style="@style/text_14_13C1FF"
+                        android:background="@drawable/stroke_13aeff_radius_8dp"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="1dp"
+                        android:text="@{item.collegeTypeStr}"
+                        android:textSize="12sp" />
 
-                    <ImageView
-                        style="@style/wrap_layout"
-                        android:layout_marginEnd="10dp"
-                        android:src="@drawable/icon_school_985"
-                        android:visibility="@{item.collegeLevel.contains(`2`) ? View.VISIBLE : View.GONE}" />
-
-                    <ImageView
-                        style="@style/wrap_layout"
-                        android:layout_marginEnd="10dp"
-                        android:src="@drawable/icon_school_shifan"
-                        android:visibility="@{item.collegeLevel.contains(`3`) ? View.VISIBLE : View.GONE}" />
-
-                    <ImageView
-                        style="@style/wrap_layout"
-                        android:layout_marginEnd="10dp"
-                        android:src="@drawable/icon_school_gugan"
-                        android:visibility="@{item.collegeLevel.contains(`4`) ? View.VISIBLE : View.GONE}" />
-
-                    <ImageView
-                        style="@style/wrap_layout"
-                        android:layout_marginEnd="10dp"
-                        android:src="@drawable/icon_school_gong"
-                        android:visibility="@{item.collegeLevel.contains(`5`) ? View.VISIBLE : View.GONE}" />
-
-                    <ImageView
-                        style="@style/wrap_layout"
-                        android:layout_marginEnd="10dp"
-                        android:src="@drawable/icon_school_yi"
-                        android:visibility="@{item.collegeLevel.contains(`6`) ? View.VISIBLE : View.GONE}" />
-
-                    <ImageView
-                        style="@style/wrap_layout"
-                        android:layout_marginEnd="10dp"
-                        android:src="@drawable/icon_school_fa"
-                        android:visibility="@{item.collegeLevel.contains(`7`) ? View.VISIBLE : View.GONE}" />
-
-                    <ImageView
-                        style="@style/wrap_layout"
-                        android:layout_marginEnd="10dp"
-                        android:src="@drawable/icon_school_shuang"
-                        android:visibility="@{item.collegeLevel.contains(`8`) ? View.VISIBLE : View.GONE}" />
-
-                    <ImageView
-                        style="@style/wrap_layout"
-                        android:layout_marginEnd="10dp"
-                        android:src="@drawable/icon_school_shuangyiliu"
-                        android:visibility="@{item.collegeLevel.contains(`9`) ? View.VISIBLE : View.GONE}" />
                 </LinearLayout>
-            </HorizontalScrollView>
-        </TableLayout>
 
-        <CheckedTextView
-            style="@style/text_14_33"
-            android:layout_gravity="end|center_vertical"
-            android:layout_marginEnd="15dp"
-            android:checked="@{item.checked}"
-            android:drawableEnd="@{item.compare ? @drawable/selector_multiple_choose : null }" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        style="@style/text_14_939799"
+                        android:layout_weight="1"
+                        android:text="@{item.enrollBatchStr}" />
+
+                    <TextView
+                        style="@style/text_14_939799"
+                        android:drawableStart="@drawable/icon_location"
+                        android:drawablePadding="5dp"
+                        android:text="@{item.provinceStr}" />
+                </LinearLayout>
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            style="@style/wrap_layout"
+                            android:layout_marginEnd="10dp"
+                            android:src="@drawable/icon_school_211"
+                            android:visibility="@{item.collegeLevel.contains(`1`) ? View.VISIBLE : View.GONE}" />
+
+                        <ImageView
+                            style="@style/wrap_layout"
+                            android:layout_marginEnd="10dp"
+                            android:src="@drawable/icon_school_985"
+                            android:visibility="@{item.collegeLevel.contains(`2`) ? View.VISIBLE : View.GONE}" />
+
+                        <ImageView
+                            style="@style/wrap_layout"
+                            android:layout_marginEnd="10dp"
+                            android:src="@drawable/icon_school_shifan"
+                            android:visibility="@{item.collegeLevel.contains(`3`) ? View.VISIBLE : View.GONE}" />
+
+                        <ImageView
+                            style="@style/wrap_layout"
+                            android:layout_marginEnd="10dp"
+                            android:src="@drawable/icon_school_gugan"
+                            android:visibility="@{item.collegeLevel.contains(`4`) ? View.VISIBLE : View.GONE}" />
+
+                        <ImageView
+                            style="@style/wrap_layout"
+                            android:layout_marginEnd="10dp"
+                            android:src="@drawable/icon_school_gong"
+                            android:visibility="@{item.collegeLevel.contains(`5`) ? View.VISIBLE : View.GONE}" />
+
+                        <ImageView
+                            style="@style/wrap_layout"
+                            android:layout_marginEnd="10dp"
+                            android:src="@drawable/icon_school_yi"
+                            android:visibility="@{item.collegeLevel.contains(`6`) ? View.VISIBLE : View.GONE}" />
+
+                        <ImageView
+                            style="@style/wrap_layout"
+                            android:layout_marginEnd="10dp"
+                            android:src="@drawable/icon_school_fa"
+                            android:visibility="@{item.collegeLevel.contains(`7`) ? View.VISIBLE : View.GONE}" />
+
+                        <ImageView
+                            style="@style/wrap_layout"
+                            android:layout_marginEnd="10dp"
+                            android:src="@drawable/icon_school_shuang"
+                            android:visibility="@{item.collegeLevel.contains(`8`) ? View.VISIBLE : View.GONE}" />
+
+                        <ImageView
+                            style="@style/wrap_layout"
+                            android:layout_marginEnd="10dp"
+                            android:src="@drawable/icon_school_shuangyiliu"
+                            android:visibility="@{item.collegeLevel.contains(`9`) ? View.VISIBLE : View.GONE}" />
+                    </LinearLayout>
+                </HorizontalScrollView>
+            </LinearLayout>
+
+            <CheckedTextView
+                style="@style/text_14_33"
+                android:layout_gravity="end|center_vertical"
+                android:checked="@{item.checked}"
+                android:drawableEnd="@{item.compare ? @drawable/selector_multiple_choose : null }" />
+        </LinearLayout>
 
         <View
             android:layout_width="match_parent"

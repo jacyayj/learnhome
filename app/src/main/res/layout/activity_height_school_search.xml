@@ -104,7 +104,7 @@
             android:layout_height="match_parent"
             android:background="@color/colorWhite">
 
-            <pro.haichuang.learn.home.ui.weight.VerticalRecyclerView
+            <pro.haichuang.learn.home.ui.weight.VerticalRecyclerViewNodivider
                 android:id="@+id/listView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

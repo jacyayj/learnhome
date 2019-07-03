@@ -6,6 +6,7 @@ import android.support.design.widget.TabLayout
 import com.jacy.kit.adapter.CommonAdapter
 import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.mStartActivity
+import com.zhouyou.http.EasyHttp
 import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.activity_vr.*
 import kotlinx.android.synthetic.main.item_vr.view.*
@@ -53,6 +54,11 @@ class VRActivity : BaseActivity() {
         initTab()
         pageUrl = Url.College.VrList
         fetchPageData()
+    }
+
+    override fun fetchPageData(loadMore: Boolean, showLoading: Boolean) {
+        val params = HttpParams()
+        EasyHttp.get("https://api-public.720yun.com/api/products/channel/").params(params)
     }
 
     override fun setPageParams(pageParams: HttpParams) {

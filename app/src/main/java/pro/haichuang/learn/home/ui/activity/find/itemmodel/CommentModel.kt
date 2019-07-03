@@ -13,6 +13,7 @@ class CommentModel : BaseModel() {
     var createTime = ""
     var contentId = 0
     var id = 0
+    var hasUp = false
     @Bindable
     var ups = 0
     set(value) {

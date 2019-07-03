@@ -16,8 +16,6 @@ class ImageBean : BaseModel {
             field = value
             notifyPropertyChanged(BR.canDelete)
         }
-
-
     @Bindable
     var take = false
         set(value) {

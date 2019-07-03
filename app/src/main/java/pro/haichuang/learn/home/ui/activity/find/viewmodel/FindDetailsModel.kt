@@ -1,5 +1,7 @@
 package pro.haichuang.learn.home.ui.activity.find.viewmodel
 
+import android.databinding.Bindable
+import com.jacy.develop.kit.BR
 import com.jacy.kit.config.toast
 import com.jacy.kit.net.Params
 import pro.haichuang.learn.home.bean.Author
@@ -20,6 +22,12 @@ class FindDetailsModel : BaseModel() {
     var picArr: ArrayList<ImageBean>? = null
     var author: Author? = null
     var hasCollect = false
+    @Bindable
+    var hasUp = false
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.hasUp)
+        }
     @Params([Url.Comment.Save], "text")
     var comment = ""
 

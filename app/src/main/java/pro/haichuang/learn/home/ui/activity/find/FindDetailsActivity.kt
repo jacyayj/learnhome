@@ -22,16 +22,21 @@ import pro.haichuang.learn.home.utils.GsonUtil
 @ContentView(R.layout.activity_find_details)
 class FindDetailsActivity : DataBindingActivity<FindDetailsModel>() {
     private val commentAdapter by lazy {
-        CommonRecyclerAdapter<CommentModel>(layoutInflater, R.layout.item_find_details_comment,ArrayList()) { v, t, _ ->
+        CommonRecyclerAdapter<CommentModel>(layoutInflater, R.layout.item_find_details_comment, ArrayList()) { v, t, _ ->
             v.to_index.setOnClickListener {
+                return@setOnClickListener
                 mStartActivity(PersonalIndexActivity::class.java)
             }
             v.up.setOnClickListener {
                 val params = HttpParams()
                 params.put("commentId", t.id.toString())
+                params.put("operate", if (t.hasUp) "0" else "1")
                 post(Url.Comment.Up, params, needSession = true) {
-                    t.ups++
-                    toast("点赞成功")
+                    if (t.hasUp)
+                        t.ups--
+                    else
+                        t.ups++
+                    t.hasUp = t.hasUp.not()
                 }
             }
             v.comment.setOnClickListener {
@@ -64,10 +69,11 @@ class FindDetailsActivity : DataBindingActivity<FindDetailsModel>() {
 
     override fun initListener() {
         to_index.setOnClickListener {
+            return@setOnClickListener
             mStartActivity(PersonalIndexActivity::class.java)
         }
         share.setOnClickListener {
-            ShareDialog(this,model.title,model.shareUrl,model.txt).show()
+            ShareDialog(this, model.title, model.shareUrl, model.txt).show()
         }
         collect.setOnClickListener {
             params.put("operate", if (model.hasCollect) "0" else "1")
@@ -88,6 +94,7 @@ class FindDetailsActivity : DataBindingActivity<FindDetailsModel>() {
         up.setOnClickListener {
             val params = HttpParams()
             params.put("id", model.id.toString())
+            params.put("operate", if (model.hasUp) "0" else "1")
             post(Url.Content.Up, params, needSession = true)
         }
         send.setOnClickListener {
@@ -131,7 +138,7 @@ class FindDetailsActivity : DataBindingActivity<FindDetailsModel>() {
                 }
             }
             Url.Content.Up -> {
-                toast("点赞成功")
+                model.hasUp = model.hasUp.not()
             }
         }
     }

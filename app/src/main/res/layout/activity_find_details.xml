@@ -106,7 +106,7 @@
                             android:layout_marginEnd="65dp"
                             android:background="@drawable/bg_f0f7fa_radius_5dp"
                             android:gravity="center"
-                            android:text="点赞"
+                            android:text="@{model.hasUp ? `已点赞` : `点赞`}"
                             android:textColor="@color/color32C8FA"
                             android:textSize="15sp" />
 

@@ -49,10 +49,10 @@
                     android:layout_height="match_parent"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
-                    android:tag="clear"
                     android:background="@null"
                     android:hint="请输入手机号"
                     android:singleLine="true"
+                    android:tag="clear"
                     android:text="@={model.phone}"
                     android:textColor="@color/color33"
                     android:textColorHint="@color/colorCCDCE0"
@@ -170,11 +170,26 @@
                     android:buttonTint="@color/color13C1FF"
                     android:checked="true"
                     android:gravity="center_vertical"
-                    android:text="勾选代表您已同意" />
+                    android:text="勾选代表您已同意"
+                    android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/to_user"
                     style="@style/text_14_13C1FF"
-                    android:text="《使用协议》" />
+                    android:text="《用户条款》"
+                    android:textSize="12sp" />
+
+                <TextView
+                    style="@style/text_14_99"
+                    android:buttonTint="@color/color13C1FF"
+                    android:text="和"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/to_private"
+                    style="@style/text_14_13C1FF"
+                    android:text="《隐私协议》"
+                    android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>
 

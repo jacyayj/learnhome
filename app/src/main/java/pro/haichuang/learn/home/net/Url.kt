@@ -3,9 +3,9 @@ package pro.haichuang.learn.home.net
 object Url {
 
     const val app_key = "s3o8KTWUsN25JnuIE97T6zHcIo6BOdOw"
-//    const val base_url = "http://118.24.80.29:8080/learn-home-server/api/app/"
+    //    const val base_url = "http://118.24.80.29:8080/learn-home-server/api/app/"
     const val base_url = "http://47.98.158.91:8080/learn-home-server/api/app/"
-//    const val image_base_url = "http://118.24.80.29:8080/learn-home-server"
+    //    const val image_base_url = "http://118.24.80.29:8080/learn-home-server"
     const val image_base_url = "http://47.98.158.91:8080/learn-home-server"
 
     /**
@@ -16,6 +16,28 @@ object Url {
         private const val base = "sms/"
 
         const val Send = "${base}send"
+    }
+
+    /**
+     * 点赞相关接口
+     */
+    object Up {
+
+        private const val base = "up/"
+
+        const val My = "${base}my"
+    }
+
+    /**
+     * 用户指南相关接口
+     */
+    object Guide {
+
+        private const val base = "guide/"
+
+        const val List = "${base}list"
+
+        const val Get = "${base}get"
     }
 
     /**

@@ -70,6 +70,7 @@ class MyFollowActivity : BaseActivity() {
 
     override fun initListener() {
         listView.setSwipeMenuItemClickListener { _, position ->
+            return@setSwipeMenuItemClickListener
             mStartActivity(PersonalIndexActivity::class.java)
         }
         listView.adapter = adapter

@@ -15,7 +15,7 @@
         android:showDividers="middle"
         android:paddingHorizontal="15dp"
         android:drawableEnd="@drawable/icon_arrow_next"
-        android:text="@{item.question}"
+        android:text="@{item.subName}"
         android:textColor="@color/color77"
         android:textSize="15sp" />
 </layout>

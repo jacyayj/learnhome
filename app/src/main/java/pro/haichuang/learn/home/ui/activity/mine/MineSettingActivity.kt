@@ -39,7 +39,7 @@ class MineSettingActivity : BaseActivity() {
                 }.show("确定清除缓存？")
                 4 -> startActivity(Intent(this, FeedbackActivity::class.java))
                 5 -> startActivity(Intent(this, QuestionActivity::class.java))
-                6 -> startActivity(Intent(this, AboutActivity::class.java))
+                6 -> startActivity(Intent(this, GuideActivity::class.java))
                 7 -> startActivity(Intent(this, AboutActivity::class.java))
             }
         }

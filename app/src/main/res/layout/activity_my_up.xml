@@ -4,13 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+
     tools:context=".ui.activity.message.MyUpActivity">
 
     <include layout="@layout/layout_title" />
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@id/refresh_layout"
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorWhite">
@@ -19,6 +19,7 @@
             android:id="@+id/listView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:divider="@color/colorF0F7FA"
             android:dividerHeight="5dp" />
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </LinearLayout>

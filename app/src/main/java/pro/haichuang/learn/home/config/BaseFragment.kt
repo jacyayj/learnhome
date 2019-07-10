@@ -13,6 +13,7 @@ import com.vondear.rxtool.RxEncryptTool
 import com.zhouyou.http.EasyHttp
 import com.zhouyou.http.model.HttpParams
 import pro.haichuang.learn.home.R
+import pro.haichuang.learn.home.adapter.SearchAdapter
 import pro.haichuang.learn.home.net.MyCallBack
 import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.utils.SPUtils
@@ -88,6 +89,11 @@ abstract class BaseFragment : RootFragment(), OnRefreshLoadMoreListener {
                     (adapter as CommonRecyclerAdapter<T>).insertData(data)
                 else
                     (adapter as CommonAdapter<T>).refresh(data)
+            is SearchAdapter<*> ->
+                if (isLoadMore)
+                    (adapter as SearchAdapter<T>).add(data)
+                else
+                    (adapter as SearchAdapter<T>).refresh(data)
         }
     }
 

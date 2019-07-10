@@ -20,6 +20,7 @@ import com.jacy.kit.adapter.CommonRecyclerAdapter
 import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.mStartActivity
 import com.jacy.kit.config.mStartActivityForResult
+import com.youth.banner.BannerConfig
 import com.youth.banner.loader.ImageLoader
 import kotlinx.android.synthetic.main.fragment_index.*
 import pro.haichuang.learn.home.R
@@ -102,6 +103,7 @@ class IndexFragment : BaseFragment(), WeatherSearch.OnWeatherSearchListener, AMa
                     beans.forEach {
                         urls.add(it.image)
                     }
+                    banner.setBannerStyle(BannerConfig.RIGHT)
                     banner.setImageLoader(object : ImageLoader() {
                         override fun displayImage(context: Context?, path: Any?, imageView: ImageView?) {
                             ImageBinding.displayMatchNet(imageView, path.toString())

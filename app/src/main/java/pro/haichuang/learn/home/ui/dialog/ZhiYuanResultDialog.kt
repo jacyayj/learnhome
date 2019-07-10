@@ -5,7 +5,6 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import com.jacy.kit.adapter.CommonAdapter
-import com.jacy.kit.config.show
 import kotlinx.android.synthetic.main.dialog_zhiyuan_result.*
 import kotlinx.android.synthetic.main.item_dialog_zhiyuan.view.*
 import pro.haichuang.learn.home.R
@@ -13,8 +12,6 @@ import pro.haichuang.learn.home.ui.activity.index.itemmodel.CollegeModel
 import pro.haichuang.learn.home.utils.DialogUtils
 
 class ZhiYuanResultDialog(context: Context, private val result: () -> Unit, private val remove: (id: Int) -> Unit) : Dialog(context, R.style.Dialog) {
-
-    private lateinit var data: ArrayList<CollegeModel>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,5 +34,4 @@ class ZhiYuanResultDialog(context: Context, private val result: () -> Unit, priv
         }
     }
 
-    private fun remove() {}
 }

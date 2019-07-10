@@ -62,7 +62,7 @@ public class AdvancedTeamNicknameActivity extends UI implements TextWatcher, Vie
         toolbarView.setText(R.string.save);
         toolbarView.setOnClickListener(this);
 
-        regularTeamNickname = (EditText) findViewById(R.id.regular_team_nickname);
+        regularTeamNickname = findViewById(R.id.regular_team_nickname);
         regularTeamNickname.setText(nickName);
         regularTeamNickname.addTextChangedListener(this);
         regularTeamNickname.setOnKeyListener(new View.OnKeyListener() {

@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.dialog_notice.*
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.utils.DialogUtils
 
-class NoticeDialog(context: Context, private val result: () -> Unit = {}) : Dialog(context, R.style.Dialog) {
+class NoticeDialog(context: Context?, private val result: () -> Unit = {}) : Dialog(context, R.style.Dialog) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

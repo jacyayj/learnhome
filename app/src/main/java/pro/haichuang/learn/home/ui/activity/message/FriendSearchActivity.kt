@@ -30,6 +30,9 @@ class FriendSearchActivity : BaseActivity() {
             v.add_friend.setOnClickListener {
                 friendService.addFriend(AddFriendData(t.imAccid, VerifyType.VERIFY_REQUEST, "我是${SPUtils.userName}")).setCallback(object : RequestCallback<Void> {
                     override fun onSuccess(p0: Void?) {
+                        v.add_friend.text = "已发送"
+                        v.add_friend.isEnabled = false
+                        v.add_friend.setBackgroundResource(R.drawable.bg_e0_radius_5dp)
                         toast("好友请求发送成功")
                     }
 
@@ -38,7 +41,6 @@ class FriendSearchActivity : BaseActivity() {
                             404 -> toast("该用户不存在")
                             else -> toast("$p0")
                         }
-
                     }
 
                     override fun onException(p0: Throwable?) {

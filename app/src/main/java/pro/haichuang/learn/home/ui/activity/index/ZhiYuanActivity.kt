@@ -34,7 +34,7 @@ class ZhiYuanActivity : BaseActivity() {
 
     private var subject = 1
 
-    private var province = ""
+    private var province = "510000000000"
 
     override fun initData() {
         initTab()

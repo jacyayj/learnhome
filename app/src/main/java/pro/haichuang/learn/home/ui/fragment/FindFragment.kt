@@ -3,7 +3,10 @@ package pro.haichuang.learn.home.ui.fragment
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.support.design.widget.TabLayout
-import com.jacy.kit.adapter.CommonAdapter
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.KeyEvent
+import android.view.inputmethod.EditorInfo
 import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.gone
 import com.jacy.kit.config.mStartActivity
@@ -12,6 +15,7 @@ import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.fragment_find.*
 import pro.haichuang.learn.home.BR
 import pro.haichuang.learn.home.R
+import pro.haichuang.learn.home.adapter.SearchAdapter
 import pro.haichuang.learn.home.bean.TabBean
 import pro.haichuang.learn.home.config.BaseFragment
 import pro.haichuang.learn.home.config.Constants
@@ -26,8 +30,8 @@ import pro.haichuang.learn.home.utils.ImageBinding
 class FindFragment : BaseFragment() {
     private lateinit var tabBeans: ArrayList<TabBean>
 
-    private val firstAdapter by lazy { CommonAdapter<ItemNews>(layoutInflater, R.layout.item_find_first) }
-    private val otherAdapter by lazy { CommonAdapter<ItemNews>(layoutInflater, R.layout.item_find_other) }
+    private val firstAdapter by lazy { SearchAdapter<ItemNews>(layoutInflater, R.layout.item_find_first) }
+    private val otherAdapter by lazy { SearchAdapter<ItemNews>(layoutInflater, R.layout.item_find_other) }
 
     override fun initData() {
         listView.adapter = firstAdapter
@@ -35,6 +39,38 @@ class FindFragment : BaseFragment() {
     }
 
     override fun initListener() {
+        clear.setEdit(search_input)
+        search_input.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                if (s.isNullOrEmpty()) {
+                    clear.gone()
+                    if (tab.selectedTabPosition == 0)
+                        firstAdapter.doSearch("")
+                    else
+                        otherAdapter.doSearch("")
+                } else {
+                    clear.show()
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+        })
+        search_input.setOnEditorActionListener { _, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_DONE || event != null && event.keyCode == KeyEvent.KEYCODE_ENTER) {
+                if (tab.selectedTabPosition == 0)
+                    firstAdapter.doSearch(search_input.text.toString())
+                else
+                    otherAdapter.doSearch(search_input.text.toString())
+                true
+            } else {
+                false
+            }
+        }
+
         tab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(p0: TabLayout.Tab?) {
             }

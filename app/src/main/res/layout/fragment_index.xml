@@ -76,21 +76,17 @@
                 style="@style/match_layout"
                 android:orientation="vertical">
 
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp">
 
-                    <com.youth.banner.Banner
-                        android:id="@+id/banner"
-                        android:layout_width="match_parent"
-                        android:layout_height="250dp"
-                        app:image_scale_type="fit_xy"
-                        app:indicator_drawable_selected="@drawable/banner_point_true"
-                        app:indicator_drawable_unselected="@drawable/banner_point_false"
-                        app:indicator_height="@dimen/dp_10"
-                        app:indicator_margin="5dp"
-                        app:indicator_width="@dimen/dp_10" />
-                </FrameLayout>
+                <com.youth.banner.Banner
+                    android:id="@+id/banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    app:image_scale_type="fit_xy"
+                    app:indicator_drawable_selected="@drawable/banner_point_true_index"
+                    app:indicator_drawable_unselected="@drawable/banner_point_false_index"
+                    app:indicator_height="@dimen/dp_10"
+                    app:indicator_margin="5dp"
+                    app:indicator_width="5dp" />
 
                 <pro.haichuang.learn.home.ui.weight.GridRecyclerView
                     android:id="@+id/grid"

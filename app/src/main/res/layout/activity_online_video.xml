@@ -35,12 +35,22 @@
                 android:src="@drawable/icon_friend_search" />
 
             <EditText
+                android:id="@+id/search_input"
                 style="@style/match_layout"
+                android:layout_weight="1"
                 android:background="@null"
                 android:hint="搜索课程类型或者课程关键字"
                 android:textColor="@color/color33"
                 android:textColorHint="@color/colorCCC4CC"
+                android:imeOptions="actionSearch"
                 android:textSize="15sp" />
+
+            <pro.haichuang.learn.home.ui.weight.ClearImage
+                android:id="@+id/clear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/dp_10"
+                android:visibility="gone" />
         </LinearLayout>
     </LinearLayout>
 

@@ -49,7 +49,6 @@ public class ImageBinding {
     @BindingAdapter({"match_net_url"})
     public static void displayMatchNet(ImageView view, String url) {
         Glide.with(view)
-                .applyDefaultRequestOptions(RequestOptions.noTransformation())
                 .load(Url.image_base_url + url)
                 .into(view);
     }

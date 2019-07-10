@@ -37,11 +37,10 @@ class ZhiYuanPiCiActivity : BaseActivity() {
     @SuppressLint("SetTextI18n")
     override fun onSuccess(url: String, result: Any?) {
         GsonUtil.parseArray(result, PiCiModel::class.java).let { data ->
-
             val score = if (isDifference) data.find { it.enrollBatch == batch }?.let { if (subject == 1) it.score1 + mScore else it.score2 + mScore }
                     ?: 0
             else mScore
-            data.forEachIndexed { i, it ->
+            data.asReversed().forEachIndexed { i, it ->
                 when (subject) {
                     1 -> {
                         if (score >= it.score1) {

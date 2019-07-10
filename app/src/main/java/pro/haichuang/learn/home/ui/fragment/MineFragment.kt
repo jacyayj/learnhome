@@ -78,10 +78,12 @@ class MineFragment : BaseFragment(), AMapLocationListener {
                     name.text = user.teachername
                     ImageBinding.displayNet(header, user.teacherImg)
                     to_vip.gone()
+                    updateName(user.teachername)
                 } else {
                     name.text = user.realname
                     ImageBinding.displayNet(header, user.userImg)
                     to_vip.setImageResource(if (user.isVip) R.drawable.icon_vip else R.drawable.icon_vip_not)
+                    updateName(user.realname)
                 }
             }
             Url.Upload.Upload -> {
@@ -108,6 +110,12 @@ class MineFragment : BaseFragment(), AMapLocationListener {
                 })
             }
         }
+    }
+
+    private fun updateName(name:String) {
+        val filed = HashMap<UserInfoFieldEnum, String>()
+        filed[UserInfoFieldEnum.Name] = name
+        NIMClient.getService(UserService::class.java).updateUserInfo(filed as Map<UserInfoFieldEnum, Any>?)
     }
 
     override fun initListener() {
@@ -159,7 +167,7 @@ class MineFragment : BaseFragment(), AMapLocationListener {
             when (requestCode) {
                 PictureConfig.CHOOSE_REQUEST -> {
                     val url = PictureSelector.obtainMultipleResult(data)[0].compressPath
-                    if (url.isNullOrEmpty()){
+                    if (url.isNullOrEmpty()) {
                         toast("图片无效")
                         return
                     }
@@ -170,7 +178,7 @@ class MineFragment : BaseFragment(), AMapLocationListener {
                     params.put("uploadFile", File(url), null)
                     try {
                         post(Url.Upload.Upload, params, showLoading = true)
-                    }catch (e:NullPointerException){
+                    } catch (e: NullPointerException) {
                         toast("图片无效")
                     }
                 }

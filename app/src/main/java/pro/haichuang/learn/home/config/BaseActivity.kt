@@ -16,6 +16,7 @@ import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.layout_title.*
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.adapter.CollectAdapter
+import pro.haichuang.learn.home.adapter.SearchAdapter
 import pro.haichuang.learn.home.net.MyCallBack
 import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.mine.itemmodel.CollectModel
@@ -101,10 +102,11 @@ abstract class BaseActivity : RootActivity(), OnRefreshLoadMoreListener {
             }
         }
         when (adapter) {
-            is CommonAdapter<*> -> if (isLoadMore)
-                (adapter as CommonAdapter<T>).add(data)
-            else
-                (adapter as CommonAdapter<T>).refresh(data)
+            is CommonAdapter<*> ->
+                if (isLoadMore)
+                    (adapter as CommonAdapter<T>).add(data)
+                else
+                    (adapter as CommonAdapter<T>).refresh(data)
             is CommonRecyclerAdapter<*> ->
                 if (isLoadMore)
                     (adapter as CommonRecyclerAdapter<T>).insertData(data)
@@ -115,6 +117,11 @@ abstract class BaseActivity : RootActivity(), OnRefreshLoadMoreListener {
                     adapter.insertData(data as ArrayList<CollectModel>)
                 else
                     adapter.refresh(data as ArrayList<CollectModel>)
+            is SearchAdapter<*> ->
+                if (isLoadMore)
+                    (adapter as SearchAdapter<T>).add(data)
+                else
+                    (adapter as SearchAdapter<T>).refresh(data)
         }
     }
 

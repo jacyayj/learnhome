@@ -9,9 +9,9 @@ import com.scwang.smartrefresh.layout.util.DensityUtil
 import kotlinx.android.synthetic.main.popup_zhiyuan.view.*
 import pro.haichuang.learn.home.R
 
-class ZhiYuanPopup(private val layoutInflater: LayoutInflater, result: (res: String) -> Unit = {}) : PopupWindow(DensityUtil.dp2px(75f), WindowManager.LayoutParams.WRAP_CONTENT) {
+class ZhiYuanPopup(layoutInflater: LayoutInflater, result: (res: String) -> Unit = {}) : PopupWindow(DensityUtil.dp2px(75f), WindowManager.LayoutParams.WRAP_CONTENT) {
 
-    private val data by lazy { arrayListOf("A", "B", "C", "D", "E", "F") }
+    private val data by lazy { arrayListOf("A", "B", "C", "D", "E", "F","G","H","I") }
 
     init {
         isOutsideTouchable = true

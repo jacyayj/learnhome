@@ -10,20 +10,23 @@
             type="pro.haichuang.learn.home.ui.activity.index.viewmodel.LiuXueDetailsModel" />
     </data>
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical"
         tools:context=".ui.activity.index.LiuXueDetailsActivity">
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <FrameLayout
@@ -39,8 +42,8 @@
                         app:indicator_drawable_selected="@drawable/banner_point_true"
                         app:indicator_drawable_unselected="@drawable/banner_point_false"
                         app:indicator_height="@dimen/dp_10"
-                        app:indicator_width="@dimen/dp_10"
-                        app:indicator_margin="5dp" />
+                        app:indicator_margin="5dp"
+                        app:indicator_width="@dimen/dp_10" />
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -520,5 +523,5 @@
             android:layout_gravity="bottom"
             android:layout_marginHorizontal="55dp"
             android:text="免费咨询" />
-    </FrameLayout>
+    </LinearLayout>
 </layout>

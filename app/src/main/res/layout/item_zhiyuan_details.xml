@@ -47,6 +47,8 @@
 
                     <TextView
                         style="@style/text_16_33"
+                        android:ellipsize="end"
+                        android:singleLine="true"
                         android:text="@{item.collegeName}"
                         android:textColor="#ff2f2f33"
                         android:textSize="16sp" />
@@ -64,6 +66,7 @@
                         style="@style/text_16_8E8E99"
                         android:drawableStart="@drawable/icon_location"
                         android:drawablePadding="5dp"
+                        android:singleLine="true"
                         android:text="@{item.provinceStr}" />
                 </LinearLayout>
 

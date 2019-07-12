@@ -18,23 +18,29 @@ import com.android.databinding.library.baseAdapters.BR
 import com.jacy.kit.config.toast
 import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureConfig
+import com.previewlibrary.GPreviewBuilder
 import kotlinx.android.synthetic.main.item_square_image_release.view.*
 import pro.haichuang.learn.home.R
 import pro.haichuang.learn.home.bean.ImageBean
+import pro.haichuang.learn.home.bean.MyThumb
 
 class ReleaseImageAdapter(private val context: Activity) : RecyclerView.Adapter<ReleaseImageAdapter.CommonHolder>() {
     private val inflater by lazy { LayoutInflater.from(context) }
     private val data by lazy { ArrayList<ImageBean>() }
 
+    private val imageInfos by lazy { ArrayList<MyThumb>() }
+
     private fun remove(position: Int) {
         this.data.removeAt(position)
         notifyItemRemoved(position)
+        imageInfos.removeAt(position)
         if (position != data.size)
             notifyItemRangeChanged(position, data.size - position)
     }
 
-    fun insert(path: String,des:String) {
-        data.add(0, ImageBean(path,des))
+    fun insert(path: String, des: String) {
+        data.add(0, ImageBean(path, des))
+        imageInfos.add(0, MyThumb(path))
         if (data.size == 9)
             notifyItemRemoved(8)
         notifyItemInserted(0)
@@ -66,24 +72,31 @@ class ReleaseImageAdapter(private val context: Activity) : RecyclerView.Adapter<
                     val temp = ImageBean()
                     temp.canDelete = false
                     temp.take = true
-                    holder.itemView.apply {
-                        take.setOnClickListener {
-                            PictureSelector.create(this@ReleaseImageAdapter.context)
-                                    .openGallery(PictureConfig.TYPE_IMAGE)
-                                    .compress(true)
-                                    .maxSelectNum(9 - data.size)
-                                    .isCamera(true)
-                                    .previewImage(true)
-                                    .selectionMode(PictureConfig.MULTIPLE)
-                                    .forResult(PictureConfig.CHOOSE_REQUEST)
-                        }
-                        holder.itemView.delete.setOnClickListener(null)
+                    holder.itemView.image.setOnClickListener(null)
+                    holder.itemView.take.setOnClickListener {
+                        PictureSelector.create(this@ReleaseImageAdapter.context)
+                                .openGallery(PictureConfig.TYPE_IMAGE)
+                                .compress(true)
+                                .maxSelectNum(9 - data.size)
+                                .isCamera(true)
+                                .previewImage(true)
+                                .selectionMode(PictureConfig.MULTIPLE)
+                                .forResult(PictureConfig.CHOOSE_REQUEST)
                     }
+                    holder.itemView.delete.setOnClickListener(null)
                     temp
                 } else {
                     val temp = data[position]
                     temp.canDelete = true
                     holder.itemView.take.setOnClickListener(null)
+                    holder.itemView.image.setOnClickListener {
+                        GPreviewBuilder.from(context)
+                                .setCurrentIndex(position)
+                                .setFullscreen(false)
+                                .setData(imageInfos)
+                                .setType(GPreviewBuilder.IndicatorType.Number)
+                                .start()
+                    }
                     holder.itemView.delete.setOnClickListener {
                         remove(position)
                     }

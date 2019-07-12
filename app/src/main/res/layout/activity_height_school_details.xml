@@ -30,7 +30,7 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="85dp">
+                android:layout_height="wrap_content">
 
                 <com.yhy.widget.core.img.round.CircleImageView
                     net_url="@{model.logo}"
@@ -43,24 +43,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="75dp"
+                    android:paddingVertical="5dp"
                     android:paddingEnd="15dp">
+
+                    <TextView
+                        style="@style/text_16_33"
+                        android:layout_marginEnd="3dp"
+                        android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:text="@{model.collegeName}" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_marginTop="15dp"
+                        android:layout_marginVertical="5dp"
                         android:gravity="center_vertical">
 
                         <TextView
-                            style="@style/text_16_33"
-                            android:layout_marginEnd="3dp"
-                            android:ellipsize="end"
-                            android:singleLine="true"
-                            android:layout_weight="1"
-                            android:text="@{model.collegeName}" />
-
-                        <TextView
                             style="@style/text_14_13C1FF"
-                            android:layout_marginEnd="5dp"
+                            android:layout_marginEnd="10dp"
                             android:background="@drawable/stroke_13aeff_radius_8dp"
                             android:paddingHorizontal="8dp"
                             android:paddingVertical="1dp"
@@ -70,12 +71,10 @@
 
                         <TextView
                             style="@style/text_14_939799"
-                            android:layout_marginEnd="5dp"
-                            android:gravity="end"
+                            android:layout_weight="1"
                             android:text="@{model.collegeTypeStr}" />
 
                         <TextView
-
                             style="@style/text_14_939799"
                             android:drawableStart="@drawable/icon_location"
                             android:drawablePadding="5dp"

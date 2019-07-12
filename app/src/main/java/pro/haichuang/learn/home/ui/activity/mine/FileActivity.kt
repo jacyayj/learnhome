@@ -17,6 +17,7 @@ import pro.haichuang.learn.home.ui.dialog.AddressDialog
 import pro.haichuang.learn.home.ui.dialog.ClassDialog
 import pro.haichuang.learn.home.ui.dialog.SexDialog
 import pro.haichuang.learn.home.utils.GsonUtil
+import pro.haichuang.learn.home.utils.SPUtils
 
 
 @ContentView(R.layout.activity_file)
@@ -28,6 +29,7 @@ class FileActivity : DataBindingActivity<FileModel>(), RadioGroup.OnCheckedChang
             model.district = it
         }
     }
+
     private val classDialog by lazy {
         ClassDialog(this) {
             model.studentClass = it
@@ -53,6 +55,7 @@ class FileActivity : DataBindingActivity<FileModel>(), RadioGroup.OnCheckedChang
             }
             Url.User.FileSave -> {
                 model.done = true
+                SPUtils.isRegister = false
                 toast("保存成功")
             }
         }
@@ -72,6 +75,13 @@ class FileActivity : DataBindingActivity<FileModel>(), RadioGroup.OnCheckedChang
         choose_class.setOnClickListener { classDialog.show() }
         choose_sex.setOnClickListener { sexDialog.show() }
         save.setOnClickListener { autoPost(Url.User.FileSave, needSession = true) }
+    }
+
+    override fun onBackPressed() {
+        if (SPUtils.isRegister && model.done) {
+            toast("请先完善资料")
+        } else
+            super.onBackPressed()
     }
 
     override fun onCheckedChanged(group: RadioGroup?, checkedId: Int) {

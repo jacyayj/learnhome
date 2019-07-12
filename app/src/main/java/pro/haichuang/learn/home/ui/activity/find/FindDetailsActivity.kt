@@ -5,11 +5,13 @@ import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.mStartActivity
 import com.jacy.kit.config.toast
 import com.jacy.kit.weight.KeyboardLayout
+import com.previewlibrary.GPreviewBuilder
 import com.vondear.rxtool.RxKeyboardTool
 import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.activity_find_details.*
 import kotlinx.android.synthetic.main.item_find_details_comment.view.*
 import pro.haichuang.learn.home.R
+import pro.haichuang.learn.home.bean.MyThumb
 import pro.haichuang.learn.home.config.Constants
 import pro.haichuang.learn.home.config.DataBindingActivity
 import pro.haichuang.learn.home.net.Url
@@ -57,7 +59,7 @@ class FindDetailsActivity : DataBindingActivity<FindDetailsModel>() {
             put("id", model.id.toString())
         }
     }
-
+    private val imageInfos by lazy { ArrayList<MyThumb>() }
 
     override fun initData() {
         model.id = intent.getIntExtra(Constants.NEWS_ID, -1)
@@ -109,12 +111,23 @@ class FindDetailsActivity : DataBindingActivity<FindDetailsModel>() {
                 }
             }
         })
+        images.setOnItemClickListener { _, _, position, _ ->
+            GPreviewBuilder.from(this)
+                    .setCurrentIndex(position)
+                    .setFullscreen(false)
+                    .setData(imageInfos)
+                    .setType(GPreviewBuilder.IndicatorType.Number)
+                    .start()
+        }
     }
 
     override fun onSuccess(url: String, result: Any?) {
         when (url) {
             Url.Publish.Get -> {
                 notifyModel(GsonUtil.parseObject(result, FindDetailsModel::class.java))
+                model.picArr?.forEach {
+                    imageInfos.add(MyThumb(it.picPaths))
+                }
             }
             Url.Content.Collect -> {
                 model.hasCollect = model.hasCollect.not()

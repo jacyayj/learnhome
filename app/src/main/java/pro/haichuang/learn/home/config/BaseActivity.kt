@@ -6,6 +6,7 @@ import android.os.Bundle
 import com.jacy.kit.adapter.CommonAdapter
 import com.jacy.kit.adapter.CommonRecyclerAdapter
 import com.jacy.kit.config.RootActivity
+import com.jacy.kit.config.mStartActivity
 import com.jacy.kit.config.toast
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.api.RefreshLayout
@@ -19,6 +20,7 @@ import pro.haichuang.learn.home.adapter.CollectAdapter
 import pro.haichuang.learn.home.adapter.SearchAdapter
 import pro.haichuang.learn.home.net.MyCallBack
 import pro.haichuang.learn.home.net.Url
+import pro.haichuang.learn.home.ui.activity.login.LoginActivity
 import pro.haichuang.learn.home.ui.activity.mine.itemmodel.CollectModel
 import pro.haichuang.learn.home.utils.SPUtils
 
@@ -66,6 +68,17 @@ abstract class BaseActivity : RootActivity(), OnRefreshLoadMoreListener {
      *@param success 成功回调
      */
     fun post(url: String, params: HttpParams = HttpParams(), showLoading: Boolean = true, needSession: Boolean = false, jessionid: String = "", success: () -> Unit = {}) {
+
+        if (SPUtils.isTourist)
+            if (url == Url.Teacher.Collect || url == Url.Content.Collect || url == Url.Lecture.Collect || url == Url.College.Collect || url == Url.Order.Collect
+                    || url == Url.Comment.Save || url == Url.Comment.Up || url == Url.Comment.Up || url == Url.Content.Up || url == Url.Teacher.Fee || url == Url.Lecture.Apply
+                    || url == Url.Consult.Save || url == Url.Friend.Attention|| url == Url.Account.Activate
+            ) {
+                mStartActivity(LoginActivity::class.java, Pair("re_login", true))
+                toast("请先登录后再操作")
+                return
+            }
+
         if (needSession)
             SPUtils.session?.let {
                 params.put("sessionKey", it)

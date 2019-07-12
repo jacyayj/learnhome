@@ -1,6 +1,7 @@
 package pro.haichuang.learn.home.ui.activity.login
 
 import android.Manifest
+import android.app.Activity
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -10,6 +11,7 @@ import android.support.design.widget.TabLayout
 import android.view.View
 import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.mStartActivity
+import com.jacy.kit.config.mStartActivityForResult
 import com.jacy.kit.config.toast
 import com.netease.nim.uikit.api.NimUIKit
 import com.netease.nimlib.sdk.RequestCallback
@@ -118,7 +120,7 @@ class LoginActivity : DataBindingActivity<LoginModel>(), IUiListener {
             }
             Url.User.Login, Url.User.ThirdLogin -> {
                 if (openId.isNotEmpty() && result is Int && result == 303) {
-                    mStartActivity(CompleteInfoActivity::class.java, Pair("thirdKey", openId), Pair("source", source))
+                    mStartActivityForResult(CompleteInfoActivity::class.java, 0x99, Pair("thirdKey", openId), Pair("source", source), Pair("re_login", re_login))
                 } else {
                     val info = GsonUtil.parseObject(result, UserInfo::class.java)
                     SPUtils.userInfo = info
@@ -131,6 +133,7 @@ class LoginActivity : DataBindingActivity<LoginModel>(), IUiListener {
                             toast("登录成功")
                             if (!re_login)
                                 mStartActivity(MainActivity::class.java)
+                            SPUtils.isTourist = false
                             finish()
                         }
 
@@ -147,7 +150,10 @@ class LoginActivity : DataBindingActivity<LoginModel>(), IUiListener {
     }
 
     fun tourIn(view: View) {
-        mStartActivity(MainActivity::class.java)
+        SPUtils.isTourist = true
+        if (!re_login)
+            mStartActivity(MainActivity::class.java)
+        finish()
     }
 
     override fun onComplete(result: Any?) {
@@ -191,7 +197,10 @@ class LoginActivity : DataBindingActivity<LoginModel>(), IUiListener {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        Tencent.handleResultData(data, this)
+        if (requestCode == 0x99 && resultCode == Activity.RESULT_OK)
+            finish()
+        else
+            Tencent.handleResultData(data, this)
     }
 
     inner class WxResponse : BroadcastReceiver() {

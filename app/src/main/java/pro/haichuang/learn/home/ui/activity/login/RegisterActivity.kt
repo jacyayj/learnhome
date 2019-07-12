@@ -9,6 +9,7 @@ import pro.haichuang.learn.home.config.DataBindingActivity
 import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.WebActivity
 import pro.haichuang.learn.home.ui.activity.login.viewmodel.RegisterModel
+import pro.haichuang.learn.home.utils.SPUtils
 
 @ContentView(R.layout.activity_register)
 class RegisterActivity : DataBindingActivity<RegisterModel>() {
@@ -45,6 +46,7 @@ class RegisterActivity : DataBindingActivity<RegisterModel>() {
             }
             Url.User.Register -> {
                 toast("注册成功")
+                SPUtils.isRegister = true
                 finish()
             }
         }

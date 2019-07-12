@@ -3,10 +3,13 @@ package pro.haichuang.learn.home.config
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import com.android.databinding.library.baseAdapters.BR
+import com.jacy.kit.config.mStartActivity
+import com.jacy.kit.config.toast
 import com.zhouyou.http.EasyHttp
 import pro.haichuang.learn.home.bean.BaseModel
 import pro.haichuang.learn.home.net.MyCallBack
 import pro.haichuang.learn.home.net.Url
+import pro.haichuang.learn.home.ui.activity.login.LoginActivity
 import pro.haichuang.learn.home.utils.SPUtils
 import java.lang.reflect.ParameterizedType
 
@@ -44,6 +47,15 @@ open class DataBindingActivity<T : BaseModel> : BaseActivity() {
     }
 
     fun autoPost(url: String, showLoading: Boolean = true, needSession: Boolean = false) {
+        if (SPUtils.isTourist)
+            if (url == Url.Teacher.Collect || url == Url.Content.Collect || url == Url.Lecture.Collect || url == Url.College.Collect || url == Url.Order.Collect
+                    || url == Url.Comment.Save || url == Url.Comment.Up || url == Url.Comment.Up || url == Url.Content.Up || url == Url.Teacher.Fee || url == Url.Lecture.Apply
+                    || url == Url.Consult.Save || url == Url.Friend.Attention|| url == Url.Account.Activate
+            ) {
+                mStartActivity(LoginActivity::class.java, Pair("re_login", true))
+                toast("请先登录后再操作")
+                return
+            }
         if (model.checkSuccess(url)) {
             val params = model.getParams(url)
             if (needSession)

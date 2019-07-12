@@ -44,6 +44,14 @@ object SPUtils {
         get() = sp.getBoolean("isTeacher", false)
         private set(value) = sp.edit().putBoolean("isTeacher", value).apply()
 
+    var isRegister: Boolean
+        get() = sp.getBoolean("isRegister", false)
+        set(value) = sp.edit().putBoolean("isRegister", value).apply()
+
+    var isTourist: Boolean
+        get() = sp.getBoolean("isTourist", false)
+        set(value) = sp.edit().putBoolean("isTourist", value).apply()
+
     fun clear() {
         sp.edit().clear().apply()
     }

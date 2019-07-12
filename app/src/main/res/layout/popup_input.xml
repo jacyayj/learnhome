@@ -17,6 +17,7 @@
         android:textColor="@color/color33"
         android:hint="请输入专业名称关键字"
         android:textColorHint="@color/colorCC"
+
         android:background="@drawable/stroke_e0e0e0" />
 
     <TextView

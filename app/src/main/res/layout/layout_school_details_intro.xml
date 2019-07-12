@@ -35,7 +35,8 @@
         <TextView
             style="@style/text_14_002133"
             android:paddingTop="15dp"
-            android:text="@{`重点建设：`+model.collegeTypeStrs}" />
+            android:text="@{`重点建设：`+model.collegeTypeStrs}"
+            android:visibility="gone" />
 
         <TextView
             style="@style/text_14_002133"
@@ -45,19 +46,41 @@
         <TextView
             style="@style/text_14_002133"
             android:paddingTop="15dp"
-            android:text="@{`地址：`+model.address}" />
+            android:text="@{`地址：`+model.address}"
+            android:visibility="gone" />
 
-        <TextView
-            android:id="@+id/phone"
-            style="@style/text_14_002133"
-            android:paddingTop="15dp"
-            android:text="@{`联系电话：`+model.contact}" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="15dp">
 
-        <TextView
-            android:id="@+id/website"
-            style="@style/text_14_002133"
-            android:paddingTop="15dp"
-            android:text="@{`网址：`+model.website}" />
+            <TextView
+                style="@style/text_14_002133"
+                android:text="联系电话：" />
+
+            <TextView
+                android:id="@+id/phone"
+                style="@style/text_14_13C1FF"
+                android:text="@{model.contact}" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="15dp">
+
+            <TextView
+                style="@style/text_14_002133"
+                android:text="网址：" />
+
+            <TextView
+                android:id="@+id/website"
+                style="@style/text_14_13C1FF"
+                android:text="@{model.website}" />
+        </LinearLayout>
+
 
         <View
             android:layout_width="match_parent"

@@ -3,6 +3,8 @@ package pro.haichuang.learn.home.config
 import android.app.Application
 import android.content.Context
 import android.support.multidex.MultiDex
+import android.support.v4.app.Fragment
+import android.widget.ImageView
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import com.netease.nim.uikit.api.NimUIKit
@@ -17,6 +19,9 @@ import com.netease.nimlib.sdk.msg.MsgService
 import com.netease.nimlib.sdk.msg.MsgServiceObserve
 import com.netease.nimlib.sdk.msg.model.IMMessage
 import com.netease.nimlib.sdk.util.NIMUtil
+import com.previewlibrary.ZoomMediaLoader
+import com.previewlibrary.loader.IZoomMediaLoader
+import com.previewlibrary.loader.MySimpleTarget
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
@@ -35,6 +40,7 @@ import pro.haichuang.learn.home.ui.im.CollectAction
 import pro.haichuang.learn.home.ui.im.MsgViewHolderTip
 import pro.haichuang.learn.home.ui.im.location.NimDemoLocationProvider
 import pro.haichuang.learn.home.utils.HttpUtils
+import pro.haichuang.learn.home.utils.ImageBinding
 import pro.haichuang.learn.home.utils.SPUtils
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -64,7 +70,38 @@ class BaseApplication : Application() {
         NIMClient.init(this, SPUtils.loginInfo, options())
         initUiKit()
         initRefreshLayout()
+        /**
+         * 图片预览
+         */
+        ZoomMediaLoader.getInstance().init(object : IZoomMediaLoader {
+            override fun displayGifImage(
+                    p0: Fragment,
+                    p1: String,
+                    p2: ImageView?,
+                    p3: MySimpleTarget
+            ) {
 
+            }
+
+            override fun clearMemory(c: Context) {
+            }
+
+            override fun displayImage(
+                    p0: Fragment,
+                    p1: String,
+                    p2: ImageView?,
+                    p3: MySimpleTarget
+            ) {
+                if (p1.startsWith("/storage"))
+                    ImageBinding.displayLocal(p2, p1)
+                else
+                    ImageBinding.displayMatchNet(p2, p1)
+                p3.onResourceReady()
+            }
+
+            override fun onStop(p0: Fragment) {
+            }
+        })
         CrashReport.initCrashReport(this, "955150cb5c", true)
     }
 

@@ -1,5 +1,6 @@
 package pro.haichuang.learn.home.ui.activity.login
 
+import android.app.Activity
 import com.jacy.kit.config.ContentView
 import com.jacy.kit.config.toast
 import com.netease.nim.uikit.api.NimUIKit
@@ -19,7 +20,7 @@ import pro.haichuang.learn.home.utils.SPUtils
 
 @ContentView(R.layout.activity_complete_info)
 class CompleteInfoActivity : DataBindingActivity<CompleteInfoModel>() {
-
+    private val re_login by lazy { intent.getBooleanExtra("re_login", false) }
     override fun initData() {
         model.thirdKey = intent.getStringExtra("thirdKey")
         model.source = intent.getStringExtra("source")
@@ -59,7 +60,12 @@ class CompleteInfoActivity : DataBindingActivity<CompleteInfoModel>() {
                         NimUIKit.getOptions().isTeacher = info.teacher
                         NimUIKit.loginSuccess(p0?.account)
                         toast("登录成功")
-                        RxActivityTool.skipActivityAndFinishAll(this@CompleteInfoActivity, MainActivity::class.java)
+                        SPUtils.isRegister = true
+                        SPUtils.isTourist = false
+                        if (re_login)
+                            setResult(Activity.RESULT_OK)
+                        else
+                            RxActivityTool.skipActivityAndFinishAll(this@CompleteInfoActivity, MainActivity::class.java)
                         finish()
                     }
 

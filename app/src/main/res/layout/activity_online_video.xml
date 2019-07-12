@@ -42,6 +42,7 @@
                 android:hint="搜索课程类型或者课程关键字"
                 android:textColor="@color/color33"
                 android:textColorHint="@color/colorCCC4CC"
+
                 android:imeOptions="actionSearch"
                 android:textSize="15sp" />
 

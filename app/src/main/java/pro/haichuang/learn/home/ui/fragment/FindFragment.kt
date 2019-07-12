@@ -7,10 +7,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
-import com.jacy.kit.config.ContentView
-import com.jacy.kit.config.gone
-import com.jacy.kit.config.mStartActivity
-import com.jacy.kit.config.show
+import com.jacy.kit.config.*
 import com.zhouyou.http.model.HttpParams
 import kotlinx.android.synthetic.main.fragment_find.*
 import pro.haichuang.learn.home.BR
@@ -22,9 +19,11 @@ import pro.haichuang.learn.home.config.Constants
 import pro.haichuang.learn.home.net.Url
 import pro.haichuang.learn.home.ui.activity.find.FindDetailsActivity
 import pro.haichuang.learn.home.ui.activity.find.FindReleaseActivity
+import pro.haichuang.learn.home.ui.activity.login.LoginActivity
 import pro.haichuang.learn.home.ui.fragment.itemview.ItemNews
 import pro.haichuang.learn.home.utils.GsonUtil
 import pro.haichuang.learn.home.utils.ImageBinding
+import pro.haichuang.learn.home.utils.SPUtils
 
 @ContentView(R.layout.fragment_find)
 class FindFragment : BaseFragment() {
@@ -90,7 +89,11 @@ class FindFragment : BaseFragment() {
             }
         })
         to_release.setOnClickListener {
-            mStartActivity(FindReleaseActivity::class.java)
+            if (SPUtils.isTourist) {
+                mStartActivity(LoginActivity::class.java, Pair("re_login", true))
+                toast("请先登录后再操作")
+            } else
+                mStartActivity(FindReleaseActivity::class.java)
         }
         listView.setOnItemClickListener { _, _, position, _ ->
             mStartActivity(FindDetailsActivity::class.java, Pair(Constants.NEWS_ID, if (tab.selectedTabPosition == 0) firstAdapter.getItem(position).id else otherAdapter.getItem(position).id))

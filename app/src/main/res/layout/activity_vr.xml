@@ -44,6 +44,7 @@
                 android:hint="搜索学校/专业名称"
                 android:textColor="@color/color33"
                 android:textColorHint="@color/colorCCC4CC"
+
                 android:textSize="15sp" />
         </LinearLayout>
 

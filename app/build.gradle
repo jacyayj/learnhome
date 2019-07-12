@@ -84,4 +84,6 @@ dependencies {
 //    implementation "com.github.vondear.RxTool:RxFeature:v2.2.7"
 
         implementation 'com.tencent.bugly:crashreport:3.0.0'
+
+    implementation 'com.ycjiang:ImagePreview:2.2.2'
 }

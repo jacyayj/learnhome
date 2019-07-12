@@ -37,13 +37,13 @@
                 android:paddingEnd="15dp"
                 android:src="@drawable/icon_share_blue" />
 
-            <CheckBox
+            <CheckedTextView
                 android:id="@+id/collect"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="end"
                 android:layout_toLeftOf="@id/share"
-                android:button="@drawable/selector_heart"
+                android:drawableStart="@drawable/selector_heart"
                 android:checked="@{model.hasCollect}"
                 android:paddingEnd="15dp" />
         </RelativeLayout>

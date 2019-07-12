@@ -54,7 +54,8 @@ class MineFragment : BaseFragment(), AMapLocationListener {
     }
     private lateinit var headerUrl: String
     override fun onResume() {
-        post(Url.User.Info, showLoading = false, needSession = true)
+        if (!SPUtils.isTourist)
+            post(Url.User.Info, showLoading = false, needSession = true)
         super.onResume()
     }
 
@@ -112,7 +113,7 @@ class MineFragment : BaseFragment(), AMapLocationListener {
         }
     }
 
-    private fun updateName(name:String) {
+    private fun updateName(name: String) {
         val filed = HashMap<UserInfoFieldEnum, String>()
         filed[UserInfoFieldEnum.Name] = name
         NIMClient.getService(UserService::class.java).updateUserInfo(filed as Map<UserInfoFieldEnum, Any>?)

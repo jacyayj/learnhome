@@ -170,7 +170,7 @@
                     android:buttonTint="@color/color13C1FF"
                     android:checked="true"
                     android:gravity="center_vertical"
-                    android:text="勾选代表您已同意"
+                    android:text="同意"
                     android:textSize="12sp" />
 
                 <TextView

@@ -57,10 +57,10 @@ object ShareUtils {
             intent.component = cop
             intent.action = Intent.ACTION_SEND
             intent.type = "image/*"
-                if (picFile.isFile && picFile.exists()) {
-                    val uri = RxFileTool.getImageContentUri(context, picFile)
-                    intent.putExtra(Intent.EXTRA_STREAM, uri)
-                }
+            if (picFile.isFile && picFile.exists()) {
+                val uri = RxFileTool.getImageContentUri(context, picFile)
+                intent.putExtra(Intent.EXTRA_STREAM, uri)
+            }
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             context?.startActivityForResult(Intent.createChooser(intent, "sharePictureToWechatFriend"), 0x01)
         } else {
@@ -119,13 +119,20 @@ object ShareUtils {
 
     fun shareToQQ(context: Activity, title: String, url: String, content: String) {
         val bundle = Bundle()
+        val logoPath = RxFileTool.getDiskFileDir(context) + "/logo.png"
+        if (!RxFileTool.isFileExists(logoPath))
+            RxImageTool.save(
+                    BitmapFactory.decodeResource(context.resources, R.drawable.icon_logo),
+                    logoPath,
+                    Bitmap.CompressFormat.PNG
+            )
         bundle.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, QQShare.SHARE_TO_QQ_TYPE_DEFAULT)
         //这条分享消息被好友点击后的跳转URL。
         bundle.putString(QQShare.SHARE_TO_QQ_TARGET_URL, url)
         //分享的标题。注：PARAM_TITLE、PARAM_IMAGE_URL、PARAM_SUMMARY不能全为空，最少必须有一个是有值的。
         bundle.putString(QQShare.SHARE_TO_QQ_TITLE, title)
         //分享的图片URL
-        bundle.putString(QQShare.SHARE_TO_QQ_IMAGE_URL, "http://img3.cache.netease.com/photo/0005/2013-03-07/8PBKS8G400BV0005.jpg")
+        bundle.putString(QQShare.SHARE_TO_QQ_IMAGE_URL, logoPath)
         //分享的消息摘要，最长50个字
         bundle.putString(QQShare.SHARE_TO_QQ_SUMMARY, content)
         //手Q客户端顶部，替换“返回”按钮文字，如果为空，用返回代替
@@ -142,7 +149,7 @@ object ShareUtils {
         val msg = WXMediaMessage(webpage)
         msg.title = title
         msg.description = content
-        val thumbBmp = BitmapFactory.decodeResource(context.resources, R.drawable.cuow)
+        val thumbBmp = BitmapFactory.decodeResource(context.resources, R.drawable.icon_logo)
         msg.thumbData = RxImageTool.bitmap2Bytes(thumbBmp, Bitmap.CompressFormat.PNG)
 
         //构造一个Req
@@ -165,7 +172,7 @@ object ShareUtils {
         val msg = WXMediaMessage(webpage)
         msg.title = title
         msg.description = content
-        val thumbBmp = BitmapFactory.decodeResource(context.resources, R.drawable.cuow)
+        val thumbBmp = BitmapFactory.decodeResource(context.resources, R.drawable.icon_logo)
         msg.thumbData = RxImageTool.bitmap2Bytes(thumbBmp, Bitmap.CompressFormat.PNG)
 
         //构造一个Req

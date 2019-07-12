@@ -20,6 +20,7 @@ import com.netease.nimlib.sdk.util.NIMUtil
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
+import com.tencent.bugly.crashreport.CrashReport
 import com.tencent.smtt.sdk.QbSdk
 import com.vondear.rxtool.RxFileTool
 import com.vondear.rxtool.RxTool
@@ -63,6 +64,8 @@ class BaseApplication : Application() {
         NIMClient.init(this, SPUtils.loginInfo, options())
         initUiKit()
         initRefreshLayout()
+
+        CrashReport.initCrashReport(this, "955150cb5c", true)
     }
 
     private fun initUiKit() {

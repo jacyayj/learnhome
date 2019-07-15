@@ -42,7 +42,10 @@ class OnlineVideoActivity : BaseActivity() {
             pageParams.put("videoType", videoType)
         else
             pageParams.remove("videoType")
-        pageParams.put("recommend", recommend.toString())
+        if (recommend)
+            pageParams.put("recommend", recommend.toString())
+        else
+            pageParams.remove("recommend")
     }
 
     override fun initListener() {

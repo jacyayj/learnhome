@@ -80,8 +80,10 @@ class FileActivity : DataBindingActivity<FileModel>(), RadioGroup.OnCheckedChang
     override fun onBackPressed() {
         if (SPUtils.isRegister && !model.done) {
             toast("请先完善资料")
-        } else
+        } else {
             super.onBackPressed()
+            SPUtils.isRegister = false
+        }
     }
 
     override fun onCheckedChanged(group: RadioGroup?, checkedId: Int) {

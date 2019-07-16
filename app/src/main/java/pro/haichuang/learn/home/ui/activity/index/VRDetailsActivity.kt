@@ -11,6 +11,7 @@ class VRDetailsActivity : BaseActivity() {
 
     override fun initData() {
         titleModel.title = intent.getStringExtra("name") + "全景"
-        content.loadUrl("https://720yun.com/scene/29708074")
+//        content.loadUrl("https://720yun.com/scene/29708074")
+        content.loadUrl(intent.getStringExtra("url"))
     }
 }
